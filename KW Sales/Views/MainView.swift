@@ -10,7 +10,7 @@ import SwiftUI
 
 struct MainView: View {
     
-//    @ObservedObject var viewModel: MainViewModel
+    //    @ObservedObject var viewModel: MainViewModel
     @State var selected = 0
     
     var body: some View {
@@ -20,10 +20,9 @@ struct MainView: View {
             NavigationView {
                 AddDistrictView()
                     .navigationBarTitle(Text("Main"), displayMode: .inline)
-//                .navigationBarItems(leading: Text("hi"))
-                .navigationBarItems(leading:
-                    Image("Logo")
-                        .frame(height: nil)
+                    .navigationBarItems(leading:
+                        Image("Logo")
+                            .frame(height: nil)
                 )
             }
             .tabItem({
@@ -36,7 +35,11 @@ struct MainView: View {
             NavigationView {
                 PendingView()
                     .navigationBarTitle(
-                    Text("Pending Installs"), displayMode: .inline)
+                        Text("Pending Installs"), displayMode: .inline)
+                .navigationBarItems(leading:
+                        Image("Logo")
+                            .frame(height: nil)
+                )
                 
             }
             .tabItem({
@@ -45,10 +48,26 @@ struct MainView: View {
                 Text("\(Constants.TabBarText.tabBar1)")
             }).tag(1)
             
+            //Completed
+            NavigationView {
+                CompletedView()
+                    .navigationBarTitle(
+                        Text("Completed Installs"), displayMode: .inline)
+                .navigationBarItems(leading:
+                        Image("Logo")
+                            .frame(height: nil)
+                )
+            }
+            .tabItem({
+                Image(systemName: Constants.TabBarImageName.tabBar2)
+                    .font(.title)
+                Text("\(Constants.TabBarText.tabBar2)")
+            }).tag(2)
+            
             
         }.accentColor(Color.red)
             .onAppear(){
-//                self.viewModel.fetchTeamData()
+                //                self.viewModel.fetchTeamData()
         }
     }
 }

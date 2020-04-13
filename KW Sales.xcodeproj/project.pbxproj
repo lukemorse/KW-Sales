@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,12 +16,14 @@
 		A30C9B772444C1CB0049E4FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A30C9B752444C1CB0049E4FC /* LaunchScreen.storyboard */; };
 		A30C9B822444C1CB0049E4FC /* KW_SalesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30C9B812444C1CB0049E4FC /* KW_SalesTests.swift */; };
 		A30C9B8D2444C1CB0049E4FC /* KW_SalesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30C9B8C2444C1CB0049E4FC /* KW_SalesUITests.swift */; };
+		A30F4BF5244526B300B59F8B /* CompletedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30F4BF4244526B300B59F8B /* CompletedView.swift */; };
 		A3EE48CD2444D3E500C6A554 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EE48CC2444D3E500C6A554 /* MainView.swift */; };
 		A3EE48CF2444D5C700C6A554 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EE48CE2444D5C700C6A554 /* Constants.swift */; };
 		A3EE48D12444D9DC00C6A554 /* AddDistrictView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EE48D02444D9DC00C6A554 /* AddDistrictView.swift */; };
 		A3EE48D32444F68B00C6A554 /* PendingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EE48D22444F68B00C6A554 /* PendingView.swift */; };
 		A3EE48D52444FFB000C6A554 /* PendingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EE48D42444FFB000C6A554 /* PendingDetailView.swift */; };
 		A3EE48D82445032000C6A554 /* Installation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EE48D72445032000C6A554 /* Installation.swift */; };
+		A3EE48DA2445114800C6A554 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EE48D92445114800C6A554 /* TestData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,12 +59,14 @@
 		A30C9B882444C1CB0049E4FC /* KW SalesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "KW SalesUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A30C9B8C2444C1CB0049E4FC /* KW_SalesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KW_SalesUITests.swift; sourceTree = "<group>"; };
 		A30C9B8E2444C1CB0049E4FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A30F4BF4244526B300B59F8B /* CompletedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedView.swift; sourceTree = "<group>"; };
 		A3EE48CC2444D3E500C6A554 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		A3EE48CE2444D5C700C6A554 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A3EE48D02444D9DC00C6A554 /* AddDistrictView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDistrictView.swift; sourceTree = "<group>"; };
 		A3EE48D22444F68B00C6A554 /* PendingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingView.swift; sourceTree = "<group>"; };
 		A3EE48D42444FFB000C6A554 /* PendingDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingDetailView.swift; sourceTree = "<group>"; };
 		A3EE48D72445032000C6A554 /* Installation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Installation.swift; sourceTree = "<group>"; };
+		A3EE48D92445114800C6A554 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		A9F6FC5B3B907EB6981549FC /* Pods_KW_Sales.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KW_Sales.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3F10BB24EC3F6484A435780 /* Pods-KW Sales.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KW Sales.release.xcconfig"; path = "Target Support Files/Pods-KW Sales/Pods-KW Sales.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,7 +103,6 @@
 				5C30314522E30CD88CC02F10 /* Pods-KW Sales.debug.xcconfig */,
 				B3F10BB24EC3F6484A435780 /* Pods-KW Sales.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -141,6 +144,7 @@
 				A30C9B6A2444C1C80049E4FC /* AppDelegate.swift */,
 				A30C9B6C2444C1C80049E4FC /* SceneDelegate.swift */,
 				A3EE48CE2444D5C700C6A554 /* Constants.swift */,
+				A3EE48D92445114800C6A554 /* TestData.swift */,
 				A30C9B702444C1CB0049E4FC /* Assets.xcassets */,
 				A30C9B752444C1CB0049E4FC /* LaunchScreen.storyboard */,
 				A30C9B782444C1CB0049E4FC /* Info.plist */,
@@ -175,14 +179,23 @@
 			path = "KW SalesUITests";
 			sourceTree = "<group>";
 		};
+		A30F4BF32445269800B59F8B /* PendingView */ = {
+			isa = PBXGroup;
+			children = (
+				A3EE48D22444F68B00C6A554 /* PendingView.swift */,
+				A3EE48D42444FFB000C6A554 /* PendingDetailView.swift */,
+			);
+			path = PendingView;
+			sourceTree = "<group>";
+		};
 		A3EE48CB2444D3D300C6A554 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A30F4BF32445269800B59F8B /* PendingView */,
 				A30C9B6E2444C1C80049E4FC /* LoginView.swift */,
 				A3EE48CC2444D3E500C6A554 /* MainView.swift */,
 				A3EE48D02444D9DC00C6A554 /* AddDistrictView.swift */,
-				A3EE48D22444F68B00C6A554 /* PendingView.swift */,
-				A3EE48D42444FFB000C6A554 /* PendingDetailView.swift */,
+				A30F4BF4244526B300B59F8B /* CompletedView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -373,9 +386,11 @@
 				A3EE48CF2444D5C700C6A554 /* Constants.swift in Sources */,
 				A30C9B6B2444C1C80049E4FC /* AppDelegate.swift in Sources */,
 				A3EE48D12444D9DC00C6A554 /* AddDistrictView.swift in Sources */,
+				A3EE48DA2445114800C6A554 /* TestData.swift in Sources */,
 				A3EE48CD2444D3E500C6A554 /* MainView.swift in Sources */,
 				A3EE48D82445032000C6A554 /* Installation.swift in Sources */,
 				A3EE48D32444F68B00C6A554 /* PendingView.swift in Sources */,
+				A30F4BF5244526B300B59F8B /* CompletedView.swift in Sources */,
 				A3EE48D52444FFB000C6A554 /* PendingDetailView.swift in Sources */,
 				A30C9B6D2444C1C80049E4FC /* SceneDelegate.swift in Sources */,
 				A30C9B6F2444C1C80049E4FC /* LoginView.swift in Sources */,

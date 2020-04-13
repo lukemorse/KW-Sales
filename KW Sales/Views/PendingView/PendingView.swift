@@ -21,7 +21,7 @@ struct PendingView: View {
                 ForEach(0..<testList.count, id: \.self) {index in
                     VStack {
                         NavigationLink(testList[index], destination:
-                            Text(testList[index])
+                            PendingDetailView(name: testList[index])
                         )
                     }
                 }
@@ -36,6 +36,9 @@ struct PendingView: View {
     
     struct PendingView_Previews: PreviewProvider {
         static var previews: some View {
-            PendingView()
+            NavigationView {
+                PendingView()
+            }
+            
         }
 }
