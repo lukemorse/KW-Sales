@@ -25,9 +25,28 @@ struct AddDistrictView: View {
     
     var body: some View {
         NavigationView {
-            // 3.
             Form {
-                // 4.
+                Button(action: {
+                // Import CSV
+                }) {
+                    Text("Import CSV")
+                }
+                Button(action: {
+                // Import CSV
+                }) {
+                    Text("Send POD Order")
+                }
+                Button(action: {
+                // Import CSV
+                }) {
+                    Text("Create Implementation Plan")
+                }
+                
+                Section(header: Text("General")) {
+                    formItem(with: $numPods, label: "Number of Pods Needed")
+                    formItem(with: $startDate, label: "Start Date")
+                }
+                
                 Section(header: Text("District Information")){
                     
                     formItem(with: $districtName, label: "District Name")
@@ -35,12 +54,6 @@ struct AddDistrictView: View {
                     formItem(with: $numElementaryKSchools, label: "Number of Elementary Schools")
                     formItem(with: $numMiddleSchools, label: "Number of Middle Schools")
                     formItem(with: $numHighSchools, label: "Number of High Schools")
-                }
-                
-                Section(header: Text("General")) {
-                    formItem(with: $numPods, label: "Number of Pods Needed")
-                    formItem(with: $startDate, label: "Start Date")
-                    
                 }
                 
                 Section(header: Text("Contact Information")) {
