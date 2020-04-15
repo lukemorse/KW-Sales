@@ -10,8 +10,10 @@ import Foundation
 import Firebase
 import CodableFirebase
 
-struct Installation: Encodable, Hashable {
+struct Installation: Encodable, Identifiable, Hashable  {
+    var id: Int {hashValue}
     let statusCode: Int
+    let schoolType: SchoolType
     let address: GeoPoint
     let districtContact: String
     let districtName: String
@@ -24,7 +26,9 @@ struct Installation: Encodable, Hashable {
     let timeStamp: Timestamp
     
     private enum CodingKeys: String, CodingKey {
+        
         case statusCode
+        case schoolType
         case address
         case districtContact
         case districtName
@@ -40,6 +44,7 @@ struct Installation: Encodable, Hashable {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(statusCode, forKey: .statusCode)
+        try container.encode(schoolType.description, forKey: .schoolType)
         try container.encode(address, forKey: .address)
         try container.encode(districtContact, forKey: .districtContact)
         try container.encode(districtName, forKey: .districtName)
@@ -57,6 +62,7 @@ extension Installation: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         statusCode = try container.decode(Int.self, forKey: .statusCode)
+        schoolType = try container.decode(SchoolType.self, forKey: .schoolType)
         address = try container.decode(GeoPoint.self, forKey: .address)
         districtContact = try container.decode(String.self, forKey: .districtContact)
         districtName = try container.decode(String.self, forKey: .districtName)

@@ -11,6 +11,7 @@ import SwiftUI
 struct MainView: View {
     
     //    @ObservedObject var viewModel: MainViewModel
+    @Environment(\.colorScheme) var colorScheme
     @State var selected = 0
     
     var body: some View {
