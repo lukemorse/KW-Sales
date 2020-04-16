@@ -19,6 +19,10 @@
 		A30F4BF5244526B300B59F8B /* CompletedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30F4BF4244526B300B59F8B /* CompletedView.swift */; };
 		A30F4BF7244530A800B59F8B /* CreateImplementationPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30F4BF6244530A800B59F8B /* CreateImplementationPlanView.swift */; };
 		A31F80782445FFE500ADC66A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A31F80772445FFE500ADC66A /* GoogleService-Info.plist */; };
+		A3295BCC2448EC7800F26E1F /* PodNodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3295BCB2448EC7800F26E1F /* PodNodeView.swift */; };
+		A37C82232448CB630012F075 /* TestActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37C82222448CB630012F075 /* TestActionSheet.swift */; };
+		A38C39B72447F034005BECFB /* CreatePodMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38C39B62447F034005BECFB /* CreatePodMapView.swift */; };
+		A38C39BB2448A207005BECFB /* TestTapLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38C39BA2448A207005BECFB /* TestTapLocation.swift */; };
 		A3A2F0F52447756100079243 /* TestSchoolType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A2F0F42447756000079243 /* TestSchoolType.swift */; };
 		A3A2F0F824478D8400079243 /* CreateImplementationPlanListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A2F0F724478D8400079243 /* CreateImplementationPlanListView.swift */; };
 		A3B37B892446204200D8CE40 /* District.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B37B882446204200D8CE40 /* District.swift */; };
@@ -71,6 +75,10 @@
 		A30F4BF4244526B300B59F8B /* CompletedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedView.swift; sourceTree = "<group>"; };
 		A30F4BF6244530A800B59F8B /* CreateImplementationPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateImplementationPlanView.swift; sourceTree = "<group>"; };
 		A31F80772445FFE500ADC66A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A3295BCB2448EC7800F26E1F /* PodNodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodNodeView.swift; sourceTree = "<group>"; };
+		A37C82222448CB630012F075 /* TestActionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestActionSheet.swift; sourceTree = "<group>"; };
+		A38C39B62447F034005BECFB /* CreatePodMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePodMapView.swift; sourceTree = "<group>"; };
+		A38C39BA2448A207005BECFB /* TestTapLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTapLocation.swift; sourceTree = "<group>"; };
 		A3A2F0F42447756000079243 /* TestSchoolType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestSchoolType.swift; sourceTree = "<group>"; };
 		A3A2F0F724478D8400079243 /* CreateImplementationPlanListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateImplementationPlanListView.swift; sourceTree = "<group>"; };
 		A3B37B882446204200D8CE40 /* District.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = District.swift; sourceTree = "<group>"; };
@@ -135,6 +143,7 @@
 		A30C9B5E2444C1C80049E4FC = {
 			isa = PBXGroup;
 			children = (
+				A38C39BA2448A207005BECFB /* TestTapLocation.swift */,
 				A30C9B692444C1C80049E4FC /* KW Sales */,
 				A30C9B802444C1CB0049E4FC /* KW SalesTests */,
 				A30C9B8B2444C1CB0049E4FC /* KW SalesUITests */,
@@ -209,6 +218,15 @@
 			path = PendingView;
 			sourceTree = "<group>";
 		};
+		A3295BCD2448EF8400F26E1F /* CreatePodMapView */ = {
+			isa = PBXGroup;
+			children = (
+				A38C39B62447F034005BECFB /* CreatePodMapView.swift */,
+				A3295BCB2448EC7800F26E1F /* PodNodeView.swift */,
+			);
+			path = CreatePodMapView;
+			sourceTree = "<group>";
+		};
 		A3A2F0F624478D6A00079243 /* CreateImplementationPlanView */ = {
 			isa = PBXGroup;
 			children = (
@@ -229,12 +247,14 @@
 		A3EE48CB2444D3D300C6A554 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A3295BCD2448EF8400F26E1F /* CreatePodMapView */,
 				A3A2F0F624478D6A00079243 /* CreateImplementationPlanView */,
 				A3F4259824475DA0004D2CCE /* AddDistrictView */,
 				A30F4BF32445269800B59F8B /* PendingView */,
 				A30C9B6E2444C1C80049E4FC /* LoginView.swift */,
 				A3EE48CC2444D3E500C6A554 /* MainView.swift */,
 				A30F4BF4244526B300B59F8B /* CompletedView.swift */,
+				A37C82222448CB630012F075 /* TestActionSheet.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -440,14 +460,18 @@
 				A3EE48D12444D9DC00C6A554 /* AddDistrictView.swift in Sources */,
 				A3EE48DA2445114800C6A554 /* TestData.swift in Sources */,
 				A3EE48CD2444D3E500C6A554 /* MainView.swift in Sources */,
+				A37C82232448CB630012F075 /* TestActionSheet.swift in Sources */,
 				A3A2F0F52447756100079243 /* TestSchoolType.swift in Sources */,
 				A3B37B90244632B900D8CE40 /* Team.swift in Sources */,
 				A30F4BF7244530A800B59F8B /* CreateImplementationPlanView.swift in Sources */,
 				A3B37B892446204200D8CE40 /* District.swift in Sources */,
+				A38C39BB2448A207005BECFB /* TestTapLocation.swift in Sources */,
 				A3EE48D82445032000C6A554 /* Installation.swift in Sources */,
+				A3295BCC2448EC7800F26E1F /* PodNodeView.swift in Sources */,
 				A3EE48D32444F68B00C6A554 /* PendingView.swift in Sources */,
 				A3B37B8E244631E500D8CE40 /* AddDistrictViewModel.swift in Sources */,
 				A30F4BF5244526B300B59F8B /* CompletedView.swift in Sources */,
+				A38C39B72447F034005BECFB /* CreatePodMapView.swift in Sources */,
 				A3A2F0F824478D8400079243 /* CreateImplementationPlanListView.swift in Sources */,
 				A3F4259A24475DB8004D2CCE /* SendPodOrderButtonView.swift in Sources */,
 				A3EE48D52444FFB000C6A554 /* PendingDetailView.swift in Sources */,
@@ -620,6 +644,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"KW Sales/Preview Content\"";
 				DEVELOPMENT_TEAM = 4Z8CKPY35P;
 				ENABLE_PREVIEWS = YES;
@@ -631,6 +657,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.lukemorse.KW-Sales";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_SWIFT_SYMBOLS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

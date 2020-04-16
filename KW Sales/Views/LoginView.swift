@@ -48,6 +48,7 @@ struct LoginView: View {
     }
     
     func attemptLogin() {
+        print("attempt")
         if username == correctUsername && password == correctPassword {
             //login here
         } else {

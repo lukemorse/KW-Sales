@@ -20,37 +20,38 @@ struct CreateImplementationPlanView: View {
     let installation: Installation
     
     var body: some View {
-        NavigationView {
-            
-            VStack {
-                Text("School 1")
-                if isExpanded {
-                    VStack {
-                        Form {
-                            Section(header: Text("School Information")){
-                                formItem(with: $schoolName, label: "School Name")
-                                formItem(with: $schoolType, label: "School Type")
-                                formItem(with: $numFloors, label: "Number of Floors")
-                                formItem(with: $numRooms, label: "Number of Rooms")
-                                formItem(with: $numPods, label: "Number of Pods")
-                                formItem(with: $schoolContactName, label: "School Contact Person")
-                                
-                                Button(action: {
-                                    // floor plan
-                                }) {
-                                    Text("Upload Floor Plan")
-                                }
-                                Button(action: {
-                                    ///pod map
-                                }) {
-                                    Text("Create POD Map")
-                                }
-                            }
-                        } .navigationBarTitle("Implementation Plan")
+        HStack {
+            content
+            .padding(15)
+        }
+    }
+    
+    private var content: some View {
+        VStack(alignment: .leading) {
+            Text("School 1")
+                Form {
+                    Section(header: Text("School Information")){
+                        formItem(with: $schoolName, label: "School Name")
+                        formItem(with: $schoolType, label: "School Type")
+                        formItem(with: $numFloors, label: "Number of Floors")
+                        formItem(with: $numRooms, label: "Number of Rooms")
+                        formItem(with: $numPods, label: "Number of Pods")
+                        formItem(with: $schoolContactName, label: "School Contact Person")
+                        
+                        Button(action: {
+                            // floor plan
+                        }) {
+                            Text("Upload Floor Plan")
+                        }
+                        Button(action: {
+                            ///pod map
+                        }) {
+                            Text("Create POD Map")
+                        }
                     }
                 }
-                
-            }
+                //                        .navigationBarTitle("Implementation Plan")
+            
         }
     }
     
@@ -65,7 +66,7 @@ struct CreateImplementationPlanView: View {
                     .padding(.all)
                 
             }
-            .padding(.horizontal, 15)
+            
     }
     
     func formItem(with schoolType: Binding<SchoolType>, label: String) -> some
@@ -81,7 +82,7 @@ struct CreateImplementationPlanView: View {
                 .padding(.all)
                 
             }
-            .padding(.horizontal, 15)
+            
     }
     
     func formItem(with name: Binding<Int>, label: String) -> some
@@ -97,7 +98,7 @@ struct CreateImplementationPlanView: View {
                 })
                     .padding(.all)
             }
-            .padding(.horizontal, 15)
+            
     }
     
     func formItem(with name: Binding<Date>, label: String) -> some View {
@@ -108,7 +109,7 @@ struct CreateImplementationPlanView: View {
                 Text("")
             }
         }
-        .padding(.horizontal, 15)
+        
     }
     
 }
