@@ -30,7 +30,7 @@ struct AddDistrictView: View {
             Form {
                 Group {
                     Button(action: {
-                        // Import CSV
+                        self.importCSV()
                     }) {
                         Text("Import CSV")
                     }
@@ -79,11 +79,13 @@ struct AddDistrictView: View {
                     }
                 }
                 SendPodOrderButtonView(numPods: numPods, email: districtContactEmail)
-                Button(action: {
-                    // Import CSV
-                }) {
+                
+                NavigationLink(destination: CreateImplementationPlanListView()) {
                     Text("Create Implementation Plan")
                 }
+                    
+                    
+                
                 Button(action: {
                     self.addDistrict()
                 }) {
@@ -95,6 +97,26 @@ struct AddDistrictView: View {
             }
             
         }
+    }
+    
+    func importCSV() {
+        let arr = parseCSV()
+        self.numPods = Int(arr[0]) ?? 0
+        
+        let dateString = arr[1]
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .none
+        self.startDate = dateFormatter.date(from: dateString) ?? Date()
+        
+        self.districtName = arr[2]
+        self.numPreKSchools = Int(arr[3]) ?? 0
+        self.numElementaryKSchools = Int(arr[4]) ?? 0
+        self.numMiddleSchools = Int(arr[5]) ?? 0
+        self.numHighSchools = Int(arr[6]) ?? 0
+        self.districtContactName = arr[7]
+        self.districtContactPhone = arr[8]
+        self.districtOfficeAddress = arr[9]
     }
     
     //Funcs for adding form items

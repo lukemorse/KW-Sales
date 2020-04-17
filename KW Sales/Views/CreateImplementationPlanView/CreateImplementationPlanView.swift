@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CreateImplementationPlanView: View {
     //        @ObservedObject var viewModel = AddDistrictViewModel()
-    let isExpanded: Bool
+    @State private var isExpanded: Bool = true
     @State var schoolName: String = ""
     @State var schoolType: SchoolType = .preKSchool
     @State var numFloors: Int = 0
@@ -20,39 +20,44 @@ struct CreateImplementationPlanView: View {
     let installation: Installation
     
     var body: some View {
-        HStack {
             content
-            .padding(15)
-        }
     }
     
     private var content: some View {
-        VStack(alignment: .leading) {
-            Text("School 1")
-                Form {
-                    Section(header: Text("School Information")){
-                        formItem(with: $schoolName, label: "School Name")
-                        formItem(with: $schoolType, label: "School Type")
-                        formItem(with: $numFloors, label: "Number of Floors")
-                        formItem(with: $numRooms, label: "Number of Rooms")
-                        formItem(with: $numPods, label: "Number of Pods")
-                        formItem(with: $schoolContactName, label: "School Contact Person")
+//        VStack(alignment: .leading) {
+//            Text("School 1")
+                
+                    Section {
+                        Text(schoolName)
+                        .onTapGesture {
+                            self.isExpanded.toggle()
+                        }
+                        if isExpanded {
+                            formItem(with: $schoolName, label: "School Name")
+                            formItem(with: $schoolType, label: "School Type")
+                            formItem(with: $numFloors, label: "Number of Floors")
+                            formItem(with: $numRooms, label: "Number of Rooms")
+                            formItem(with: $numPods, label: "Number of Pods")
+                            formItem(with: $schoolContactName, label: "School Contact Person")
+                            
+                            Button(action: {
+                                // floor plan
+                            }) {
+                                Text("Upload Floor Plan")
+                            }
+                            Button(action: {
+                                ///pod map
+                            }) {
+                                Text("Create POD Map")
+                            }
+                        }
                         
-                        Button(action: {
-                            // floor plan
-                        }) {
-                            Text("Upload Floor Plan")
-                        }
-                        Button(action: {
-                            ///pod map
-                        }) {
-                            Text("Create POD Map")
-                        }
                     }
-                }
+                    
+                
                 //                        .navigationBarTitle("Implementation Plan")
             
-        }
+//        }
     }
     
     //Funcs for adding form items
@@ -63,7 +68,7 @@ struct CreateImplementationPlanView: View {
                 Text(label)
                     .font(.headline)
                 TextField("Enter " + label, text: name)
-                    .padding(.all)
+                    .padding([.top, .bottom])
                 
             }
             
@@ -79,7 +84,7 @@ struct CreateImplementationPlanView: View {
                         Text(school.description).tag(school)
                     }
                 }
-                .padding(.all)
+                .padding([.top, .bottom])
                 
             }
             
@@ -96,7 +101,7 @@ struct CreateImplementationPlanView: View {
                         Text(String(idx))
                     }
                 })
-                    .padding(.all)
+                    .padding([.top, .bottom])
             }
             
     }
@@ -116,7 +121,7 @@ struct CreateImplementationPlanView: View {
 
 struct CreateImplementationPlan_Previews: PreviewProvider {
     static var previews: some View {
-        CreateImplementationPlanView(isExpanded: true, installation: testInstallArray[0])
+        CreateImplementationPlanView(installation: testInstallArray[0])
         //            .environment(\.colorScheme, .dark)
     }
 }

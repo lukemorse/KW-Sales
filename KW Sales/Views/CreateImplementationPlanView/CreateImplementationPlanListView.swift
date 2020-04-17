@@ -9,17 +9,23 @@
 import SwiftUI
 
 struct CreateImplementationPlanListView: View {
-//    let installations: [Installation]
+    //    let installations: [Installation]
+    @State var implmentationPlanViews: [CreateImplementationPlanView] = []
     
     var body: some View {
-        List {
+        Form {
+            ForEach(0..<implmentationPlanViews.count, id: \.self) { imp in
+           CreateImplementationPlanView(installation: testInstallArray[0])
+            }
             
             Button(action: {
-                //
+                self.implmentationPlanViews.append(CreateImplementationPlanView(installation: testInstallArray[0]))
             }) {
                 Text("Add School")
             }
         }
+        
+        
     }
 }
 
