@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct CreatePodMapView: View {
-    @State var showingActionSheet: Bool
+    @State var showingActionSheet = false
     @State private var position = CGSize.zero
     @State var podNodes: [PodNodeView] = []
     
@@ -28,63 +28,55 @@ struct CreatePodMapView: View {
     var body: some View {
         VStack {
             ZStack {
-                GeometryReader { geo in
-                    ZStack {
-                        Image("floorPlan")
-                            .resizable()
-                        
-                        
-                        
-                        self.podGroup
-                            .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local).onChanged({ val in
-                                print("dragging pod")
-                                self.tapPoint = val.startLocation
-                                self.dragSize = CGSize(width: val.translation.width + self.lastDrag.width, height: val.translation.height + self.lastDrag.height)
-                            })
-                                .onEnded({ (val) in
-                                    self.dragSize = CGSize(width: val.translation.width + self.lastDrag.width, height: val.translation.height + self.lastDrag.height)
-                                    self.lastDrag = self.dragSize
-                                }))
-                    }
-                    .scaledToFit()
-                    .animation(.linear)
-                    .scaleEffect(self.scale)
-                    .offset(self.dragSize)
-                    .gesture(MagnificationGesture().onChanged { val in
-                        let delta = val / self.lastScaleValue
-                        self.lastScaleValue = val
-                        self.scale = self.scale * delta
-                        
-                    }.onEnded { val in
-                        // without this the next gesture will be broken
-                        self.lastScaleValue = 1.0
-                        }
-                        
-                    )
-                        .simultaneousGesture(DragGesture(minimumDistance: 1, coordinateSpace: .local).onChanged({ val in
-                            print("dragging map")
-                            self.tapPoint = val.startLocation
+                Image("floorPlan")
+                    .resizable()
+                self.podGroup
+                    .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local).onChanged({ val in
+                        print("dragging pod")
+                        self.tapPoint = val.startLocation
+                        self.dragSize = CGSize(width: val.translation.width + self.lastDrag.width, height: val.translation.height + self.lastDrag.height)
+                    })
+                        .onEnded({ (val) in
                             self.dragSize = CGSize(width: val.translation.width + self.lastDrag.width, height: val.translation.height + self.lastDrag.height)
-                            
-                            
-                        })
-                            .onEnded({ (val) in
-                                self.dragSize = CGSize(width: val.translation.width + self.lastDrag.width, height: val.translation.height + self.lastDrag.height)
-                                self.lastDrag = self.dragSize
-                            }))
-                        .simultaneousGesture(DragGesture(minimumDistance: 0, coordinateSpace: .local).onChanged({ (val) in
-                            if self.isPlacingPod {
-                                
-                                let startingPoint = val.startLocation
-                                print("1")
-                                print(startingPoint)
-                                self.podNodes.append(PodNodeView(podType: self.nextPodType, pos: startingPoint, isActive: true))
-                                self.isPlacingPod = false
-                            }
+                            self.lastDrag = self.dragSize
                         }))
-                    
-                }
             }
+            .scaledToFit()
+            .animation(.linear)
+            .scaleEffect(self.scale)
+            .offset(self.dragSize)
+            .gesture(MagnificationGesture().onChanged { val in
+                let delta = val / self.lastScaleValue
+                self.lastScaleValue = val
+                self.scale = self.scale * delta
+                
+            }.onEnded { val in
+                // without this the next gesture will be broken
+                self.lastScaleValue = 1.0
+                }
+                
+            )
+                .simultaneousGesture(DragGesture(minimumDistance: 1, coordinateSpace: .local).onChanged({ val in
+                    print("dragging map")
+                    self.tapPoint = val.startLocation
+                    self.dragSize = CGSize(width: val.translation.width + self.lastDrag.width, height: val.translation.height + self.lastDrag.height)
+                })
+                    .onEnded({ (val) in
+                        self.dragSize = CGSize(width: val.translation.width + self.lastDrag.width, height: val.translation.height + self.lastDrag.height)
+                        self.lastDrag = self.dragSize
+                    }))
+                .simultaneousGesture(DragGesture(minimumDistance: 0, coordinateSpace: .local).onChanged({ (val) in
+                    if self.isPlacingPod {
+                        
+                        // TODO: Fix starting point when scaled
+                        let startingPoint = CGPoint(x: val.startLocation.x - self.dragSize.width, y: val.startLocation.y - self.dragSize.height)
+                        
+                        self.podNodes.append(PodNodeView(podType: self.nextPodType, pos: startingPoint, isActive: true))
+                        self.isPlacingPod = false
+                        
+                    }
+                }))
+            Spacer()
             actionSheetButton
         }
     }
@@ -108,9 +100,10 @@ struct CreatePodMapView: View {
         Button(action: {
             self.showingActionSheet = true
         }) {
-            Text("Show ActionSheet")
+            Text("Add KW POD")
                 .font(.title)
-                .foregroundColor(Color.yellow)
+                .foregroundColor(Color.blue)
+                .background(Color.white)
         }
         .actionSheet(isPresented: $showingActionSheet, content: {
             ActionSheet(title: Text("Add POD"), message: Text("Choose POD Type"), buttons:

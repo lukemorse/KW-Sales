@@ -22,6 +22,7 @@ struct CreateImplementationPlanListView: View {
                 self.implmentationPlanViews.append(CreateImplementationPlanView(installation: testInstallArray[0]))
             }) {
                 Text("Add School")
+                    .foregroundColor(Color.blue)
             }
         }
         

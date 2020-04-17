@@ -22,7 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Create the SwiftUI view that provides the window contents.
 //        let contentView = TestDistrictView()
 //        let contentView = CreatePodMapView(showingActionSheet: false)
-        let contentView = MainView()
+//        let contentView = MainView()
+        let contentView = StartView()
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

@@ -10,6 +10,10 @@ import SwiftUI
 
 struct CreateImplementationPlanView: View {
     //        @ObservedObject var viewModel = AddDistrictViewModel()
+    @State var showImagePicker: Bool = false
+    @State var image: Image? = nil
+    @State var images: [Image] = []
+    
     @State private var isExpanded: Bool = true
     @State var schoolName: String = ""
     @State var schoolType: SchoolType = .preKSchool
@@ -20,44 +24,42 @@ struct CreateImplementationPlanView: View {
     let installation: Installation
     
     var body: some View {
-            content
+        content
     }
     
     private var content: some View {
-//        VStack(alignment: .leading) {
-//            Text("School 1")
+        Section {
+            Text(schoolName)
+                .onTapGesture {
+                    self.isExpanded.toggle()
+            }
+            if isExpanded {
+                formItem(with: $schoolName, label: "School Name")
+                formItem(with: $schoolType, label: "School Type")
+                formItem(with: $numFloors, label: "Number of Floors")
+                formItem(with: $numRooms, label: "Number of Rooms")
+                formItem(with: $numPods, label: "Number of Pods")
+                formItem(with: $schoolContactName, label: "School Contact Person")
                 
-                    Section {
-                        Text(schoolName)
-                        .onTapGesture {
-                            self.isExpanded.toggle()
-                        }
-                        if isExpanded {
-                            formItem(with: $schoolName, label: "School Name")
-                            formItem(with: $schoolType, label: "School Type")
-                            formItem(with: $numFloors, label: "Number of Floors")
-                            formItem(with: $numRooms, label: "Number of Rooms")
-                            formItem(with: $numPods, label: "Number of Pods")
-                            formItem(with: $schoolContactName, label: "School Contact Person")
-                            
-                            Button(action: {
-                                // floor plan
-                            }) {
-                                Text("Upload Floor Plan")
-                            }
-                            Button(action: {
-                                ///pod map
-                            }) {
-                                Text("Create POD Map")
-                            }
-                        }
-                        
-                    }
-                    
+                Button(action: {
+                    self.showImagePicker.toggle()
+                }) {
+                    Text("Upload Floorplan")
+                }
                 
-                //                        .navigationBarTitle("Implementation Plan")
+                NavigationLink(destination: CreatePodMapView()) {
+                    Text("Create POD Map")
+                        .foregroundColor(Color.blue)
+                }
+            }
             
-//        }
+        }
+        .sheet(isPresented: $showImagePicker) {
+            ImagePicker(sourceType: .photoLibrary) { image in
+                self.image = Image(uiImage: image)
+                self.images.append(Image(uiImage: image))
+            }
+        }
     }
     
     //Funcs for adding form items

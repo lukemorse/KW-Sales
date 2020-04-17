@@ -31,7 +31,7 @@ struct PodNodeView: Identifiable, Hashable, Equatable, View {
         if isActive {
             return AnyView(Image(podImageDict[self.podType] ?? "")
                 .resizable()
-                .frame(width: 30, height: 30, alignment: .center)
+                .frame(width: 30, height: 30)
 //                .offset(x: position.width + dragOffset.width, y: position.height + dragOffset.height)
                 
 //                .animation(.linear)

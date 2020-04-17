@@ -25,6 +25,7 @@ struct District: Codable {
     let team: DocumentReference
     let numPodsNeeded: Int
     let startDate: Date
+    
 //
 //    private enum CodingKeys: String, CodingKey {
 //        case readyToInstall

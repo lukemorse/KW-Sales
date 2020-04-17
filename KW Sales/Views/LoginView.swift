@@ -8,23 +8,25 @@
 
 import SwiftUI
 
-//for testing
-let correctUsername = "test"
-let correctPassword = "123"
-
 struct LoginView: View {
     @State private var username: String = ""
     @State private var password: String = ""
     @State private var showingLoginAlert = false
     
+//    var handler: (String, (Bool) -> Void) -> Void
+    var handler: (String, String, (Bool) -> Void) -> Void
+    
     var body: some View {
         VStack(spacing: 20.0) {
             Image("Logo")
                 .resizable()
-                .frame(width: 125, height: 100, alignment: .center)
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 125, alignment: .center)
             TextField("Enter email/username", text: $username)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
+                .textContentType(.oneTimeCode)
                 .keyboardType(.emailAddress)
+                
             SecureField("Enter password", text: $password)
             .textFieldStyle(RoundedBorderTextFieldStyle())
             Button(action: {
@@ -48,20 +50,35 @@ struct LoginView: View {
     }
     
     func attemptLogin() {
-        print("attempt")
-        if username == correctUsername && password == correctPassword {
-            //login here
-        } else {
-//            alert
-            showingLoginAlert = true
-            username = ""
-            password = ""
+        
+        handler(username,password) { success in
+            print(success)
+            if !success {
+                showingLoginAlert = true
+            }
         }
+        
+//        print("attempt")
+//        if username == correctUsername && password == correctPassword {
+//            //login here
+//        } else {
+////            alert
+//            showingLoginAlert = true
+//            username = ""
+//            password = ""
+//        }
     }
 }
+//
+//struct LoginView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LoginView().previewLayout(.fixed(width: 812, height: 375))
+//    }
+//}
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView().previewLayout(.fixed(width: 812, height: 375))
+        LoginView { (username, password, callBack: (Bool) -> Void) in
+        }
     }
 }

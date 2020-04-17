@@ -25,6 +25,8 @@ struct AddDistrictView: View {
     @State var startDate: Date = Date()
     @State var readyToInstall: Bool = false
     
+    @State private var isShowingAddDistrictAlert = false
+    
     var body: some View {
         NavigationView {
             Form {
@@ -35,6 +37,7 @@ struct AddDistrictView: View {
                         Text("Import CSV")
                     }
                 }
+                
                 
                 Section(header: Text("General")) {
                     Group {
@@ -78,24 +81,35 @@ struct AddDistrictView: View {
                         }
                     }
                 }
-                SendPodOrderButtonView(numPods: numPods, email: districtContactEmail)
-                
                 NavigationLink(destination: CreateImplementationPlanListView()) {
                     Text("Create Implementation Plan")
+                        .foregroundColor(Color.blue)
                 }
-                    
-                    
                 
-                Button(action: {
-                    self.addDistrict()
-                }) {
-                    Text("Add District")
-                }
-            } .navigationBarTitle("Add District")
-                .onAppear() {
-                    print(self.assignedTeam.name)
+                sendPodButton
+                
+                addDistrictButton
             }
-            
+                
+            .navigationBarTitle("Add District")
+        }
+        .alert(isPresented: self.$isShowingAddDistrictAlert) {
+        Alert(title: Text("Please complete all fields"))
+        }
+        
+    }
+    
+    var sendPodButton: some View {
+        //Button is red until email is valid
+        SendPodOrderButtonView(numPods: numPods, email: districtContactEmail, textColor: validateEmail(enteredEmail: districtContactEmail) ? Color.green : Color.red)
+    }
+    
+    var addDistrictButton: some View {
+        Button(action: {
+            self.addDistrict()
+        }) {
+            Text("Add District")
+                .foregroundColor(self.formIsEmpty() ? Color.red : Color.green)
         }
     }
     
@@ -126,10 +140,6 @@ struct AddDistrictView: View {
             return VStack(alignment: .leading) {
                 Text(label)
                     .font(.headline)
-                //            ForEach(0..<1, id: \.self) { index in
-                //                TextField("Enter " + label, text: name).id(index)
-                //                    .padding(.all)
-                //            }
                 TextField("Enter " + label, text: name)
                     .padding(.all)
                 
@@ -183,6 +193,10 @@ struct AddDistrictView: View {
     }
     
     func addDistrict() {
+        if formIsEmpty() {
+            isShowingAddDistrictAlert = true
+            return
+        }
         if let team = viewModel.teamDict.first(where: { $0.value == assignedTeam })?.key {
             let district = District(readyToInstall: readyToInstall, numPreKSchools: numPreKSchools, numElementarySchools: numElementaryKSchools, numMiddleSchools: numMiddleSchools, numHighSchools: numHighSchools, districtContactPerson: districtContactName, districtEmail: districtContactEmail, districtPhoneNumber: districtContactPhone, districtOfficeAddress: districtOfficeAddress, team: team, numPodsNeeded: numPods, startDate: startDate)
             
@@ -191,6 +205,13 @@ struct AddDistrictView: View {
         } else {
             print("could not find team")
         }
+    }
+    
+    func formIsEmpty() -> Bool {
+        return districtContactName.isEmpty ||
+        districtContactEmail.isEmpty ||
+        districtContactPhone.isEmpty ||
+        districtOfficeAddress.isEmpty
     }
 }
 
