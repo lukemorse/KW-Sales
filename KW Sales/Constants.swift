@@ -23,4 +23,7 @@ struct Constants {
         static let tabBar2 = "Completed"
 //        static let tabBar3 = "References"
     }
+    
+    static let kFloorPlanCollectionName = "floorPlansCollection"
+    static let kFloorPlanFolderName = "floorPlansFolder"
 }

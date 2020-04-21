@@ -9,6 +9,10 @@
 import SwiftUI
 
 struct CreatePodMapView: View {
+    var floorPlanImages: [Image]
+    var viewModel: CreateImplementationPlanViewModel
+    var floorPlanIndex = 0
+    
     @State var showingActionSheet = false
     @State private var position = CGSize.zero
     @State var podNodes: [PodNodeView] = []
@@ -27,7 +31,12 @@ struct CreatePodMapView: View {
     @GestureState private var dragOffset = CGSize.zero
     var body: some View {
         VStack {
+            Spacer()
             ZStack {
+                if floorPlanImages.count > 0 {
+                    floorPlanImages[floorPlanIndex]
+                        .resizable()
+                }
                 Image("floorPlan")
                     .resizable()
                 self.podGroup
@@ -66,12 +75,18 @@ struct CreatePodMapView: View {
                         self.lastDrag = self.dragSize
                     }))
                 .simultaneousGesture(DragGesture(minimumDistance: 0, coordinateSpace: .local).onChanged({ (val) in
-                    if self.isPlacingPod {
+                    
                         
                         // TODO: Fix starting point when scaled
                         let startingPoint = CGPoint(x: val.startLocation.x - self.dragSize.width, y: val.startLocation.y - self.dragSize.height)
-                        
-                        self.podNodes.append(PodNodeView(podType: self.nextPodType, pos: startingPoint, isActive: true))
+                        if self.isPlacingPod {
+                            let pod = PodNodeView(podType: self.nextPodType, pos: startingPoint)
+                        self.podNodes.append(pod)
+//                            
+//                            let dictEntry = [
+////                                pod.
+//                            ]
+                            
                         self.isPlacingPod = false
                         
                     }
@@ -124,20 +139,28 @@ struct CreatePodMapView: View {
                         self.nextPodType = .ceiling
                         self.isPlacingPod = true
                     }),
+                    .default(Text("Commit Map"), action: {
+                        self.commitMap()
+                    }),
                     .cancel()])
-            
-            
         })
         
     }
-}
-
-
-
-struct CreatePodMapView_Previews: PreviewProvider {
-    static var previews: some View {
-        CreatePodMapView(showingActionSheet: false)
+    
+    func commitMap() {
+        for pod in podNodes {
+            viewModel.podMaps[self.floorPlanIndex].pods.append([pod.podType.description: [Float(pod.pos.x)]])
+        }
+        viewModel.updateFloorPlanPods(atIndex: self.floorPlanIndex)
     }
 }
+
+
+//
+//struct CreatePodMapView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CreatePodMapView(floorPlanImages: [] showingActionSheet: false)
+//    }
+//}
 
 

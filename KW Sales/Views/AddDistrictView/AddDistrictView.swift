@@ -198,7 +198,7 @@ struct AddDistrictView: View {
             return
         }
         if let team = viewModel.teamDict.first(where: { $0.value == assignedTeam })?.key {
-            let district = District(readyToInstall: readyToInstall, numPreKSchools: numPreKSchools, numElementarySchools: numElementaryKSchools, numMiddleSchools: numMiddleSchools, numHighSchools: numHighSchools, districtContactPerson: districtContactName, districtEmail: districtContactEmail, districtPhoneNumber: districtContactPhone, districtOfficeAddress: districtOfficeAddress, team: team, numPodsNeeded: numPods, startDate: startDate)
+            let district = District(districtID: UUID().uuidString, readyToInstall: readyToInstall, numPreKSchools: numPreKSchools, numElementarySchools: numElementaryKSchools, numMiddleSchools: numMiddleSchools, numHighSchools: numHighSchools, districtContactPerson: districtContactName, districtEmail: districtContactEmail, districtPhoneNumber: districtContactPhone, districtOfficeAddress: districtOfficeAddress, team: team, numPodsNeeded: numPods, startDate: startDate, implementationPlan: [])
             
             viewModel.addDistrict(district: district)
             

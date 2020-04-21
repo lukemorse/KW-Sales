@@ -11,15 +11,17 @@ import SwiftUI
 struct CreateImplementationPlanListView: View {
     //    let installations: [Installation]
     @State var implmentationPlanViews: [CreateImplementationPlanView] = []
+    @State var numSchools = 0
     
     var body: some View {
         Form {
             ForEach(0..<implmentationPlanViews.count, id: \.self) { imp in
-           CreateImplementationPlanView(installation: testInstallArray[0])
+                self.implmentationPlanViews[imp]
             }
             
             Button(action: {
-                self.implmentationPlanViews.append(CreateImplementationPlanView(installation: testInstallArray[0]))
+                self.implmentationPlanViews.append(CreateImplementationPlanView(index: self.numSchools))
+                self.numSchools += 1
             }) {
                 Text("Add School")
                     .foregroundColor(Color.blue)

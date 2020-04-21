@@ -9,7 +9,8 @@
 import SwiftUI
 
 struct CreateImplementationPlanView: View {
-    //        @ObservedObject var viewModel = AddDistrictViewModel()
+    let index: Int
+    @ObservedObject var viewModel = CreateImplementationPlanViewModel()
     @State var showImagePicker: Bool = false
     @State var image: Image? = nil
     @State var images: [Image] = []
@@ -21,7 +22,6 @@ struct CreateImplementationPlanView: View {
     @State var numRooms: Int = 0
     @State var numPods: Int = 0
     @State var schoolContactName: String = ""
-    let installation: Installation
     
     var body: some View {
         content
@@ -45,9 +45,10 @@ struct CreateImplementationPlanView: View {
                     self.showImagePicker.toggle()
                 }) {
                     Text("Upload Floorplan")
+                    .foregroundColor(Color.blue)
                 }
                 
-                NavigationLink(destination: CreatePodMapView()) {
+                NavigationLink(destination: CreatePodMapView(floorPlanImages: self.images, viewModel: self.viewModel)) {
                     Text("Create POD Map")
                         .foregroundColor(Color.blue)
                 }
@@ -56,8 +57,9 @@ struct CreateImplementationPlanView: View {
         }
         .sheet(isPresented: $showImagePicker) {
             ImagePicker(sourceType: .photoLibrary) { image in
-                self.image = Image(uiImage: image)
+//                self.image = Image(uiImage: image)
                 self.images.append(Image(uiImage: image))
+                self.viewModel.uploadFloorPlan(image: image)
             }
         }
     }
@@ -123,7 +125,7 @@ struct CreateImplementationPlanView: View {
 
 struct CreateImplementationPlan_Previews: PreviewProvider {
     static var previews: some View {
-        CreateImplementationPlanView(installation: testInstallArray[0])
+        CreateImplementationPlanView(index: 0)
         //            .environment(\.colorScheme, .dark)
     }
 }

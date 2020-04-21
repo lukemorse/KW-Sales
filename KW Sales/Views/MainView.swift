@@ -20,7 +20,7 @@ struct MainView: View {
             //Add District
             NavigationView {
                 AddDistrictView()
-                    .navigationBarTitle(Text("Main"), displayMode: .inline)
+                    .navigationBarTitle(Text("Add District"), displayMode: .inline)
                     .navigationBarItems(leading:
                         Image("Logo")
                             .frame(height: nil)

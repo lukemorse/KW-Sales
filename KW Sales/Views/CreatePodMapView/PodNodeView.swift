@@ -14,8 +14,6 @@ struct PodNodeView: Identifiable, Hashable, Equatable, View {
     var id: Int { hashValue }
     var uuid = UUID()
     var pos: CGPoint
-    @State var isActive: Bool
-    @GestureState private var dragOffset = CGSize.zero
     @State private var position = CGSize.zero
     
     static func == (lhs: PodNodeView, rhs: PodNodeView) -> Bool {
@@ -23,37 +21,32 @@ struct PodNodeView: Identifiable, Hashable, Equatable, View {
     }
     
     func hash(into hasher: inout Hasher) {
-        hasher.combine(isActive)
         hasher.combine(uuid)
     }
     
     var body: some View {
-        if isActive {
-            return AnyView(Image(podImageDict[self.podType] ?? "")
-                .resizable()
-                .frame(width: 30, height: 30)
-//                .offset(x: position.width + dragOffset.width, y: position.height + dragOffset.height)
-                
-//                .animation(.linear)
-//                .gesture(DragGesture()
-//                    .updating(self.$dragOffset, body: { (value, state, transaction) in
-//                        state = value.translation
-//                    })
-//                    .onEnded({ (value) in
-//                        self.position.height += value.translation.height
-//                        self.position.width += value.translation.width
-//                    })
-//            )
-                .position(pos)
-            )
-        } else {
-            return AnyView(Image("outdoor pod"))
-        }
+        Image(podImageDict[self.podType] ?? "")
+            .resizable()
+            .frame(width: 30, height: 30)
+            .position(pos)
     }
 }
 
 enum PodType {
     case outdoor, corner, hallway, ceiling
+    
+    var description: String {
+        switch self {
+        case .outdoor:
+            return "outdoor"
+        case .corner:
+            return "corner"
+        case .hallway:
+            return "hallway"
+        case .ceiling:
+            return "ceiling"
+        }
+    }
 }
 
 let podImageDict: [PodType : String] = [
@@ -65,6 +58,6 @@ let podImageDict: [PodType : String] = [
 
 struct PodNodeView_Previews: PreviewProvider {
     static var previews: some View {
-        PodNodeView(podType: .hallway, pos: CGPoint(x: 250, y: 250), isActive: true)
+        PodNodeView(podType: .hallway, pos: CGPoint(x: 250, y: 250))
     }
 }

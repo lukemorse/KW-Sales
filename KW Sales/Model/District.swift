@@ -13,6 +13,7 @@ import Firebase
 import CodableFirebase
 
 struct District: Codable {
+    let districtID: String
     let readyToInstall: Bool
     let numPreKSchools: Int
     let numElementarySchools: Int
@@ -25,6 +26,7 @@ struct District: Codable {
     let team: DocumentReference
     let numPodsNeeded: Int
     let startDate: Date
+    let implementationPlan: [ImplementationPlanUnit]
     
 //
 //    private enum CodingKeys: String, CodingKey {
