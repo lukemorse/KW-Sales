@@ -13,7 +13,7 @@ import CodableFirebase
 
 struct ImplementationPlanUnit: Codable {
     
-    let id: String
+    let id = UUID().uuidString
     let schoolName: String
     let schoolType: SchoolType
     let numFloors: Int

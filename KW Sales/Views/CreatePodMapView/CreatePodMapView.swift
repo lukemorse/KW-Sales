@@ -9,7 +9,8 @@
 import SwiftUI
 
 struct CreatePodMapView: View {
-    var floorPlanImages: [Image]
+    @State var showImagePicker: Bool = false
+    @State var image: Image? = nil
     var viewModel: CreateImplementationPlanViewModel
     var floorPlanIndex = 0
     
@@ -33,12 +34,11 @@ struct CreatePodMapView: View {
         VStack {
             Spacer()
             ZStack {
-                if floorPlanImages.count > 0 {
-                    floorPlanImages[floorPlanIndex]
-                        .resizable()
-                }
-                Image("floorPlan")
+                self.image ?? Image("blankImage")
                     .resizable()
+                
+                //                Image("floorPlan")
+                //                    .resizable()
                 self.podGroup
                     .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local).onChanged({ val in
                         print("dragging pod")
@@ -66,7 +66,7 @@ struct CreatePodMapView: View {
                 
             )
                 .simultaneousGesture(DragGesture(minimumDistance: 1, coordinateSpace: .local).onChanged({ val in
-                    print("dragging map")
+                    
                     self.tapPoint = val.startLocation
                     self.dragSize = CGSize(width: val.translation.width + self.lastDrag.width, height: val.translation.height + self.lastDrag.height)
                 })
@@ -76,24 +76,33 @@ struct CreatePodMapView: View {
                     }))
                 .simultaneousGesture(DragGesture(minimumDistance: 0, coordinateSpace: .local).onChanged({ (val) in
                     
-                        
-                        // TODO: Fix starting point when scaled
-                        let startingPoint = CGPoint(x: val.startLocation.x - self.dragSize.width, y: val.startLocation.y - self.dragSize.height)
-                        if self.isPlacingPod {
-                            let pod = PodNodeView(podType: self.nextPodType, pos: startingPoint)
+                    
+                    // TODO: Fix starting point when scaled
+                    let startingPoint = CGPoint(x: val.startLocation.x - self.dragSize.width, y: val.startLocation.y - self.dragSize.height)
+                    if self.isPlacingPod {
+                        let pod = PodNodeView(podType: self.nextPodType, pos: startingPoint)
                         self.podNodes.append(pod)
-//                            
-//                            let dictEntry = [
-////                                pod.
-//                            ]
-                            
                         self.isPlacingPod = false
                         
                     }
                 }))
-            Spacer()
-            actionSheetButton
+                .sheet(isPresented: $showImagePicker) {
+                    ImagePicker(sourceType: .photoLibrary) { image in
+                        self.image = Image(uiImage: image)
+                            .resizable()
+                        self.viewModel.uploadFloorPlan(image: image)
+                    }
+            }
+                Spacer()
+                actionSheetButton
+            
+            }
+        .onAppear() {
+        self.showImagePicker.toggle()
+            
         }
+        
+        
     }
     
     var podGroup: some View {
@@ -149,18 +158,18 @@ struct CreatePodMapView: View {
     
     func commitMap() {
         for pod in podNodes {
-            viewModel.podMaps[self.floorPlanIndex].pods.append([pod.podType.description: [Float(pod.pos.x)]])
+            viewModel.podMaps[self.floorPlanIndex].pods.append([pod.podType.description: [Float(pod.pos.x), Float(pod.pos.y)]])
         }
         viewModel.updateFloorPlanPods(atIndex: self.floorPlanIndex)
     }
 }
 
 
-//
-//struct CreatePodMapView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CreatePodMapView(floorPlanImages: [] showingActionSheet: false)
-//    }
-//}
+
+struct CreatePodMapView_Previews: PreviewProvider {
+    static var previews: some View {
+        CreatePodMapView(viewModel: CreateImplementationPlanViewModel())
+    }
+}
 
 

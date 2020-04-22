@@ -262,9 +262,9 @@
 		A3EE48CB2444D3D300C6A554 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A3F4259824475DA0004D2CCE /* AddDistrictView */,
 				A3A2F0F624478D6A00079243 /* CreateImplementationPlanView */,
 				A3295BCD2448EF8400F26E1F /* CreatePodMapView */,
-				A3F4259824475DA0004D2CCE /* AddDistrictView */,
 				A30F4BF32445269800B59F8B /* PendingView */,
 				A30C9B6E2444C1C80049E4FC /* LoginView.swift */,
 				A3557C4D244A424200C747FE /* StartView.swift */,

@@ -37,7 +37,7 @@ struct MainView: View {
                 PendingView()
                     .navigationBarTitle(
                         Text("Pending Installs"), displayMode: .inline)
-                .navigationBarItems(leading:
+                    .navigationBarItems(leading:
                         Image("Logo")
                             .frame(height: nil)
                 )
@@ -54,7 +54,7 @@ struct MainView: View {
                 CompletedView()
                     .navigationBarTitle(
                         Text("Completed Installs"), displayMode: .inline)
-                .navigationBarItems(leading:
+                    .navigationBarItems(leading:
                         Image("Logo")
                             .frame(height: nil)
                 )

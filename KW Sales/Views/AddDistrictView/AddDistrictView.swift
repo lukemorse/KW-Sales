@@ -10,6 +10,9 @@ import SwiftUI
 
 struct AddDistrictView: View {
     @ObservedObject var viewModel = AddDistrictViewModel()
+    @ObservedObject var createImplementationPlanViewModel = CreateImplementationPlanViewModel()
+    
+    @State var implmentationPlanViews: [CreateImplementationPlanView] = []
     
     @State var districtName: String = ""
     @State var numPreKSchools: Int = 0
@@ -37,7 +40,6 @@ struct AddDistrictView: View {
                         Text("Import CSV")
                     }
                 }
-                
                 
                 Section(header: Text("General")) {
                     Group {
@@ -81,10 +83,16 @@ struct AddDistrictView: View {
                         }
                     }
                 }
-                NavigationLink(destination: CreateImplementationPlanListView()) {
+                NavigationLink(destination: CreateImplementationPlanListView(viewModel: self.createImplementationPlanViewModel)) {
                     Text("Create Implementation Plan")
                         .foregroundColor(Color.blue)
+                    
                 }
+//                .navigationBarTitle("Implementation Plan")
+//                .navigationBarItems(trailing: Button("Add") {
+//
+//                })
+                
                 
                 sendPodButton
                 
@@ -92,6 +100,10 @@ struct AddDistrictView: View {
             }
                 
             .navigationBarTitle("Add District")
+//        .navigationBarItems(trailing:
+//            Button("Add") {
+////                viewModel.addDistrict(district: self.dis)
+//        })
         }
         .alert(isPresented: self.$isShowingAddDistrictAlert) {
         Alert(title: Text("Please complete all fields"))
@@ -198,7 +210,7 @@ struct AddDistrictView: View {
             return
         }
         if let team = viewModel.teamDict.first(where: { $0.value == assignedTeam })?.key {
-            let district = District(districtID: UUID().uuidString, readyToInstall: readyToInstall, numPreKSchools: numPreKSchools, numElementarySchools: numElementaryKSchools, numMiddleSchools: numMiddleSchools, numHighSchools: numHighSchools, districtContactPerson: districtContactName, districtEmail: districtContactEmail, districtPhoneNumber: districtContactPhone, districtOfficeAddress: districtOfficeAddress, team: team, numPodsNeeded: numPods, startDate: startDate, implementationPlan: [])
+            let district = District(districtID: UUID().uuidString, readyToInstall: readyToInstall, numPreKSchools: numPreKSchools, numElementarySchools: numElementaryKSchools, numMiddleSchools: numMiddleSchools, numHighSchools: numHighSchools, districtContactPerson: districtContactName, districtEmail: districtContactEmail, districtPhoneNumber: districtContactPhone, districtOfficeAddress: districtOfficeAddress, team: team, numPodsNeeded: numPods, startDate: startDate, implementationPlan: createImplementationPlanViewModel.implementationPlanUnits)
             
             viewModel.addDistrict(district: district)
             

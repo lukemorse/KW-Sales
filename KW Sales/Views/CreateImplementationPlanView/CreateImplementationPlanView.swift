@@ -10,10 +10,8 @@ import SwiftUI
 
 struct CreateImplementationPlanView: View {
     let index: Int
-    @ObservedObject var viewModel = CreateImplementationPlanViewModel()
-    @State var showImagePicker: Bool = false
-    @State var image: Image? = nil
-    @State var images: [Image] = []
+//    @ObservedObject var viewModel = CreateImplementationPlanViewModel()
+    @ObservedObject var viewModel: CreateImplementationPlanViewModel
     
     @State private var isExpanded: Bool = true
     @State var schoolName: String = ""
@@ -22,6 +20,7 @@ struct CreateImplementationPlanView: View {
     @State var numRooms: Int = 0
     @State var numPods: Int = 0
     @State var schoolContactName: String = ""
+    @State var podMaps: [PodMapModel] = []
     
     var body: some View {
         content
@@ -41,27 +40,25 @@ struct CreateImplementationPlanView: View {
                 formItem(with: $numPods, label: "Number of Pods")
                 formItem(with: $schoolContactName, label: "School Contact Person")
                 
-                Button(action: {
-                    self.showImagePicker.toggle()
-                }) {
-                    Text("Upload Floorplan")
-                    .foregroundColor(Color.blue)
-                }
+//                Button(action: {
+//                    self.showImagePicker.toggle()
+//                }) {
+//                    Text("Upload Floorplan")
+//                    .foregroundColor(Color.blue)
+//                }
                 
-                NavigationLink(destination: CreatePodMapView(floorPlanImages: self.images, viewModel: self.viewModel)) {
+                NavigationLink(destination: CreatePodMapView(viewModel: self.viewModel)) {
                     Text("Create POD Map")
                         .foregroundColor(Color.blue)
                 }
             }
             
         }
-        .sheet(isPresented: $showImagePicker) {
-            ImagePicker(sourceType: .photoLibrary) { image in
-//                self.image = Image(uiImage: image)
-                self.images.append(Image(uiImage: image))
-                self.viewModel.uploadFloorPlan(image: image)
-            }
-        }
+        
+    }
+    
+    func getImplementationPlanUnit() -> ImplementationPlanUnit {
+        return ImplementationPlanUnit(schoolName: schoolName, schoolType: schoolType, numFloors: numFloors, numRooms: numRooms, numPods: numPods, schoolContactPerson: schoolContactName, podMaps: podMaps)
     }
     
     //Funcs for adding form items
@@ -125,7 +122,7 @@ struct CreateImplementationPlanView: View {
 
 struct CreateImplementationPlan_Previews: PreviewProvider {
     static var previews: some View {
-        CreateImplementationPlanView(index: 0)
+        CreateImplementationPlanView(index: 0, viewModel: CreateImplementationPlanViewModel())
         //            .environment(\.colorScheme, .dark)
     }
 }

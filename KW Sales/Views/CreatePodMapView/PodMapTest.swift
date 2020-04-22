@@ -47,7 +47,6 @@ struct PodMapTest: View {
                 
             )
                 .simultaneousGesture(DragGesture(minimumDistance: 1, coordinateSpace: .local).onChanged({ val in
-                    print("dragging map")
                     self.tapPoint = val.startLocation
                     self.dragSize = CGSize(width: val.translation.width + self.lastDrag.width, height: val.translation.height + self.lastDrag.height)
                 })

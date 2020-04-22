@@ -9,7 +9,9 @@
 import SwiftUI
 
 struct CreateImplementationPlanListView: View {
-    //    let installations: [Installation]
+    
+//    @ObservedObject var viewModel = CreateImplementationPlanViewModel()
+    @ObservedObject var viewModel: CreateImplementationPlanViewModel
     @State var implmentationPlanViews: [CreateImplementationPlanView] = []
     @State var numSchools = 0
     
@@ -20,21 +22,33 @@ struct CreateImplementationPlanListView: View {
             }
             
             Button(action: {
-                self.implmentationPlanViews.append(CreateImplementationPlanView(index: self.numSchools))
+                self.implmentationPlanViews.append(CreateImplementationPlanView(index: self.numSchools, viewModel: self.viewModel))
                 self.numSchools += 1
             }) {
                 Text("Add School")
                     .foregroundColor(Color.blue)
             }
+            Button(action: {
+                self.uploadImplementationPlans()
+            }) {
+                Text("Finish")
+                .foregroundColor(Color.blue)
+            }
         }
-        
-        
+    .navigationBarTitle("Implementation Plan")
     }
+    
+    func uploadImplementationPlans() -> [ImplementationPlanUnit] {
+        var result: [ImplementationPlanUnit] = []
+        for impView in implmentationPlanViews {
+            let imp = impView.getImplementationPlanUnit()
+            result.append(imp)
+        }
+        viewModel.uploadImplementationPlan(implemenationPlans: result)
+        print(result)
+        return result
+    }
+    
+    
 }
 
-
-struct CreateImplementationPlanListView_Previews: PreviewProvider {
-    static var previews: some View {
-        CreateImplementationPlanListView()
-    }
-}

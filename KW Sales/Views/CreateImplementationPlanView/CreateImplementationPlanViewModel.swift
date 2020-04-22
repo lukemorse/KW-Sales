@@ -12,7 +12,7 @@ import CodableFirebase
 
 class CreateImplementationPlanViewModel: ObservableObject {
     @Published var podMaps: [PodMapModel] = []
-//    @Published var image: Image?
+    @Published var implementationPlanUnits: [ImplementationPlanUnit] = []
     
     func uploadFloorPlan(image: UIImage) {
         guard let data = image.jpegData(compressionQuality: 1.0) else {
@@ -20,7 +20,7 @@ class CreateImplementationPlanViewModel: ObservableObject {
             return
         }
         let imageName = UUID().uuidString
-        let imageRef = Storage.storage().reference().child(Constants.kFloorPlanFolderName).child(imageName)
+        let imageRef = Storage.storage().reference().child(Constants.kFloorPlanFolder).child(imageName)
         imageRef.putData(data, metadata: nil) { (metaData, error) in
             if let error = error {
                 print(error.localizedDescription)
@@ -35,7 +35,7 @@ class CreateImplementationPlanViewModel: ObservableObject {
                     print("could not create url")
                     return
                 }
-                let dataRef = Firestore.firestore().collection(Constants.kFloorPlanCollectionName).document()
+                let dataRef = Firestore.firestore().collection(Constants.kFloorPlanCollection).document()
                 let docID = dataRef.documentID
                 let urlString = url.absoluteString
                 let data = [
@@ -57,9 +57,25 @@ class CreateImplementationPlanViewModel: ObservableObject {
         }
     }
     
+    func uploadImplementationPlan(implemenationPlans: [ImplementationPlanUnit]) {
+        //encode district file
+        self.implementationPlanUnits = implemenationPlans
+        print(implemenationPlans)
+        let dict = ["districtName?" ?? "" :implemenationPlans]
+        let implementationPlanData = try! FirestoreEncoder().encode(dict)
+        //send district file to database
+        Firestore.firestore().collection(Constants.kImplementationPlanCollection).document().setData(implementationPlanData) { error in
+            if let error = error {
+                print("Error writing document: \(error)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+    }
+    
     func updateFloorPlanPods(atIndex index: Int) {
         let podMap = podMaps[index]
-        let dataRef = Firestore.firestore().collection(Constants.kFloorPlanCollectionName).document(podMap.id)
+        let dataRef = Firestore.firestore().collection(Constants.kFloorPlanCollection).document(podMap.id)
         let data = [
             "id" : podMap.id,
             "pods": podMap.pods
@@ -72,28 +88,5 @@ class CreateImplementationPlanViewModel: ObservableObject {
             print("successfully updated floor plan pods")
         }
     }
-    
-//    func downloadFloorPlan(index: Int) {
-//        let ref = podMaps[index].imageData
-//        ref.getDocument { (snapshot, error) in
-//            if let error = error {
-//                print(error.localizedDescription)
-//                return
-//            }
-//            guard let snapshot = snapshot,
-//                let data = snapshot.data(),
-//                let urlString = data["imageURL"] as? String,
-//                let url = URL(string: urlString) else {
-//                print("error")
-//                    return
-//            }
-//            if let imageData = try? Data(contentsOf: url) {
-//                if let uiImage = UIImage(data: imageData) {
-//                    self.image = Image(uiImage: uiImage)
-//
-//                }
-//            }
-//        }
-//    }
  
 }
