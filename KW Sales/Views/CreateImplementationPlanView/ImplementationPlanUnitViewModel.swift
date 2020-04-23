@@ -12,7 +12,6 @@ import CodableFirebase
 
 class ImplementationPlanUnitViewModel: ObservableObject {
     @Published var podMaps: [PodMapModel] = []
-//    @Published var implementationPlanUnit: ImplementationPlanUnit = ImplementationPlanUnit(schoolName: "", schoolType: .preKSchool, numFloors: 0, numRooms: 0, numPods: 0, schoolContactPerson: "", podMaps: [])
     @Published var implementationPlanUnit: ImplementationPlanUnit
     
     init(implementationPlanUnit: ImplementationPlanUnit) {
@@ -61,22 +60,6 @@ class ImplementationPlanUnitViewModel: ObservableObject {
             }
         }
     }
-    
-//    func uploadImplementationPlan(implemenationPlans: [ImplementationPlanUnit]) {
-//        //encode district file
-//        self.implementationPlanUnits = implemenationPlans
-//        print(implemenationPlans)
-//        let dict = ["districtName?" ?? "" :implemenationPlans]
-//        let implementationPlanData = try! FirestoreEncoder().encode(dict)
-//        //send district file to database
-//        Firestore.firestore().collection(Constants.kImplementationPlanCollection).document().setData(implementationPlanData) { error in
-//            if let error = error {
-//                print("Error writing document: \(error)")
-//            } else {
-//                print("Document successfully written!")
-//            }
-//        }
-//    }
     
     func updateFloorPlanPods(atIndex index: Int) {
         let podMap = podMaps[index]

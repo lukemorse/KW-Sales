@@ -36,7 +36,6 @@ struct AddDistrictView: View {
                 Section(header: Text("District Information")){
                     Group {
                         districtNameField
-                        numPodPicker
                         numPreKSchoolsPicker
                         numElementarySchoolsPicker
                         numMiddleSchoolsPicker
@@ -106,7 +105,7 @@ struct AddDistrictView: View {
     
     var startDatePicker: some View {
         VStack(alignment: .leading) {
-            Text("Number PODS Needed")
+            Text("Start Date")
                 .font(.headline)
             
             DatePicker(selection: Binding<Date>(
@@ -132,7 +131,7 @@ struct AddDistrictView: View {
     
     var numPreKSchoolsPicker: some View {
         VStack(alignment: .leading) {
-            Text("Number PODS Needed")
+            Text("Number of Pre-K Schools")
                 .font(.headline)
             
             Picker(selection:
@@ -149,7 +148,7 @@ struct AddDistrictView: View {
     
     var numElementarySchoolsPicker: some View {
         VStack(alignment: .leading) {
-            Text("Number PODS Needed")
+            Text("Number of Elementary Schools")
                 .font(.headline)
             
             Picker(selection:
@@ -166,7 +165,7 @@ struct AddDistrictView: View {
     
     var numMiddleSchoolsPicker: some View {
         VStack(alignment: .leading) {
-            Text("Number PODS Needed")
+            Text("Number of Middle Schools")
                 .font(.headline)
             
             Picker(selection:
@@ -183,7 +182,7 @@ struct AddDistrictView: View {
     
     var numHighSchoolsPicker: some View {
         VStack(alignment: .leading) {
-            Text("Number PODS Needed")
+            Text("Number of High Schools")
                 .font(.headline)
             
             Picker(selection:
@@ -239,9 +238,9 @@ struct AddDistrictView: View {
     
     var districtAddressField: some View {
         VStack(alignment: .leading) {
-            Text("District Phone Number")
+            Text("District Office Address")
                 .font(.headline)
-            TextField("Enter District Phone Number", text: Binding<String>(
+            TextField("Enter District Office Address", text: Binding<String>(
             get: {self.viewModel.district?.districtOfficeAddress ?? ""},
             set: {self.viewModel.district?.districtOfficeAddress = $0}
             ))
