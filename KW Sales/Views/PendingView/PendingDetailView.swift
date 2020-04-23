@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct PendingDetailView: View {
-    var name: String
+    var district: District
     var body: some View {
         VStack {
             listView(list: groupSchoolsByStatusCode(list: testInstallArray))
@@ -69,6 +69,6 @@ struct PendingDetailView: View {
 
 struct PendingDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        PendingDetailView(name: "testName")
+        PendingDetailView(district: District(districtID: "", districtName: "", readyToInstall: false, numPreKSchools: 0, numElementarySchools: 0, numMiddleSchools: 0, numHighSchools: 0, districtContactPerson: "", districtEmail: "", districtPhoneNumber: "", districtOfficeAddress: "", team: Team(), numPodsNeeded: 0, startDate: Date(), implementationPlan: []))
     }
 }

@@ -250,7 +250,7 @@ struct AddDistrictView: View {
     }
     
     func teamPicker() -> some View {
-        let teams = self.viewModel.teamDict.map {$0.value}
+        let team = self.viewModel.district?.team ?? Team()
         return VStack(alignment: .leading) {
             Text("Assign Team")
                 .font(.headline)
@@ -267,9 +267,9 @@ struct AddDistrictView: View {
                 },
                     set: {self.viewModel.district?.team = $0}),
                    
-                   label: Text(""), content: {
-                    ForEach(0..<teams.count, id: \.self) { idx in
-                        Text(teams[idx].name).tag(idx)
+                   label: Text(team.name), content: {
+                    ForEach(0..<self.viewModel.teams.count, id: \.self) { idx in
+                        Text(self.viewModel.teams[idx].name).tag(idx)
                     }
             })}
     }

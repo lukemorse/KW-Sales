@@ -16,7 +16,7 @@ struct Team: Encodable, Hashable, Identifiable {
     let name: String
     let leader: String
     let members: [String]
-    var installations: [DocumentReference]
+    var installations: [Installation]
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(name)
@@ -28,7 +28,7 @@ struct Team: Encodable, Hashable, Identifiable {
     init(name: String = "",
          leader: String = "",
          members: [String] = [],
-         installations: [DocumentReference] = []) {
+         installations: [Installation] = []) {
         self.name = name
         self.leader = leader
         self.members = members
@@ -57,6 +57,6 @@ extension Team: Decodable {
         name = try container.decode(String.self, forKey: .name)
         leader = try container.decode(String.self, forKey: .leader)
         members = try container.decode([String].self, forKey: .members)
-        installations = try container.decode([DocumentReference].self, forKey: .installations)
+        installations = try container.decode([Installation].self, forKey: .installations)
     }
 }

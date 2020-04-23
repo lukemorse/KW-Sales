@@ -13,12 +13,11 @@ import CodableFirebase
 class AddDistrictViewModel: ObservableObject {
     @Published var teams: [Team] = []
     @Published var teamIndex = 0
-    @Published var teamDict: [DocumentReference : Team] = [:]
     @Published var district: District?
 //    var districtName: String?
     
     init() {
-        self.district = District(districtID: nil, readyToInstall: nil, numPreKSchools: nil, numElementarySchools: nil, numMiddleSchools: nil, numHighSchools: nil, districtContactPerson: nil, districtEmail: nil, districtPhoneNumber: nil, districtOfficeAddress: nil, team: nil, numPodsNeeded: nil, startDate: nil, implementationPlan: [])
+        self.district = District(districtID: "", readyToInstall: false, numPreKSchools: nil, numElementarySchools: nil, numMiddleSchools: nil, numHighSchools: nil, districtContactPerson: nil, districtEmail: nil, districtPhoneNumber: nil, districtOfficeAddress: nil, team: nil, numPodsNeeded: nil, startDate: nil, implementationPlan: [])
         fetchTeams()
     }
     
@@ -59,21 +58,16 @@ class AddDistrictViewModel: ObservableObject {
     
     func fetchTeams() {
         teams = []
-        Firestore.firestore().collection(Constants.kDistrictCollection).document(Constants.kTeamCollection).getDocument { (document, error) in
-            if let document = document, document.exists {
-                if let teamArr = document.data()!["teams"] as? [DocumentReference] {
-                    for docRef in teamArr {
-                        docRef.getDocument { (teamDoc, teamError) in
-                            let decodedTeamDoc = try! FirestoreDecoder().decode(Team.self, from: teamDoc?.data() ?? [:])
-                            self.teams.append(decodedTeamDoc)
-                            self.teamDict[docRef] = decodedTeamDoc
-                        }
-                    }
-                } else {
-                    print("error fetching team array")
+        Firestore.firestore().collection(Constants.kTeamCollection).getDocuments() { (snapshot, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                for document in snapshot!.documents {
+                    let team = try! FirestoreDecoder().decode(Team.self, from: document.data())
+                    self.teams.append(team)
+                    print(team)
                 }
             }
-            
         }
     }
 }

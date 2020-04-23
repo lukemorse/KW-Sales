@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct CompletedView: View {
+struct CompletedListView: View {
     var body: some View {
         VStack {
             listView(list: getCompleted(list: testInstallArray))
@@ -44,6 +44,6 @@ struct CompletedView: View {
 
 struct CompletedView_Previews: PreviewProvider {
     static var previews: some View {
-        CompletedView()
+        CompletedListView()
     }
 }
