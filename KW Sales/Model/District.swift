@@ -13,20 +13,21 @@ import Firebase
 import CodableFirebase
 
 struct District: Codable {
-    let districtID: String
-    let readyToInstall: Bool
-    let numPreKSchools: Int
-    let numElementarySchools: Int
-    let numMiddleSchools: Int
-    let numHighSchools: Int
-    let districtContactPerson: String
-    let districtEmail: String
-    let districtPhoneNumber: String
-    let districtOfficeAddress: String
-    let team: DocumentReference
-    let numPodsNeeded: Int
-    let startDate: Date
-    let implementationPlan: [ImplementationPlanUnit]
+    var districtID: String?
+    var districtName: String?
+    var readyToInstall: Bool?
+    var numPreKSchools: Int?
+    var numElementarySchools: Int?
+    var numMiddleSchools: Int?
+    var numHighSchools: Int?
+    var districtContactPerson: String?
+    var districtEmail: String?
+    var districtPhoneNumber: String?
+    var districtOfficeAddress: String?
+    var team: Team?
+    var numPodsNeeded: Int?
+    var startDate: Date?
+    var implementationPlan: [ImplementationPlanUnit]
     
 //
 //    private enum CodingKeys: String, CodingKey {

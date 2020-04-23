@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct CreateImplementationPlanUnitView: View {
+//    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     let index: Int
     @ObservedObject var viewModel: ImplementationPlanUnitViewModel
     @State private var isExpanded: Bool = true
@@ -16,9 +17,13 @@ struct CreateImplementationPlanUnitView: View {
     var body: some View {
         Section {
             Text(viewModel.implementationPlanUnit.schoolName)
+//                .onReceive(timer) { input in
+//                    print(self.viewModel.implementationPlanUnit)
+//                }
                 .onTapGesture {
                     self.isExpanded.toggle()
             }
+            
             if isExpanded {
                 
 //                VStack(alignment: .leading) {
@@ -44,6 +49,7 @@ struct CreateImplementationPlanUnitView: View {
                 }
             }
         }
+        
     }
     
     func getImplementationPlanUnit() -> ImplementationPlanUnit {

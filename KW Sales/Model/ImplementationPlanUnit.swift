@@ -14,11 +14,11 @@ import CodableFirebase
 struct ImplementationPlanUnit: Codable {
     
     let id = UUID().uuidString
-    let schoolName: String
-    let schoolType: SchoolType
-    let numFloors: Int
-    let numRooms: Int
-    let numPods: Int
-    let schoolContactPerson: String
-    let podMaps: [PodMapModel]
+    var schoolName: String
+    var schoolType: SchoolType
+    var numFloors: Int
+    var numRooms: Int
+    var numPods: Int
+    var schoolContactPerson: String
+    var podMaps: [PodMapModel]
 }

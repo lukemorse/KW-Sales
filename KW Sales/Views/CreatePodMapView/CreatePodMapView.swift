@@ -11,7 +11,7 @@ import SwiftUI
 struct CreatePodMapView: View {
     @State var showImagePicker: Bool = false
     @State var image: Image? = nil
-    var viewModel: CreateImplementationPlanViewModel
+    var viewModel: ImplementationPlanUnitViewModel
     var floorPlanIndex = 0
     
     @State var showingActionSheet = false
@@ -78,12 +78,10 @@ struct CreatePodMapView: View {
                     
                     
                     // TODO: Fix starting point when scaled
-                    let startingPoint = CGPoint(x: val.startLocation.x - self.dragSize.width, y: val.startLocation.y - self.dragSize.height)
+                    
                     if self.isPlacingPod {
-                        let pod = PodNodeView(podType: self.nextPodType, pos: startingPoint)
-                        self.podNodes.append(pod)
-                        self.isPlacingPod = false
-                        
+                        let tapPoint = CGPoint(x: val.startLocation.x - self.dragSize.width, y: val.startLocation.y - self.dragSize.height)
+                        self.addPod(type: self.nextPodType, location: tapPoint)
                     }
                 }))
                 .sheet(isPresented: $showImagePicker) {
@@ -101,8 +99,6 @@ struct CreatePodMapView: View {
         self.showImagePicker.toggle()
             
         }
-        
-        
     }
     
     var podGroup: some View {
@@ -148,19 +144,15 @@ struct CreatePodMapView: View {
                         self.nextPodType = .ceiling
                         self.isPlacingPod = true
                     }),
-                    .default(Text("Commit Map"), action: {
-                        self.commitMap()
-                    }),
                     .cancel()])
         })
-        
     }
     
-    func commitMap() {
-        for pod in podNodes {
-            viewModel.podMaps[self.floorPlanIndex].pods.append([pod.podType.description: [Float(pod.pos.x), Float(pod.pos.y)]])
-        }
-        viewModel.updateFloorPlanPods(atIndex: self.floorPlanIndex)
+    func addPod(type: PodType, location: CGPoint) {
+        let pod = PodNodeView(podType: type, pos: location)
+        self.podNodes.append(pod)
+        self.isPlacingPod = false
+        viewModel.podMaps[self.floorPlanIndex].pods.append([pod.podType.description: [Float(pod.pos.x), Float(pod.pos.y)]])
     }
 }
 
@@ -168,7 +160,7 @@ struct CreatePodMapView: View {
 
 struct CreatePodMapView_Previews: PreviewProvider {
     static var previews: some View {
-        CreatePodMapView(viewModel: CreateImplementationPlanViewModel())
+        CreatePodMapView(viewModel: ImplementationPlanUnitViewModel(implementationPlanUnit: ImplementationPlanUnit(schoolName: "", schoolType: .elementary, numFloors: 0, numRooms: 0, numPods: 0, schoolContactPerson: "", podMaps: [])))
     }
 }
 

@@ -17,7 +17,8 @@
 		A30C9B822444C1CB0049E4FC /* KW_SalesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30C9B812444C1CB0049E4FC /* KW_SalesTests.swift */; };
 		A30C9B8D2444C1CB0049E4FC /* KW_SalesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30C9B8C2444C1CB0049E4FC /* KW_SalesUITests.swift */; };
 		A30F4BF5244526B300B59F8B /* CompletedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30F4BF4244526B300B59F8B /* CompletedView.swift */; };
-		A30F4BF7244530A800B59F8B /* CreateImplementationPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30F4BF6244530A800B59F8B /* CreateImplementationPlanView.swift */; };
+		A30F4BF7244530A800B59F8B /* CreateImplementationPlanUnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30F4BF6244530A800B59F8B /* CreateImplementationPlanUnitView.swift */; };
+		A31C4C462450C24E004CAEAB /* ImplementationPlanListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31C4C452450C24E004CAEAB /* ImplementationPlanListViewModel.swift */; };
 		A31F80782445FFE500ADC66A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A31F80772445FFE500ADC66A /* GoogleService-Info.plist */; };
 		A3295BCC2448EC7800F26E1F /* PodNodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3295BCB2448EC7800F26E1F /* PodNodeView.swift */; };
 		A3295BD1244A044A00F26E1F /* CSVTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3295BD0244A044A00F26E1F /* CSVTest.swift */; };
@@ -25,7 +26,7 @@
 		A3295BDE244A2E9500F26E1F /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3295BDD244A2E9500F26E1F /* HelperFunctions.swift */; };
 		A3557C4C244A3E7400C747FE /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3557C4B244A3E7400C747FE /* ImagePicker.swift */; };
 		A3557C4E244A424200C747FE /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3557C4D244A424200C747FE /* StartView.swift */; };
-		A368EA5F244DE82B00FE7685 /* CreateImplementationPlanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A368EA5E244DE82B00FE7685 /* CreateImplementationPlanViewModel.swift */; };
+		A368EA5F244DE82B00FE7685 /* ImplementationPlanUnitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A368EA5E244DE82B00FE7685 /* ImplementationPlanUnitViewModel.swift */; };
 		A368EA61244DF96F00FE7685 /* PodMapTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A368EA60244DF96F00FE7685 /* PodMapTest.swift */; };
 		A368EA63244E126A00FE7685 /* ImplementationPlanUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A368EA62244E126A00FE7685 /* ImplementationPlanUnit.swift */; };
 		A368EA65244E130600FE7685 /* PodMapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A368EA64244E130600FE7685 /* PodMapModel.swift */; };
@@ -79,7 +80,8 @@
 		A30C9B8C2444C1CB0049E4FC /* KW_SalesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KW_SalesUITests.swift; sourceTree = "<group>"; };
 		A30C9B8E2444C1CB0049E4FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A30F4BF4244526B300B59F8B /* CompletedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedView.swift; sourceTree = "<group>"; };
-		A30F4BF6244530A800B59F8B /* CreateImplementationPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateImplementationPlanView.swift; sourceTree = "<group>"; };
+		A30F4BF6244530A800B59F8B /* CreateImplementationPlanUnitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateImplementationPlanUnitView.swift; sourceTree = "<group>"; };
+		A31C4C452450C24E004CAEAB /* ImplementationPlanListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImplementationPlanListViewModel.swift; sourceTree = "<group>"; };
 		A31F80772445FFE500ADC66A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A3295BCB2448EC7800F26E1F /* PodNodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodNodeView.swift; sourceTree = "<group>"; };
 		A3295BD0244A044A00F26E1F /* CSVTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVTest.swift; sourceTree = "<group>"; };
@@ -87,7 +89,7 @@
 		A3295BDD244A2E9500F26E1F /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
 		A3557C4B244A3E7400C747FE /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		A3557C4D244A424200C747FE /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
-		A368EA5E244DE82B00FE7685 /* CreateImplementationPlanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateImplementationPlanViewModel.swift; sourceTree = "<group>"; };
+		A368EA5E244DE82B00FE7685 /* ImplementationPlanUnitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImplementationPlanUnitViewModel.swift; sourceTree = "<group>"; };
 		A368EA60244DF96F00FE7685 /* PodMapTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodMapTest.swift; sourceTree = "<group>"; };
 		A368EA62244E126A00FE7685 /* ImplementationPlanUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImplementationPlanUnit.swift; sourceTree = "<group>"; };
 		A368EA64244E130600FE7685 /* PodMapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodMapModel.swift; sourceTree = "<group>"; };
@@ -252,8 +254,9 @@
 			isa = PBXGroup;
 			children = (
 				A3A2F0F724478D8400079243 /* CreateImplementationPlanListView.swift */,
-				A368EA5E244DE82B00FE7685 /* CreateImplementationPlanViewModel.swift */,
-				A30F4BF6244530A800B59F8B /* CreateImplementationPlanView.swift */,
+				A31C4C452450C24E004CAEAB /* ImplementationPlanListViewModel.swift */,
+				A30F4BF6244530A800B59F8B /* CreateImplementationPlanUnitView.swift */,
+				A368EA5E244DE82B00FE7685 /* ImplementationPlanUnitViewModel.swift */,
 				A3557C4B244A3E7400C747FE /* ImagePicker.swift */,
 			);
 			path = CreateImplementationPlanView;
@@ -482,12 +485,13 @@
 				A3EE48CD2444D3E500C6A554 /* MainView.swift in Sources */,
 				A368EA65244E130600FE7685 /* PodMapModel.swift in Sources */,
 				A3B37B90244632B900D8CE40 /* Team.swift in Sources */,
-				A30F4BF7244530A800B59F8B /* CreateImplementationPlanView.swift in Sources */,
+				A30F4BF7244530A800B59F8B /* CreateImplementationPlanUnitView.swift in Sources */,
 				A3B37B892446204200D8CE40 /* District.swift in Sources */,
 				A3EE48D82445032000C6A554 /* Installation.swift in Sources */,
 				A3295BDE244A2E9500F26E1F /* HelperFunctions.swift in Sources */,
 				A368EA63244E126A00FE7685 /* ImplementationPlanUnit.swift in Sources */,
-				A368EA5F244DE82B00FE7685 /* CreateImplementationPlanViewModel.swift in Sources */,
+				A368EA5F244DE82B00FE7685 /* ImplementationPlanUnitViewModel.swift in Sources */,
+				A31C4C462450C24E004CAEAB /* ImplementationPlanListViewModel.swift in Sources */,
 				A3295BCC2448EC7800F26E1F /* PodNodeView.swift in Sources */,
 				A3295BD1244A044A00F26E1F /* CSVTest.swift in Sources */,
 				A368EA61244DF96F00FE7685 /* PodMapTest.swift in Sources */,

@@ -10,9 +10,8 @@ import SwiftUI
 
 struct CreateImplementationPlanListView: View {
     
-//    @ObservedObject var viewModel = CreateImplementationPlanViewModel()
-    @ObservedObject var viewModel: CreateImplementationPlanViewModel
-    @State var implmentationPlanViews: [CreateImplementationPlanView] = []
+    @ObservedObject var viewModel: ImplementationPlanListViewModel
+    @State var implmentationPlanViews: [CreateImplementationPlanUnitView] = []
     @State var numSchools = 0
     
     var body: some View {
@@ -22,31 +21,21 @@ struct CreateImplementationPlanListView: View {
             }
             
             Button(action: {
-                self.implmentationPlanViews.append(CreateImplementationPlanView(index: self.numSchools, viewModel: self.viewModel))
+                let viewModel = self.viewModel.addImplementationPlanUnit()
+                self.implmentationPlanViews.append(CreateImplementationPlanUnitView(index: self.numSchools, viewModel: viewModel))
                 self.numSchools += 1
             }) {
                 Text("Add School")
                     .foregroundColor(Color.blue)
             }
             Button(action: {
-                self.uploadImplementationPlans()
+                self.viewModel.uploadImplementationPlan()
             }) {
                 Text("Finish")
                 .foregroundColor(Color.blue)
             }
         }
     .navigationBarTitle("Implementation Plan")
-    }
-    
-    func uploadImplementationPlans() -> [ImplementationPlanUnit] {
-        var result: [ImplementationPlanUnit] = []
-        for impView in implmentationPlanViews {
-            let imp = impView.getImplementationPlanUnit()
-            result.append(imp)
-        }
-        viewModel.uploadImplementationPlan(implemenationPlans: result)
-        print(result)
-        return result
     }
     
     
