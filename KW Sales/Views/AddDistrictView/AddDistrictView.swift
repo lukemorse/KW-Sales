@@ -290,6 +290,5 @@ struct AddDistrictView: View {
 struct AddDistrictView_Previews: PreviewProvider {
     static var previews: some View {
         AddDistrictView()
-        //            .environment(\.colorScheme, .dark)
     }
 }

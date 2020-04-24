@@ -13,7 +13,6 @@ struct LoginView: View {
     @State private var password: String = ""
     @State private var showingLoginAlert = false
     
-//    var handler: (String, (Bool) -> Void) -> Void
     var handler: (String, String, (Bool) -> Void) -> Void
     
     var body: some View {
@@ -58,24 +57,6 @@ struct LoginView: View {
             }
         }
         
-//        print("attempt")
-//        if username == correctUsername && password == correctPassword {
-//            //login here
-//        } else {
-////            alert
-//            showingLoginAlert = true
-//            username = ""
-//            password = ""
-//        }
-    }
-}
-//
-//struct LoginView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        LoginView().previewLayout(.fixed(width: 812, height: 375))
-//    }
-//}
-
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView { (username, password, callBack: (Bool) -> Void) in

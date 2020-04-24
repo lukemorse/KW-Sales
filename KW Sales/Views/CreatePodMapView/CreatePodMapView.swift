@@ -38,8 +38,6 @@ struct CreatePodMapView: View {
                 self.image ?? Image("blankImage")
                     .resizable()
                 
-                //                Image("floorPlan")
-                //                    .resizable()
                 self.podGroup
                     .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local).onChanged({ val in
                         print("dragging pod")
@@ -156,8 +154,6 @@ struct CreatePodMapView: View {
         viewModel.podMaps[self.floorPlanIndex].pods.append([pod.podType.description: [Float(pod.pos.x), Float(pod.pos.y)]])
     }
 }
-
-
 
 struct CreatePodMapView_Previews: PreviewProvider {
     static var previews: some View {

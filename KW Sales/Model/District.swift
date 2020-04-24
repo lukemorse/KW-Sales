@@ -107,9 +107,3 @@ extension District: Decodable {
         startDate = timeStamp.dateValue()
     }
 }
-
-//extension DocumentReference: DocumentReferenceType {}
-//extension GeoPoint: GeoPointType {}
-//extension FieldValue: FieldValueType {}
-//extension Timestamp: TimestampType {}
-

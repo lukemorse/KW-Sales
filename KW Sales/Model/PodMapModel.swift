@@ -14,7 +14,6 @@ struct PodMapModel: Codable, Hashable {
     
     let id: String
     var pods: [[String: [Float]]]
-//    var pods: String
     
     enum CodingKeys: String, CodingKey {
         case id

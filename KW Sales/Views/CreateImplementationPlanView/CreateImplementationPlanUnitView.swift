@@ -24,8 +24,6 @@ struct CreateInstallationView: View {
             if isExpanded {
                 
                 formItem(with: $viewModel.installation.schoolName, label: "School Name")
-                
-//                formItem(with: $schoolName, label: "School Name")
                 formItem(with: $viewModel.installation.schoolType, label: "School Type")
                 formItem(with: $viewModel.installation.numFloors, label: "Number of Floors")
                 formItem(with: $viewModel.installation.numRooms, label: "Number of Rooms")
@@ -53,10 +51,8 @@ struct CreateInstallationView: View {
                 Text(label)
                     .font(.headline)
                 TextField("Enter " + label, text: name)
-                    .padding([.top, .bottom])
-                
+                    .padding([.top, .bottom])   
             }
-            
     }
     
     func formItem(with schoolType: Binding<SchoolType>, label: String) -> some

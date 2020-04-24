@@ -35,12 +35,6 @@ struct StartView: View {
         self.isLoggedIn = newVal
     }
 }
-//
-//struct StartView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        StartView()
-//    }
-//}
 
 struct StartView_Previews: PreviewProvider {
     static var previews: some View {
