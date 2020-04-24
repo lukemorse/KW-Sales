@@ -251,22 +251,20 @@ struct AddDistrictView: View {
     
     func teamPicker() -> some View {
         return VStack(alignment: .leading) {
-            Text("Assign Team")
+            Text("Assigned Team")
                 .font(.headline)
             
             Picker(selection:
-                Binding<Team>(
-                    get: {
-                        if self.viewModel.teams.count > 0 {
-                            return self.viewModel.teams[self.viewModel.teamIndex]
-                            
-                        } else {
-                            return Team()
-                        }
-                },
-                    set: {self.viewModel.district?.team = $0}),
+                Binding<Int>(
+                get: {self.viewModel.teamIndex},
+                set: {
+                    self.viewModel.teamIndex = $0
+                    self.viewModel.district?.team = self.viewModel.teams[$0]
+                }),
                    
-                   label: Text(self.viewModel.district?.team?.name ?? ""), content: {
+                   label: Text(
+                    self.viewModel.teams.count > 0 ? self.viewModel.teams[self.viewModel.teamIndex].name : ""
+                ), content: {
                     ForEach(0..<self.viewModel.teams.count, id: \.self) { idx in
                         Text(self.viewModel.teams[idx].name).tag(idx)
                     }
