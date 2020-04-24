@@ -16,7 +16,7 @@ class ImplementationPlanListViewModel: ObservableObject {
     var installationViewModels: [InstallationViewModel] = []
     
     func addInstallation() -> InstallationViewModel {
-        let installation = Installation(statusCode: 0, schoolType: .elementary, address: chicagoGeoPoint, districtContact: "", districtName: "", schoolContact: "", schoolName: "", email: "", numFloors: 0, numRooms: 0, numPods: 0, timeStamp: Timestamp(), podMaps: [])
+        let installation = Installation(status: .notStarted, schoolType: .elementary, address: chicagoGeoPoint, districtContact: "", districtName: "", schoolContact: "", schoolName: "", email: "", numFloors: 0, numRooms: 0, numPods: 0, timeStamp: Timestamp(), podMaps: [])
         let viewModel = InstallationViewModel(installation: installation)
         installations.append(installation)
         installationViewModels.append(viewModel)
@@ -33,7 +33,7 @@ class ImplementationPlanListViewModel: ObservableObject {
     
     func uploadImplementationPlan() {
         //encode district file
-        let dict = ["districtName?" ?? "" : getInstallations()]
+        let dict = ["districtName?" : getInstallations()]
         let implementationPlanData = try! FirestoreEncoder().encode(dict)
         //send district file to database
         Firestore.firestore().collection(Constants.kImplementationPlanCollection).document().setData(implementationPlanData) { error in

@@ -12,7 +12,7 @@ struct PendingDetailView: View {
     var district: District
     var body: some View {
         VStack {
-            listView(list: groupSchoolsByStatusCode(list: testInstallArray))
+            listView(list: groupSchoolsByStatusCode(list: district.implementationPlan))
         }
     }
     
@@ -48,27 +48,25 @@ struct PendingDetailView: View {
     }
     
     func groupSchoolsByStatusCode(list: [Installation]) -> [[Installation]] {
-        var status0Array: [Installation] = []
-        var status1Array: [Installation] = []
-        var status2Array: [Installation] = []
+        var notStartedArray: [Installation] = []
+        var inProgressArray: [Installation] = []
+        var completeArray: [Installation] = []
         for install in list {
-            switch install.statusCode {
-            case 0:
-                status0Array.append(install)
-            case 1:
-                status1Array.append(install)
-            case 2:
-                status2Array.append(install)
-            default:
-                break
+            switch install.status {
+            case .notStarted:
+                notStartedArray.append(install)
+            case .inProgress:
+                inProgressArray.append(install)
+            case .complete:
+                completeArray.append(install)
             }
         }
-        return [status0Array,status1Array,status2Array]
+        return [notStartedArray,inProgressArray,completeArray]
     }
 }
 
 struct PendingDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        PendingDetailView(district: District(districtID: "", districtName: "", readyToInstall: false, numPreKSchools: 0, numElementarySchools: 0, numMiddleSchools: 0, numHighSchools: 0, districtContactPerson: "", districtEmail: "", districtPhoneNumber: "", districtOfficeAddress: "", team: Team(), numPodsNeeded: 0, startDate: Date(), implementationPlan: []))
+        PendingDetailView(district: District())
     }
 }

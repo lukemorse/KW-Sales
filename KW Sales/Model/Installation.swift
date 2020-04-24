@@ -16,7 +16,7 @@ struct Installation: Encodable, Identifiable, Hashable  {
     }
     
     var id: Int {hashValue}
-    var statusCode: Int
+    var status: InstallationStatus
     var schoolType: SchoolType
     var address: GeoPoint
     var districtContact: String
@@ -32,7 +32,7 @@ struct Installation: Encodable, Identifiable, Hashable  {
     
     private enum CodingKeys: String, CodingKey {
         
-        case statusCode
+        case status
         case schoolType
         case address
         case districtContact
@@ -49,7 +49,7 @@ struct Installation: Encodable, Identifiable, Hashable  {
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(statusCode, forKey: .statusCode)
+        try container.encode(status, forKey: .status)
         try container.encode(schoolType.description, forKey: .schoolType)
         try container.encode(address, forKey: .address)
         try container.encode(districtContact, forKey: .districtContact)
@@ -68,7 +68,7 @@ struct Installation: Encodable, Identifiable, Hashable  {
 extension Installation: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        statusCode = try container.decode(Int.self, forKey: .statusCode)
+        status = try container.decode(InstallationStatus.self, forKey: .status)
         schoolType = try container.decode(SchoolType.self, forKey: .schoolType)
         address = try container.decode(GeoPoint.self, forKey: .address)
         districtContact = try container.decode(String.self, forKey: .districtContact)
@@ -88,3 +88,19 @@ extension DocumentReference: DocumentReferenceType {}
 extension GeoPoint: GeoPointType {}
 extension FieldValue: FieldValueType {}
 extension Timestamp: TimestampType {}
+
+enum InstallationStatus: Int, Codable, CaseIterable, Hashable, Identifiable {
+    var id: Int { hashValue }
+    
+    case notStarted
+    case inProgress
+    case complete
+    
+    var description: String {
+        switch self {
+        case .notStarted: return "Not Started"
+        case .inProgress: return "In Progress"
+        case .complete: return "Complete"
+        }
+    }
+}

@@ -27,7 +27,6 @@ struct AddDistrictView: View {
                 
                 Section(header: Text("General")) {
                     Group {
-                        //                        formItem(with: $numPods, label: "Number of Pods Needed")
                         numPodPicker
                         startDatePicker
                     }
@@ -72,7 +71,7 @@ struct AddDistrictView: View {
     
     var sendPodButton: some View {
         //Button is red until email is valid
-        SendPodOrderButtonView(numPods: viewModel.district?.numPodsNeeded ?? 0, email: viewModel.district?.districtEmail ?? "", textColor: validateEmail(enteredEmail: viewModel.district?.districtEmail ?? "") ? Color.green : Color.red)
+        SendPodOrderButtonView(numPods: viewModel.district.numPodsNeeded , email: viewModel.district.districtEmail , textColor: validateEmail(enteredEmail: viewModel.district.districtEmail ) ? Color.green : Color.red)
     }
     
     var addDistrictButton: some View {
@@ -93,8 +92,8 @@ struct AddDistrictView: View {
             
             Picker(selection:
                 Binding<Int>(
-                    get: {self.viewModel.district?.numPodsNeeded ?? 0},
-                    set: {self.viewModel.district?.numPodsNeeded = $0}),
+                    get: {self.viewModel.district.numPodsNeeded },
+                    set: {self.viewModel.district.numPodsNeeded = $0}),
                    
                    label: Text(""), content: {
                     ForEach(0..<50, id: \.self) { idx in
@@ -109,8 +108,8 @@ struct AddDistrictView: View {
                 .font(.headline)
             
             DatePicker(selection: Binding<Date>(
-                get: {self.viewModel.district?.startDate ?? Date()},
-                set: {self.viewModel.district?.startDate = $0}), displayedComponents: .date) {
+                get: {self.viewModel.district.startDate },
+                set: {self.viewModel.district.startDate = $0}), displayedComponents: .date) {
                     Text("")
             }
         }
@@ -121,8 +120,8 @@ struct AddDistrictView: View {
             Text("District Name")
                 .font(.headline)
             TextField("Enter District Name", text: Binding<String>(
-            get: {self.viewModel.district?.districtName ?? ""},
-            set: {self.viewModel.district?.districtName = $0}
+                get: {self.viewModel.district.districtName },
+            set: {self.viewModel.district.districtName = $0}
             ))
                 .padding(.all)
         }
@@ -136,8 +135,8 @@ struct AddDistrictView: View {
             
             Picker(selection:
                 Binding<Int>(
-                    get: {self.viewModel.district?.numPreKSchools ?? 0},
-                    set: {self.viewModel.district?.numPreKSchools = $0}),
+                    get: {self.viewModel.district.numPreKSchools },
+                    set: {self.viewModel.district.numPreKSchools = $0}),
                    
                    label: Text(""), content: {
                     ForEach(0..<50, id: \.self) { idx in
@@ -153,8 +152,8 @@ struct AddDistrictView: View {
             
             Picker(selection:
                 Binding<Int>(
-                    get: {self.viewModel.district?.numElementarySchools ?? 0},
-                    set: {self.viewModel.district?.numElementarySchools = $0}),
+                    get: {self.viewModel.district.numElementarySchools },
+                    set: {self.viewModel.district.numElementarySchools = $0}),
                    
                    label: Text(""), content: {
                     ForEach(0..<50, id: \.self) { idx in
@@ -170,8 +169,8 @@ struct AddDistrictView: View {
             
             Picker(selection:
                 Binding<Int>(
-                    get: {self.viewModel.district?.numMiddleSchools ?? 0},
-                    set: {self.viewModel.district?.numMiddleSchools = $0}),
+                    get: {self.viewModel.district.numMiddleSchools },
+                    set: {self.viewModel.district.numMiddleSchools = $0}),
                    
                    label: Text(""), content: {
                     ForEach(0..<50, id: \.self) { idx in
@@ -187,8 +186,8 @@ struct AddDistrictView: View {
             
             Picker(selection:
                 Binding<Int>(
-                    get: {self.viewModel.district?.numHighSchools ?? 0},
-                    set: {self.viewModel.district?.numHighSchools = $0}),
+                    get: {self.viewModel.district.numHighSchools },
+                    set: {self.viewModel.district.numHighSchools = $0}),
                    
                    label: Text(""), content: {
                     ForEach(0..<50, id: \.self) { idx in
@@ -202,8 +201,8 @@ struct AddDistrictView: View {
             Text("District Contact Person")
                 .font(.headline)
             TextField("Enter District Contact Name", text: Binding<String>(
-            get: {self.viewModel.district?.districtContactPerson ?? ""},
-            set: {self.viewModel.district?.districtContactPerson = $0}
+                get: {self.viewModel.district.districtContactPerson },
+            set: {self.viewModel.district.districtContactPerson = $0}
             ))
                 .padding(.all)
         }
@@ -215,8 +214,8 @@ struct AddDistrictView: View {
             Text("District Email")
                 .font(.headline)
             TextField("Enter District Email", text: Binding<String>(
-            get: {self.viewModel.district?.districtEmail ?? ""},
-            set: {self.viewModel.district?.districtEmail = $0}
+                get: {self.viewModel.district.districtEmail },
+            set: {self.viewModel.district.districtEmail = $0}
             ))
                 .padding(.all)
         }
@@ -228,8 +227,8 @@ struct AddDistrictView: View {
             Text("District Phone Number")
                 .font(.headline)
             TextField("Enter District Phone Number", text: Binding<String>(
-            get: {self.viewModel.district?.districtPhoneNumber ?? ""},
-            set: {self.viewModel.district?.districtPhoneNumber = $0}
+                get: {self.viewModel.district.districtPhoneNumber },
+            set: {self.viewModel.district.districtPhoneNumber = $0}
             ))
                 .padding(.all)
         }
@@ -241,8 +240,8 @@ struct AddDistrictView: View {
             Text("District Office Address")
                 .font(.headline)
             TextField("Enter District Office Address", text: Binding<String>(
-            get: {self.viewModel.district?.districtOfficeAddress ?? ""},
-            set: {self.viewModel.district?.districtOfficeAddress = $0}
+                get: {self.viewModel.district.districtOfficeAddress },
+            set: {self.viewModel.district.districtOfficeAddress = $0}
             ))
                 .padding(.all)
         }
@@ -259,7 +258,7 @@ struct AddDistrictView: View {
                 get: {self.viewModel.teamIndex},
                 set: {
                     self.viewModel.teamIndex = $0
-                    self.viewModel.district?.team = self.viewModel.teams[$0]
+                    self.viewModel.district.team = self.viewModel.teams[$0]
                 }),
                    
                    label: Text(
@@ -273,22 +272,18 @@ struct AddDistrictView: View {
     
     var readyToInstallToggle: some View {
         Toggle(isOn: Binding<Bool>(
-            get: {(self.viewModel.district?.readyToInstall ?? false)},
-            set: {self.viewModel.district?.readyToInstall = $0}
+            get: {(self.viewModel.district.readyToInstall )},
+            set: {self.viewModel.district.readyToInstall = $0}
             ))  {
             Text("Ready To Install")
         }
     }
     
     func formIsEmpty() -> Bool {
-        if let district = viewModel.district {
-            return district.districtContactPerson?.isEmpty ?? true ||
-                district.districtEmail?.isEmpty ?? true ||
-                district.districtPhoneNumber?.isEmpty ?? true ||
-                district.districtOfficeAddress?.isEmpty ?? true
-        } else {
-            return true
-        }
+        return viewModel.district.districtContactPerson.isEmpty ||
+            viewModel.district.districtEmail.isEmpty ||
+            viewModel.district.districtPhoneNumber.isEmpty ||
+            viewModel.district.districtOfficeAddress.isEmpty
     }
 }
 

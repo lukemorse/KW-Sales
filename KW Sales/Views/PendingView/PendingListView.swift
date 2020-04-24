@@ -22,7 +22,7 @@ struct PendingListView: View {
             return AnyView(List {
                 ForEach(0..<self.viewModel.districts.count, id: \.self) {index in
                     VStack {
-                        NavigationLink(self.viewModel.districts[index].districtName ?? "", destination:
+                        NavigationLink(self.viewModel.districts[index].districtName , destination:
                             PendingDetailView(district: self.viewModel.districts[index])
                         )
                     }

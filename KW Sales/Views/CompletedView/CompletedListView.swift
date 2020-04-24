@@ -34,7 +34,7 @@ struct CompletedListView: View {
     func getCompleted(list: [Installation]) -> [Installation] {
         var completedArray: [Installation] = []
         for install in list {
-            if install.statusCode == 0 {
+            if install.status == .complete {
                 completedArray.append(install)
             }
         }

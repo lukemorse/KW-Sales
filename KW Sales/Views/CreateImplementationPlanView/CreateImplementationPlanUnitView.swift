@@ -118,7 +118,7 @@ struct CreateInstallationView: View {
 
 struct CreateImplementationPlan_Previews: PreviewProvider {
     static var previews: some View {
-        CreateInstallationView(index: 0, viewModel: InstallationViewModel(installation: Installation(statusCode: 0, schoolType: .elementary, address: chicagoGeoPoint, districtContact: "", districtName: "", schoolContact: "", schoolName: "", email: "", numFloors: 0, numRooms: 0, numPods: 0, timeStamp: Timestamp(), podMaps: [])))
+        CreateInstallationView(index: 0, viewModel: InstallationViewModel(installation: Installation(status: .notStarted, schoolType: .elementary, address: chicagoGeoPoint, districtContact: "", districtName: "", schoolContact: "", schoolName: "", email: "", numFloors: 0, numRooms: 0, numPods: 0, timeStamp: Timestamp(), podMaps: [])))
         //            .environment(\.colorScheme, .dark)
     }
 }

@@ -9,11 +9,11 @@
 import Foundation
 import Firebase
 
-let testInstallStatus0 = Installation(statusCode: 0, schoolType: .elementary, address: GeoPoint(latitude: 2, longitude: 2), districtContact: "", districtName: "", schoolContact: "", schoolName: "School x", email: "", numFloors: 4, numRooms: 3, numPods: 4, timeStamp: Timestamp(date: Date()), podMaps: [])
+let testInstallStatus0 = Installation(status: .notStarted, schoolType: .elementary, address: GeoPoint(latitude: 2, longitude: 2), districtContact: "", districtName: "", schoolContact: "", schoolName: "School x", email: "", numFloors: 4, numRooms: 3, numPods: 4, timeStamp: Timestamp(date: Date()), podMaps: [])
 
-let testInstallStatus1 = Installation(statusCode: 1, schoolType: .elementary, address: chicagoGeoPoint, districtContact: "", districtName: "", schoolContact: "", schoolName: "", email: "", numFloors: 0, numRooms: 0, numPods: 0, timeStamp: Timestamp(), podMaps: [])
+let testInstallStatus1 = Installation(status: .inProgress, schoolType: .elementary, address: chicagoGeoPoint, districtContact: "", districtName: "", schoolContact: "", schoolName: "", email: "", numFloors: 0, numRooms: 0, numPods: 0, timeStamp: Timestamp(), podMaps: [])
 
-let testInstallStatus2 = Installation(statusCode: 2, schoolType: .elementary, address: chicagoGeoPoint, districtContact: "", districtName: "", schoolContact: "", schoolName: "", email: "", numFloors: 0, numRooms: 0, numPods: 0, timeStamp: Timestamp(), podMaps: [])
+let testInstallStatus2 = Installation(status: .complete, schoolType: .elementary, address: chicagoGeoPoint, districtContact: "", districtName: "", schoolContact: "", schoolName: "", email: "", numFloors: 0, numRooms: 0, numPods: 0, timeStamp: Timestamp(), podMaps: [])
 
 let testInstallArray = [testInstallStatus0,testInstallStatus0,testInstallStatus0,testInstallStatus1,testInstallStatus1,testInstallStatus1,testInstallStatus2,testInstallStatus0,testInstallStatus2]
 

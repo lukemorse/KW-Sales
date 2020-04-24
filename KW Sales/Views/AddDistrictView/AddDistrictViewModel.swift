@@ -13,47 +13,48 @@ import CodableFirebase
 class AddDistrictViewModel: ObservableObject {
     @Published var teams: [Team] = []
     @Published var teamIndex = 0
-    @Published var district: District?
-//    var districtName: String?
+    @Published var district = District()
     
     init() {
-        self.district = District(districtID: "", readyToInstall: false, numPreKSchools: nil, numElementarySchools: nil, numMiddleSchools: nil, numHighSchools: nil, districtContactPerson: nil, districtEmail: nil, districtPhoneNumber: nil, districtOfficeAddress: nil, team: nil, numPodsNeeded: nil, startDate: nil, implementationPlan: [])
         fetchTeams()
     }
     
+    func addInstallation(installation: Installation) {
+        district.implementationPlan.append(installation)
+    }
+    
     func uploadDistrict() {
-        if let district = self.district {
-            //encode district file
-            let districtData = try! FirestoreEncoder().encode(district)
-            //send district file to database
-            Firestore.firestore().collection(Constants.kDistrictCollection).document().setData(districtData) { error in
-                if let error = error {
-                    print("Error writing document: \(error)")
-                } else {
-                    print("Document successfully written!")
-                }
+        //encode district file
+        let districtData = try! FirestoreEncoder().encode(district)
+        //send district file to database
+        Firestore.firestore().collection(Constants.kDistrictCollection).document().setData(districtData) { error in
+            if let error = error {
+                print("Error writing document: \(error)")
+            } else {
+                print("Document successfully written!")
             }
         }
+        
     }
     
     func importCSV() {
         let arr = parseCSV()
-        district?.numPodsNeeded = Int(arr[0]) ?? 0
+        district.numPodsNeeded = Int(arr[0]) ?? 0
         let dateString = arr[1]
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
         dateFormatter.timeStyle = .none
-        district?.startDate = dateFormatter.date(from: dateString) ?? Date()
+        district.startDate = dateFormatter.date(from: dateString) ?? Date()
         
-        district?.districtName = arr[2]
-        district?.numPreKSchools = Int(arr[3]) ?? 0
-        district?.numElementarySchools = Int(arr[4]) ?? 0
-        district?.numMiddleSchools = Int(arr[5]) ?? 0
-        district?.numHighSchools = Int(arr[6]) ?? 0
-        district?.districtContactPerson = arr[7]
-        district?.districtEmail = arr[8]
-        district?.districtPhoneNumber = arr[9]
-        district?.districtOfficeAddress = String(arr[10].dropLast())
+        district.districtName = arr[2]
+        district.numPreKSchools = Int(arr[3]) ?? 0
+        district.numElementarySchools = Int(arr[4]) ?? 0
+        district.numMiddleSchools = Int(arr[5]) ?? 0
+        district.numHighSchools = Int(arr[6]) ?? 0
+        district.districtContactPerson = arr[7]
+        district.districtEmail = arr[8]
+        district.districtPhoneNumber = arr[9]
+        district.districtOfficeAddress = String(arr[10].dropLast())
     }
     
     func fetchTeams() {
