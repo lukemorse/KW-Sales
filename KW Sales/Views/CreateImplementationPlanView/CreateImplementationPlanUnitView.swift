@@ -104,6 +104,7 @@ struct CreateImplementationPlan_Previews: PreviewProvider {
 enum SchoolType: Int, Codable, CaseIterable, Hashable, Identifiable {
     var id: Int { hashValue }
     
+    case unknown
     case preKSchool
     case elementary
     case middleSchool
@@ -111,6 +112,7 @@ enum SchoolType: Int, Codable, CaseIterable, Hashable, Identifiable {
     
     var description: String {
         switch self {
+        case .unknown: return "Unknown School Type"
         case .preKSchool: return "Pre K School"
         case .elementary: return "Elementary School"
         case .middleSchool: return "Middle School"

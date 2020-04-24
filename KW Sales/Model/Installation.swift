@@ -85,7 +85,6 @@ extension Installation: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         status = try container.decode(InstallationStatus.self, forKey: .status)
-        schoolType = try container.decode(SchoolType.self, forKey: .schoolType)
         address = try container.decode(GeoPoint.self, forKey: .address)
         districtContact = try container.decode(String.self, forKey: .districtContact)
         districtName = try container.decode(String.self, forKey: .districtName)
@@ -97,6 +96,12 @@ extension Installation: Decodable {
         numPods = try container.decode(Int.self, forKey: .numPods)
         timeStamp = try container.decode(Timestamp.self, forKey: .timeStamp)
         podMaps = try container.decode([PodMapModel].self, forKey: .podMaps)
+        
+        if let schoolTypeValue = try? container.decode(Int.self, forKey: .schoolType) {
+            schoolType = SchoolType(rawValue: schoolTypeValue) ?? SchoolType.unknown
+        } else {
+            schoolType = .unknown
+        }
     }
 }
 
