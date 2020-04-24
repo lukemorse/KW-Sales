@@ -11,7 +11,7 @@ import SwiftUI
 struct CreateImplementationPlanListView: View {
     
     @ObservedObject var viewModel: ImplementationPlanListViewModel
-    @State var implmentationPlanViews: [CreateImplementationPlanUnitView] = []
+    @State var implmentationPlanViews: [CreateInstallationView] = []
     @State var numSchools = 0
     
     var body: some View {
@@ -21,8 +21,8 @@ struct CreateImplementationPlanListView: View {
             }
             
             Button(action: {
-                let viewModel = self.viewModel.addImplementationPlanUnit()
-                self.implmentationPlanViews.append(CreateImplementationPlanUnitView(index: self.numSchools, viewModel: viewModel))
+                let viewModel = self.viewModel.addInstallation()
+                self.implmentationPlanViews.append(CreateInstallationView(index: self.numSchools, viewModel: viewModel))
                 self.numSchools += 1
             }) {
                 Text("Add School")

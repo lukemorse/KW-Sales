@@ -2,28 +2,33 @@
 //  Installation.swift
 //  KW Sales
 //
-//  Created by Luke Morse on 4/13/20.
+//  Created by Luke Morse on 4/23/20.
 //  Copyright © 2020 Luke Morse. All rights reserved.
-
+//
 
 import Foundation
 import Firebase
 import CodableFirebase
 
 struct Installation: Encodable, Identifiable, Hashable  {
+    static func == (lhs: Installation, rhs: Installation) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
     var id: Int {hashValue}
-    let statusCode: Int
-    let schoolType: SchoolType
-    let address: GeoPoint
-    let districtContact: String
-    let districtName: String
-    let schoolContact: String
-    let schoolName: String
-    let email: String
-    let numFloors: Int
-    let numRooms: Int
-    let numPods: Int
-    let timeStamp: Timestamp
+    var statusCode: Int
+    var schoolType: SchoolType
+    var address: GeoPoint
+    var districtContact: String
+    var districtName: String
+    var schoolContact: String
+    var schoolName: String
+    var email: String
+    var numFloors: Int
+    var numRooms: Int
+    var numPods: Int
+    var timeStamp: Timestamp
+    var podMaps: [PodMapModel]
     
     private enum CodingKeys: String, CodingKey {
         
@@ -39,6 +44,7 @@ struct Installation: Encodable, Identifiable, Hashable  {
         case numRooms
         case numPods
         case timeStamp
+        case podMaps
     }
     
     func encode(to encoder: Encoder) throws {
@@ -55,6 +61,7 @@ struct Installation: Encodable, Identifiable, Hashable  {
         try container.encode(numRooms, forKey: .numRooms)
         try container.encode(numPods, forKey: .numPods)
         try container.encode(timeStamp, forKey: .timeStamp)
+        try container.encode(podMaps, forKey: .podMaps)
     }
 }
 
@@ -73,6 +80,7 @@ extension Installation: Decodable {
         numRooms = try container.decode(Int.self, forKey: .numRooms)
         numPods = try container.decode(Int.self, forKey: .numPods)
         timeStamp = try container.decode(Timestamp.self, forKey: .timeStamp)
+        podMaps = try container.decode([PodMapModel].self, forKey: .podMaps)
     }
 }
 

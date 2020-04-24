@@ -12,28 +12,28 @@ import Firebase
 import CodableFirebase
 
 class ImplementationPlanListViewModel: ObservableObject {
-    @Published var implementationPlanUnits: [ImplementationPlanUnit] = []
-    var implementationPlanUnitViewModels: [ImplementationPlanUnitViewModel] = []
+    @Published var installations: [Installation] = []
+    var installationViewModels: [InstallationViewModel] = []
     
-    func addImplementationPlanUnit() -> ImplementationPlanUnitViewModel {
-        let implementationPlanUnit = ImplementationPlanUnit(schoolName: "", schoolType: .elementary, numFloors: 0, numRooms: 0, numPods: 0, schoolContactPerson: "", podMaps: [])
-        let viewModel = ImplementationPlanUnitViewModel(implementationPlanUnit: implementationPlanUnit)
-        implementationPlanUnits.append(implementationPlanUnit)
-        implementationPlanUnitViewModels.append(viewModel)
+    func addInstallation() -> InstallationViewModel {
+        let installation = Installation(statusCode: 0, schoolType: .elementary, address: chicagoGeoPoint, districtContact: "", districtName: "", schoolContact: "", schoolName: "", email: "", numFloors: 0, numRooms: 0, numPods: 0, timeStamp: Timestamp(), podMaps: [])
+        let viewModel = InstallationViewModel(installation: installation)
+        installations.append(installation)
+        installationViewModels.append(viewModel)
         return viewModel
     }
     
-    func getImplementationPlanUnits() -> [ImplementationPlanUnit] {
-        var result: [ImplementationPlanUnit] = []
-        for viewModel in implementationPlanUnitViewModels {
-            result.append(viewModel.implementationPlanUnit)
+    func getInstallations() -> [Installation] {
+        var result: [Installation] = []
+        for viewModel in installationViewModels {
+            result.append(viewModel.installation)
         }
         return result
     }
     
     func uploadImplementationPlan() {
         //encode district file
-        let dict = ["districtName?" ?? "" : getImplementationPlanUnits()]
+        let dict = ["districtName?" ?? "" : getInstallations()]
         let implementationPlanData = try! FirestoreEncoder().encode(dict)
         //send district file to database
         Firestore.firestore().collection(Constants.kImplementationPlanCollection).document().setData(implementationPlanData) { error in

@@ -7,11 +7,12 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct CreatePodMapView: View {
     @State var showImagePicker: Bool = false
     @State var image: Image? = nil
-    var viewModel: ImplementationPlanUnitViewModel
+    var viewModel: InstallationViewModel
     var floorPlanIndex = 0
     
     @State var showingActionSheet = false
@@ -160,7 +161,7 @@ struct CreatePodMapView: View {
 
 struct CreatePodMapView_Previews: PreviewProvider {
     static var previews: some View {
-        CreatePodMapView(viewModel: ImplementationPlanUnitViewModel(implementationPlanUnit: ImplementationPlanUnit(schoolName: "", schoolType: .elementary, numFloors: 0, numRooms: 0, numPods: 0, schoolContactPerson: "", podMaps: [])))
+        CreatePodMapView(viewModel: InstallationViewModel(installation: Installation(statusCode: 0, schoolType: .elementary, address: chicagoGeoPoint, districtContact: "", districtName: "", schoolContact: "", schoolName: "", email: "", numFloors: 0, numRooms: 0, numPods: 0, timeStamp: Timestamp(), podMaps: [])))
     }
 }
 

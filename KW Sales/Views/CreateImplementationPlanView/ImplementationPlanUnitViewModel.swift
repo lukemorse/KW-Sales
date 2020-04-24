@@ -10,12 +10,12 @@ import Foundation
 import Firebase
 import CodableFirebase
 
-class ImplementationPlanUnitViewModel: ObservableObject {
+class InstallationViewModel: ObservableObject {
     @Published var podMaps: [PodMapModel] = []
-    @Published var implementationPlanUnit: ImplementationPlanUnit
+    @Published var installation: Installation
     
-    init(implementationPlanUnit: ImplementationPlanUnit) {
-        self.implementationPlanUnit = implementationPlanUnit
+    init(installation: Installation) {
+        self.installation = installation
     }
 
     func uploadFloorPlan(image: UIImage) {

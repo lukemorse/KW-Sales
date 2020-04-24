@@ -27,7 +27,7 @@ struct District: Encodable {
     var team: Team?
     var numPodsNeeded: Int?
     var startDate: Date?
-    var implementationPlan: [ImplementationPlanUnit]
+    var implementationPlan: [Installation]
     
 
     private enum CodingKeys: String, CodingKey {
@@ -82,7 +82,7 @@ extension District: Decodable {
         numPodsNeeded = try container.decode(Int.self, forKey: .numPodsNeeded)
         let timeStamp: Timestamp = try container.decode(Timestamp.self, forKey: .startDate)
         startDate = timeStamp.dateValue()
-        implementationPlan = try container.decode([ImplementationPlanUnit].self, forKey: .implementationPlan)
+        implementationPlan = try container.decode([Installation].self, forKey: .implementationPlan)
     }
 }
 

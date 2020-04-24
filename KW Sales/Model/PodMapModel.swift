@@ -10,7 +10,7 @@ import SwiftUI
 import Firebase
 import CodableFirebase
 
-struct PodMapModel: Codable {
+struct PodMapModel: Codable, Hashable {
     
     let id: String
     var pods: [[String: [Float]]]

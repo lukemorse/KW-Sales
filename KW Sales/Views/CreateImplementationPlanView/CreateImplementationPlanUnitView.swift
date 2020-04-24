@@ -7,18 +7,19 @@
 //
 
 import SwiftUI
+import Firebase
 
-struct CreateImplementationPlanUnitView: View {
+struct CreateInstallationView: View {
 //    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     let index: Int
-    @ObservedObject var viewModel: ImplementationPlanUnitViewModel
+    @ObservedObject var viewModel: InstallationViewModel
     @State private var isExpanded: Bool = true
     
     var body: some View {
         Section {
-            Text(viewModel.implementationPlanUnit.schoolName)
+            Text(viewModel.installation.schoolName)
 //                .onReceive(timer) { input in
-//                    print(self.viewModel.implementationPlanUnit)
+//                    print(self.viewModel.Installation)
 //                }
                 .onTapGesture {
                     self.isExpanded.toggle()
@@ -29,19 +30,19 @@ struct CreateImplementationPlanUnitView: View {
 //                VStack(alignment: .leading) {
 //                    Text("School Name")
 //                        .font(.headline)
-//                    TextField("Enter School Name", text: $viewModel.implementationPlanUnit.schoolName)
+//                    TextField("Enter School Name", text: $viewModel.Installation.schoolName)
 //                        .padding([.top, .bottom])
 //
 //                }
                 
-                formItem(with: $viewModel.implementationPlanUnit.schoolName, label: "School Name")
+                formItem(with: $viewModel.installation.schoolName, label: "School Name")
                 
 //                formItem(with: $schoolName, label: "School Name")
-                formItem(with: $viewModel.implementationPlanUnit.schoolType, label: "School Type")
-                formItem(with: $viewModel.implementationPlanUnit.numFloors, label: "Number of Floors")
-                formItem(with: $viewModel.implementationPlanUnit.numRooms, label: "Number of Rooms")
-                formItem(with: $viewModel.implementationPlanUnit.numPods, label: "Number of Pods")
-                formItem(with: $viewModel.implementationPlanUnit.schoolContactPerson, label: "School Contact Person")
+                formItem(with: $viewModel.installation.schoolType, label: "School Type")
+                formItem(with: $viewModel.installation.numFloors, label: "Number of Floors")
+                formItem(with: $viewModel.installation.numRooms, label: "Number of Rooms")
+                formItem(with: $viewModel.installation.numPods, label: "Number of Pods")
+                formItem(with: $viewModel.installation.schoolContact, label: "School Contact Person")
                 
                 NavigationLink(destination: CreatePodMapView(viewModel: self.viewModel)) {
                     Text("Create POD Map")
@@ -52,8 +53,8 @@ struct CreateImplementationPlanUnitView: View {
         
     }
     
-    func getImplementationPlanUnit() -> ImplementationPlanUnit {
-        return viewModel.implementationPlanUnit
+    func getInstallation() -> Installation {
+        return viewModel.installation
     }
     
     //Funcs for adding form items
@@ -75,7 +76,7 @@ struct CreateImplementationPlanUnitView: View {
             return VStack(alignment: .leading) {
                 Text(label)
                     .font(.headline)
-                Picker(selection: $viewModel.implementationPlanUnit.schoolType, label: Text("School Type")) {
+                Picker(selection: $viewModel.installation.schoolType, label: Text("School Type")) {
                     ForEach(SchoolType.allCases) { school in
                         Text(school.description).tag(school)
                     }
@@ -117,7 +118,7 @@ struct CreateImplementationPlanUnitView: View {
 
 struct CreateImplementationPlan_Previews: PreviewProvider {
     static var previews: some View {
-        CreateImplementationPlanUnitView(index: 0, viewModel: ImplementationPlanUnitViewModel(implementationPlanUnit: ImplementationPlanUnit(schoolName: "", schoolType: .elementary, numFloors: 0, numRooms: 0, numPods: 0, schoolContactPerson: "", podMaps: [])))
+        CreateInstallationView(index: 0, viewModel: InstallationViewModel(installation: Installation(statusCode: 0, schoolType: .elementary, address: chicagoGeoPoint, districtContact: "", districtName: "", schoolContact: "", schoolName: "", email: "", numFloors: 0, numRooms: 0, numPods: 0, timeStamp: Timestamp(), podMaps: [])))
         //            .environment(\.colorScheme, .dark)
     }
 }

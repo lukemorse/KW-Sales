@@ -34,6 +34,7 @@
 		A3A2F0F824478D8400079243 /* CreateImplementationPlanListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A2F0F724478D8400079243 /* CreateImplementationPlanListView.swift */; };
 		A3AD36372452160D00BCDA4D /* CompletedListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD36362452160D00BCDA4D /* CompletedListViewModel.swift */; };
 		A3AD36392452165D00BCDA4D /* PendingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD36382452165D00BCDA4D /* PendingListViewModel.swift */; };
+		A3AD363B2452677200BCDA4D /* Installation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD363A2452677200BCDA4D /* Installation.swift */; };
 		A3B37B892446204200D8CE40 /* District.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B37B882446204200D8CE40 /* District.swift */; };
 		A3B37B8E244631E500D8CE40 /* AddDistrictViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B37B8D244631E500D8CE40 /* AddDistrictViewModel.swift */; };
 		A3B37B90244632B900D8CE40 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B37B8F244632B900D8CE40 /* Team.swift */; };
@@ -42,7 +43,6 @@
 		A3EE48D12444D9DC00C6A554 /* AddDistrictView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EE48D02444D9DC00C6A554 /* AddDistrictView.swift */; };
 		A3EE48D32444F68B00C6A554 /* PendingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EE48D22444F68B00C6A554 /* PendingListView.swift */; };
 		A3EE48D52444FFB000C6A554 /* PendingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EE48D42444FFB000C6A554 /* PendingDetailView.swift */; };
-		A3EE48D82445032000C6A554 /* Installation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EE48D72445032000C6A554 /* Installation.swift */; };
 		A3EE48DA2445114800C6A554 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EE48D92445114800C6A554 /* TestData.swift */; };
 		A3F4259A24475DB8004D2CCE /* SendPodOrderButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F4259924475DB8004D2CCE /* SendPodOrderButtonView.swift */; };
 		A3F4259C24475E4F004D2CCE /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F4259B24475E4F004D2CCE /* MailView.swift */; };
@@ -99,6 +99,7 @@
 		A3A2F0F724478D8400079243 /* CreateImplementationPlanListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateImplementationPlanListView.swift; sourceTree = "<group>"; };
 		A3AD36362452160D00BCDA4D /* CompletedListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedListViewModel.swift; sourceTree = "<group>"; };
 		A3AD36382452165D00BCDA4D /* PendingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingListViewModel.swift; sourceTree = "<group>"; };
+		A3AD363A2452677200BCDA4D /* Installation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Installation.swift; sourceTree = "<group>"; };
 		A3B37B882446204200D8CE40 /* District.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = District.swift; sourceTree = "<group>"; };
 		A3B37B8D244631E500D8CE40 /* AddDistrictViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDistrictViewModel.swift; sourceTree = "<group>"; };
 		A3B37B8F244632B900D8CE40 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
@@ -107,7 +108,6 @@
 		A3EE48D02444D9DC00C6A554 /* AddDistrictView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDistrictView.swift; sourceTree = "<group>"; };
 		A3EE48D22444F68B00C6A554 /* PendingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingListView.swift; sourceTree = "<group>"; };
 		A3EE48D42444FFB000C6A554 /* PendingDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingDetailView.swift; sourceTree = "<group>"; };
-		A3EE48D72445032000C6A554 /* Installation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Installation.swift; sourceTree = "<group>"; };
 		A3EE48D92445114800C6A554 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		A3F4259924475DB8004D2CCE /* SendPodOrderButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPodOrderButtonView.swift; sourceTree = "<group>"; };
 		A3F4259B24475E4F004D2CCE /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
@@ -294,10 +294,10 @@
 		A3EE48D62445031300C6A554 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A3EE48D72445032000C6A554 /* Installation.swift */,
 				A3B37B882446204200D8CE40 /* District.swift */,
 				A3B37B8F244632B900D8CE40 /* Team.swift */,
 				A368EA62244E126A00FE7685 /* ImplementationPlanUnit.swift */,
+				A3AD363A2452677200BCDA4D /* Installation.swift */,
 				A368EA64244E130600FE7685 /* PodMapModel.swift */,
 			);
 			path = Model;
@@ -502,9 +502,9 @@
 				A3B37B90244632B900D8CE40 /* Team.swift in Sources */,
 				A30F4BF7244530A800B59F8B /* CreateImplementationPlanUnitView.swift in Sources */,
 				A3B37B892446204200D8CE40 /* District.swift in Sources */,
-				A3EE48D82445032000C6A554 /* Installation.swift in Sources */,
 				A3295BDE244A2E9500F26E1F /* HelperFunctions.swift in Sources */,
 				A368EA63244E126A00FE7685 /* ImplementationPlanUnit.swift in Sources */,
+				A3AD363B2452677200BCDA4D /* Installation.swift in Sources */,
 				A368EA5F244DE82B00FE7685 /* ImplementationPlanUnitViewModel.swift in Sources */,
 				A31C4C462450C24E004CAEAB /* ImplementationPlanListViewModel.swift in Sources */,
 				A3295BCC2448EC7800F26E1F /* PodNodeView.swift in Sources */,
