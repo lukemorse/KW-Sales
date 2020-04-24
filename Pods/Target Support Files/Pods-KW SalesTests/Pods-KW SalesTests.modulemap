@@ -1,0 +1,6 @@
+framework module Pods_KW_SalesTests {
+  umbrella header "Pods-KW SalesTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

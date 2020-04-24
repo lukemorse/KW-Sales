@@ -30,6 +30,22 @@ struct Installation: Encodable, Identifiable, Hashable  {
     var timeStamp: Timestamp
     var podMaps: [PodMapModel]
     
+    init() {
+        self.status = .notStarted
+        self.schoolType = .elementary
+        self.address = chicagoGeoPoint
+        self.districtContact = ""
+        self.districtName = ""
+        self.schoolContact = ""
+        self.schoolName = ""
+        self.email = ""
+        self.numFloors = 0
+        self.numRooms = 0
+        self.numPods = 0
+        self.timeStamp = Timestamp()
+        self.podMaps = []
+    }
+    
     private enum CodingKeys: String, CodingKey {
         
         case status

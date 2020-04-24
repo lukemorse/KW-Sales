@@ -16,7 +16,7 @@ class ImplementationPlanListViewModel: ObservableObject {
     var installationViewModels: [InstallationViewModel] = []
     
     func addInstallation() -> InstallationViewModel {
-        let installation = Installation(status: .notStarted, schoolType: .elementary, address: chicagoGeoPoint, districtContact: "", districtName: "", schoolContact: "", schoolName: "", email: "", numFloors: 0, numRooms: 0, numPods: 0, timeStamp: Timestamp(), podMaps: [])
+        let installation = Installation()
         let viewModel = InstallationViewModel(installation: installation)
         installations.append(installation)
         installationViewModels.append(viewModel)

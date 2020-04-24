@@ -10,7 +10,6 @@ import SwiftUI
 import Firebase
 
 struct CreateInstallationView: View {
-//    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     let index: Int
     @ObservedObject var viewModel: InstallationViewModel
     @State private var isExpanded: Bool = true
@@ -18,22 +17,11 @@ struct CreateInstallationView: View {
     var body: some View {
         Section {
             Text(viewModel.installation.schoolName)
-//                .onReceive(timer) { input in
-//                    print(self.viewModel.Installation)
-//                }
                 .onTapGesture {
                     self.isExpanded.toggle()
             }
             
             if isExpanded {
-                
-//                VStack(alignment: .leading) {
-//                    Text("School Name")
-//                        .font(.headline)
-//                    TextField("Enter School Name", text: $viewModel.Installation.schoolName)
-//                        .padding([.top, .bottom])
-//
-//                }
                 
                 formItem(with: $viewModel.installation.schoolName, label: "School Name")
                 
@@ -82,9 +70,7 @@ struct CreateInstallationView: View {
                     }
                 }
                 .padding([.top, .bottom])
-                
             }
-            
     }
     
     func formItem(with name: Binding<Int>, label: String) -> some
@@ -100,7 +86,6 @@ struct CreateInstallationView: View {
                 })
                     .padding([.top, .bottom])
             }
-            
     }
     
     func formItem(with name: Binding<Date>, label: String) -> some View {
@@ -111,15 +96,12 @@ struct CreateInstallationView: View {
                 Text("")
             }
         }
-        
     }
-    
 }
 
 struct CreateImplementationPlan_Previews: PreviewProvider {
     static var previews: some View {
-        CreateInstallationView(index: 0, viewModel: InstallationViewModel(installation: Installation(status: .notStarted, schoolType: .elementary, address: chicagoGeoPoint, districtContact: "", districtName: "", schoolContact: "", schoolName: "", email: "", numFloors: 0, numRooms: 0, numPods: 0, timeStamp: Timestamp(), podMaps: [])))
-        //            .environment(\.colorScheme, .dark)
+        CreateInstallationView(index: 0, viewModel: InstallationViewModel(installation: Installation()))
     }
 }
 

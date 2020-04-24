@@ -11,7 +11,8 @@ import SwiftUI
 struct CompletedListView: View {
     var body: some View {
         VStack {
-            listView(list: getCompleted(list: testInstallArray))
+//            listView(list: getCompleted(list: testInstallArray))
+            EmptyView()
         }
     }
     

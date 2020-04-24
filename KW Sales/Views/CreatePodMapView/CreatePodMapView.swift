@@ -161,7 +161,7 @@ struct CreatePodMapView: View {
 
 struct CreatePodMapView_Previews: PreviewProvider {
     static var previews: some View {
-        CreatePodMapView(viewModel: InstallationViewModel(installation: Installation(status: .notStarted, schoolType: .elementary, address: chicagoGeoPoint, districtContact: "", districtName: "", schoolContact: "", schoolName: "", email: "", numFloors: 0, numRooms: 0, numPods: 0, timeStamp: Timestamp(), podMaps: [])))
+        CreatePodMapView(viewModel: InstallationViewModel(installation: Installation()))
     }
 }
 

@@ -12,5 +12,9 @@ target 'KW Sales' do
     pod 'Firebase/Storage'
     pod 'Firebase/Firestore'
     pod 'CodableFirebase'
-
+    
+    target 'KW SalesTests' do
+        inherit! :search_paths
+        pod 'Firebase'
+    end
 end
