@@ -56,7 +56,10 @@ struct LoginView: View {
                 showingLoginAlert = true
             }
         }
-        
+    }
+}
+
+
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView { (username, password, callBack: (Bool) -> Void) in

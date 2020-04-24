@@ -11,6 +11,7 @@ import Firebase
 import CodableFirebase
 
 class AddDistrictViewModel: ObservableObject {
+    var implementationPlanListViewModel: ImplementationPlanListViewModel?
     @Published var teams: [Team] = []
     @Published var teamIndex = 0
     @Published var district = District()
@@ -19,11 +20,11 @@ class AddDistrictViewModel: ObservableObject {
         fetchTeams()
     }
     
-    func addInstallation(installation: Installation) {
-        district.implementationPlan.append(installation)
-    }
-    
     func uploadDistrict() {
+        if let implementationPlanListViewModel = self.implementationPlanListViewModel {
+            district.implementationPlan = implementationPlanListViewModel.getInstallations()
+        }
+        
         //encode district file
         let districtData = try! FirestoreEncoder().encode(district)
         //send district file to database

@@ -12,15 +12,15 @@ import Firebase
 import CodableFirebase
 
 class ImplementationPlanListViewModel: ObservableObject {
-    @Published var installations: [Installation] = []
-    var installationViewModels: [InstallationViewModel] = []
+    @Published var implmentationPlanViews: [CreateInstallationView] = []
+    @Published var numSchools = 0
+    @Published var installationViewModels: [InstallationViewModel] = []
     
-    func addInstallation() -> InstallationViewModel {
-        let installation = Installation()
-        let viewModel = InstallationViewModel(installation: installation)
-        installations.append(installation)
+    func addInstallation() {
+        let viewModel = InstallationViewModel(installation: Installation())
+        self.implmentationPlanViews.append(CreateInstallationView(index: self.numSchools, viewModel: viewModel))
         installationViewModels.append(viewModel)
-        return viewModel
+        self.numSchools += 1
     }
     
     func getInstallations() -> [Installation] {

@@ -9,9 +9,8 @@
 import SwiftUI
 
 struct AddDistrictView: View {
-    @ObservedObject var viewModel = AddDistrictViewModel()
     @ObservedObject var implementationPlanViewModel = ImplementationPlanListViewModel()
-    
+    @ObservedObject var viewModel = AddDistrictViewModel()
     @State private var isShowingAddDistrictAlert = false
     
     var body: some View {
@@ -53,7 +52,7 @@ struct AddDistrictView: View {
                     }
                 }
                 NavigationLink(destination: CreateImplementationPlanListView(viewModel: self.implementationPlanViewModel)) {
-                    Text("Create Implementation Plan")
+                    Text("Implementation Plan")
                         .foregroundColor(Color.blue)
                     
                 }
@@ -66,7 +65,9 @@ struct AddDistrictView: View {
         .alert(isPresented: self.$isShowingAddDistrictAlert) {
             Alert(title: Text("Please complete all fields"))
         }
-        
+        .onAppear() {
+            self.viewModel.implementationPlanListViewModel = self.implementationPlanViewModel
+        }
     }
     
     var sendPodButton: some View {

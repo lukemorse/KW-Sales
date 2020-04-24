@@ -12,7 +12,7 @@ import Firebase
 struct CreateInstallationView: View {
     let index: Int
     @ObservedObject var viewModel: InstallationViewModel
-    @State private var isExpanded: Bool = true
+    @State var isExpanded: Bool = true
     
     var body: some View {
         Section {

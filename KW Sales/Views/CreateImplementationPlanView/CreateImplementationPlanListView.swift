@@ -11,19 +11,15 @@ import SwiftUI
 struct CreateImplementationPlanListView: View {
     
     @ObservedObject var viewModel: ImplementationPlanListViewModel
-    @State var implmentationPlanViews: [CreateInstallationView] = []
-    @State var numSchools = 0
     
     var body: some View {
         Form {
-            ForEach(0..<implmentationPlanViews.count, id: \.self) { imp in
-                self.implmentationPlanViews[imp]
+            ForEach(0..<self.viewModel.implmentationPlanViews.count, id: \.self) { index in
+                self.viewModel.implmentationPlanViews[index]
             }
             
             Button(action: {
-                let viewModel = self.viewModel.addInstallation()
-                self.implmentationPlanViews.append(CreateInstallationView(index: self.numSchools, viewModel: viewModel))
-                self.numSchools += 1
+                self.viewModel.addInstallation()
             }) {
                 Text("Add School")
                     .foregroundColor(Color.blue)
@@ -32,12 +28,25 @@ struct CreateImplementationPlanListView: View {
                 self.viewModel.uploadImplementationPlan()
             }) {
                 Text("Finish")
-                .foregroundColor(Color.blue)
+                    .foregroundColor(Color.blue)
             }
         }
-    .navigationBarTitle("Implementation Plan")
+        .onAppear() {
+            if self.viewModel.implmentationPlanViews.count > 0 {
+                for view in self.viewModel.implmentationPlanViews {
+                    view.isExpanded = false
+                }
+            }
+        }
+        .navigationBarTitle("Implementation Plan")
+        
     }
-    
     
 }
 
+
+struct CreateImplementationPlanListView_Previews: PreviewProvider {
+    static var previews: some View {
+        CreateImplementationPlanListView(viewModel: ImplementationPlanListViewModel())
+    }
+}
