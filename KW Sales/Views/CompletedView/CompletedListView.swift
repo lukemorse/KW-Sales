@@ -9,37 +9,30 @@
 import SwiftUI
 
 struct CompletedListView: View {
+    @ObservedObject var viewModel = CompletedListViewModel()
     var body: some View {
-        VStack {
-//            listView(list: getCompleted(list: testInstallArray))
-            EmptyView()
+        listView
+            .onAppear() {
+                self.viewModel.getDistrictsWithCompletedSchools()
         }
     }
     
-    func listView(list: [Installation]) -> some View {
-        if list.count > 0 {
-            return AnyView(
-                List {
-                    ForEach(0..<list.count, id: \.self) {index in
-                        Text(list[index].schoolName)
+    var listView : some View {
+        if self.viewModel.districts.count > 0 {
+            return AnyView(List {
+                ForEach(0..<self.viewModel.districts.count, id: \.self) {index in
+                    VStack {
+                        NavigationLink(self.viewModel.districts[index].districtName , destination:
+                            CompletedDetailView(district: self.viewModel.districts[index])
+                        )
                     }
                 }
-            )
+            })
         }
-        
         return AnyView(List {
             Text("No Schools found")
         })
-    }
-    
-    func getCompleted(list: [Installation]) -> [Installation] {
-        var completedArray: [Installation] = []
-        for install in list {
-            if install.status == .complete {
-                completedArray.append(install)
-            }
-        }
-        return completedArray
+        
     }
 }
 

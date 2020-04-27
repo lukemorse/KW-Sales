@@ -41,6 +41,5 @@ struct PendingView_Previews: PreviewProvider {
         NavigationView {
             PendingListView()
         }
-        
     }
 }
