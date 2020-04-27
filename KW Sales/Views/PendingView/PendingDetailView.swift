@@ -12,30 +12,38 @@ struct PendingDetailView: View {
     var district: District
     var body: some View {
         VStack {
-            listView(list: groupSchoolsByStatusCode(list: district.implementationPlan))
+            listView(dict: groupSchoolsByStatusCode(list: district.implementationPlan))
         }
     }
     
-    func listView(list: [[Installation]]) -> some View {
-        if list.count > 0 {
+    func listView(dict: [InstallationStatus: [Installation]]) -> some View {
+        if dict.count > 0 {
             return AnyView(
                 List {
-                    Section(header: Text("Completed")) {
-                        ForEach(0..<list[0].count, id: \.self) {index in
-                            Text(list[0][index].schoolName)
-                                .listRowBackground(Color.green)
+                    if dict[.complete]?.count ?? 0 > 0 {
+                        Section(header: Text("Completed")) {
+                            ForEach(0..<dict[.complete]!.count, id: \.self) {index in
+                                Text(dict[.complete]![index].schoolName)
+                                    .listRowBackground(Color.green)
+                            }
                         }
                     }
-                    Section(header: Text("In Progress")) {
-                        ForEach(0..<list[1].count, id: \.self) {index in
-                            Text(list[1][index].schoolName)
-                                .listRowBackground(Color.yellow)
+                    
+                    if dict[.inProgress]?.count ?? 0 > 0 {
+                        Section(header: Text("In Progress")) {
+                            ForEach(0..<dict[.inProgress]!.count, id: \.self) {index in
+                                Text(dict[.inProgress]![index].schoolName)
+                                    .listRowBackground(Color.yellow)
+                            }
                         }
                     }
-                    Section(header: Text("Not Started")) {
-                        ForEach(0..<list[2].count, id: \.self) {index in
-                            Text(list[2][index].schoolName)
-                                .listRowBackground(Color.red)
+                    
+                    if dict[.notStarted]?.count ?? 0 > 0 {
+                        Section(header: Text("Not Started")) {
+                            ForEach(0..<dict[.notStarted]!.count, id: \.self) {index in
+                                Text(dict[.notStarted]![index].schoolName)
+                                    .listRowBackground(Color.red)
+                            }
                         }
                     }
                 }   
@@ -47,21 +55,26 @@ struct PendingDetailView: View {
         })
     }
     
-    func groupSchoolsByStatusCode(list: [Installation]) -> [[Installation]] {
+    func groupSchoolsByStatusCode(list: [Installation]) -> [InstallationStatus: [Installation]] {
+        
         var notStartedArray: [Installation] = []
         var inProgressArray: [Installation] = []
         var completeArray: [Installation] = []
         for install in list {
             switch install.status {
-            case .notStarted:
-                notStartedArray.append(install)
-            case .inProgress:
-                inProgressArray.append(install)
             case .complete:
                 completeArray.append(install)
+                
+            case .inProgress:
+                inProgressArray.append(install)
+            case .notStarted:
+                notStartedArray.append(install)
+                
             }
         }
-        return [notStartedArray,inProgressArray,completeArray]
+        return [.complete: completeArray,
+                .inProgress: inProgressArray,
+                .notStarted: notStartedArray]
     }
 }
 
