@@ -9,9 +9,12 @@
 import SwiftUI
 
 struct AddDistrictView: View {
-    @ObservedObject var implementationPlanViewModel = ImplementationPlanListViewModel()
+    @ObservedObject var implementationPlanViewModel = ImplementationPlanViewModel()
     @ObservedObject var viewModel = AddDistrictViewModel()
-    @State private var isShowingAddDistrictAlert = false
+    @State private var isShowingAlert = false
+    @State private var isFieldsIncomplete = false
+    @State private var addDistrictSuccess = false
+    @State private var addDistrictFail = false
     
     var body: some View {
         NavigationView {
@@ -51,19 +54,38 @@ struct AddDistrictView: View {
                         readyToInstallToggle
                     }
                 }
-                NavigationLink(destination: CreateImplementationPlanListView(viewModel: self.implementationPlanViewModel)) {
+                
+                NavigationLink(destination: ImplementationPlanView(viewModel: self.implementationPlanViewModel)
+                    .onAppear() {
+                        let district = self.viewModel.district
+                        self.implementationPlanViewModel.districtContactPerson = district.districtContactPerson
+                        self.implementationPlanViewModel.districtEmail = district.districtEmail
+                        self.implementationPlanViewModel.districtName = district.districtName
+                    }
+                ) {
                     Text("Implementation Plan")
                         .foregroundColor(Color.blue)
-                    
                 }
+                
                 sendPodButton
                 addDistrictButton
             }
                 
             .navigationBarTitle("Add District")
         }
-        .alert(isPresented: self.$isShowingAddDistrictAlert) {
-            Alert(title: Text("Please complete all fields"))
+            
+        .alert(isPresented: self.$isShowingAlert) {
+            if self.addDistrictSuccess {
+                return Alert(title: Text("Successfully Uploaded District Data"))
+            } else if self.addDistrictFail {
+                return Alert(title: Text("Failed to Upload District Data"))
+            } else if self.isFieldsIncomplete {
+                return Alert(title: Text("Please complete all fields"))
+            } else {
+                return Alert(title: Text("Something went wrong"))
+            }
+            
+            
         }
         .onAppear() {
             self.viewModel.implementationPlanListViewModel = self.implementationPlanViewModel
@@ -77,15 +99,29 @@ struct AddDistrictView: View {
     
     var addDistrictButton: some View {
         Button(action: {
-            self.viewModel.uploadDistrict()
+            if self.formIsEmpty() {
+                self.isFieldsIncomplete = true
+                self.isShowingAlert = true
+                return
+            }
+            self.viewModel.uploadDistrict() { success in
+                if success {
+                    self.addDistrictSuccess = true
+                    self.isShowingAlert = true
+                } else {
+                    self.addDistrictFail = true
+                    self.isShowingAlert = true
+                }
+            }
         }) {
             Text("Add District")
                 .foregroundColor(self.formIsEmpty() ? Color.red : Color.green)
         }
     }
-    
+}
+
+extension AddDistrictView {
     //Funcs for adding form items
-    
     var numPodPicker: some View {
         VStack(alignment: .leading) {
             Text("Number PODS Needed")
@@ -122,7 +158,7 @@ struct AddDistrictView: View {
                 .font(.headline)
             TextField("Enter District Name", text: Binding<String>(
                 get: {self.viewModel.district.districtName },
-            set: {self.viewModel.district.districtName = $0}
+                set: {self.viewModel.district.districtName = $0}
             ))
                 .padding(.all)
         }
@@ -203,7 +239,7 @@ struct AddDistrictView: View {
                 .font(.headline)
             TextField("Enter District Contact Name", text: Binding<String>(
                 get: {self.viewModel.district.districtContactPerson },
-            set: {self.viewModel.district.districtContactPerson = $0}
+                set: {self.viewModel.district.districtContactPerson = $0}
             ))
                 .padding(.all)
         }
@@ -216,7 +252,7 @@ struct AddDistrictView: View {
                 .font(.headline)
             TextField("Enter District Email", text: Binding<String>(
                 get: {self.viewModel.district.districtEmail },
-            set: {self.viewModel.district.districtEmail = $0}
+                set: {self.viewModel.district.districtEmail = $0}
             ))
                 .padding(.all)
         }
@@ -229,7 +265,7 @@ struct AddDistrictView: View {
                 .font(.headline)
             TextField("Enter District Phone Number", text: Binding<String>(
                 get: {self.viewModel.district.districtPhoneNumber },
-            set: {self.viewModel.district.districtPhoneNumber = $0}
+                set: {self.viewModel.district.districtPhoneNumber = $0}
             ))
                 .padding(.all)
         }
@@ -242,7 +278,7 @@ struct AddDistrictView: View {
                 .font(.headline)
             TextField("Enter District Office Address", text: Binding<String>(
                 get: {self.viewModel.district.districtOfficeAddress },
-            set: {self.viewModel.district.districtOfficeAddress = $0}
+                set: {self.viewModel.district.districtOfficeAddress = $0}
             ))
                 .padding(.all)
         }
@@ -256,10 +292,10 @@ struct AddDistrictView: View {
             
             Picker(selection:
                 Binding<Int>(
-                get: {self.viewModel.teamIndex},
-                set: {
-                    self.viewModel.teamIndex = $0
-                    self.viewModel.district.team = self.viewModel.teams[$0]
+                    get: {self.viewModel.teamIndex},
+                    set: {
+                        self.viewModel.teamIndex = $0
+                        self.viewModel.district.team = self.viewModel.teams[$0]
                 }),
                    
                    label: Text(
@@ -275,7 +311,7 @@ struct AddDistrictView: View {
         Toggle(isOn: Binding<Bool>(
             get: {(self.viewModel.district.readyToInstall )},
             set: {self.viewModel.district.readyToInstall = $0}
-            ))  {
+        ))  {
             Text("Ready To Install")
         }
     }

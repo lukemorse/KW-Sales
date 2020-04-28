@@ -1,5 +1,5 @@
 //
-//  CreateImplementationPlanListView.swift
+//  ImplementationPlanView.swift
 //  KW Sales
 //
 //  Created by Luke Morse on 4/15/20.
@@ -8,9 +8,9 @@
 
 import SwiftUI
 
-struct CreateImplementationPlanListView: View {
+struct ImplementationPlanView: View {
     
-    @ObservedObject var viewModel: ImplementationPlanListViewModel
+    @ObservedObject var viewModel: ImplementationPlanViewModel
     
     var body: some View {
         Form {
@@ -24,12 +24,12 @@ struct CreateImplementationPlanListView: View {
                 Text("Add School")
                     .foregroundColor(Color.blue)
             }
-            Button(action: {
-                self.viewModel.uploadImplementationPlan()
-            }) {
-                Text("Finish")
-                    .foregroundColor(Color.blue)
-            }
+//            Button(action: {
+//                self.viewModel.uploadImplementationPlan()
+//            }) {
+//                Text("Finish")
+//                    .foregroundColor(Color.blue)
+//            }
         }
         .onAppear() {
             if self.viewModel.implmentationPlanViews.count > 0 {
@@ -47,6 +47,6 @@ struct CreateImplementationPlanListView: View {
 
 struct CreateImplementationPlanListView_Previews: PreviewProvider {
     static var previews: some View {
-        CreateImplementationPlanListView(viewModel: ImplementationPlanListViewModel())
+        ImplementationPlanView(viewModel: ImplementationPlanViewModel())
     }
 }

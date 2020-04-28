@@ -11,14 +11,21 @@ import Foundation
 import Firebase
 import CodableFirebase
 
-class ImplementationPlanListViewModel: ObservableObject {
-    @Published var implmentationPlanViews: [CreateInstallationView] = []
+class ImplementationPlanViewModel: ObservableObject {
+    @Published var implmentationPlanViews: [InstallationView] = []
     @Published var numSchools = 0
     @Published var installationViewModels: [InstallationViewModel] = []
+    var districtName: String = ""
+    var districtContactPerson: String = ""
+    var districtEmail: String = ""
+    var schoolContact: String = ""
     
     func addInstallation() {
-        let viewModel = InstallationViewModel(installation: Installation())
-        self.implmentationPlanViews.append(CreateInstallationView(index: self.numSchools, viewModel: viewModel))
+        var installation = Installation()
+        installation.districtName = self.districtName
+        installation.districtContact = self.districtContactPerson
+        let viewModel = InstallationViewModel(installation: installation)
+        self.implmentationPlanViews.append(InstallationView(index: self.numSchools, viewModel: viewModel))
         installationViewModels.append(viewModel)
         self.numSchools += 1
     }
@@ -33,7 +40,7 @@ class ImplementationPlanListViewModel: ObservableObject {
     
     func uploadImplementationPlan() {
         //encode district file
-        let dict = ["districtName?" : getInstallations()]
+        let dict = [self.districtName : getInstallations()]
         let implementationPlanData = try! FirestoreEncoder().encode(dict)
         //send district file to database
         Firestore.firestore().collection(Constants.kImplementationPlanCollection).document().setData(implementationPlanData) { error in

@@ -31,10 +31,8 @@ class CompletedListViewModel: ObservableObject {
                         self.districts.append(district)
                         shouldAdd = false
                     }
-                    
                 }
             }
         }
     }
- 
 }

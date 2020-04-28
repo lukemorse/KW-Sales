@@ -9,7 +9,7 @@
 import SwiftUI
 import Firebase
 
-struct CreateInstallationView: View {
+struct InstallationView: View {
     let index: Int
     @ObservedObject var viewModel: InstallationViewModel
     @State var isExpanded: Bool = true
@@ -97,7 +97,7 @@ struct CreateInstallationView: View {
 
 struct CreateImplementationPlan_Previews: PreviewProvider {
     static var previews: some View {
-        CreateInstallationView(index: 0, viewModel: InstallationViewModel(installation: Installation()))
+        InstallationView(index: 0, viewModel: InstallationViewModel(installation: Installation()))
     }
 }
 

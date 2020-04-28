@@ -11,20 +11,19 @@ import Firebase
 import CodableFirebase
 
 class InstallationViewModel: ObservableObject {
-    @Published var podMaps: [PodMapModel] = []
     @Published var installation: Installation
     
     init(installation: Installation) {
         self.installation = installation
     }
 
-    func uploadFloorPlan(image: UIImage) {
+    func uploadFloorPlan(image: UIImage, index: Int = 0) {
         guard let data = image.jpegData(compressionQuality: 1.0) else {
             print("could not create data from image")
             return
         }
-        let imageName = UUID().uuidString
-        let imageRef = Storage.storage().reference().child(Constants.kFloorPlanFolder).child(imageName)
+        let uuid = UUID().uuidString
+        let imageRef = Storage.storage().reference().child(Constants.kFloorPlanFolder).child(uuid)
         imageRef.putData(data, metadata: nil) { (metaData, error) in
             if let error = error {
                 print(error.localizedDescription)
@@ -42,13 +41,15 @@ class InstallationViewModel: ObservableObject {
                 let dataRef = Firestore.firestore().collection(Constants.kFloorPlanCollection).document()
                 let docID = dataRef.documentID
                 let urlString = url.absoluteString
+                
+                self.installation.podMaps.append(PodMapModel(id: docID, pods: [:]))
+                self.installation.podMaps[index].imageUrl = urlString
+                
                 let data = [
                     "uid": docID,
-                    "imageURL": urlString
-                ]
-                
-                let podMapModel = PodMapModel(id: docID, pods: [[:]])
-                self.podMaps.append(podMapModel)
+                    "imageURL": urlString,
+                    "pods" : ""
+                    ]
                 
                 dataRef.setData(data) { (error) in
                     if let error = error {
@@ -61,19 +62,16 @@ class InstallationViewModel: ObservableObject {
         }
     }
     
-    func updateFloorPlanPods(atIndex index: Int) {
-        let podMap = podMaps[index]
+    func updatePodMaps(atIndex index: Int) {
+        let podMap = self.installation.podMaps[index]
         let dataRef = Firestore.firestore().collection(Constants.kFloorPlanCollection).document(podMap.id)
-        let data = [
-            "id" : podMap.id,
-            "pods": podMap.pods
-            ] as [String : Any]
-        dataRef.setData(data) { error in
-            if let error = error {
-                print(error.localizedDescription)
-                return
+        
+        dataRef.updateData(["pods" : podMap.pods]) { (err) in
+            if let err = err {
+                print(err.localizedDescription)
+            } else {
+                print("successfully updated pods")
             }
-            print("successfully updated floor plan pods")
         }
     }
  

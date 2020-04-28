@@ -29,6 +29,7 @@ struct CreatePodMapView: View {
     
     @State var isPlacingPod: Bool = false
     @State var nextPodType: PodType = .ceiling
+    @State var podIndex = 0
     
     @GestureState private var dragOffset = CGSize.zero
     var body: some View {
@@ -151,7 +152,11 @@ struct CreatePodMapView: View {
         let pod = PodNodeView(podType: type, pos: location)
         self.podNodes.append(pod)
         self.isPlacingPod = false
-        viewModel.podMaps[self.floorPlanIndex].pods.append([pod.podType.description: [Float(pod.pos.x), Float(pod.pos.y)]])
+        
+        let podData = [pod.podType.description: [Float(pod.pos.x), Float(pod.pos.y)]]
+        let uuid = UUID().uuidString
+        self.viewModel.installation.podMaps[floorPlanIndex].pods[uuid] = podData
+        viewModel.updatePodMaps(atIndex: self.floorPlanIndex)
     }
 }
 
