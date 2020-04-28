@@ -12,6 +12,9 @@ import CodableFirebase
 
 class InstallationViewModel: ObservableObject {
     @Published var installation: Installation
+//    var docRef: DocumentReference?
+    var docRef: DocumentReference?
+    var childKeys: [String] = []
     
     init(installation: Installation) {
         self.installation = installation
@@ -38,25 +41,39 @@ class InstallationViewModel: ObservableObject {
                     print("could not create url")
                     return
                 }
-                let dataRef = Firestore.firestore().collection(Constants.kFloorPlanCollection).document()
-                let docID = dataRef.documentID
+                //if this is the first floorplan for the installation, make a new folder
+                
+                if self.docRef == nil {
+                    let docID = String(self.installation.id)
+                    self.docRef = Firestore.firestore().collection(Constants.kFloorPlanCollection).document(docID)
+                }
+                
+                
+                
+//                print("doc id: \(docRef.documentID)")
+                
                 let urlString = url.absoluteString
                 
-                self.installation.podMaps.append(PodMapModel(id: docID, pods: [:]))
+                self.installation.podMaps.append(PodMapModel(id: UUID().uuidString, pods: [:]))
                 self.installation.podMaps[index].imageUrl = urlString
                 
-                let data = [
-                    "uid": docID,
+                let childKey = UUID().uuidString
+                self.childKeys.append(childKey)
+                
+                let data = [childKey : [
+                    "uid": String(self.installation.id),
                     "imageURL": urlString,
                     "pods" : ""
-                    ]
+                    ]]
                 
-                dataRef.setData(data) { (error) in
-                    if let error = error {
-                        print(error.localizedDescription)
-                        return
+                if let parentDocRef = self.docRef {
+                    parentDocRef.setData(data, merge: true) { (error) in
+                        if let error = error {
+                            print(error.localizedDescription)
+                            return
+                        }
+                        print("successfully added image to database")
                     }
-                    print("successfully added image to database")
                 }
             }
         }
@@ -64,15 +81,17 @@ class InstallationViewModel: ObservableObject {
     
     func updatePodMaps(atIndex index: Int) {
         let podMap = self.installation.podMaps[index]
-        let dataRef = Firestore.firestore().collection(Constants.kFloorPlanCollection).document(podMap.id)
-        
-        dataRef.updateData(["pods" : podMap.pods]) { (err) in
-            if let err = err {
-                print(err.localizedDescription)
-            } else {
-                print("successfully updated pods")
+        if let parentDocRef = self.docRef {
+            parentDocRef.updateData([childKeys[index] :["pods" : podMap.pods]]) { (err) in
+                if let err = err {
+                    print(err.localizedDescription)
+                } else {
+                    print("successfully updated pods")
+                }
             }
         }
+            
+        
     }
  
 }

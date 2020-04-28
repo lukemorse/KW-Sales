@@ -13,7 +13,7 @@ struct CreatePodMapView: View {
     @State var showImagePicker: Bool = false
     @State var image: Image? = nil
     var viewModel: InstallationViewModel
-    var floorPlanIndex = 0
+    var floorPlanIndex: Int
     
     @State var showingActionSheet = false
     @State private var position = CGSize.zero
@@ -155,6 +155,8 @@ struct CreatePodMapView: View {
         
         let podData = [pod.podType.description: [Float(pod.pos.x), Float(pod.pos.y)]]
         let uuid = UUID().uuidString
+        print(self.viewModel.installation.podMaps)
+        print(floorPlanIndex)
         self.viewModel.installation.podMaps[floorPlanIndex].pods[uuid] = podData
         viewModel.updatePodMaps(atIndex: self.floorPlanIndex)
     }
@@ -162,7 +164,7 @@ struct CreatePodMapView: View {
 
 struct CreatePodMapView_Previews: PreviewProvider {
     static var previews: some View {
-        CreatePodMapView(viewModel: InstallationViewModel(installation: Installation()))
+        CreatePodMapView(viewModel: InstallationViewModel(installation: Installation()), floorPlanIndex: 0)
     }
 }
 

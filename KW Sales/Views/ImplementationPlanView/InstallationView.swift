@@ -11,6 +11,8 @@ import Firebase
 
 struct InstallationView: View {
     let index: Int
+    @State var floorPlanIndex = 0
+    
     @ObservedObject var viewModel: InstallationViewModel
     @State var isExpanded: Bool = true
     
@@ -30,7 +32,11 @@ struct InstallationView: View {
                 formItem(with: $viewModel.installation.numPods, label: "Number of Pods")
                 formItem(with: $viewModel.installation.schoolContact, label: "School Contact Person")
                 
-                NavigationLink(destination: CreatePodMapView(viewModel: self.viewModel)) {
+                NavigationLink(destination: CreatePodMapView(viewModel: self.viewModel, floorPlanIndex: self.floorPlanIndex)
+                    .onDisappear() {
+                        self.floorPlanIndex += 1
+                    }
+                ) {
                     Text("Create POD Map")
                         .foregroundColor(Color.blue)
                 }
