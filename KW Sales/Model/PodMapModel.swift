@@ -12,19 +12,19 @@ import CodableFirebase
 
 struct PodMapModel: Codable, Hashable {
     
-    let id: String
+    let uid: String
     var pods: [String : [String : [Float]]]
     var imageUrl: String = ""
     
     enum CodingKeys: String, CodingKey {
-        case id
+        case uid
         case pods
         case imageUrl
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(id, forKey: .id)
+        try container.encode(uid, forKey: .uid)
         try container.encode(pods, forKey: .pods)
         try container.encode(imageUrl, forKey: .imageUrl)
     }

@@ -20,7 +20,7 @@ class InstallationViewModel: ObservableObject {
         self.installation = installation
     }
 
-    func uploadFloorPlan(image: UIImage, index: Int = 0) {
+    func uploadFloorPlan(image: UIImage, index: Int = 0, completion: @escaping (_ flag:Bool) -> ()) {
         guard let data = image.jpegData(compressionQuality: 1.0) else {
             print("could not create data from image")
             return
@@ -47,14 +47,11 @@ class InstallationViewModel: ObservableObject {
                     let docID = String(self.installation.id)
                     self.docRef = Firestore.firestore().collection(Constants.kFloorPlanCollection).document(docID)
                 }
-                
-                
-                
 //                print("doc id: \(docRef.documentID)")
                 
                 let urlString = url.absoluteString
                 
-                self.installation.podMaps.append(PodMapModel(id: UUID().uuidString, pods: [:]))
+                self.installation.podMaps.append(PodMapModel(uid: UUID().uuidString, pods: [:]))
                 self.installation.podMaps[index].imageUrl = urlString
                 
                 let childKey = UUID().uuidString
@@ -70,8 +67,10 @@ class InstallationViewModel: ObservableObject {
                     parentDocRef.setData(data, merge: true) { (error) in
                         if let error = error {
                             print(error.localizedDescription)
+                            completion(false)
                             return
                         }
+                        completion(true)
                         print("successfully added image to database")
                     }
                 }
@@ -82,7 +81,7 @@ class InstallationViewModel: ObservableObject {
     func updatePodMaps(atIndex index: Int) {
         let podMap = self.installation.podMaps[index]
         if let parentDocRef = self.docRef {
-            parentDocRef.updateData([childKeys[index] :["pods" : podMap.pods]]) { (err) in
+            parentDocRef.setData([childKeys[index] :["pods" : podMap.pods]], merge: true) { (err) in
                 if let err = err {
                     print(err.localizedDescription)
                 } else {

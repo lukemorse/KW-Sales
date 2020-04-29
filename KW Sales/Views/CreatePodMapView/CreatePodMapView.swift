@@ -15,6 +15,7 @@ struct CreatePodMapView: View {
     var viewModel: InstallationViewModel
     var floorPlanIndex: Int
     
+    @State var isLoading = false
     @State var showingActionSheet = false
     @State private var position = CGSize.zero
     @State var podNodes: [PodNodeView] = []
@@ -32,6 +33,7 @@ struct CreatePodMapView: View {
     @State var podIndex = 0
     
     @GestureState private var dragOffset = CGSize.zero
+    
     var body: some View {
         VStack {
             Spacer()
@@ -49,6 +51,10 @@ struct CreatePodMapView: View {
                             self.dragSize = CGSize(width: val.translation.width + self.lastDrag.width, height: val.translation.height + self.lastDrag.height)
                             self.lastDrag = self.dragSize
                         }))
+                if isLoading {
+                    ActivityIndicator()
+                }
+                
             }
             .scaledToFit()
             .animation(.linear)
@@ -84,13 +90,23 @@ struct CreatePodMapView: View {
                         self.addPod(type: self.nextPodType, location: tapPoint)
                     }
                 }))
+                    
                 .sheet(isPresented: $showImagePicker) {
                     ImagePicker(sourceType: .photoLibrary) { image in
                         self.image = Image(uiImage: image)
                             .resizable()
-                        self.viewModel.uploadFloorPlan(image: image)
+                        self.isLoading = true
+                        self.viewModel.uploadFloorPlan(image: image) { success in
+                            if success {
+                                self.isLoading = false
+                            } else {
+                                self.isLoading = false
+                                // error uploading image
+                            }
+                        }
                     }
             }
+            
                 Spacer()
                 actionSheetButton
             
@@ -149,6 +165,9 @@ struct CreatePodMapView: View {
     }
     
     func addPod(type: PodType, location: CGPoint) {
+        if isLoading {
+            return
+        }
         let pod = PodNodeView(podType: type, pos: location)
         self.podNodes.append(pod)
         self.isPlacingPod = false
