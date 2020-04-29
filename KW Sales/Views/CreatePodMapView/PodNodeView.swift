@@ -32,7 +32,9 @@ struct PodNodeView: Identifiable, Hashable, Equatable, View {
     }
 }
 
-enum PodType {
+enum PodType: Int, Codable, CaseIterable, Hashable, Identifiable {
+    var id: Int { hashValue }
+    
     case outdoor, corner, hallway, ceiling
     
     var description: String {
@@ -48,6 +50,7 @@ enum PodType {
         }
     }
 }
+
 
 let podImageDict: [PodType : String] = [
     .outdoor : "outdoor pod",

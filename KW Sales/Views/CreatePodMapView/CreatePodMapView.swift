@@ -168,16 +168,18 @@ struct CreatePodMapView: View {
         if isLoading {
             return
         }
-        let pod = PodNodeView(podType: type, pos: location)
-        self.podNodes.append(pod)
+        let podView = PodNodeView(podType: type, pos: location)
+        self.podNodes.append(podView)
         self.isPlacingPod = false
         
-        let podData = [pod.podType.description: [Float(pod.pos.x), Float(pod.pos.y)]]
-        let uuid = UUID().uuidString
-        print(self.viewModel.installation.podMaps)
-        print(floorPlanIndex)
-        self.viewModel.installation.podMaps[floorPlanIndex].pods[uuid] = podData
-        viewModel.updatePodMaps(atIndex: self.floorPlanIndex)
+        //add to implementation plan
+        let pod = Pod(podType: type, position: location)
+        let key = self.viewModel.installation.floorPlanUrls[floorPlanIndex]
+        if self.viewModel.installation.pods.keys.contains(key) {
+            self.viewModel.installation.pods[key]?.append(pod)
+        } else {
+            self.viewModel.installation.pods[key] = [pod]
+        }
     }
 }
 

@@ -51,17 +51,17 @@ class InstallationViewModel: ObservableObject {
                 
                 let urlString = url.absoluteString
                 
-                self.installation.podMaps.append(PodMapModel(uid: UUID().uuidString, pods: [:]))
-                self.installation.podMaps[index].imageUrl = urlString
+                self.installation.floorPlanUrls.append(urlString)
                 
-                let childKey = UUID().uuidString
-                self.childKeys.append(childKey)
+//                self.installation.podMaps.append(PodMapModel(uid: UUID().uuidString, pods: [:]))
+//                self.installation.podMaps[index].imageUrl = urlString
                 
-                let data = [childKey : [
-                    "uid": String(self.installation.id),
+//                let childKey = UUID().uuidString
+//                self.childKeys.append(childKey)
+                
+                let data = [
                     "imageURL": urlString,
-                    "pods" : ""
-                    ]]
+                    ]
                 
                 if let parentDocRef = self.docRef {
                     parentDocRef.setData(data, merge: true) { (error) in
@@ -78,19 +78,19 @@ class InstallationViewModel: ObservableObject {
         }
     }
     
-    func updatePodMaps(atIndex index: Int) {
-        let podMap = self.installation.podMaps[index]
-        if let parentDocRef = self.docRef {
-            parentDocRef.setData([childKeys[index] :["pods" : podMap.pods]], merge: true) { (err) in
-                if let err = err {
-                    print(err.localizedDescription)
-                } else {
-                    print("successfully updated pods")
-                }
-            }
-        }
-            
-        
-    }
+//    func updatePodMaps(atIndex index: Int) {
+//        let podMap = self.installation.pods[index]
+//        if let parentDocRef = self.docRef {
+//            parentDocRef.setData([childKeys[index] :["pods" : podMap.pods]], merge: true) { (err) in
+//                if let err = err {
+//                    print(err.localizedDescription)
+//                } else {
+//                    print("successfully updated pods")
+//                }
+//            }
+//        }
+//
+//
+//    }
  
 }

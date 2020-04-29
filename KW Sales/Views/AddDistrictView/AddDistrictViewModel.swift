@@ -24,6 +24,7 @@ class AddDistrictViewModel: ObservableObject {
         if let implementationPlanListViewModel = self.implementationPlanListViewModel {
             district.implementationPlan = implementationPlanListViewModel.getInstallations()
         }
+        print(district)
         //encode district file
         let districtData = try! FirestoreEncoder().encode(district)
         //send district file to database

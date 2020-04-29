@@ -28,7 +28,8 @@ struct Installation: Encodable, Identifiable, Hashable  {
     var numRooms: Int
     var numPods: Int
     var timeStamp: Timestamp
-    var podMaps: [PodMapModel]
+    var floorPlanUrls: [String]
+    var pods: [String:[Pod]]
     
     init() {
         self.status = .notStarted
@@ -43,7 +44,8 @@ struct Installation: Encodable, Identifiable, Hashable  {
         self.numRooms = 0
         self.numPods = 0
         self.timeStamp = Timestamp()
-        self.podMaps = []
+        self.floorPlanUrls = []
+        self.pods = [:]
     }
     
     private enum CodingKeys: String, CodingKey {
@@ -60,7 +62,8 @@ struct Installation: Encodable, Identifiable, Hashable  {
         case numRooms
         case numPods
         case timeStamp
-        case podMaps
+        case floorPlanUrls
+        case pods
     }
     
     func encode(to encoder: Encoder) throws {
@@ -77,7 +80,8 @@ struct Installation: Encodable, Identifiable, Hashable  {
         try container.encode(numRooms, forKey: .numRooms)
         try container.encode(numPods, forKey: .numPods)
         try container.encode(timeStamp, forKey: .timeStamp)
-        try container.encode(podMaps, forKey: .podMaps)
+        try container.encode(floorPlanUrls, forKey: .floorPlanUrls)
+        try container.encode(pods, forKey: .pods)
     }
 }
 
@@ -95,7 +99,8 @@ extension Installation: Decodable {
         numRooms = try container.decode(Int.self, forKey: .numRooms)
         numPods = try container.decode(Int.self, forKey: .numPods)
         timeStamp = try container.decode(Timestamp.self, forKey: .timeStamp)
-        podMaps = try container.decode([PodMapModel].self, forKey: .podMaps)
+        floorPlanUrls = try container.decode([String].self, forKey: .floorPlanUrls)
+        pods = try container.decode([String:[Pod]].self, forKey: .pods)
         
         if let schoolTypeValue = try? container.decode(Int.self, forKey: .schoolType) {
             schoolType = SchoolType(rawValue: schoolTypeValue) ?? SchoolType.unknown
