@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Firebase
 
 struct Constants {
     
@@ -27,4 +28,6 @@ struct Constants {
     static let kDistrictCollection = "districts"
     static let kTeamCollection = "teams"
     static let kImplementationPlanCollection = "implementationPlans"
+    
+    static let chicagoGeoPoint = GeoPoint(latitude: 41.8781, longitude: -87.6298)
 }

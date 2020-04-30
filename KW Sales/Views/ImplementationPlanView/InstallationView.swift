@@ -48,7 +48,9 @@ struct InstallationView: View {
     func getInstallation() -> Installation {
         return viewModel.installation
     }
-    
+}
+
+extension InstallationView {
     //Funcs for adding form items
     
     func formItem(with name: Binding<String>, label: String) -> some
@@ -57,7 +59,7 @@ struct InstallationView: View {
                 Text(label)
                     .font(.headline)
                 TextField("Enter " + label, text: name)
-                    .padding([.top, .bottom])   
+                    .padding([.top, .bottom])
             }
     }
     

@@ -24,12 +24,6 @@ struct ImplementationPlanView: View {
                 Text("Add School")
                     .foregroundColor(Color.blue)
             }
-//            Button(action: {
-//                self.viewModel.uploadImplementationPlan()
-//            }) {
-//                Text("Finish")
-//                    .foregroundColor(Color.blue)
-//            }
         }
         .onAppear() {
             if self.viewModel.implmentationPlanViews.count > 0 {
@@ -38,10 +32,8 @@ struct ImplementationPlanView: View {
                 }
             }
         }
-        .navigationBarTitle("Implementation Plan")
-        
+        .navigationBarTitle("Implementation Plan")   
     }
-    
 }
 
 

@@ -45,11 +45,9 @@ struct LoginView: View {
             }
         }
         .padding()
-    
     }
     
     func attemptLogin() {
-        
         handler(username,password) { success in
             print(success)
             if !success {

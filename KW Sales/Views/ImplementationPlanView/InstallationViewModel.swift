@@ -12,7 +12,6 @@ import CodableFirebase
 
 class InstallationViewModel: ObservableObject {
     @Published var installation: Installation
-//    var docRef: DocumentReference?
     var docRef: DocumentReference?
     var childKeys: [String] = []
     
@@ -41,23 +40,15 @@ class InstallationViewModel: ObservableObject {
                     print("could not create url")
                     return
                 }
-                //if this is the first floorplan for the installation, make a new folder
                 
+                //if this is the first floorplan for the installation, make a new folder
                 if self.docRef == nil {
                     let docID = String(self.installation.id)
                     self.docRef = Firestore.firestore().collection(Constants.kFloorPlanCollection).document(docID)
                 }
-//                print("doc id: \(docRef.documentID)")
                 
                 let urlString = url.absoluteString
-                
                 self.installation.floorPlanUrls.append(urlString)
-                
-//                self.installation.podMaps.append(PodMapModel(uid: UUID().uuidString, pods: [:]))
-//                self.installation.podMaps[index].imageUrl = urlString
-                
-//                let childKey = UUID().uuidString
-//                self.childKeys.append(childKey)
                 
                 let data = [
                     "imageURL": urlString,
@@ -78,19 +69,4 @@ class InstallationViewModel: ObservableObject {
         }
     }
     
-//    func updatePodMaps(atIndex index: Int) {
-//        let podMap = self.installation.pods[index]
-//        if let parentDocRef = self.docRef {
-//            parentDocRef.setData([childKeys[index] :["pods" : podMap.pods]], merge: true) { (err) in
-//                if let err = err {
-//                    print(err.localizedDescription)
-//                } else {
-//                    print("successfully updated pods")
-//                }
-//            }
-//        }
-//
-//
-//    }
- 
 }

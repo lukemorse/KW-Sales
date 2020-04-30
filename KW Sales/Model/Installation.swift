@@ -34,7 +34,7 @@ struct Installation: Encodable, Identifiable, Hashable  {
     init() {
         self.status = .notStarted
         self.schoolType = .elementary
-        self.address = chicagoGeoPoint
+        self.address = Constants.chicagoGeoPoint
         self.districtContact = ""
         self.districtName = ""
         self.schoolContact = ""
