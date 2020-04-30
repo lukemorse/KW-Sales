@@ -62,7 +62,7 @@ struct Installation: Encodable, Identifiable, Hashable  {
         case numRooms
         case numPods
         case timeStamp
-        case floorPlanUrls
+        case floorPlanURLs
         case pods
     }
     
@@ -80,7 +80,7 @@ struct Installation: Encodable, Identifiable, Hashable  {
         try container.encode(numRooms, forKey: .numRooms)
         try container.encode(numPods, forKey: .numPods)
         try container.encode(timeStamp, forKey: .timeStamp)
-        try container.encode(floorPlanUrls, forKey: .floorPlanUrls)
+        try container.encode(floorPlanUrls, forKey: .floorPlanURLs)
         try container.encode(pods, forKey: .pods)
     }
 }
@@ -99,7 +99,7 @@ extension Installation: Decodable {
         numRooms = try container.decode(Int.self, forKey: .numRooms)
         numPods = try container.decode(Int.self, forKey: .numPods)
         timeStamp = try container.decode(Timestamp.self, forKey: .timeStamp)
-        floorPlanUrls = try container.decode([String].self, forKey: .floorPlanUrls)
+        floorPlanUrls = try container.decode([String].self, forKey: .floorPlanURLs)
         pods = try container.decode([String:[Pod]].self, forKey: .pods)
         
         if let schoolTypeValue = try? container.decode(Int.self, forKey: .schoolType) {
