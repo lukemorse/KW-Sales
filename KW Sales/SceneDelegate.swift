@@ -24,6 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        let contentView = CreatePodMapView(showingActionSheet: false)
         let contentView = MainView()
 //        let contentView = StartView()
+//        let contentView = PodMapTest()
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
