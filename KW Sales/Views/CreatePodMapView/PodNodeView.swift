@@ -29,6 +29,7 @@ struct PodNodeView: Identifiable, Hashable, Equatable, View {
             .resizable()
             .frame(width: 30, height: 30)
             .position(pos)
+            .colorMultiply(Color.red)
     }
 }
 
