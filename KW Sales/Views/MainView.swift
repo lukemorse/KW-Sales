@@ -25,11 +25,13 @@ struct MainView: View {
                             .frame(height: nil)
                 )
             }
+            .navigationViewStyle(StackNavigationViewStyle())
             .tabItem({
                 Image(systemName: Constants.TabBarImageName.tabBar0)
                     .font(.title)
                 Text("\(Constants.TabBarText.tabBar0)")
             }).tag(0)
+            
             
             //Pending
             NavigationView {
@@ -42,6 +44,7 @@ struct MainView: View {
                 )
                 
             }
+            .navigationViewStyle(StackNavigationViewStyle())
             .tabItem({
                 Image(systemName: Constants.TabBarImageName.tabBar1)
                     .font(.title)
@@ -58,6 +61,7 @@ struct MainView: View {
                             .frame(height: nil)
                 )
             }
+            .navigationViewStyle(StackNavigationViewStyle())
             .tabItem({
                 Image(systemName: Constants.TabBarImageName.tabBar2)
                     .font(.title)

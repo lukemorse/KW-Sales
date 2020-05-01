@@ -17,7 +17,7 @@ struct AddDistrictView: View {
     @State private var addDistrictFail = false
     
     var body: some View {
-        NavigationView {
+//        NavigationView {
             Form {
                 Group {
                     Button(action: {
@@ -72,7 +72,7 @@ struct AddDistrictView: View {
             }
                 
             .navigationBarTitle("Add District")
-        }
+//        }
             
         .alert(isPresented: self.$isShowingAlert) {
             if self.addDistrictSuccess {
