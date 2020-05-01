@@ -56,6 +56,8 @@ struct CreatePodMapView: View {
                 }
                 
             }
+            .coordinateSpace(name: "custom")
+            .overlay(podPlacementGesture)
             .scaledToFit()
             .animation(.linear)
             .scaleEffect(self.scale)
@@ -80,17 +82,17 @@ struct CreatePodMapView: View {
                         self.dragSize = CGSize(width: val.translation.width + self.lastDrag.width, height: val.translation.height + self.lastDrag.height)
                         self.lastDrag = self.dragSize
                     }))
-                .simultaneousGesture(DragGesture(minimumDistance: 0, coordinateSpace: .local).onChanged({ (val) in
-                    
-                    
-                    // TODO: Fix starting point when scaled
-                    
-                    if self.isPlacingPod {
-                        let tapPoint = CGPoint(x: val.startLocation.x - self.dragSize.width, y: val.startLocation.y - self.dragSize.height)
-                        self.addPod(type: self.nextPodType, location: tapPoint)
-                    }
-                }))
-                    
+//                .simultaneousGesture(DragGesture(minimumDistance: 0, coordinateSpace: .local).onChanged({ (val) in
+//
+//
+//                    // TODO: Fix starting point when scaled
+//
+//                    if self.isPlacingPod {
+//                        let tapPoint = CGPoint(x: val.startLocation.x - self.dragSize.width, y: val.startLocation.y - self.dragSize.height)
+//                        self.addPod(type: self.nextPodType, location: tapPoint)
+//                    }
+//                }))
+                
                 .sheet(isPresented: $showImagePicker) {
                     ImagePicker(sourceType: .photoLibrary) { image in
                         self.image = Image(uiImage: image)
@@ -107,13 +109,30 @@ struct CreatePodMapView: View {
                     }
             }
             
-                Spacer()
-                actionSheetButton
+            Spacer()
+            actionSheetButton
             
-            }
+        }
         .onAppear() {
-        self.showImagePicker.toggle()
+            self.showImagePicker.toggle()
             
+        }
+    }
+    
+    var podPlacementGesture: some View {
+        
+        if self.isPlacingPod {
+            return AnyView(GeometryReader {geo in
+                Color.clear.contentShape(Rectangle())
+            }
+            .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .named(AnyHashable("custom")))
+            .onChanged({ (value) in
+                print(value.location)
+                self.addPod(type: self.nextPodType, location: value.location)
+            })
+            ))
+        } else {
+            return AnyView(EmptyView())
         }
     }
     
