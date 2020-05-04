@@ -25,6 +25,7 @@ struct InstallationView: View {
             
             if isExpanded {
                 
+                startDatePicker()
                 formItem(with: $viewModel.installation.schoolName, label: "School Name")
                 formItem(with: $viewModel.installation.schoolType, label: "School Type")
                 formItem(with: $viewModel.installation.numFloors, label: "Number of Floors")
@@ -100,6 +101,29 @@ extension InstallationView {
                 Text("")
             }
         }
+    }
+    
+    func startDatePicker() -> some View {
+        return VStack(alignment: .leading) {
+            Text("Start Date")
+                .font(.headline)
+            
+            DatePicker(selection: Binding<Date>(
+                get: {self.viewModel.installation.date },
+                set: {self.viewModel.installation.date = $0}), displayedComponents: .date) {
+                    Text("")
+            }
+        }
+    }
+    
+    func convertTimestamp(serverTimestamp: Double) -> String {
+        let x = serverTimestamp / 1000
+        let date = NSDate(timeIntervalSince1970: x)
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        formatter.timeStyle = .medium
+
+        return formatter.string(from: date as Date)
     }
 }
 

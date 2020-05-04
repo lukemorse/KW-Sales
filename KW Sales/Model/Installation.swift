@@ -27,7 +27,7 @@ struct Installation: Encodable, Identifiable, Hashable  {
     var numFloors: Int
     var numRooms: Int
     var numPods: Int
-    var timeStamp: Timestamp
+    var date: Date
     var floorPlanUrls: [String]
     var pods: [String:[Pod]]
     
@@ -43,7 +43,7 @@ struct Installation: Encodable, Identifiable, Hashable  {
         self.numFloors = 0
         self.numRooms = 0
         self.numPods = 0
-        self.timeStamp = Timestamp()
+        self.date = Date()
         self.floorPlanUrls = []
         self.pods = [:]
     }
@@ -79,7 +79,7 @@ struct Installation: Encodable, Identifiable, Hashable  {
         try container.encode(numFloors, forKey: .numFloors)
         try container.encode(numRooms, forKey: .numRooms)
         try container.encode(numPods, forKey: .numPods)
-        try container.encode(timeStamp, forKey: .timeStamp)
+        try container.encode(date, forKey: .timeStamp)
         try container.encode(floorPlanUrls, forKey: .floorPlanURLs)
         try container.encode(pods, forKey: .pods)
     }
@@ -98,7 +98,7 @@ extension Installation: Decodable {
         numFloors = try container.decode(Int.self, forKey: .numFloors)
         numRooms = try container.decode(Int.self, forKey: .numRooms)
         numPods = try container.decode(Int.self, forKey: .numPods)
-        timeStamp = try container.decode(Timestamp.self, forKey: .timeStamp)
+        date = try container.decode(Date.self, forKey: .timeStamp)
         floorPlanUrls = try container.decode([String].self, forKey: .floorPlanURLs)
         pods = try container.decode([String:[Pod]].self, forKey: .pods)
         
