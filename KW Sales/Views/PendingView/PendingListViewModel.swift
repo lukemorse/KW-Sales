@@ -20,8 +20,12 @@ class PendingListViewModel: ObservableObject {
                 print("Error getting documents: \(error)")
             } else {
                 for document in snapshot!.documents {
-                    let district = try! FirestoreDecoder().decode(District.self, from: document.data())
-                    self.districts.append(district)
+                    do {
+                        let district = try FirestoreDecoder().decode(District.self, from: document.data())
+                        self.districts.append(district)
+                    } catch let error {
+                        print(error)
+                    }
                 }
             }
         }

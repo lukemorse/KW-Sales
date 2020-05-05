@@ -35,6 +35,7 @@
 		A3AD36372452160D00BCDA4D /* CompletedListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD36362452160D00BCDA4D /* CompletedListViewModel.swift */; };
 		A3AD36392452165D00BCDA4D /* PendingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD36382452165D00BCDA4D /* PendingListViewModel.swift */; };
 		A3AD363B2452677200BCDA4D /* Installation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD363A2452677200BCDA4D /* Installation.swift */; };
+		A3B133AC246061C80082A618 /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = A3B133AB246061C80082A618 /* AppIcon.appiconset */; };
 		A3B37B892446204200D8CE40 /* District.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B37B882446204200D8CE40 /* District.swift */; };
 		A3B37B8E244631E500D8CE40 /* AddDistrictViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B37B8D244631E500D8CE40 /* AddDistrictViewModel.swift */; };
 		A3B37B90244632B900D8CE40 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B37B8F244632B900D8CE40 /* Team.swift */; };
@@ -104,6 +105,7 @@
 		A3AD36362452160D00BCDA4D /* CompletedListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedListViewModel.swift; sourceTree = "<group>"; };
 		A3AD36382452165D00BCDA4D /* PendingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingListViewModel.swift; sourceTree = "<group>"; };
 		A3AD363A2452677200BCDA4D /* Installation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Installation.swift; sourceTree = "<group>"; };
+		A3B133AB246061C80082A618 /* AppIcon.appiconset */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppIcon.appiconset; sourceTree = "<group>"; };
 		A3B37B882446204200D8CE40 /* District.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = District.swift; sourceTree = "<group>"; };
 		A3B37B8D244631E500D8CE40 /* AddDistrictViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDistrictViewModel.swift; sourceTree = "<group>"; };
 		A3B37B8F244632B900D8CE40 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				A3295BD0244A044A00F26E1F /* CSVTest.swift */,
 				A3EE48CE2444D5C700C6A554 /* Constants.swift */,
 				A30C9B702444C1CB0049E4FC /* Assets.xcassets */,
+				A3B133AB246061C80082A618 /* AppIcon.appiconset */,
 				A30C9B752444C1CB0049E4FC /* LaunchScreen.storyboard */,
 				A30C9B782444C1CB0049E4FC /* Info.plist */,
 				A31F80772445FFE500ADC66A /* GoogleService-Info.plist */,
@@ -437,6 +440,7 @@
 				A3295BDC244A0CE700F26E1F /* SampleCSV.csv in Resources */,
 				A31F80782445FFE500ADC66A /* GoogleService-Info.plist in Resources */,
 				A30C9B742444C1CB0049E4FC /* Preview Assets.xcassets in Resources */,
+				A3B133AC246061C80082A618 /* AppIcon.appiconset in Resources */,
 				A30C9B712444C1CB0049E4FC /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

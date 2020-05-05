@@ -20,16 +20,21 @@ class CompletedListViewModel: ObservableObject {
                 print("Error getting documents: \(error)")
             } else {
                 for document in snapshot!.documents {
-                    let district = try! FirestoreDecoder().decode(District.self, from: document.data())
-                    var shouldAdd = false
-                    for school in district.implementationPlan {
-                        if school.status == .complete {
-                            shouldAdd = true
+                    do {
+                        var shouldAdd = false
+                        let district = try FirestoreDecoder().decode(District.self, from: document.data())
+                        for school in district.implementationPlan {
+                            if school.status == .complete {
+                                shouldAdd = true
+                            }
                         }
-                    }
-                    if shouldAdd {
-                        self.districts.append(district)
-                        shouldAdd = false
+                        if shouldAdd {
+                            self.districts.append(district)
+                            shouldAdd = false
+                        }
+                        
+                    } catch let error {
+                        print(error)
                     }
                 }
             }

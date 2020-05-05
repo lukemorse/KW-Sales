@@ -43,7 +43,6 @@ struct CreatePodMapView: View {
                 
                 self.podGroup
                     .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local).onChanged({ val in
-                        print("dragging pod")
                         self.tapPoint = val.startLocation
                         self.dragSize = CGSize(width: val.translation.width + self.lastDrag.width, height: val.translation.height + self.lastDrag.height)
                     })

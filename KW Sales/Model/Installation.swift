@@ -10,6 +10,7 @@ import Foundation
 import Firebase
 import CodableFirebase
 
+
 struct Installation: Encodable, Identifiable, Hashable  {
     static func == (lhs: Installation, rhs: Installation) -> Bool {
         return lhs.id == rhs.id
@@ -61,7 +62,7 @@ struct Installation: Encodable, Identifiable, Hashable  {
         case numFloors
         case numRooms
         case numPods
-        case timeStamp
+        case date
         case floorPlanURLs
         case pods
     }
@@ -79,7 +80,7 @@ struct Installation: Encodable, Identifiable, Hashable  {
         try container.encode(numFloors, forKey: .numFloors)
         try container.encode(numRooms, forKey: .numRooms)
         try container.encode(numPods, forKey: .numPods)
-        try container.encode(date, forKey: .timeStamp)
+        try container.encode(Timestamp(date: date), forKey: .date)
         try container.encode(floorPlanUrls, forKey: .floorPlanURLs)
         try container.encode(pods, forKey: .pods)
     }
@@ -98,9 +99,11 @@ extension Installation: Decodable {
         numFloors = try container.decode(Int.self, forKey: .numFloors)
         numRooms = try container.decode(Int.self, forKey: .numRooms)
         numPods = try container.decode(Int.self, forKey: .numPods)
-        date = try container.decode(Date.self, forKey: .timeStamp)
         floorPlanUrls = try container.decode([String].self, forKey: .floorPlanURLs)
         pods = try container.decode([String:[Pod]].self, forKey: .pods)
+        
+        let timeStamp: Timestamp = try container.decode(Timestamp.self, forKey: .date)
+        date = timeStamp.dateValue()
         
         if let schoolTypeValue = try? container.decode(Int.self, forKey: .schoolType) {
             schoolType = SchoolType(rawValue: schoolTypeValue) ?? SchoolType.unknown

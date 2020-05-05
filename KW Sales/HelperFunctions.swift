@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Firebase
 
 func validateEmail(enteredEmail:String) -> Bool {
 
@@ -14,4 +15,18 @@ func validateEmail(enteredEmail:String) -> Bool {
     let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
     return emailPredicate.evaluate(with: enteredEmail)
 
+}
+
+func timeStampToDateString(_ timeStamp: Timestamp) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateStyle = .medium
+    dateFormatter.timeStyle = .none
+    return dateFormatter.string(from: timeStamp.dateValue())
+}
+
+func dateToString(_ date: Date) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateStyle = .medium
+    dateFormatter.timeStyle = .none
+    return dateFormatter.string(from: date)
 }

@@ -24,9 +24,8 @@ struct InstallationView: View {
             }
             
             if isExpanded {
-                
-                startDatePicker()
                 formItem(with: $viewModel.installation.schoolName, label: "School Name")
+                startDatePicker()
                 formItem(with: $viewModel.installation.schoolType, label: "School Type")
                 formItem(with: $viewModel.installation.numFloors, label: "Number of Floors")
                 formItem(with: $viewModel.installation.numRooms, label: "Number of Rooms")
