@@ -22,7 +22,6 @@ struct MainView: View {
                     .navigationBarTitle(Text("Add District"), displayMode: .inline)
                     .navigationBarItems(leading:
                         Image("Logo")
-                            .frame(height: nil)
                 )
             }
             .navigationViewStyle(StackNavigationViewStyle())

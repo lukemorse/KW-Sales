@@ -17,7 +17,6 @@ struct AddDistrictView: View {
     @State private var addDistrictFail = false
     
     var body: some View {
-//        NavigationView {
             Form {
                 Group {
                     Button(action: {
@@ -50,6 +49,11 @@ struct AddDistrictView: View {
                         districtEmailField
                         districtPhoneField
                         districtAddressField
+                    }
+                }
+                
+                Section {
+                    Group {
                         teamPicker()
                         readyToInstallToggle
                     }
@@ -72,7 +76,6 @@ struct AddDistrictView: View {
             }
                 
             .navigationBarTitle("Add District")
-//        }
             
         .alert(isPresented: self.$isShowingAlert) {
             if self.addDistrictSuccess {
@@ -92,6 +95,7 @@ struct AddDistrictView: View {
         }
     }
     
+    //MARK: - Buttons
     var sendPodButton: some View {
         //Button is red until email is valid
         SendPodOrderButtonView(numPods: viewModel.district.numPodsNeeded , email: viewModel.district.districtEmail , textColor: validateEmail(enteredEmail: viewModel.district.districtEmail ) ? Color.green : Color.red)
@@ -121,7 +125,7 @@ struct AddDistrictView: View {
 }
 
 extension AddDistrictView {
-    //Funcs for adding form items
+    // MARK: - Form Items
     var numPodPicker: some View {
         VStack(alignment: .leading) {
             Text("Number PODS Needed")
