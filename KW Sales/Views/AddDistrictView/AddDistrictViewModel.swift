@@ -56,7 +56,7 @@ class AddDistrictViewModel: ObservableObject {
         district.districtContactPerson = arr[7]
         district.districtEmail = arr[8]
         district.districtPhoneNumber = arr[9]
-        district.districtOfficeAddress = String(arr[10].dropLast())
+//        district.districtOfficeAddress = String(arr[10].dropLast())
     }
     
     func fetchTeams() {

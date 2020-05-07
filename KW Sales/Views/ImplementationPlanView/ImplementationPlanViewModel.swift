@@ -25,7 +25,7 @@ class ImplementationPlanViewModel: ObservableObject {
         installation.districtName = self.districtName
         installation.districtContact = self.districtContactPerson
         let viewModel = InstallationViewModel(installation: installation)
-        self.implmentationPlanViews.append(InstallationView(index: self.numSchools, viewModel: viewModel))
+        self.implmentationPlanViews.append(InstallationView(index: self.numSchools, viewModel: viewModel, locationSearchService: LocationSearchService()))
         installationViewModels.append(viewModel)
         self.numSchools += 1
     }

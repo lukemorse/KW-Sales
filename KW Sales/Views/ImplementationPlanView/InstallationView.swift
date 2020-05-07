@@ -8,12 +8,15 @@
 
 import SwiftUI
 import Firebase
+import MapKit
 
 struct InstallationView: View {
     let index: Int
-    @State var floorPlanIndex = 0
     
     @ObservedObject var viewModel: InstallationViewModel
+    @ObservedObject var locationSearchService: LocationSearchService
+    
+    @State var floorPlanIndex = 0
     @State var isExpanded: Bool = true
     
     var body: some View {
@@ -32,6 +35,8 @@ struct InstallationView: View {
                 formItem(with: $viewModel.installation.numPods, label: "Number of Pods")
                 formItem(with: $viewModel.installation.schoolContact, label: "School Contact Person")
                 
+                AddressSearchBar(labelText: "School Address", locationSearchService: locationSearchService)
+                
                 NavigationLink(destination: CreatePodMapView(viewModel: self.viewModel, floorPlanIndex: self.floorPlanIndex)
                     .onDisappear() {
                         self.floorPlanIndex += 1
@@ -41,6 +46,9 @@ struct InstallationView: View {
                         .foregroundColor(Color.blue)
                 }
             }
+        }
+        .onAppear() {
+            self.viewModel.installation.address = self.locationSearchService.selectedAddress
         }
         
     }
@@ -128,7 +136,7 @@ extension InstallationView {
 
 struct CreateImplementationPlan_Previews: PreviewProvider {
     static var previews: some View {
-        InstallationView(index: 0, viewModel: InstallationViewModel(installation: Installation()))
+        InstallationView(index: 0, viewModel: InstallationViewModel(installation: Installation()), locationSearchService: LocationSearchService())
     }
 }
 

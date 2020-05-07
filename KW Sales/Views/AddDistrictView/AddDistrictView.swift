@@ -7,10 +7,12 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct AddDistrictView: View {
     @ObservedObject var implementationPlanViewModel = ImplementationPlanViewModel()
     @ObservedObject var viewModel = AddDistrictViewModel()
+    @ObservedObject var locationSearchService = LocationSearchService()
     @State private var isShowingAlert = false
     @State private var isFieldsIncomplete = false
     @State private var addDistrictSuccess = false
@@ -48,7 +50,7 @@ struct AddDistrictView: View {
                         districtContactPersonField
                         districtEmailField
                         districtPhoneField
-                        districtAddressField
+                        AddressSearchBar(labelText: "District Office Address", locationSearchService: locationSearchService)
                     }
                 }
                 
@@ -276,18 +278,18 @@ extension AddDistrictView {
         .padding(.horizontal, 15)
     }
     
-    var districtAddressField: some View {
-        VStack(alignment: .leading) {
-            Text("District Office Address")
-                .font(.headline)
-            TextField("Enter District Office Address", text: Binding<String>(
-                get: {self.viewModel.district.districtOfficeAddress },
-                set: {self.viewModel.district.districtOfficeAddress = $0}
-            ))
-                .padding(.all)
-        }
-        .padding(.horizontal, 15)
-    }
+//    var districtAddressField: some View {
+//        VStack(alignment: .leading) {
+//            Text("District Office Address")
+//                .font(.headline)
+//            TextField("Enter District Office Address", text: Binding<String>(
+//                get: {self.viewModel.district.districtOfficeAddress },
+//                set: {self.viewModel.district.districtOfficeAddress = $0}
+//            ))
+//                .padding(.all)
+//        }
+//        .padding(.horizontal, 15)
+//    }
     
     func teamPicker() -> some View {
         return VStack(alignment: .leading) {
@@ -324,7 +326,7 @@ extension AddDistrictView {
         return viewModel.district.districtContactPerson.isEmpty ||
             viewModel.district.districtEmail.isEmpty ||
             viewModel.district.districtPhoneNumber.isEmpty ||
-            viewModel.district.districtOfficeAddress.isEmpty
+            viewModel.district.districtOfficeAddress == GeoPoint(latitude: 0, longitude: 0)
     }
 }
 

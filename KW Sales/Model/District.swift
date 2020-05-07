@@ -23,7 +23,7 @@ struct District: Encodable {
     var districtContactPerson: String
     var districtEmail: String
     var districtPhoneNumber: String
-    var districtOfficeAddress: String
+    var districtOfficeAddress: GeoPoint
     var team: Team
     var numPodsNeeded: Int
     var startDate: Date
@@ -40,7 +40,7 @@ struct District: Encodable {
         self.districtContactPerson = ""
         self.districtEmail = ""
         self.districtPhoneNumber = ""
-        self.districtOfficeAddress = ""
+        self.districtOfficeAddress = Constants.chicagoGeoPoint
         self.team = Team()
         self.numPodsNeeded = 0
         self.startDate = Date()
@@ -98,7 +98,7 @@ extension District: Decodable {
         districtContactPerson = try container.decode(String.self, forKey: .districtContactPerson)
         districtEmail = try container.decode(String.self, forKey: .districtEmail)
         districtPhoneNumber = try container.decode(String.self, forKey: .districtPhoneNumber)
-        districtOfficeAddress = try container.decode(String.self, forKey: .districtOfficeAddress)
+        districtOfficeAddress = try container.decode(GeoPoint.self, forKey: .districtOfficeAddress)
         team = try container.decode(Team.self, forKey: .team)
         numPodsNeeded = try container.decode(Int.self, forKey: .numPodsNeeded)
         implementationPlan = try container.decode([Installation].self, forKey: .implementationPlan)

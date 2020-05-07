@@ -12,11 +12,13 @@ import CodableFirebase
 
 class InstallationViewModel: ObservableObject {
     @Published var installation: Installation
+    @Published var address: String
     var docRef: DocumentReference?
     var childKeys: [String] = []
     
     init(installation: Installation) {
         self.installation = installation
+        self.address = ""
     }
 
     func uploadFloorPlan(image: UIImage, index: Int = 0, completion: @escaping (_ flag:Bool) -> ()) {
