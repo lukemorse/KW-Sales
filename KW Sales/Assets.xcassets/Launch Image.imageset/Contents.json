@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "outdoor pod.png",
+      "filename" : "Launch Image.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Launch Image-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "Launch Image-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
