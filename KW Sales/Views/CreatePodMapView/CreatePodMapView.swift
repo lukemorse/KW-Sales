@@ -42,14 +42,6 @@ struct CreatePodMapView: View {
                     .resizable()
                 
                 self.podGroup
-                    .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local).onChanged({ val in
-                        self.tapPoint = val.startLocation
-                        self.dragSize = CGSize(width: val.translation.width + self.lastDrag.width, height: val.translation.height + self.lastDrag.height)
-                    })
-                        .onEnded({ (val) in
-                            self.dragSize = CGSize(width: val.translation.width + self.lastDrag.width, height: val.translation.height + self.lastDrag.height)
-                            self.lastDrag = self.dragSize
-                        }))
                 if isLoading {
                     ActivityIndicator()
                 }
@@ -92,7 +84,7 @@ struct CreatePodMapView: View {
                                 self.isLoading = false
                             } else {
                                 self.isLoading = false
-                                // error uploading image
+                                print("error uploading image")
                             }
                         }
                     }
@@ -131,6 +123,9 @@ struct CreatePodMapView: View {
                 Group {
                     ForEach(podNodes, id: \.self) { pod in
                         pod
+                            .onTapGesture {
+                            print("tapped")
+                        }
                     }
                 }
             )

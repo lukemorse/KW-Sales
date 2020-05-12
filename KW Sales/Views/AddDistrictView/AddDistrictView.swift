@@ -134,9 +134,6 @@ extension AddDistrictView {
             Text("Number of PODs Needed")
                 .font(.headline)
             NumberField(text: self.$viewModel.numPodsString, keyType: UIKeyboardType.numberPad)
-                //            TextField("Number of PODS", text: self.$viewModel.numPodsString)
-                
-                //                .keyboardType(.numberPad)
                 .onReceive(Just(viewModel.numPodsString)) { newVal in
                     let filtered = newVal.filter {"0123456789".contains($0)}
                     if filtered != newVal {
