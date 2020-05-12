@@ -29,7 +29,7 @@ struct CreatePodMapView: View {
     @State var lastDrag: CGSize = CGSize.zero
     
     @State var isPlacingPod: Bool = false
-    @State var nextPodType: PodType = .ceiling
+    @State var nextPodType: PodType = .vertical_hallway
     @State var podIndex = 0
     
     @GestureState private var dragOffset = CGSize.zero
@@ -156,11 +156,11 @@ struct CreatePodMapView: View {
                         self.isPlacingPod = true
                     }),
                     .default(Text("Hallway POD"), action: {
-                        self.nextPodType = .hallway
+                        self.nextPodType = .horizontal_hallway
                         self.isPlacingPod = true
                     }),
-                    .default(Text("Ceiling POD"), action: {
-                        self.nextPodType = .ceiling
+                    .default(Text("Vertical Hallway POD"), action: {
+                        self.nextPodType = .vertical_hallway
                         self.isPlacingPod = true
                     }),
                     .cancel()])

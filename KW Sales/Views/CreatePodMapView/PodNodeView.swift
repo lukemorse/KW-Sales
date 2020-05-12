@@ -29,8 +29,8 @@ struct PodNodeView: Identifiable, Hashable, Equatable, View {
             .resizable()
             .scaledToFit()
             .frame(
-                width: self.podType == .hallway ? 25 : 15,
-                height: self.podType == .ceiling ? 25 : 15)
+                width: self.podType == .horizontal_hallway ? 25 : 15,
+                height: self.podType == .vertical_hallway ? 25 : 15)
             .position(pos)
             .colorMultiply(Color.red)
     }
@@ -39,7 +39,7 @@ struct PodNodeView: Identifiable, Hashable, Equatable, View {
 enum PodType: Int, Codable, CaseIterable, Hashable, Identifiable {
     var id: Int { hashValue }
     
-    case outdoor, corner, hallway, ceiling
+    case outdoor, corner, horizontal_hallway, vertical_hallway
     
     var description: String {
         switch self {
@@ -47,10 +47,10 @@ enum PodType: Int, Codable, CaseIterable, Hashable, Identifiable {
             return "outdoor"
         case .corner:
             return "corner"
-        case .hallway:
+        case .horizontal_hallway:
             return "hallway"
-        case .ceiling:
-            return "ceiling"
+        case .vertical_hallway:
+            return "vertical hallway"
         }
     }
 }
@@ -59,15 +59,15 @@ enum PodType: Int, Codable, CaseIterable, Hashable, Identifiable {
 let podImageDict: [PodType : String] = [
     .outdoor : "outdoor pod",
     .corner : "corner pod",
-    .hallway : "hallway pod",
-    .ceiling : "ceiling pod"
+    .horizontal_hallway : ".horizontal hallway pod",
+    .vertical_hallway : "vertical hallway pod"
 ]
 
 struct PodNodeView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            PodNodeView(podType: .hallway, pos: CGPoint(x: 250, y: 250))
-            PodNodeView(podType: .ceiling, pos: CGPoint(x: 250, y: 250))
+            PodNodeView(podType: .horizontal_hallway, pos: CGPoint(x: 250, y: 250))
+            PodNodeView(podType: .vertical_hallway, pos: CGPoint(x: 250, y: 250))
             PodNodeView(podType: .outdoor, pos: CGPoint(x: 250, y: 250))
         }
         
