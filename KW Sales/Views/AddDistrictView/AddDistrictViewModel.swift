@@ -12,14 +12,9 @@ import CodableFirebase
 
 class AddDistrictViewModel: ObservableObject {
     var implementationPlanListViewModel: ImplementationPlanViewModel?
-    @Published var teams: [Team] = []
-    @Published var teamIndex = 0
     @Published var district = District()
     @Published var numPodsString = "0"
     
-    init() {
-        fetchTeams()
-    }
     
     func uploadDistrict(completion: @escaping (_ flag:Bool) -> ()) {
         if let implementationPlanListViewModel = self.implementationPlanListViewModel {
@@ -58,20 +53,5 @@ class AddDistrictViewModel: ObservableObject {
         district.districtEmail = arr[8]
         district.districtPhoneNumber = arr[9]
 //        district.districtOfficeAddress = String(arr[10].dropLast())
-    }
-    
-    func fetchTeams() {
-        teams = []
-        Firestore.firestore().collection(Constants.kTeamCollection).getDocuments() { (snapshot, error) in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                for document in snapshot!.documents {
-                    let team = try! FirestoreDecoder().decode(Team.self, from: document.data())
-                    self.teams.append(team)
-                    print(team)
-                }
-            }
-        }
     }
 }

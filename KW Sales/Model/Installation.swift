@@ -17,6 +17,7 @@ struct Installation: Encodable, Identifiable, Hashable  {
     }
     
     var id: Int {hashValue}
+    var team: Team
     var status: InstallationStatus
     var schoolType: SchoolType
     var address: GeoPoint
@@ -34,6 +35,7 @@ struct Installation: Encodable, Identifiable, Hashable  {
     
     init() {
         self.status = .notStarted
+        self.team = Team()
         self.schoolType = .elementary
         self.address = Constants.chicagoGeoPoint
         self.districtContact = ""
@@ -52,6 +54,7 @@ struct Installation: Encodable, Identifiable, Hashable  {
     private enum CodingKeys: String, CodingKey {
         
         case status
+        case team
         case schoolType
         case address
         case districtContact
@@ -69,6 +72,7 @@ struct Installation: Encodable, Identifiable, Hashable  {
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(team, forKey: .team)
         try container.encode(status, forKey: .status)
         try container.encode(schoolType.description, forKey: .schoolType)
         try container.encode(address, forKey: .address)
@@ -90,6 +94,7 @@ extension Installation: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         status = try container.decode(InstallationStatus.self, forKey: .status)
+        team = try container.decode(Team.self, forKey: .team)
         address = try container.decode(GeoPoint.self, forKey: .address)
         districtContact = try container.decode(String.self, forKey: .districtContact)
         districtName = try container.decode(String.self, forKey: .districtName)

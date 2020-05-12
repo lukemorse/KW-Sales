@@ -15,16 +15,37 @@ class ImplementationPlanViewModel: ObservableObject {
     @Published var implmentationPlanViews: [InstallationView] = []
     @Published var numSchools = 0
     @Published var installationViewModels: [InstallationViewModel] = []
+    @Published var teams: [Team] = []
+    
     var districtName: String = ""
     var districtContactPerson: String = ""
     var districtEmail: String = ""
     var schoolContact: String = ""
     
+    init() {
+        fetchTeams()
+    }
+    
+    private func fetchTeams() {
+        teams = []
+        Firestore.firestore().collection(Constants.kTeamCollection).getDocuments() { (snapshot, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                for document in snapshot!.documents {
+                    let team = try! FirestoreDecoder().decode(Team.self, from: document.data())
+                    self.teams.append(team)
+                    print(team)
+                }
+            }
+        }
+    }
+    
     func addInstallation() {
         var installation = Installation()
         installation.districtName = self.districtName
         installation.districtContact = self.districtContactPerson
-        let viewModel = InstallationViewModel(installation: installation)
+        let viewModel = InstallationViewModel(installation: installation, teams: self.teams)
         self.implmentationPlanViews.append(InstallationView(index: self.numSchools, viewModel: viewModel, locationSearchService: LocationSearchService()))
         installationViewModels.append(viewModel)
         self.numSchools += 1

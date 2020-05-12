@@ -27,6 +27,7 @@ struct InstallationView: View {
             }
             
             if isExpanded {
+                teamPicker()
                 formItem(with: $viewModel.installation.schoolName, label: "School Name")
                 startDatePicker()
                 formItem(with: $viewModel.installation.schoolType, label: "School Type")
@@ -85,6 +86,28 @@ extension InstallationView {
             }
     }
     
+    func teamPicker() -> some View {
+        return VStack(alignment: .leading) {
+            Text("Assigned Team")
+                .font(.headline)
+            
+            Picker(selection:
+                Binding<Int>(
+                    get: {self.viewModel.teamIndex},
+                    set: {
+                        self.viewModel.teamIndex = $0
+                        self.viewModel.installation.team = self.viewModel.teams[$0]
+                }),
+                   
+                   label: Text(
+                    self.viewModel.teams.count > 0 ? self.viewModel.teams[self.viewModel.teamIndex].name : ""
+                ), content: {
+                    ForEach(0..<self.viewModel.teams.count, id: \.self) { idx in
+                        Text(self.viewModel.teams[idx].name).tag(idx)
+                    }
+            })}
+    }
+    
     func formItem(with name: Binding<Int>, label: String) -> some
         View {
             return VStack(alignment: .leading) {
@@ -136,7 +159,7 @@ extension InstallationView {
 
 struct InstallationView_Previews: PreviewProvider {
     static var previews: some View {
-        InstallationView(index: 0, viewModel: InstallationViewModel(installation: Installation()), locationSearchService: LocationSearchService(), floorPlanIndex: 0, isExpanded: true)
+        InstallationView(index: 0, viewModel: InstallationViewModel(installation: Installation(), teams: [Team()]), locationSearchService: LocationSearchService(), floorPlanIndex: 0, isExpanded: true)
     }
 }
 
