@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Firebase
+import Combine
 
 struct AddDistrictView: View {
     @ObservedObject var implementationPlanViewModel = ImplementationPlanViewModel()
@@ -19,65 +20,65 @@ struct AddDistrictView: View {
     @State private var addDistrictFail = false
     
     var body: some View {
-            Form {
-                Group {
-                    Button(action: {
-                        self.viewModel.importCSV()
-                    }) {
-                        Text("Import CSV")
-                    }
+        Form {
+            Group {
+                Button(action: {
+                    self.viewModel.importCSV()
+                }) {
+                    Text("Import CSV")
                 }
-                
-                Section(header: Text("General")) {
-                    Group {
-                        numPodPicker
-                        startDatePicker
-                    }
-                }
-                
-                Section(header: Text("District Information")){
-                    Group {
-                        districtNameField
-                        numPreKSchoolsPicker
-                        numElementarySchoolsPicker
-                        numMiddleSchoolsPicker
-                        numHighSchoolsPicker
-                    }
-                }
-                
-                Section(header: Text("Contact Information")) {
-                    Group {
-                        districtContactPersonField
-                        districtEmailField
-                        districtPhoneField
-                        AddressSearchBar(labelText: "District Office Address", locationSearchService: locationSearchService)
-                    }
-                }
-                
-                Section {
-                    Group {
-                        teamPicker()
-                        readyToInstallToggle
-                    }
-                }
-                
-                NavigationLink(destination: ImplementationPlanView(viewModel: self.implementationPlanViewModel)
-                    .onAppear() {
-                        let district = self.viewModel.district
-                        self.implementationPlanViewModel.districtContactPerson = district.districtContactPerson
-                        self.implementationPlanViewModel.districtEmail = district.districtEmail
-                        self.implementationPlanViewModel.districtName = district.districtName
-                    }
-                ) {
-                    Text("Implementation Plan")
-                        .foregroundColor(Color.blue)
-                }
-                
-                sendPodButton
-                addDistrictButton
             }
-                
-            .navigationBarTitle("Add District")
+            
+            Section(header: Text("General")) {
+                Group {
+                    numPodPicker
+                    startDatePicker
+                }
+            }
+            
+            Section(header: Text("District Information")){
+                Group {
+                    districtNameField
+                    numPreKSchoolsPicker
+                    numElementarySchoolsPicker
+                    numMiddleSchoolsPicker
+                    numHighSchoolsPicker
+                }
+            }
+            
+            Section(header: Text("Contact Information")) {
+                Group {
+                    districtContactPersonField
+                    districtEmailField
+                    districtPhoneField
+                    AddressSearchBar(labelText: "District Office Address", locationSearchService: locationSearchService)
+                }
+            }
+            
+            Section {
+                Group {
+                    teamPicker()
+                    readyToInstallToggle
+                }
+            }
+            
+            NavigationLink(destination: ImplementationPlanView(viewModel: self.implementationPlanViewModel)
+                .onAppear() {
+                    let district = self.viewModel.district
+                    self.implementationPlanViewModel.districtContactPerson = district.districtContactPerson
+                    self.implementationPlanViewModel.districtEmail = district.districtEmail
+                    self.implementationPlanViewModel.districtName = district.districtName
+                }
+            ) {
+                Text("Implementation Plan")
+                    .foregroundColor(Color.blue)
+            }
+            
+            sendPodButton
+            addDistrictButton
+        }
+            
+        .navigationBarTitle("Add District")
             
         .alert(isPresented: self.$isShowingAlert) {
             if self.addDistrictSuccess {
@@ -130,19 +131,21 @@ extension AddDistrictView {
     // MARK: - Form Items
     var numPodPicker: some View {
         VStack(alignment: .leading) {
-            Text("Number PODS Needed")
+            Text("Number of PODs Needed")
                 .font(.headline)
-            
-            Picker(selection:
-                Binding<Int>(
-                    get: {self.viewModel.district.numPodsNeeded },
-                    set: {self.viewModel.district.numPodsNeeded = $0}),
-                   
-                   label: Text(""), content: {
-                    ForEach(0..<50, id: \.self) { idx in
-                        Text(String(idx))
+            NumberField(text: self.$viewModel.numPodsString, keyType: UIKeyboardType.numberPad)
+                //            TextField("Number of PODS", text: self.$viewModel.numPodsString)
+                
+                //                .keyboardType(.numberPad)
+                .onReceive(Just(viewModel.numPodsString)) { newVal in
+                    let filtered = newVal.filter {"0123456789".contains($0)}
+                    if filtered != newVal {
+                        self.viewModel.numPodsString = filtered
+                        self.viewModel.district.numPodsNeeded = Int(filtered) ?? 0
                     }
-            })}
+            }
+            .padding(.all)
+        }
     }
     
     var startDatePicker: some View {

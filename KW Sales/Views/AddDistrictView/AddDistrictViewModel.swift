@@ -15,6 +15,7 @@ class AddDistrictViewModel: ObservableObject {
     @Published var teams: [Team] = []
     @Published var teamIndex = 0
     @Published var district = District()
+    @Published var numPodsString = "0"
     
     init() {
         fetchTeams()
