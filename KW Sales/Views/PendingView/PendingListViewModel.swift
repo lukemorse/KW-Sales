@@ -24,7 +24,7 @@ class PendingListViewModel: ObservableObject {
                         let district = try FirestoreDecoder().decode(District.self, from: document.data())
                         self.districts.append(district)
                     } catch let error {
-                        print(error)
+                        print(error.localizedDescription)
                     }
                 }
             }

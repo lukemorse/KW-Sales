@@ -28,7 +28,7 @@ class AddDistrictViewModel: ObservableObject {
         //encode district file
         let districtData = try! FirestoreEncoder().encode(district)
         //send district file to database
-        Firestore.firestore().collection(Constants.kDistrictCollection).document().setData(districtData) { error in
+        Firestore.firestore().collection(Constants.kDistrictCollection).document(district.districtName).setData(districtData) { error in
             if let error = error {
                 print("Error writing document: \(error)")
                 completion(false)

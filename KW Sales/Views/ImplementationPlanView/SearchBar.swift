@@ -86,9 +86,13 @@ struct AddressSearchBar: View {
             SearchBar(text: $locationSearchService.searchQuery, didSelect: $didSelect)
             
             if didSelect && !locationSearchService.completions.isEmpty {
-                VStack {
-                    Text(locationSearchService.completions[0].title)
-                    Text(locationSearchService.completions[0].subtitle)
+                HStack {
+                    Spacer()
+                    VStack(alignment: .center) {
+                        Text(locationSearchService.completions[0].title)
+                        Text(locationSearchService.completions[0].subtitle)
+                    }
+                    Spacer()
                 }
             } else {
                 List(locationSearchService.completions) { completion in

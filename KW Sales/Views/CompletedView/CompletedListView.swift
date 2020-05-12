@@ -32,7 +32,6 @@ struct CompletedListView: View {
         return AnyView(List {
             Text("No Schools found")
         })
-        
     }
 }
 

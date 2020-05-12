@@ -36,6 +36,7 @@
 		A3AD36392452165D00BCDA4D /* PendingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD36382452165D00BCDA4D /* PendingListViewModel.swift */; };
 		A3AD363B2452677200BCDA4D /* Installation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD363A2452677200BCDA4D /* Installation.swift */; };
 		A3B133AC246061C80082A618 /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = A3B133AB246061C80082A618 /* AppIcon.appiconset */; };
+		A3B1B5F02463599200CE71A0 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B1B5EF2463599200CE71A0 /* SearchBar.swift */; };
 		A3B37B892446204200D8CE40 /* District.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B37B882446204200D8CE40 /* District.swift */; };
 		A3B37B8E244631E500D8CE40 /* AddDistrictViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B37B8D244631E500D8CE40 /* AddDistrictViewModel.swift */; };
 		A3B37B90244632B900D8CE40 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B37B8F244632B900D8CE40 /* Team.swift */; };
@@ -106,6 +107,7 @@
 		A3AD36382452165D00BCDA4D /* PendingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingListViewModel.swift; sourceTree = "<group>"; };
 		A3AD363A2452677200BCDA4D /* Installation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Installation.swift; sourceTree = "<group>"; };
 		A3B133AB246061C80082A618 /* AppIcon.appiconset */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppIcon.appiconset; sourceTree = "<group>"; };
+		A3B1B5EF2463599200CE71A0 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		A3B37B882446204200D8CE40 /* District.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = District.swift; sourceTree = "<group>"; };
 		A3B37B8D244631E500D8CE40 /* AddDistrictViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDistrictViewModel.swift; sourceTree = "<group>"; };
 		A3B37B8F244632B900D8CE40 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 				A31C4C452450C24E004CAEAB /* ImplementationPlanViewModel.swift */,
 				A30F4BF6244530A800B59F8B /* InstallationView.swift */,
 				A368EA5E244DE82B00FE7685 /* InstallationViewModel.swift */,
+				A3B1B5EF2463599200CE71A0 /* SearchBar.swift */,
 				A3557C4B244A3E7400C747FE /* ImagePicker.swift */,
 			);
 			path = ImplementationPlanView;
@@ -293,6 +296,7 @@
 		A3EE48CB2444D3D300C6A554 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A3EE48CC2444D3E500C6A554 /* MainView.swift */,
 				A3F4259824475DA0004D2CCE /* AddDistrictView */,
 				A3A2F0F624478D6A00079243 /* ImplementationPlanView */,
 				A3295BCD2448EF8400F26E1F /* CreatePodMapView */,
@@ -301,7 +305,6 @@
 				A30C9B6E2444C1C80049E4FC /* LoginView.swift */,
 				A3557C4D244A424200C747FE /* StartView.swift */,
 				A3DD6C532459D23C00319147 /* ActivityIndicator.swift */,
-				A3EE48CC2444D3E500C6A554 /* MainView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -579,6 +582,7 @@
 				A3F4259C24475E4F004D2CCE /* MailView.swift in Sources */,
 				A32D00B7245BBCF200BF6B1A /* GeoTest.swift in Sources */,
 				A3DFBD42245736EA0099A53C /* CompletedDetailView.swift in Sources */,
+				A3B1B5F02463599200CE71A0 /* SearchBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

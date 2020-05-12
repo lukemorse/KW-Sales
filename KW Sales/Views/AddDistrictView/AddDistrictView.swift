@@ -168,7 +168,6 @@ extension AddDistrictView {
             ))
                 .padding(.all)
         }
-        .padding(.horizontal, 15)
     }
     
     var numPreKSchoolsPicker: some View {
@@ -249,7 +248,6 @@ extension AddDistrictView {
             ))
                 .padding(.all)
         }
-        .padding(.horizontal, 15)
     }
     
     var districtEmailField: some View {
@@ -262,7 +260,6 @@ extension AddDistrictView {
             ))
                 .padding(.all)
         }
-        .padding(.horizontal, 15)
     }
     
     var districtPhoneField: some View {
@@ -275,21 +272,7 @@ extension AddDistrictView {
             ))
                 .padding(.all)
         }
-        .padding(.horizontal, 15)
     }
-    
-//    var districtAddressField: some View {
-//        VStack(alignment: .leading) {
-//            Text("District Office Address")
-//                .font(.headline)
-//            TextField("Enter District Office Address", text: Binding<String>(
-//                get: {self.viewModel.district.districtOfficeAddress },
-//                set: {self.viewModel.district.districtOfficeAddress = $0}
-//            ))
-//                .padding(.all)
-//        }
-//        .padding(.horizontal, 15)
-//    }
     
     func teamPicker() -> some View {
         return VStack(alignment: .leading) {

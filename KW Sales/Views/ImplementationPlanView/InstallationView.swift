@@ -134,9 +134,9 @@ extension InstallationView {
     }
 }
 
-struct CreateImplementationPlan_Previews: PreviewProvider {
+struct InstallationView_Previews: PreviewProvider {
     static var previews: some View {
-        InstallationView(index: 0, viewModel: InstallationViewModel(installation: Installation()), locationSearchService: LocationSearchService())
+        InstallationView(index: 0, viewModel: InstallationViewModel(installation: Installation()), locationSearchService: LocationSearchService(), floorPlanIndex: 0, isExpanded: true)
     }
 }
 
