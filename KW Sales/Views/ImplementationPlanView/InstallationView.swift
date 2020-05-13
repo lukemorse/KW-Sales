@@ -21,10 +21,7 @@ struct InstallationView: View {
     
     var body: some View {
         Section {
-            Text(viewModel.installation.schoolName)
-                .onTapGesture {
-                    self.isExpanded.toggle()
-            }
+            expandedButton
             
             if isExpanded {
                 teamPicker()
@@ -57,10 +54,25 @@ struct InstallationView: View {
     func getInstallation() -> Installation {
         return viewModel.installation
     }
+    
 }
 
 extension InstallationView {
     //Funcs for adding form items
+    
+    var expandedButton: some View {
+        return HStack {
+            Spacer()
+            Text(viewModel.installation.schoolName)
+                .padding()
+                .multilineTextAlignment(.center)
+            Spacer()
+        }
+        .onTapGesture {
+            self.isExpanded.toggle()
+        }
+        .background(Color.blue)
+    }
     
     func formItem(with name: Binding<String>, label: String) -> some
         View {

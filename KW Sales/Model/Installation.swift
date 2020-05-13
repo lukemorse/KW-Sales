@@ -10,7 +10,6 @@ import Foundation
 import Firebase
 import CodableFirebase
 
-
 struct Installation: Encodable, Identifiable, Hashable  {
     static func == (lhs: Installation, rhs: Installation) -> Bool {
         return lhs.id == rhs.id
