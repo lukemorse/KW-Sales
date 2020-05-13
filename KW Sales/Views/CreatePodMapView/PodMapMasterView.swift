@@ -8,65 +8,64 @@
 
 import SwiftUI
 
-class PodMapMasterViewModel: ObservableObject {
-    @Published var floorPlanImages: [Image] = [Image(systemName: "plus")]
-}
-
 struct PodMapMasterView: View {
-    @ObservedObject var viewModel: PodMapMasterViewModel
+    @ObservedObject var viewModel: InstallationViewModel
     @State var selectedImageIndex = 0
     @State var selection: Int?
     
     var body : some View {
-        VStack {
-            GeometryReader { geometry in
-                List {
-                    if self.viewModel.floorPlanImages.count > 0 {
-                        ForEach(0..<self.viewModel.floorPlanImages.chunked(into: 3).count) { row in // create number of rows
-                            HStack {
-                                ForEach(0..<self.viewModel.floorPlanImages.chunked(into: 3)[row].count, id: \.self) { column in // create 3 columns
-                                    
-                                    self.viewModel.floorPlanImages[column]
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(width: geometry.size.width / 2.5)
-                                        .border(Color.black)
-                                        .onTapGesture {
-                                            print("tapped")
-                                            self.selectedImageIndex = row * 3 + column
-                                            self.selection = row * 3 + column
-                                    }
-                                }
+        let array = self.getImageArrayWithPlusSign().chunked(into: 2)
+        return GeometryReader { geometry in
+            List {
+                ForEach(0..<array.count) { row in // create number of rows
+                    HStack {
+                        ForEach(0..<array[row].count, id: \.self) { column in // create 2 columns
+                            
+                            array[row][column]
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: geometry.size.width / 2.5)
+                                .border(Color.black)
+                                .onTapGesture {
+                                    print("tapped")
+                                    self.selectedImageIndex = row * 2 + column
+                                    self.selection = row * 2 + column
                             }
                         }
                     }
-                    else {
-                        EmptyView()
-                    }
                 }
+                self.getNavLink()
             }
-            .frame(height: 300)
-            .padding()
-            getNavLink()
         }
-        .onAppear() {
-            self.selection = nil
-            //            self.viewModel.getFloorPlans()
+            //        .background(Color.green)
+            .onAppear() {
+                self.selection = nil
+                //            self.viewModel.getFloorPlans()
         }
+    }
+    
+    func getImageArrayWithPlusSign() -> [Image] {
+        return viewModel.floorPlanImages + [Image(systemName: "plus")]
     }
     
     func getNavLink() -> some View {
         return NavigationLink(destination:
-            selectedImageIndex == 0
-                ? AnyView(viewModel.floorPlanImages[selectedImageIndex])
-                : AnyView(Text("HI")), tag: selectedImageIndex, selection: self.$selection) {
-                    Text("").hidden()}
+        CreatePodMapView(image: selectedImageIndex >= self.viewModel.floorPlanImages.count ? nil : self.viewModel.floorPlanImages[selectedImageIndex], viewModel: self.viewModel, floorPlanIndex: self.selectedImageIndex), tag: selectedImageIndex, selection: self.$selection) {
+            Text("")
+        }.hidden()
+        
+        //        return NavigationLink(destination:
+        //            selectedImageIndex == 0
+        ////                ? AnyView(viewModel.floorPlanImages[selectedImageIndex])
+        //            ? AnyView(CreatePodMapView(viewModel: self.viewModel, floorPlanIndex: self.selectedImageIndex))
+        //                : AnyView(Text("HI")), tag: selectedImageIndex, selection: self.$selection) {
+        //                    Text("").hidden()}
     }
     
 }
 
 struct PodMapMasterView_Previews: PreviewProvider {
     static var previews: some View {
-        PodMapMasterView(viewModel: PodMapMasterViewModel())
+        PodMapMasterView(viewModel: InstallationViewModel(installation: Installation(), teams: []))
     }
 }

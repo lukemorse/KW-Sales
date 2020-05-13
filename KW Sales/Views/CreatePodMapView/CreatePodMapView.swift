@@ -11,7 +11,7 @@ import Firebase
 
 struct CreatePodMapView: View {
     @State var showImagePicker: Bool = false
-    @State var image: Image? = nil
+    @State var image: Image?
     var viewModel: InstallationViewModel
     var floorPlanIndex: Int
     
@@ -40,7 +40,6 @@ struct CreatePodMapView: View {
             ZStack {
                 self.image ?? Image("blankImage")
                     .resizable()
-                
                 self.podGroup
                 if isLoading {
                     ActivityIndicator()
@@ -57,6 +56,7 @@ struct CreatePodMapView: View {
                 let delta = val / self.lastScaleValue
                 self.lastScaleValue = val
                 self.scale = self.scale * delta
+                if self.scale < 1 {self.scale = 1}
                 
             }.onEnded { val in
                 // without this the next gesture will be broken
@@ -79,6 +79,7 @@ struct CreatePodMapView: View {
                         self.image = Image(uiImage: image)
                             .resizable()
                         self.isLoading = true
+                        self.viewModel.floorPlanImages.insert(Image(uiImage: image), at: 0)
                         self.viewModel.uploadFloorPlan(image: image) { success in
                             if success {
                                 self.isLoading = false
@@ -92,11 +93,11 @@ struct CreatePodMapView: View {
             
             Spacer()
             actionSheetButton
-            
         }
         .onAppear() {
-            self.showImagePicker.toggle()
-            
+            if self.image == nil {
+                self.showImagePicker.toggle()
+            }
         }
     }
     
@@ -124,7 +125,7 @@ struct CreatePodMapView: View {
                     ForEach(podNodes, id: \.self) { pod in
                         pod
                             .onTapGesture {
-                            print("tapped")
+                                print("tapped")
                         }
                     }
                 }
@@ -155,7 +156,7 @@ struct CreatePodMapView: View {
                         self.nextPodType = .corner
                         self.isPlacingPod = true
                     }),
-                    .default(Text("Hallway POD"), action: {
+                    .default(Text("Horizontal Hallway POD"), action: {
                         self.nextPodType = .horizontal_hallway
                         self.isPlacingPod = true
                     }),

@@ -16,7 +16,7 @@ class InstallationViewModel: ObservableObject {
     @Published var address: String
     @Published var teams: [Team]
     @Published var teamIndex = 0
-    @Published var floorPlanImages: [Image] = [Image(systemName: "plus")]
+    @Published var floorPlanImages: [Image] = []
     var docRef: DocumentReference?
     var childKeys: [String] = []
     

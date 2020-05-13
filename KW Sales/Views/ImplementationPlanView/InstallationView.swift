@@ -16,7 +16,7 @@ struct InstallationView: View {
     @ObservedObject var viewModel: InstallationViewModel
     @ObservedObject var locationSearchService: LocationSearchService
     
-    @State var floorPlanIndex = 0
+//    @State var floorPlanIndex = 0
     @State var isExpanded: Bool = true
     
     var body: some View {
@@ -35,13 +35,8 @@ struct InstallationView: View {
                 
                 AddressSearchBar(labelText: "School Address", locationSearchService: locationSearchService)
                 
-                NavigationLink(destination: CreatePodMapView(viewModel: self.viewModel, floorPlanIndex: self.floorPlanIndex)
-                    .onDisappear() {
-                        self.floorPlanIndex += 1
-                    }
-                ) {
-                    Text("Create POD Map")
-                        .foregroundColor(Color.blue)
+                NavigationLink(destination: PodMapMasterView(viewModel: self.viewModel)) {
+                    Text("Pod map master")
                 }
             }
         }
@@ -171,7 +166,7 @@ extension InstallationView {
 
 struct InstallationView_Previews: PreviewProvider {
     static var previews: some View {
-        InstallationView(index: 0, viewModel: InstallationViewModel(installation: Installation(), teams: [Team()]), locationSearchService: LocationSearchService(), floorPlanIndex: 0, isExpanded: true)
+        InstallationView(index: 0, viewModel: InstallationViewModel(installation: Installation(), teams: [Team()]), locationSearchService: LocationSearchService(), isExpanded: true)
     }
 }
 
