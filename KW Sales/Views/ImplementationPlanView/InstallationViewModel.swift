@@ -9,12 +9,14 @@
 import Foundation
 import Firebase
 import CodableFirebase
+import SwiftUI
 
 class InstallationViewModel: ObservableObject {
     @Published var installation: Installation
     @Published var address: String
     @Published var teams: [Team]
     @Published var teamIndex = 0
+    @Published var floorPlanImages: [Image] = [Image(systemName: "plus")]
     var docRef: DocumentReference?
     var childKeys: [String] = []
     
