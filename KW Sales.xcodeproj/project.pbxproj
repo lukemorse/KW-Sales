@@ -32,6 +32,7 @@
 		A368EA5F244DE82B00FE7685 /* InstallationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A368EA5E244DE82B00FE7685 /* InstallationViewModel.swift */; };
 		A368EA61244DF96F00FE7685 /* PodMapTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A368EA60244DF96F00FE7685 /* PodMapTest.swift */; };
 		A38C39B72447F034005BECFB /* CreatePodMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38C39B62447F034005BECFB /* CreatePodMapView.swift */; };
+		A39878D5246C3936000F99AC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39878D4246C3936000F99AC /* User.swift */; };
 		A3A2F0F824478D8400079243 /* ImplementationPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A2F0F724478D8400079243 /* ImplementationPlanView.swift */; };
 		A3AD36372452160D00BCDA4D /* CompletedListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD36362452160D00BCDA4D /* CompletedListViewModel.swift */; };
 		A3AD36392452165D00BCDA4D /* PendingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD36382452165D00BCDA4D /* PendingListViewModel.swift */; };
@@ -104,6 +105,7 @@
 		A368EA5E244DE82B00FE7685 /* InstallationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallationViewModel.swift; sourceTree = "<group>"; };
 		A368EA60244DF96F00FE7685 /* PodMapTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodMapTest.swift; sourceTree = "<group>"; };
 		A38C39B62447F034005BECFB /* CreatePodMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePodMapView.swift; sourceTree = "<group>"; };
+		A39878D4246C3936000F99AC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A3A2F0F724478D8400079243 /* ImplementationPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImplementationPlanView.swift; sourceTree = "<group>"; };
 		A3AD36362452160D00BCDA4D /* CompletedListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedListViewModel.swift; sourceTree = "<group>"; };
 		A3AD36382452165D00BCDA4D /* PendingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingListViewModel.swift; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 			children = (
 				A3B37B882446204200D8CE40 /* District.swift */,
 				A3B37B8F244632B900D8CE40 /* Team.swift */,
+				A39878D4246C3936000F99AC /* User.swift */,
 				A3AD363A2452677200BCDA4D /* Installation.swift */,
 				A30A7881245A01CA00271993 /* Pod.swift */,
 			);
@@ -566,6 +569,7 @@
 				A3B37B892446204200D8CE40 /* District.swift in Sources */,
 				A3295BDE244A2E9500F26E1F /* HelperFunctions.swift in Sources */,
 				A3AD363B2452677200BCDA4D /* Installation.swift in Sources */,
+				A39878D5246C3936000F99AC /* User.swift in Sources */,
 				A368EA5F244DE82B00FE7685 /* InstallationViewModel.swift in Sources */,
 				A31C4C462450C24E004CAEAB /* ImplementationPlanViewModel.swift in Sources */,
 				A3DD6C542459D23C00319147 /* ActivityIndicator.swift in Sources */,
