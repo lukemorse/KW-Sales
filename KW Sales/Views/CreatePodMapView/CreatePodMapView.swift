@@ -147,8 +147,11 @@ struct CreatePodMapView: View {
         }) {
             Text("Add KW POD")
                 .font(.title)
-                .foregroundColor(Color.blue)
-                .background(Color.white)
+                .padding()
+                .foregroundColor(Color.black)
+                .background(Color.blue)
+                .cornerRadius(15)
+                .shadow(radius: 10)
         }
         .actionSheet(isPresented: $showingActionSheet, content: {
             ActionSheet(title: Text("Add POD"), message: Text("Choose POD Type"), buttons:
