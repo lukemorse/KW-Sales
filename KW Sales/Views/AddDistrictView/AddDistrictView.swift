@@ -21,13 +21,14 @@ struct AddDistrictView: View {
     
     var body: some View {
         Form {
-            Group {
-                Button(action: {
-                    self.viewModel.importCSV()
-                }) {
-                    Text("Import CSV")
-                }
-            }
+            //Uncomment for Mac App
+//            Group {
+//                Button(action: {
+//                    self.viewModel.importCSV()
+//                }) {
+//                    Text("Import CSV")
+//                }
+//            }
             
             Section(header: Text("General")) {
                 Group {
