@@ -1,8 +1,8 @@
 //
-//  PendingListViewModel.swift
+//  EditListViewModel.swift
 //  KW Sales
 //
-//  Created by Luke Morse on 4/23/20.
+//  Created by Luke Morse on 5/14/20.
 //  Copyright © 2020 Luke Morse. All rights reserved.
 //
 
@@ -10,11 +10,11 @@ import Foundation
 import Firebase
 import CodableFirebase
 
-class PendingListViewModel: ObservableObject {
+class EditListViewModel: ObservableObject {
     @Published var districts: [District] = []
     
     func getDistricts() {
-        districts = []
+        self.districts = []
         Firestore.firestore().collection(Constants.kDistrictCollection).getDocuments { (snapshot, error) in
             if let error = error {
                 print("Error getting documents: \(error)")

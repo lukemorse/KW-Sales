@@ -31,6 +31,8 @@
 		A35A6CA9246B3B17006068BE /* NumberField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35A6CA8246B3B17006068BE /* NumberField.swift */; };
 		A368EA5F244DE82B00FE7685 /* InstallationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A368EA5E244DE82B00FE7685 /* InstallationViewModel.swift */; };
 		A368EA61244DF96F00FE7685 /* PodMapTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A368EA60244DF96F00FE7685 /* PodMapTest.swift */; };
+		A36CBF02246DB71600DFEE61 /* EditListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36CBF01246DB71600DFEE61 /* EditListView.swift */; };
+		A36CBF04246DB75900DFEE61 /* EditListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36CBF03246DB75900DFEE61 /* EditListViewModel.swift */; };
 		A38C39B72447F034005BECFB /* CreatePodMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38C39B62447F034005BECFB /* CreatePodMapView.swift */; };
 		A38E202F246C792100891910 /* PodMapMasterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38E202E246C792100891910 /* PodMapMasterView.swift */; };
 		A39878D5246C3936000F99AC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39878D4246C3936000F99AC /* User.swift */; };
@@ -105,6 +107,8 @@
 		A35A6CA8246B3B17006068BE /* NumberField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NumberField.swift; path = "/Users/luke/Development/iOS Apps/KW Sales/KW Sales/Views/AddDistrictView/NumberField.swift"; sourceTree = "<absolute>"; };
 		A368EA5E244DE82B00FE7685 /* InstallationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallationViewModel.swift; sourceTree = "<group>"; };
 		A368EA60244DF96F00FE7685 /* PodMapTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodMapTest.swift; sourceTree = "<group>"; };
+		A36CBF01246DB71600DFEE61 /* EditListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditListView.swift; sourceTree = "<group>"; };
+		A36CBF03246DB75900DFEE61 /* EditListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditListViewModel.swift; sourceTree = "<group>"; };
 		A38C39B62447F034005BECFB /* CreatePodMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePodMapView.swift; sourceTree = "<group>"; };
 		A38E202E246C792100891910 /* PodMapMasterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodMapMasterView.swift; sourceTree = "<group>"; };
 		A39878D4246C3936000F99AC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -277,6 +281,15 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		A36CBF00246DB6F100DFEE61 /* EditDistrictView */ = {
+			isa = PBXGroup;
+			children = (
+				A36CBF01246DB71600DFEE61 /* EditListView.swift */,
+				A36CBF03246DB75900DFEE61 /* EditListViewModel.swift */,
+			);
+			path = EditDistrictView;
+			sourceTree = "<group>";
+		};
 		A3A2F0F624478D6A00079243 /* ImplementationPlanView */ = {
 			isa = PBXGroup;
 			children = (
@@ -308,6 +321,7 @@
 				A3A2F0F624478D6A00079243 /* ImplementationPlanView */,
 				A3295BCD2448EF8400F26E1F /* CreatePodMapView */,
 				A30F4BF32445269800B59F8B /* PendingView */,
+				A36CBF00246DB6F100DFEE61 /* EditDistrictView */,
 				A3BFE7B22452158500406518 /* CompletedView */,
 				A30C9B6E2444C1C80049E4FC /* LoginView.swift */,
 				A3557C4D244A424200C747FE /* StartView.swift */,
@@ -568,6 +582,8 @@
 				A3AD36392452165D00BCDA4D /* PendingListViewModel.swift in Sources */,
 				A3B37B90244632B900D8CE40 /* Team.swift in Sources */,
 				A30F4BF7244530A800B59F8B /* InstallationView.swift in Sources */,
+				A36CBF02246DB71600DFEE61 /* EditListView.swift in Sources */,
+				A36CBF04246DB75900DFEE61 /* EditListViewModel.swift in Sources */,
 				A38E202F246C792100891910 /* PodMapMasterView.swift in Sources */,
 				A35A6CA9246B3B17006068BE /* NumberField.swift in Sources */,
 				A3B37B892446204200D8CE40 /* District.swift in Sources */,
