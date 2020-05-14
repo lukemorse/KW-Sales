@@ -9,7 +9,7 @@
 import SwiftUI
 import MapKit
 import Combine
-import Firebase
+import FirebaseFirestore
 
 struct SearchBar: UIViewRepresentable {
     

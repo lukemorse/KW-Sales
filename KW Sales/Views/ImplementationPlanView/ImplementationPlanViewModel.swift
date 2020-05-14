@@ -8,7 +8,7 @@
 
 
 import Foundation
-import Firebase
+import FirebaseFirestore
 import CodableFirebase
 
 class ImplementationPlanViewModel: ObservableObject {

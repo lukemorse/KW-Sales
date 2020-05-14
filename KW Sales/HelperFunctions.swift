@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Firebase
+import FirebaseFirestore
 
 func validateEmail(enteredEmail:String) -> Bool {
 

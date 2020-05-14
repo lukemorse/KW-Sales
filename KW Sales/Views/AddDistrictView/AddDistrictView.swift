@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import Firebase
+import FirebaseFirestore
 import Combine
 
 struct AddDistrictView: View {

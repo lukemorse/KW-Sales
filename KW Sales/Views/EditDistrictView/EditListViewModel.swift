@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Firebase
+import FirebaseFirestore
 import CodableFirebase
 
 class EditListViewModel: ObservableObject {

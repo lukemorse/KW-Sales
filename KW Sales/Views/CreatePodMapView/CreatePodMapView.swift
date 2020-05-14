@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import Firebase
+import FirebaseFirestore
 
 struct CreatePodMapView: View {
     @State var showImagePicker: Bool = false
