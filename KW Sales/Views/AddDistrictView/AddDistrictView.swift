@@ -19,6 +19,10 @@ struct AddDistrictView: View {
     @State private var addDistrictSuccess = false
     @State private var addDistrictFail = false
     
+    init(with district: District) {
+        self.viewModel.district = district
+    }
+    
     var body: some View {
         Form {
             //Uncomment for Mac App
@@ -32,6 +36,7 @@ struct AddDistrictView: View {
             
             Section(header: Text("General")) {
                 Group {
+                    districtNameField
                     numPodPicker
                     startDatePicker
                 }
@@ -39,7 +44,6 @@ struct AddDistrictView: View {
             
             Section(header: Text("District Information")){
                 Group {
-                    districtNameField
                     numPreKSchoolsPicker
                     numElementarySchoolsPicker
                     numMiddleSchoolsPicker
@@ -74,11 +78,12 @@ struct AddDistrictView: View {
                     .foregroundColor(Color.blue)
             }
             
-            sendPodButton
-            addDistrictButton
+            sendPodOrderButton
+//            addDistrictButton
         }
             
         .navigationBarTitle("Add District")
+        .navigationBarItems(leading: Image("Logo"), trailing: saveButton)
             
         .alert(isPresented: self.$isShowingAlert) {
             if self.addDistrictSuccess {
@@ -86,7 +91,7 @@ struct AddDistrictView: View {
             } else if self.addDistrictFail {
                 return Alert(title: Text("Failed to Upload District Data"))
             } else if self.isFieldsIncomplete {
-                return Alert(title: Text("Please complete all fields"))
+                return Alert(title: Text("Please enter District Name"))
             } else {
                 return Alert(title: Text("Something went wrong"))
             }
@@ -99,14 +104,14 @@ struct AddDistrictView: View {
     }
     
     //MARK: - Buttons
-    var sendPodButton: some View {
+    var sendPodOrderButton: some View {
         //Button is red until email is valid
         SendPodOrderButtonView(numPods: viewModel.district.numPodsNeeded , email: viewModel.district.districtEmail , textColor: validateEmail(enteredEmail: viewModel.district.districtEmail ) ? Color.green : Color.red)
     }
     
-    var addDistrictButton: some View {
+    var saveButton: some View {
         Button(action: {
-            if self.formIsEmpty() {
+            if self.viewModel.district.districtName.isEmpty {
                 self.isFieldsIncomplete = true
                 self.isShowingAlert = true
                 return
@@ -121,10 +126,32 @@ struct AddDistrictView: View {
                 }
             }
         }) {
-            Text("Add District")
-                .foregroundColor(self.formIsEmpty() ? Color.red : Color.green)
+            Text("Save")
+                .foregroundColor(Color.blue)
         }
     }
+    
+//    var addDistrictButton: some View {
+//        Button(action: {
+//            if self.formIsEmpty() {
+//                self.isFieldsIncomplete = true
+//                self.isShowingAlert = true
+//                return
+//            }
+//            self.viewModel.uploadDistrict() { success in
+//                if success {
+//                    self.addDistrictSuccess = true
+//                    self.isShowingAlert = true
+//                } else {
+//                    self.addDistrictFail = true
+//                    self.isShowingAlert = true
+//                }
+//            }
+//        }) {
+//            Text("Add District")
+//                .foregroundColor(self.formIsEmpty() ? Color.red : Color.green)
+//        }
+//    }
 }
 
 extension AddDistrictView {
@@ -133,7 +160,7 @@ extension AddDistrictView {
         VStack(alignment: .leading) {
             Text("Number of PODs Needed")
                 .font(.headline)
-            NumberField(text: self.$viewModel.numPodsString, keyType: UIKeyboardType.numberPad)
+            NumberField(placeholder: "Enter Number of PODs", text: self.$viewModel.numPodsString, keyType: UIKeyboardType.numberPad)
                 .onReceive(Just(viewModel.numPodsString)) { newVal in
                     let filtered = newVal.filter {"0123456789".contains($0)}
                     if filtered != newVal {
@@ -293,6 +320,8 @@ extension AddDistrictView {
 
 struct AddDistrictView_Previews: PreviewProvider {
     static var previews: some View {
-        AddDistrictView()
+        NavigationView {
+            AddDistrictView(with: District())
+        }
     }
 }

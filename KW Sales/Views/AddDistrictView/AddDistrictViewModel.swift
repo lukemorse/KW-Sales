@@ -13,26 +13,31 @@ import CodableFirebase
 class AddDistrictViewModel: ObservableObject {
     var implementationPlanListViewModel: ImplementationPlanViewModel?
     @Published var district = District()
-    @Published var numPodsString = "0"
+    @Published var numPodsString = ""
     
     
     func uploadDistrict(completion: @escaping (_ flag:Bool) -> ()) {
         if let implementationPlanListViewModel = self.implementationPlanListViewModel {
             district.implementationPlan = implementationPlanListViewModel.getInstallations()
         }
-        print(district)
         //encode district file
-        let districtData = try! FirestoreEncoder().encode(district)
-        //send district file to database
-        Firestore.firestore().collection(Constants.kDistrictCollection).document(district.districtName).setData(districtData) { error in
-            if let error = error {
-                print("Error writing document: \(error)")
-                completion(false)
-            } else {
-                print("Document successfully written!")
-                completion(true)
+        do {
+            let districtData = try FirestoreEncoder().encode(district)
+            //send district file to database
+            Firestore.firestore().collection(Constants.kDistrictCollection).document(district.districtName).setData(districtData) { error in
+                if let error = error {
+                    print("Error writing document: \(error)")
+                    completion(false)
+                } else {
+                    print("Document successfully written!")
+                    completion(true)
+                }
             }
+        } catch let error {
+            print(error)
+            completion(false)
         }
+        
     }
     
     func importCSV() {

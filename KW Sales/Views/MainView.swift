@@ -18,11 +18,11 @@ struct MainView: View {
             
             //Add District
             NavigationView {
-                AddDistrictView()
+                AddDistrictView(with: District())
                     .navigationBarTitle(Text("Add District"), displayMode: .inline)
-                    .navigationBarItems(leading:
-                        Image("Logo")
-                )
+//                    .navigationBarItems(leading:
+//                        Image("Logo")
+//                )
             }
             .navigationViewStyle(StackNavigationViewStyle())
             .tabItem({
@@ -30,7 +30,6 @@ struct MainView: View {
                     .font(.title)
                 Text("\(Constants.TabBarText.tabBar0)")
             }).tag(0)
-            
             
             //Pending
             NavigationView {
@@ -66,6 +65,23 @@ struct MainView: View {
                     .font(.title)
                 Text("\(Constants.TabBarText.tabBar2)")
             }).tag(2)
+            
+            //Edit
+            NavigationView {
+                EditListView()
+                    .navigationBarTitle(
+                        Text("Edit Districts"), displayMode: .inline)
+//                    .navigationBarItems(leading:
+//                        Image("Logo")
+//                            .frame(height: nil)
+//                )
+            }
+            .navigationViewStyle(StackNavigationViewStyle())
+            .tabItem({
+                Image(systemName: Constants.TabBarImageName.tabBar3)
+                    .font(.title)
+                Text("\(Constants.TabBarText.tabBar3)")
+            }).tag(3)
             
             
         }.accentColor(Color.red)

@@ -15,12 +15,14 @@ struct Constants {
         static let tabBar0 = "plus.square.fill"
         static let tabBar1 = "clock.fill"
         static let tabBar2 = "checkmark.circle.fill"
+        static let tabBar3 = "pencil"
     }
     
     struct TabBarText {
         static let tabBar0 = "Add District"
         static let tabBar1 = "Pending"
         static let tabBar2 = "Completed"
+        static let tabBar3 = "Edit"
     }
     
     static let kFloorPlanCollection = "floorPlansCollection"
