@@ -17,15 +17,15 @@ struct PodMapMasterView: View {
         let array = self.getImageArrayWithPlusSign().chunked(into: 2)
         return GeometryReader { geometry in
             List {
-                ForEach(0..<array.count) { row in // create number of rows
+                ForEach(0..<array.count, id: \.self) { row in // create number of rows
                     HStack {
                         ForEach(0..<array[row].count, id: \.self) { column in // create 2 columns
                             
                             array[row][column]
                                 .resizable()
                                 .scaledToFill()
-                                .frame(width: geometry.size.width / 2.5)
                                 .border(Color.black)
+                                .frame(width: geometry.size.width / 2.5)
                                 .onTapGesture {
                                     print("tapped")
                                     self.selectedImageIndex = row * 2 + column
@@ -37,10 +37,8 @@ struct PodMapMasterView: View {
                 self.getNavLink()
             }
         }
-            //        .background(Color.green)
-            .onAppear() {
-                self.selection = nil
-                //            self.viewModel.getFloorPlans()
+        .onAppear() {
+            self.selection = nil
         }
     }
     

@@ -15,10 +15,12 @@ struct CreatePodMapView: View {
     var viewModel: InstallationViewModel
     var floorPlanIndex: Int
     
+    @State var pods: [Pod] = []
+    
     @State var isLoading = false
     @State var showingActionSheet = false
     @State private var position = CGSize.zero
-    @State var podNodes: [PodNodeView] = []
+//    @State var podNodes: [PodNodeView] = []
     
     @State var scale: CGFloat = 1.0
     @State var newScaleValue: CGFloat = 1.0
@@ -38,8 +40,9 @@ struct CreatePodMapView: View {
         VStack {
             Spacer()
             ZStack {
-                self.image ?? Image("blankImage")
-                    .resizable()
+                self.image != nil ? self.image?.resizable() : Image("blankImage").resizable()
+//                self.image ?? Image("blankImage")
+//                    .resizable()
                 self.podGroup
                 if isLoading {
                     ActivityIndicator()
@@ -79,7 +82,8 @@ struct CreatePodMapView: View {
                         self.image = Image(uiImage: image)
                             .resizable()
                         self.isLoading = true
-                        self.viewModel.floorPlanImages.insert(Image(uiImage: image), at: 0)
+//                        self.viewModel.floorPlanImages.insert(Image(uiImage: image), at: 0)
+                        self.viewModel.floorPlanImages.append(Image(uiImage: image))
                         self.viewModel.uploadFloorPlan(image: image) { success in
                             if success {
                                 self.isLoading = false
@@ -98,6 +102,7 @@ struct CreatePodMapView: View {
             if self.image == nil {
                 self.showImagePicker.toggle()
             }
+            self.getPods()
         }
     }
     
@@ -110,7 +115,7 @@ struct CreatePodMapView: View {
             .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .named(AnyHashable("custom")))
             .onChanged({ (value) in
                 print(value.location)
-                self.addPod(type: self.nextPodType, location: value.location)
+                self.addPod(pod: Pod(podType: self.nextPodType, position: value.location))
             })
             ))
         } else {
@@ -119,11 +124,11 @@ struct CreatePodMapView: View {
     }
     
     var podGroup: some View {
-        if podNodes.count > 0 {
+        if pods.count > 0 {
             return AnyView(
                 Group {
-                    ForEach(podNodes, id: \.self) { pod in
-                        pod
+                    ForEach(0..<pods.count, id: \.self) { index in
+                        PodNodeView(podType: self.pods[index].podType, pos: self.pods[index].position)
                             .onTapGesture {
                                 print("tapped")
                         }
@@ -168,16 +173,19 @@ struct CreatePodMapView: View {
         })
     }
     
-    func addPod(type: PodType, location: CGPoint) {
+    func getPods() {
+        let key = floorPlanIndex >= viewModel.installation.floorPlanUrls.count ? "" : viewModel.installation.floorPlanUrls[floorPlanIndex]
+        self.pods = viewModel.installation.pods[key] ?? []
+    }
+    
+    func addPod(pod: Pod) {
         if isLoading {
             return
         }
-        let podView = PodNodeView(podType: type, pos: location)
-        self.podNodes.append(podView)
+        self.pods.append(pod)
         self.isPlacingPod = false
         
         //add to implementation plan
-        let pod = Pod(podType: type, position: location)
         let key = self.viewModel.installation.floorPlanUrls[floorPlanIndex]
         if self.viewModel.installation.pods.keys.contains(key) {
             self.viewModel.installation.pods[key]?.append(pod)

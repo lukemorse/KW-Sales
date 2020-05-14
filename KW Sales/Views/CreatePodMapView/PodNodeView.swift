@@ -59,7 +59,7 @@ enum PodType: Int, Codable, CaseIterable, Hashable, Identifiable {
 let podImageDict: [PodType : String] = [
     .outdoor : "outdoor pod",
     .corner : "corner pod",
-    .horizontal_hallway : ".horizontal hallway pod",
+    .horizontal_hallway : "horizontal hallway pod",
     .vertical_hallway : "vertical hallway pod"
 ]
 
