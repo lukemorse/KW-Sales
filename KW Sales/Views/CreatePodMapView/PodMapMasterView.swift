@@ -16,25 +16,16 @@ struct PodMapMasterView: View {
     var body : some View {
         let array = self.getImageArrayWithPlusSign().chunked(into: 2)
         return GeometryReader { geometry in
-            List {
-                ForEach(0..<array.count, id: \.self) { row in // create number of rows
-                    HStack {
-                        ForEach(0..<array[row].count, id: \.self) { column in // create 2 columns
-                            
-                            array[row][column]
-                                .resizable()
-                                .scaledToFill()
-                                .border(Color.black)
-                                .frame(width: geometry.size.width / 2.5)
-                                .onTapGesture {
-                                    print("tapped")
-                                    self.selectedImageIndex = row * 2 + column
-                                    self.selection = row * 2 + column
+            ScrollView(.vertical, showsIndicators: true) {
+                VStack {
+                    ForEach(0..<array.count, id: \.self) { row in // create number of rows
+                        HStack {
+                            ForEach(0..<array[row].count, id: \.self) { column in // create 2 columns
+                                self.getNavLink(index: row * 2 + column, image: array[row][column], width: geometry.size.width / 2.5)
                             }
-                        }
+                        }.padding()
                     }
                 }
-                self.getNavLink()
             }
         }
         .onAppear() {
@@ -46,24 +37,37 @@ struct PodMapMasterView: View {
         return viewModel.floorPlanImages + [Image(systemName: "plus")]
     }
     
-    func getNavLink() -> some View {
-        return NavigationLink(destination:
-        CreatePodMapView(image: selectedImageIndex >= self.viewModel.floorPlanImages.count ? nil : self.viewModel.floorPlanImages[selectedImageIndex], viewModel: self.viewModel, floorPlanIndex: self.selectedImageIndex), tag: selectedImageIndex, selection: self.$selection) {
-            Text("")
-        }.hidden()
-        
-        //        return NavigationLink(destination:
-        //            selectedImageIndex == 0
-        ////                ? AnyView(viewModel.floorPlanImages[selectedImageIndex])
-        //            ? AnyView(CreatePodMapView(viewModel: self.viewModel, floorPlanIndex: self.selectedImageIndex))
-        //                : AnyView(Text("HI")), tag: selectedImageIndex, selection: self.$selection) {
-        //                    Text("").hidden()}
+    func getNavLink(index: Int, image: Image, width: CGFloat) -> some View {
+        NavigationLink(destination: CreatePodMapView(image: index >= self.viewModel.floorPlanImages.count ? nil : self.viewModel.floorPlanImages[index], viewModel: self.viewModel, floorPlanIndex: index)) {
+            image
+            .resizable()
+            .scaledToFill()
+            .border(Color.black)
+            .frame(width: width)
+        }
+        .buttonStyle(PlainButtonStyle())
+        .inExpandingRectangle()
     }
-    
 }
 
 struct PodMapMasterView_Previews: PreviewProvider {
     static var previews: some View {
-        PodMapMasterView(viewModel: InstallationViewModel(installation: Installation(), teams: []))
+        let viewModel = InstallationViewModel(installation: Installation(), teams: [])
+        viewModel.floorPlanImages.append(Image(systemName: "plus"))
+        viewModel.floorPlanImages.append(Image(systemName: "plus"))
+        return
+            NavigationView {
+                PodMapMasterView(viewModel: viewModel)
+        }
+    }
+}
+
+extension View {
+    func inExpandingRectangle() -> some View {
+        ZStack {
+            Rectangle()
+                .fill(Color.clear)
+            self
+        }
     }
 }
