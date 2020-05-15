@@ -13,13 +13,14 @@ import MapKit
 
 struct InstallationView: View {
     let index: Int
-    
+    @EnvironmentObject var mainViewModel: MainViewModel
     @Binding var installation: Installation
     @ObservedObject var locationSearchService =  LocationSearchService()
     
     //    @State var floorPlanIndex = 0
     @State var isExpanded: Bool = true
     @State var numPodsString = ""
+    @State var teamIndex = 0
     
     var body: some View {
         Section {
@@ -28,7 +29,7 @@ struct InstallationView: View {
             }
             
             if isExpanded {
-//                teamPicker()
+                teamPicker()
                 formItem(with: $installation.schoolName, label: "School Name")
                 startDatePicker()
                 formItem(with: $installation.schoolType, label: "School Type")
@@ -112,27 +113,26 @@ extension InstallationView {
             }
     }
     
-//    func teamPicker() -> some View {
-//        return VStack(alignment: .leading) {
-//            Text("Assigned Team")
-//                .font(.headline)
-//
-//            Picker(selection:
-//                Binding<Int>(
-//                    get: {self.viewModel.teamIndex},
-//                    set: {
-//                        self.viewModel.teamIndex = $0
-//                        self.viewModel.installation.team = self.viewModel.teams[$0]
-//                }),
-//
-//                   label: Text(
-//                    self.viewModel.teams.count > 0 ? self.viewModel.teams[self.viewModel.teamIndex].name : ""
-//                ), content: {
-//                    ForEach(0..<self.viewModel.teams.count, id: \.self) { idx in
-//                        Text(self.viewModel.teams[idx].name).tag(idx)
-//                    }
-//            })}
-//    }
+    func teamPicker() -> some View {
+        return VStack(alignment: .leading) {
+            Text("Assigned Team")
+                .font(.headline)
+
+            Picker(selection:
+                Binding<Int>(
+                    get: {self.teamIndex},
+                    set: {
+                        self.teamIndex = $0
+                        self.installation.team = self.mainViewModel.teams[$0]
+                }),
+                label:
+                Text(self.installation.team.name),
+                content: {
+                    ForEach(0..<self.mainViewModel.teams.count, id: \.self) { idx in
+                        Text(self.mainViewModel.teams[idx].name).tag(idx)
+                    }
+            })}
+    }
     
     func formItem(with name: Binding<Int>, label: String) -> some
         View {

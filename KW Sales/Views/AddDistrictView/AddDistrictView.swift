@@ -11,6 +11,7 @@ import FirebaseFirestore
 import Combine
 
 struct AddDistrictView: View {
+    @EnvironmentObject var mainViewModel: MainViewModel
     @ObservedObject private var keyboard = KeyboardResponder()
     @ObservedObject var viewModel = AddDistrictViewModel()
     @ObservedObject var locationSearchService = LocationSearchService()

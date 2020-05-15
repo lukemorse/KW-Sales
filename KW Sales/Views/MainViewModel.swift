@@ -12,6 +12,7 @@ import CodableFirebase
 
 class MainViewModel: ObservableObject {
     @Published var districts: [District] = []
+    @Published var teams: [Team] = []
     
     func getDistricts() {
         districts = []
@@ -26,6 +27,21 @@ class MainViewModel: ObservableObject {
                     } catch let error {
                         print(error.localizedDescription)
                     }
+                }
+            }
+        }
+    }
+    
+    func fetchTeams() {
+        self.teams = []
+        Firestore.firestore().collection(Constants.kTeamCollection).getDocuments() { (snapshot, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                for document in snapshot!.documents {
+                    let team = try! FirestoreDecoder().decode(Team.self, from: document.data())
+                    self.teams.append(team)
+                    print(team)
                 }
             }
         }

@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ImplementationPlanView: View {
 
+    @EnvironmentObject var mainViewModel: MainViewModel
     @Binding var district: District
     @State var childViews: [InstallationView] = []
     
