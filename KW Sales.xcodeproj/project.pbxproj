@@ -31,8 +31,6 @@
 		A35A6CA9246B3B17006068BE /* NumberField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35A6CA8246B3B17006068BE /* NumberField.swift */; };
 		A368EA5F244DE82B00FE7685 /* InstallationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A368EA5E244DE82B00FE7685 /* InstallationViewModel.swift */; };
 		A368EA61244DF96F00FE7685 /* PodMapTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A368EA60244DF96F00FE7685 /* PodMapTest.swift */; };
-		A36CBF02246DB71600DFEE61 /* EditListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36CBF01246DB71600DFEE61 /* EditListView.swift */; };
-		A36CBF04246DB75900DFEE61 /* EditListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36CBF03246DB75900DFEE61 /* EditListViewModel.swift */; };
 		A38C39B72447F034005BECFB /* CreatePodMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38C39B62447F034005BECFB /* CreatePodMapView.swift */; };
 		A38E202F246C792100891910 /* PodMapMasterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38E202E246C792100891910 /* PodMapMasterView.swift */; };
 		A39878D5246C3936000F99AC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39878D4246C3936000F99AC /* User.swift */; };
@@ -47,6 +45,7 @@
 		A3B37B90244632B900D8CE40 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B37B8F244632B900D8CE40 /* Team.swift */; };
 		A3DD6C542459D23C00319147 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DD6C532459D23C00319147 /* ActivityIndicator.swift */; };
 		A3DFBD42245736EA0099A53C /* CompletedDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DFBD41245736EA0099A53C /* CompletedDetailView.swift */; };
+		A3E53D87246E388F00FED80A /* EditDistrictsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E53D86246E388F00FED80A /* EditDistrictsView.swift */; };
 		A3EE48CD2444D3E500C6A554 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EE48CC2444D3E500C6A554 /* MainView.swift */; };
 		A3EE48CF2444D5C700C6A554 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EE48CE2444D5C700C6A554 /* Constants.swift */; };
 		A3EE48D12444D9DC00C6A554 /* AddDistrictView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EE48D02444D9DC00C6A554 /* AddDistrictView.swift */; };
@@ -107,8 +106,6 @@
 		A35A6CA8246B3B17006068BE /* NumberField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NumberField.swift; path = "/Users/luke/Development/iOS Apps/KW Sales/KW Sales/Views/AddDistrictView/NumberField.swift"; sourceTree = "<absolute>"; };
 		A368EA5E244DE82B00FE7685 /* InstallationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallationViewModel.swift; sourceTree = "<group>"; };
 		A368EA60244DF96F00FE7685 /* PodMapTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodMapTest.swift; sourceTree = "<group>"; };
-		A36CBF01246DB71600DFEE61 /* EditListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditListView.swift; sourceTree = "<group>"; };
-		A36CBF03246DB75900DFEE61 /* EditListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditListViewModel.swift; sourceTree = "<group>"; };
 		A38C39B62447F034005BECFB /* CreatePodMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePodMapView.swift; sourceTree = "<group>"; };
 		A38E202E246C792100891910 /* PodMapMasterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodMapMasterView.swift; sourceTree = "<group>"; };
 		A39878D4246C3936000F99AC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -123,6 +120,7 @@
 		A3B37B8F244632B900D8CE40 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		A3DD6C532459D23C00319147 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		A3DFBD41245736EA0099A53C /* CompletedDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedDetailView.swift; sourceTree = "<group>"; };
+		A3E53D86246E388F00FED80A /* EditDistrictsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDistrictsView.swift; sourceTree = "<group>"; };
 		A3EE48CC2444D3E500C6A554 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		A3EE48CE2444D5C700C6A554 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A3EE48D02444D9DC00C6A554 /* AddDistrictView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDistrictView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -284,8 +282,7 @@
 		A36CBF00246DB6F100DFEE61 /* EditDistrictView */ = {
 			isa = PBXGroup;
 			children = (
-				A36CBF01246DB71600DFEE61 /* EditListView.swift */,
-				A36CBF03246DB75900DFEE61 /* EditListViewModel.swift */,
+				A3E53D86246E388F00FED80A /* EditDistrictsView.swift */,
 			);
 			path = EditDistrictView;
 			sourceTree = "<group>";
@@ -582,14 +579,13 @@
 				A3AD36392452165D00BCDA4D /* PendingListViewModel.swift in Sources */,
 				A3B37B90244632B900D8CE40 /* Team.swift in Sources */,
 				A30F4BF7244530A800B59F8B /* InstallationView.swift in Sources */,
-				A36CBF02246DB71600DFEE61 /* EditListView.swift in Sources */,
-				A36CBF04246DB75900DFEE61 /* EditListViewModel.swift in Sources */,
 				A38E202F246C792100891910 /* PodMapMasterView.swift in Sources */,
 				A35A6CA9246B3B17006068BE /* NumberField.swift in Sources */,
 				A3B37B892446204200D8CE40 /* District.swift in Sources */,
 				A3295BDE244A2E9500F26E1F /* HelperFunctions.swift in Sources */,
 				A3AD363B2452677200BCDA4D /* Installation.swift in Sources */,
 				A39878D5246C3936000F99AC /* User.swift in Sources */,
+				A3E53D87246E388F00FED80A /* EditDistrictsView.swift in Sources */,
 				A368EA5F244DE82B00FE7685 /* InstallationViewModel.swift in Sources */,
 				A31C4C462450C24E004CAEAB /* ImplementationPlanViewModel.swift in Sources */,
 				A3DD6C542459D23C00319147 /* ActivityIndicator.swift in Sources */,
@@ -783,7 +779,7 @@
 				DEVELOPMENT_TEAM = 4Z8CKPY35P;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "KW Sales/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -807,7 +803,7 @@
 				DEVELOPMENT_TEAM = 4Z8CKPY35P;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "KW Sales/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

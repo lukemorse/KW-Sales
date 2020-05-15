@@ -21,7 +21,9 @@ struct InstallationView: View {
     
     var body: some View {
         Section {
-            expandedButton
+            if !viewModel.installation.schoolName.isEmpty {
+                expandedButton
+            }
             
             if isExpanded {
                 teamPicker()
@@ -59,6 +61,7 @@ extension InstallationView {
         return HStack {
             Spacer()
             Text(viewModel.installation.schoolName)
+                .foregroundColor(Color.white)
                 .padding()
                 .multilineTextAlignment(.center)
             Spacer()
@@ -67,6 +70,9 @@ extension InstallationView {
             self.isExpanded.toggle()
         }
         .background(Color.blue)
+        .cornerRadius(5)
+        .shadow(radius: 5)
+        
     }
     
     func formItem(with name: Binding<String>, label: String) -> some
