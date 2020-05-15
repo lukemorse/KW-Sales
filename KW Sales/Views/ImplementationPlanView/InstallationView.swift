@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 import FirebaseFirestore
 import MapKit
 
@@ -18,6 +19,7 @@ struct InstallationView: View {
     
     //    @State var floorPlanIndex = 0
     @State var isExpanded: Bool = true
+    @State var numPodsString = ""
     
     var body: some View {
         Section {
@@ -32,7 +34,7 @@ struct InstallationView: View {
                 formItem(with: $installation.schoolType, label: "School Type")
                 formItem(with: $installation.numFloors, label: "Number of Floors")
                 formItem(with: $installation.numRooms, label: "Number of Rooms")
-                formItem(with: $installation.numPods, label: "Number of Pods")
+                numPodPicker
                 formItem(with: $installation.schoolContact, label: "School Contact Person")
                 
                 AddressSearchBar(labelText: "School Address", locationSearchService: locationSearchService)
@@ -52,6 +54,22 @@ struct InstallationView: View {
 
 extension InstallationView {
     //Funcs for adding form items
+    
+    var numPodPicker: some View {
+        VStack(alignment: .leading) {
+            Text("Number of PODs Needed")
+                .font(.headline)
+            NumberField(placeholder: "Enter Number of PODs", text: self.$numPodsString, keyType: UIKeyboardType.numberPad)
+                .onReceive(Just(self.numPodsString)) { newVal in
+                    let filtered = newVal.filter {"0123456789".contains($0)}
+                    if filtered != newVal {
+                        self.numPodsString = filtered
+                        self.installation.numPods = Int(filtered) ?? 0
+                    }
+            }
+            .padding(.all)
+        }
+    }
     
     var expandedButton: some View {
         return HStack {
