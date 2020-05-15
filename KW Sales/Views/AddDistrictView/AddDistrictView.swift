@@ -11,6 +11,7 @@ import FirebaseFirestore
 import Combine
 
 struct AddDistrictView: View {
+    @ObservedObject private var keyboard = KeyboardResponder()
     @ObservedObject var viewModel = AddDistrictViewModel()
     @ObservedObject var locationSearchService = LocationSearchService()
     @State private var isShowingAlert = false
@@ -56,6 +57,7 @@ struct AddDistrictView: View {
                     districtEmailField
                     districtPhoneField
                     AddressSearchBar(labelText: "District Office Address", locationSearchService: locationSearchService)
+                        .padding(.bottom, keyboard.currentHeight)
                 }
             }
             
@@ -66,12 +68,6 @@ struct AddDistrictView: View {
             }
             
             NavigationLink(destination: ImplementationPlanView(district: self.$viewModel.district)
-                .onAppear() {
-//                    let district = self.viewModel.district
-//                    self.implementationPlanViewModel.districtContactPerson = district.districtContactPerson
-//                    self.implementationPlanViewModel.districtEmail = district.districtEmail
-//                    self.implementationPlanViewModel.districtName = district.districtName
-                }
             ) {
                 Text("Implementation Plan")
                     .foregroundColor(Color.blue)
