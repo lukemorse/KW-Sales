@@ -11,15 +11,15 @@ import FirebaseFirestore
 import CodableFirebase
 
 class AddDistrictViewModel: ObservableObject {
-    var implementationPlanListViewModel: ImplementationPlanViewModel?
+//    var implementationPlanListViewModel: ImplementationPlanViewModel?
     @Published var district = District()
     @Published var numPodsString = ""
     
     
     func uploadDistrict(completion: @escaping (_ flag:Bool) -> ()) {
-        if let implementationPlanListViewModel = self.implementationPlanListViewModel {
-            district.implementationPlan = implementationPlanListViewModel.getInstallations()
-        }
+//        if let implementationPlanListViewModel = self.implementationPlanListViewModel {
+//            district.implementationPlan = implementationPlanListViewModel.getInstallations()
+//        }
         //encode district file
         do {
             let districtData = try FirestoreEncoder().encode(district)
