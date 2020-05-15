@@ -31,6 +31,12 @@ struct PodMapMasterView: View {
         .onAppear() {
             self.selection = nil
         }
+        .navigationBarItems(trailing: saveButton)
+    }
+    
+    var saveButton: some View {
+        Text("Save")
+            .foregroundColor(.blue)
     }
     
     func getImageArrayWithPlusSign() -> [Image] {
@@ -38,7 +44,7 @@ struct PodMapMasterView: View {
     }
     
     func getNavLink(index: Int, image: Image, width: CGFloat) -> some View {
-        NavigationLink(destination: CreatePodMapView(image: index >= self.viewModel.floorPlanImages.count ? nil : self.viewModel.floorPlanImages[index], viewModel: self.viewModel, floorPlanIndex: index)) {
+        NavigationLink(destination: CreatePodMapView(viewModel: self.viewModel, floorPlanIndex: index, image: index >= self.viewModel.floorPlanImages.count ? nil : self.viewModel.floorPlanImages[index])) {
             image
             .resizable()
             .scaledToFill()

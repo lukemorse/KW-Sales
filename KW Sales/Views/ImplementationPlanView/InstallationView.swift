@@ -16,7 +16,7 @@ struct InstallationView: View {
     @ObservedObject var viewModel: InstallationViewModel
     @ObservedObject var locationSearchService: LocationSearchService
     
-//    @State var floorPlanIndex = 0
+    //    @State var floorPlanIndex = 0
     @State var isExpanded: Bool = true
     
     var body: some View {
@@ -72,7 +72,6 @@ extension InstallationView {
         .background(Color.blue)
         .cornerRadius(5)
         .shadow(radius: 5)
-        
     }
     
     func formItem(with name: Binding<String>, label: String) -> some
@@ -165,7 +164,7 @@ extension InstallationView {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
         formatter.timeStyle = .medium
-
+        
         return formatter.string(from: date as Date)
     }
 }

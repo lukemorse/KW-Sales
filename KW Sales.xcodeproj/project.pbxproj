@@ -43,6 +43,7 @@
 		A3B37B892446204200D8CE40 /* District.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B37B882446204200D8CE40 /* District.swift */; };
 		A3B37B8E244631E500D8CE40 /* AddDistrictViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B37B8D244631E500D8CE40 /* AddDistrictViewModel.swift */; };
 		A3B37B90244632B900D8CE40 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B37B8F244632B900D8CE40 /* Team.swift */; };
+		A3C26386246EDA8B003616AB /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C26385246EDA8B003616AB /* MainViewModel.swift */; };
 		A3DD6C542459D23C00319147 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DD6C532459D23C00319147 /* ActivityIndicator.swift */; };
 		A3DFBD42245736EA0099A53C /* CompletedDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DFBD41245736EA0099A53C /* CompletedDetailView.swift */; };
 		A3E53D87246E388F00FED80A /* EditDistrictsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E53D86246E388F00FED80A /* EditDistrictsView.swift */; };
@@ -118,6 +119,7 @@
 		A3B37B882446204200D8CE40 /* District.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = District.swift; sourceTree = "<group>"; };
 		A3B37B8D244631E500D8CE40 /* AddDistrictViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDistrictViewModel.swift; sourceTree = "<group>"; };
 		A3B37B8F244632B900D8CE40 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
+		A3C26385246EDA8B003616AB /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		A3DD6C532459D23C00319147 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		A3DFBD41245736EA0099A53C /* CompletedDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedDetailView.swift; sourceTree = "<group>"; };
 		A3E53D86246E388F00FED80A /* EditDistrictsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDistrictsView.swift; sourceTree = "<group>"; };
@@ -314,11 +316,12 @@
 			isa = PBXGroup;
 			children = (
 				A3EE48CC2444D3E500C6A554 /* MainView.swift */,
+				A3C26385246EDA8B003616AB /* MainViewModel.swift */,
+				A36CBF00246DB6F100DFEE61 /* EditDistrictView */,
 				A3F4259824475DA0004D2CCE /* AddDistrictView */,
 				A3A2F0F624478D6A00079243 /* ImplementationPlanView */,
 				A3295BCD2448EF8400F26E1F /* CreatePodMapView */,
 				A30F4BF32445269800B59F8B /* PendingView */,
-				A36CBF00246DB6F100DFEE61 /* EditDistrictView */,
 				A3BFE7B22452158500406518 /* CompletedView */,
 				A30C9B6E2444C1C80049E4FC /* LoginView.swift */,
 				A3557C4D244A424200C747FE /* StartView.swift */,
@@ -583,6 +586,7 @@
 				A35A6CA9246B3B17006068BE /* NumberField.swift in Sources */,
 				A3B37B892446204200D8CE40 /* District.swift in Sources */,
 				A3295BDE244A2E9500F26E1F /* HelperFunctions.swift in Sources */,
+				A3C26386246EDA8B003616AB /* MainViewModel.swift in Sources */,
 				A3AD363B2452677200BCDA4D /* Installation.swift in Sources */,
 				A39878D5246C3936000F99AC /* User.swift in Sources */,
 				A3E53D87246E388F00FED80A /* EditDistrictsView.swift in Sources */,

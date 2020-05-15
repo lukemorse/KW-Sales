@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct MainView: View {
-    
+    @EnvironmentObject var viewModel: MainViewModel
     @State var selected = 0
     
     var body: some View {

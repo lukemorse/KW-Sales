@@ -10,13 +10,12 @@ import SwiftUI
 import FirebaseFirestore
 
 struct CreatePodMapView: View {
-    @State var showImagePicker: Bool = false
-    @State var image: Image?
     var viewModel: InstallationViewModel
     var floorPlanIndex: Int
     
-    @State var pods: [Pod] = []
-    
+    @State var showImagePicker: Bool = false
+    @State var image: Image?
+    @State private var isShowingAlert = false
     @State var isLoading = false
     @State var showingActionSheet = false
     @State private var position = CGSize.zero
@@ -30,6 +29,7 @@ struct CreatePodMapView: View {
     @State var dragSize: CGSize = CGSize.zero
     @State var lastDrag: CGSize = CGSize.zero
     
+    @State var pods: [Pod] = []
     @State var isPlacingPod: Bool = false
     @State var nextPodType: PodType = .vertical_hallway
     @State var podIndex = 0
@@ -82,7 +82,6 @@ struct CreatePodMapView: View {
                         self.image = Image(uiImage: image)
                             .resizable()
                         self.isLoading = true
-//                        self.viewModel.floorPlanImages.insert(Image(uiImage: image), at: 0)
                         self.viewModel.floorPlanImages.append(Image(uiImage: image))
                         self.viewModel.uploadFloorPlan(image: image) { success in
                             if success {
@@ -98,12 +97,16 @@ struct CreatePodMapView: View {
             Spacer()
             actionSheetButton
         }
+        .alert(isPresented: $isShowingAlert) {
+            return Alert(title: Text("Successfully Saved POD Map"))
+        }
         .onAppear() {
             if self.image == nil {
                 self.showImagePicker.toggle()
             }
             self.getPods()
         }
+        .navigationBarItems(trailing: saveButton)
     }
     
     var podPlacementGesture: some View {
@@ -141,6 +144,16 @@ struct CreatePodMapView: View {
         }
     }
     
+    var saveButton: some View {
+        Button(action: {
+            self.isShowingAlert = true
+            print("pressed save")
+        }) {
+        Text("Save")
+            .foregroundColor(.blue)
+        }
+    }
+    
     var actionSheetButton: some View {
         Button(action: {
             self.showingActionSheet = true
@@ -152,6 +165,7 @@ struct CreatePodMapView: View {
                 .background(Color.blue)
                 .cornerRadius(15)
                 .shadow(radius: 10)
+                .padding()
         }
         .actionSheet(isPresented: $showingActionSheet, content: {
             ActionSheet(title: Text("Add POD"), message: Text("Choose POD Type"), buttons:

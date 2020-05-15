@@ -11,7 +11,7 @@ import FirebaseFirestore
 import CodableFirebase
 
 struct EditDistrictsView: View {
-    @ObservedObject var viewModel = ViewModel()
+    @EnvironmentObject var viewModel: MainViewModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
@@ -31,7 +31,7 @@ struct EditDistrictsView: View {
                     NavigationLink(self.viewModel.districts[index].districtName, destination: AddDistrictView(with: self.viewModel.districts[index]))
                 }})
         }
-        return AnyView(Text("No schools found"))
+        return AnyView(List{addDistrictButton})
     }
     
     var addDistrictButton: some View {
@@ -46,29 +46,6 @@ struct EditDistrictsView: View {
                 .shadow(radius: 5)
         }
         .buttonStyle(PlainButtonStyle())
-    }
-    
-    class ViewModel: ObservableObject {
-        @Published var districts: [District] = []
-        
-        func getDistricts() {
-            districts = []
-            Firestore.firestore().collection(Constants.kDistrictCollection).getDocuments { (snapshot, error) in
-                if let error = error {
-                    print("Error getting documents: \(error)")
-                } else {
-                    for document in snapshot!.documents {
-                        do {
-                            let district = try FirestoreDecoder().decode(District.self, from: document.data())
-                            self.districts.append(district)
-                        } catch let error {
-                            print(error.localizedDescription)
-                        }
-                    }
-                }
-            }
-        }
-        
     }
 }
 
