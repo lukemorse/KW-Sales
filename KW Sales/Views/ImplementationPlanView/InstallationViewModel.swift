@@ -15,16 +15,14 @@ import SwiftUI
 class InstallationViewModel: ObservableObject {
     @Published var installation: Installation
     @Published var address: String
-    @Published var teams: [Team]
     @Published var teamIndex = 0
     @Published var floorPlanImages: [Image] = []
     var docRef: DocumentReference?
     var childKeys: [String] = []
     
-    init(installation: Installation, teams: [Team]) {
+    init(installation: Installation) {
         self.installation = installation
         self.address = ""
-        self.teams = teams
     }
 
     func uploadFloorPlan(image: UIImage, index: Int = 0, completion: @escaping (_ flag:Bool) -> ()) {

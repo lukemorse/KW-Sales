@@ -12,13 +12,12 @@ struct ImplementationPlanView: View {
 
     @EnvironmentObject var mainViewModel: MainViewModel
     @Binding var district: District
-    @State var childViews: [InstallationView] = []
     
     var body: some View {
         Form {
             if self.district.implementationPlan.count > 0 {
                 ForEach(0..<self.district.implementationPlan.count, id: \.self) { index in
-                    InstallationView(index: index, installation: self.$district.implementationPlan[index])
+                    InstallationView(index: index, viewModel: self.mainViewModel.installationViewModels[self.district.districtName]![index])
                 }
             }
             

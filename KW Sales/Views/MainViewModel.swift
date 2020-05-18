@@ -13,6 +13,8 @@ import CodableFirebase
 class MainViewModel: ObservableObject {
     @Published var districts: [District] = []
     @Published var teams: [Team] = []
+    @Published var numSchools = 0
+    @Published var installationViewModels: [String: [InstallationViewModel]] = [:]
     
     func getDistricts() {
         districts = []
@@ -24,6 +26,16 @@ class MainViewModel: ObservableObject {
                     do {
                         let district = try FirestoreDecoder().decode(District.self, from: document.data())
                         self.districts.append(district)
+                        
+                        for installation in district.implementationPlan {
+                            let viewModel = InstallationViewModel(installation: installation)
+                            if self.installationViewModels.keys.contains(district.districtName) {
+                                self.installationViewModels[district.districtName]?.append(viewModel)
+                            } else {
+                                self.installationViewModels[district.districtName] = [viewModel]
+                            }
+                        }
+                        
                     } catch let error {
                         print(error.localizedDescription)
                     }
@@ -44,6 +56,19 @@ class MainViewModel: ObservableObject {
                     print(team)
                 }
             }
+        }
+    }
+    
+    func addInstallation(index: Int) {
+        var installation = Installation()
+        installation.districtName = self.districts[index].districtName
+        installation.districtContact = self.districts[index].districtContactPerson
+        let viewModel = InstallationViewModel(installation: installation)
+
+        if installationViewModels.keys.contains(self.districts[index].districtName) {
+            installationViewModels[self.districts[index].districtName]?.append(viewModel)
+        } else {
+            installationViewModels[self.districts[index].districtName] = [viewModel]
         }
     }
     

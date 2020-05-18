@@ -58,7 +58,7 @@ struct PodMapMasterView: View {
 
 struct PodMapMasterView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = InstallationViewModel(installation: Installation(), teams: [])
+        let viewModel = InstallationViewModel(installation: Installation())
         viewModel.floorPlanImages.append(Image(systemName: "plus"))
         viewModel.floorPlanImages.append(Image(systemName: "plus"))
         return

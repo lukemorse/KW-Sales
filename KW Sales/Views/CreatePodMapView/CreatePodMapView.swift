@@ -196,7 +196,7 @@ struct CreatePodMapView: View {
 
 struct CreatePodMapView_Previews: PreviewProvider {
     static var previews: some View {
-        CreatePodMapView(viewModel: InstallationViewModel(installation: Installation(), teams: [Team()]), floorPlanIndex: 0)
+        CreatePodMapView(viewModel: InstallationViewModel(installation: Installation()), floorPlanIndex: 0)
     }
 }
 
