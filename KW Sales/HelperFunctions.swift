@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import Combine
+import UIKit
 import FirebaseFirestore
 
 func validateEmail(enteredEmail:String) -> Bool {
@@ -39,3 +41,4 @@ extension Array {
         }
     }
 }
+

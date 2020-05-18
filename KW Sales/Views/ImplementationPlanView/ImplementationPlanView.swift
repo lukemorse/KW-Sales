@@ -9,43 +9,33 @@
 import SwiftUI
 
 struct ImplementationPlanView: View {
-    
-    //    @ObservedObject var viewModel: ImplementationPlanViewModel
+
     @EnvironmentObject var mainViewModel: MainViewModel
-    let districtName: String
-    let districtIndex: Int
+    @Binding var district: District
+    @State var childViews: [InstallationView] = []
     
     var body: some View {
         Form {
-            if mainViewModel.installationViewModels[self.districtName] != nil {
-                ForEach(0..<self.mainViewModel.installationViewModels[self.districtName]!.count, id: \.self) { index in
-                    InstallationView(index: index, viewModel: self.mainViewModel.installationViewModels[self.districtName]![index])
-                    //                self.mainViewModel.implmentationPlanViews[index]
+            if self.district.implementationPlan.count > 0 {
+                ForEach(0..<self.district.implementationPlan.count, id: \.self) { index in
+                    InstallationView(index: index, installation: self.$district.implementationPlan[index])
                 }
             }
             
-            
             Button(action: {
-                self.mainViewModel.addInstallation(index: self.districtIndex)
+                self.district.implementationPlan.append(Installation())
             }) {
                 Text("Add School")
                     .foregroundColor(Color.blue)
             }
         }
-            //        .onAppear() {
-            //            if self.mainViewModel.installationViewModels.count > 0 {
-            //                for view in self.mainViewModel.implmentationPlanViews {
-            //                    view.isExpanded = false
-            //                }
-            //            }
-            //        }
-            .navigationBarTitle("Implementation Plan")
+        .navigationBarTitle("Implementation Plan")   
     }
 }
 
 
-//struct CreateImplementationPlanListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ImplementationPlanView(viewModel: ImplementationPlanViewModel())
-//    }
-//}
+struct CreateImplementationPlanListView_Previews: PreviewProvider {
+    static var previews: some View {
+        ImplementationPlanView(district: .constant(District()))
+    }
+}

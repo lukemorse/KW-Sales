@@ -18,6 +18,7 @@ struct EditDistrictsView: View {
         listView
             .onAppear() {
                 self.viewModel.getDistricts()
+                self.viewModel.fetchTeams()
         }
     }
     

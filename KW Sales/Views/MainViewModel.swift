@@ -13,8 +13,6 @@ import CodableFirebase
 class MainViewModel: ObservableObject {
     @Published var districts: [District] = []
     @Published var teams: [Team] = []
-    @Published var numSchools = 0
-    @Published var installationViewModels: [String: [InstallationViewModel]] = [:]
     
     func getDistricts() {
         districts = []
@@ -34,8 +32,8 @@ class MainViewModel: ObservableObject {
         }
     }
     
-    private func fetchTeams() {
-        teams = []
+    func fetchTeams() {
+        self.teams = []
         Firestore.firestore().collection(Constants.kTeamCollection).getDocuments() { (snapshot, error) in
             if let error = error {
                 print(error.localizedDescription)
@@ -46,21 +44,6 @@ class MainViewModel: ObservableObject {
                     print(team)
                 }
             }
-        }
-    }
-    
-    func addInstallation(index: Int) {
-        var installation = Installation()
-        installation.districtName = self.districts[index].districtName
-        installation.districtContact = self.districts[index].districtContactPerson
-        let viewModel = InstallationViewModel(installation: installation, teams: self.teams)
-//        self.implmentationPlanViews.append(InstallationView(index: self.numSchools, viewModel: viewModel, locationSearchService: LocationSearchService()))
-        
-        //
-        if installationViewModels.keys.contains(self.districts[index].districtName) {
-            installationViewModels[self.districts[index].districtName]?.append(viewModel)
-        } else {
-            installationViewModels[self.districts[index].districtName] = [viewModel]
         }
     }
     

@@ -7,60 +7,75 @@
 //
 
 import SwiftUI
+import Combine
 import FirebaseFirestore
 import MapKit
 
 struct InstallationView: View {
     let index: Int
-    
-    @ObservedObject var viewModel: InstallationViewModel
-    @ObservedObject var locationSearchService = LocationSearchService()
+    @EnvironmentObject var mainViewModel: MainViewModel
+    @Binding var installation: Installation
+    @ObservedObject var locationSearchService =  LocationSearchService()
     
     //    @State var floorPlanIndex = 0
     @State var isExpanded: Bool = true
+    @State var numPodsString = ""
+    @State var teamIndex = 0
     
     var body: some View {
         Section {
-            if !viewModel.installation.schoolName.isEmpty {
+            if !installation.schoolName.isEmpty {
                 expandedButton
             }
             
             if isExpanded {
                 teamPicker()
-                formItem(with: $viewModel.installation.schoolName, label: "School Name")
+                formItem(with: $installation.schoolName, label: "School Name")
                 startDatePicker()
-                formItem(with: $viewModel.installation.schoolType, label: "School Type")
-                formItem(with: $viewModel.installation.numFloors, label: "Number of Floors")
-                formItem(with: $viewModel.installation.numRooms, label: "Number of Rooms")
-                formItem(with: $viewModel.installation.numPods, label: "Number of Pods")
-                formItem(with: $viewModel.installation.schoolContact, label: "School Contact Person")
+                formItem(with: $installation.schoolType, label: "School Type")
+                formItem(with: $installation.numFloors, label: "Number of Floors")
+                formItem(with: $installation.numRooms, label: "Number of Rooms")
+                numPodPicker
+                formItem(with: $installation.schoolContact, label: "School Contact Person")
                 
                 AddressSearchBar(labelText: "School Address", locationSearchService: locationSearchService)
                 
-                NavigationLink(destination: PodMapMasterView(viewModel: self.viewModel)) {
-                    Text("Pod map master")
-                }
+//                NavigationLink(destination: PodMapMasterView(viewModel: self.viewModel)) {
+//                    Text("Pod map master")
+//                }
             }
         }
-        .onAppear() {
-            self.viewModel.installation.address = self.locationSearchService.selectedAddress
-        }
-        
     }
     
-    func getInstallation() -> Installation {
-        return viewModel.installation
-    }
+//    func getInstallation() -> Installation {
+//        return viewModel.installation
+//    }
     
 }
 
 extension InstallationView {
     //Funcs for adding form items
     
+    var numPodPicker: some View {
+        VStack(alignment: .leading) {
+            Text("Number of PODs Needed")
+                .font(.headline)
+            NumberField(placeholder: "Enter Number of PODs", text: self.$numPodsString, keyType: UIKeyboardType.numberPad)
+                .onReceive(Just(self.numPodsString)) { newVal in
+                    let filtered = newVal.filter {"0123456789".contains($0)}
+                    if filtered != newVal {
+                        self.numPodsString = filtered
+                        self.installation.numPods = Int(filtered) ?? 0
+                    }
+            }
+            .padding(.all)
+        }
+    }
+    
     var expandedButton: some View {
         return HStack {
             Spacer()
-            Text(viewModel.installation.schoolName)
+            Text(installation.schoolName)
                 .foregroundColor(Color.white)
                 .padding()
                 .multilineTextAlignment(.center)
@@ -89,7 +104,7 @@ extension InstallationView {
             return VStack(alignment: .leading) {
                 Text(label)
                     .font(.headline)
-                Picker(selection: $viewModel.installation.schoolType, label: Text("School Type")) {
+                Picker(selection: $installation.schoolType, label: Text("School Type")) {
                     ForEach(SchoolType.allCases) { school in
                         Text(school.description).tag(school)
                     }
@@ -102,20 +117,19 @@ extension InstallationView {
         return VStack(alignment: .leading) {
             Text("Assigned Team")
                 .font(.headline)
-            
+
             Picker(selection:
                 Binding<Int>(
-                    get: {self.viewModel.teamIndex},
+                    get: {self.teamIndex},
                     set: {
-                        self.viewModel.teamIndex = $0
-                        self.viewModel.installation.team = self.viewModel.teams[$0]
+                        self.teamIndex = $0
+                        self.installation.team = self.mainViewModel.teams[$0]
                 }),
-                   
-                   label: Text(
-                    self.viewModel.teams.count > 0 ? self.viewModel.teams[self.viewModel.teamIndex].name : ""
-                ), content: {
-                    ForEach(0..<self.viewModel.teams.count, id: \.self) { idx in
-                        Text(self.viewModel.teams[idx].name).tag(idx)
+                label:
+                Text(self.installation.team.name),
+                content: {
+                    ForEach(0..<self.mainViewModel.teams.count, id: \.self) { idx in
+                        Text(self.mainViewModel.teams[idx].name).tag(idx)
                     }
             })}
     }
@@ -151,8 +165,8 @@ extension InstallationView {
                 .font(.headline)
             
             DatePicker(selection: Binding<Date>(
-                get: {self.viewModel.installation.date },
-                set: {self.viewModel.installation.date = $0}), displayedComponents: .date) {
+                get: {self.installation.date },
+                set: {self.installation.date = $0}), displayedComponents: .date) {
                     Text("")
             }
         }
@@ -169,11 +183,11 @@ extension InstallationView {
     }
 }
 
-struct InstallationView_Previews: PreviewProvider {
-    static var previews: some View {
-        InstallationView(index: 0, viewModel: InstallationViewModel(installation: Installation(), teams: [Team()]), locationSearchService: LocationSearchService(), isExpanded: true)
-    }
-}
+//struct InstallationView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        InstallationView(index: 0, viewModel: InstallationViewModel(installation: Installation(), teams: [Team()]), locationSearchService: LocationSearchService(), isExpanded: true)
+//    }
+//}
 
 enum SchoolType: Int, Codable, CaseIterable, Hashable, Identifiable {
     var id: Int { hashValue }

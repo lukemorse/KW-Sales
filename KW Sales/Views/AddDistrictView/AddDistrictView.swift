@@ -12,7 +12,7 @@ import Combine
 
 struct AddDistrictView: View {
     @EnvironmentObject var mainViewModel: MainViewModel
-    @ObservedObject var implementationPlanViewModel = ImplementationPlanViewModel()
+    @ObservedObject private var keyboard = KeyboardResponder()
     @ObservedObject var viewModel = AddDistrictViewModel()
     @ObservedObject var locationSearchService = LocationSearchService()
     @State private var isShowingAlert = false
@@ -58,6 +58,7 @@ struct AddDistrictView: View {
                     districtEmailField
                     districtPhoneField
                     AddressSearchBar(labelText: "District Office Address", locationSearchService: locationSearchService)
+                        .padding(.bottom, keyboard.currentHeight)
                 }
             }
             
@@ -67,13 +68,7 @@ struct AddDistrictView: View {
                 }
             }
             
-            NavigationLink(destination: ImplementationPlanView(districtName: self.viewModel.district.districtName, districtIndex: 0)
-//                .onAppear() {
-//                    let district = self.viewModel.district
-//                    self.implementationPlanViewModel.districtContactPerson = district.districtContactPerson
-//                    self.implementationPlanViewModel.districtEmail = district.districtEmail
-//                    self.implementationPlanViewModel.districtName = district.districtName
-//                }
+            NavigationLink(destination: ImplementationPlanView(district: self.$viewModel.district)
             ) {
                 Text("Implementation Plan")
                     .foregroundColor(Color.blue)
@@ -100,7 +95,7 @@ struct AddDistrictView: View {
             
         }
         .onAppear() {
-            self.viewModel.implementationPlanListViewModel = self.implementationPlanViewModel
+//            self.viewModel.implementationPlanListViewModel = self.implementationPlanViewModel
         }
     }
     
