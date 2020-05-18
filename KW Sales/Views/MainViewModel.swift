@@ -26,7 +26,7 @@ class MainViewModel: ObservableObject {
                     do {
                         let district = try FirestoreDecoder().decode(District.self, from: document.data())
                         self.districts.append(district)
-                        
+                        //get implementation plan
                         for installation in district.implementationPlan {
                             let viewModel = InstallationViewModel(installation: installation)
                             if self.installationViewModels.keys.contains(district.districtName) {
@@ -71,5 +71,29 @@ class MainViewModel: ObservableObject {
             installationViewModels[self.districts[index].districtName] = [viewModel]
         }
     }
+    
+    func uploadDistrict(district: District, completion: @escaping (_ flag:Bool) -> ()) {
+    //        if let implementationPlanListViewModel = self.implementationPlanListViewModel {
+    //            district.implementationPlan = implementationPlanListViewModel.getInstallations()
+    //        }
+            //encode district file
+            do {
+                let districtData = try FirestoreEncoder().encode(district)
+                //send district file to database
+                Firestore.firestore().collection(Constants.kDistrictCollection).document(district.districtName).setData(districtData) { error in
+                    if let error = error {
+                        print("Error writing document: \(error)")
+                        completion(false)
+                    } else {
+                        print("Document successfully written!")
+                        completion(true)
+                    }
+                }
+            } catch let error {
+                print(error)
+                completion(false)
+            }
+            
+        }
     
 }

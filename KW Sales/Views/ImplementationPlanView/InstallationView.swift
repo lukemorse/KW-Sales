@@ -43,6 +43,7 @@ struct InstallationView: View {
                 
                 NavigationLink(destination: PodMapMasterView(viewModel: self.viewModel)) {
                     Text("Pod map master")
+                        .foregroundColor(Color.blue)
                 }
             }
         }
