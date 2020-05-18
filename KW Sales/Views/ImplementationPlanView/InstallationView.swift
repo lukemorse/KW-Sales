@@ -42,7 +42,7 @@ struct InstallationView: View {
                 AddressSearchBar(labelText: "School Address", locationSearchService: locationSearchService)
                 
                 NavigationLink(destination: PodMapMasterView(viewModel: self.viewModel)) {
-                    Text("Pod map master")
+                    Text("Pod Maps")
                         .foregroundColor(Color.blue)
                 }
             }

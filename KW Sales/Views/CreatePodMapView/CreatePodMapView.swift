@@ -42,7 +42,7 @@ struct CreatePodMapView: View {
             
             ZStack {
                 //                self.image != nil ? self.image?.resizable() : Image("blankImage").resizable()
-                self.image != nil ? self.image?.resizable() : Image("floorPlan").resizable()
+                self.image != nil ? self.image?.resizable() : Image("blankImage").resizable()
                 self.podGroup
                 if isLoading {
                     ActivityIndicator()
@@ -52,7 +52,7 @@ struct CreatePodMapView: View {
             .coordinateSpace(name: "custom")
             .overlay(podPlacementGesture)
             .scaledToFit()
-            .animation(.linear)
+            .animation(.none)
             .scaleEffect(self.scale)
             .offset(self.dragSize)
                 
@@ -114,8 +114,11 @@ struct CreatePodMapView: View {
                 Group {
                     ForEach(0..<pods.count, id: \.self) { index in
                         PodNodeView(podType: self.pods[index].podType, pos: self.pods[index].position)
+                            //                            .scaleEffect(1 / self.scale)
                             .onTapGesture {
-                                print("tapped")
+                                if !self.isPlacingPod {
+                                    self.pods.remove(at: index)
+                                }
                         }
                     }
                 }
@@ -167,6 +170,9 @@ struct CreatePodMapView: View {
                     .default(Text("Vertical Hallway POD"), action: {
                         self.nextPodType = .vertical_hallway
                         self.isPlacingPod = true
+                    }),
+                    .default(Text("Delete PODs"), action: {
+                        self.isPlacingPod = false
                     }),
                     .cancel()])
         })
