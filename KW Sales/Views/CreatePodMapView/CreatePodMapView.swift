@@ -19,7 +19,7 @@ struct CreatePodMapView: View {
     @State var isLoading = false
     @State var showingActionSheet = false
     @State private var position = CGSize.zero
-//    @State var podNodes: [PodNodeView] = []
+    //    @State var podNodes: [PodNodeView] = []
     
     @State var scale: CGFloat = 1.0
     @State var newScaleValue: CGFloat = 1.0
@@ -38,11 +38,11 @@ struct CreatePodMapView: View {
     
     var body: some View {
         VStack {
-            Spacer()
+            
+            
             ZStack {
-                self.image != nil ? self.image?.resizable() : Image("blankImage").resizable()
-//                self.image ?? Image("blankImage")
-//                    .resizable()
+                //                self.image != nil ? self.image?.resizable() : Image("blankImage").resizable()
+                self.image != nil ? self.image?.resizable() : Image("floorPlan").resizable()
                 self.podGroup
                 if isLoading {
                     ActivityIndicator()
@@ -55,46 +55,28 @@ struct CreatePodMapView: View {
             .animation(.linear)
             .scaleEffect(self.scale)
             .offset(self.dragSize)
-            .gesture(MagnificationGesture().onChanged { val in
-                let delta = val / self.lastScaleValue
-                self.lastScaleValue = val
-                self.scale = self.scale * delta
-                if self.scale < 1 {self.scale = 1}
                 
-            }.onEnded { val in
-                // without this the next gesture will be broken
-                self.lastScaleValue = 1.0
-                }
                 
-            )
-                .simultaneousGesture(DragGesture(minimumDistance: 1, coordinateSpace: .local).onChanged({ val in
-                    
-                    self.tapPoint = val.startLocation
-                    self.dragSize = CGSize(width: val.translation.width + self.lastDrag.width, height: val.translation.height + self.lastDrag.height)
-                })
-                    .onEnded({ (val) in
-                        self.dragSize = CGSize(width: val.translation.width + self.lastDrag.width, height: val.translation.height + self.lastDrag.height)
-                        self.lastDrag = self.dragSize
-                    }))
                 
-                .sheet(isPresented: $showImagePicker) {
-                    ImagePicker(sourceType: .photoLibrary) { image in
-                        self.image = Image(uiImage: image)
-                            .resizable()
-                        self.isLoading = true
-                        self.viewModel.floorPlanImages.append(Image(uiImage: image))
-                        self.viewModel.uploadFloorPlan(image: image) { success in
-                            if success {
-                                self.isLoading = false
-                            } else {
-                                self.isLoading = false
-                                print("error uploading image")
-                            }
+            .sheet(isPresented: $showImagePicker) {
+                ImagePicker(sourceType: .photoLibrary) { image in
+                    self.image = Image(uiImage: image)
+                        .resizable()
+                    self.isLoading = true
+                    self.viewModel.floorPlanImages.append(Image(uiImage: image))
+                    self.viewModel.uploadFloorPlan(image: image) { success in
+                        if success {
+                            self.isLoading = false
+                        } else {
+                            self.isLoading = false
+                            print("error uploading image")
                         }
                     }
+                }
             }
             
             Spacer()
+            moveAndScaleButtons
             actionSheetButton
         }
         .alert(isPresented: $isShowingAlert) {
@@ -149,8 +131,8 @@ struct CreatePodMapView: View {
             self.isShowingAlert = true
             print("pressed save")
         }) {
-        Text("Save")
-            .foregroundColor(.blue)
+            Text("Save")
+                .foregroundColor(.blue)
         }
     }
     
@@ -158,7 +140,7 @@ struct CreatePodMapView: View {
         Button(action: {
             self.showingActionSheet = true
         }) {
-            Text("Add KW POD")
+            Text("KW POD")
                 .font(.title)
                 .padding()
                 .foregroundColor(Color.black)
@@ -200,7 +182,7 @@ struct CreatePodMapView: View {
             return
         }
         self.pods.append(pod)
-        self.isPlacingPod = false
+//        self.isPlacingPod = false
         
         //add to implementation plan
         let key = self.viewModel.installation.floorPlanUrls[floorPlanIndex]
@@ -215,6 +197,73 @@ struct CreatePodMapView: View {
 struct CreatePodMapView_Previews: PreviewProvider {
     static var previews: some View {
         CreatePodMapView(viewModel: InstallationViewModel(installation: Installation(), teams: [Team()]), floorPlanIndex: 0)
+    }
+}
+
+extension CreatePodMapView {
+    
+    var moveAndScaleButtons: some View {
+        HStack {
+            VStack(spacing: 50) {
+                button_scaleUp
+                button_scaleDown
+            }
+            Spacer()
+            VStack {
+                button_moveUp
+                HStack {
+                    button_moveLeft
+                    button_moveRight
+                }
+                button_moveDown
+            }
+        }
+    }
+    
+    func getButton(imageName: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Image(systemName: imageName)
+                .foregroundColor(Color.white)
+                .font(.headline)
+                .padding()
+                .foregroundColor(Color.black)
+                .background(Color.blue)
+                .cornerRadius(15)
+                .shadow(radius: 10)
+                .padding(EdgeInsets(top: 5, leading: 30, bottom: 5, trailing: 30))
+        }
+    }
+    
+    var button_moveUp: some View {
+        getButton(imageName: "arrow.up", action: {
+            self.dragSize.height += 40 / self.scale
+        })
+    }
+    var button_moveDown: some View {
+        getButton(imageName: "arrow.down", action: {
+            self.dragSize.height -= 40 / self.scale
+        })
+    }
+    var button_moveLeft: some View {
+        getButton(imageName: "arrow.left", action: {
+            self.dragSize.width += 40 / self.scale
+        })
+    }
+    var button_moveRight: some View {
+        getButton(imageName: "arrow.right", action: {
+            self.dragSize.width -= 40 / self.scale
+        })
+    }
+    
+    var button_scaleUp: some View {
+        getButton(imageName: "plus", action: {
+            self.scale += 0.2
+        })
+    }
+    var button_scaleDown: some View {
+        getButton(imageName: "minus", action: {
+            self.scale -= 0.2
+        })
     }
 }
 
