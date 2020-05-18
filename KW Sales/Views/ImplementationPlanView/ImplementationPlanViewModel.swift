@@ -12,7 +12,6 @@ import FirebaseFirestore
 import CodableFirebase
 
 class ImplementationPlanViewModel: ObservableObject {
-    @Published var implmentationPlanViews: [InstallationView] = []
     @Published var numSchools = 0
     @Published var installationViewModels: [InstallationViewModel] = []
     @Published var teams: [Team] = []
@@ -46,9 +45,7 @@ class ImplementationPlanViewModel: ObservableObject {
         installation.districtName = self.districtName
         installation.districtContact = self.districtContactPerson
         let viewModel = InstallationViewModel(installation: installation, teams: self.teams)
-        self.implmentationPlanViews.append(InstallationView(index: self.numSchools, viewModel: viewModel, locationSearchService: LocationSearchService()))
         installationViewModels.append(viewModel)
-        self.numSchools += 1
     }
     
     func getInstallations() -> [Installation] {

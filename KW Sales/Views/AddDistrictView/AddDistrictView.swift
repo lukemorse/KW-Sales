@@ -11,6 +11,7 @@ import FirebaseFirestore
 import Combine
 
 struct AddDistrictView: View {
+    @EnvironmentObject var mainViewModel: MainViewModel
     @ObservedObject var implementationPlanViewModel = ImplementationPlanViewModel()
     @ObservedObject var viewModel = AddDistrictViewModel()
     @ObservedObject var locationSearchService = LocationSearchService()
@@ -66,13 +67,13 @@ struct AddDistrictView: View {
                 }
             }
             
-            NavigationLink(destination: ImplementationPlanView(viewModel: self.implementationPlanViewModel)
-                .onAppear() {
-                    let district = self.viewModel.district
-                    self.implementationPlanViewModel.districtContactPerson = district.districtContactPerson
-                    self.implementationPlanViewModel.districtEmail = district.districtEmail
-                    self.implementationPlanViewModel.districtName = district.districtName
-                }
+            NavigationLink(destination: ImplementationPlanView(districtName: self.viewModel.district.districtName, districtIndex: 0)
+//                .onAppear() {
+//                    let district = self.viewModel.district
+//                    self.implementationPlanViewModel.districtContactPerson = district.districtContactPerson
+//                    self.implementationPlanViewModel.districtEmail = district.districtEmail
+//                    self.implementationPlanViewModel.districtName = district.districtName
+//                }
             ) {
                 Text("Implementation Plan")
                     .foregroundColor(Color.blue)

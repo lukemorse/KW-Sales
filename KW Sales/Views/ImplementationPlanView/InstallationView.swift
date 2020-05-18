@@ -14,7 +14,7 @@ struct InstallationView: View {
     let index: Int
     
     @ObservedObject var viewModel: InstallationViewModel
-    @ObservedObject var locationSearchService: LocationSearchService
+    @ObservedObject var locationSearchService = LocationSearchService()
     
     //    @State var floorPlanIndex = 0
     @State var isExpanded: Bool = true

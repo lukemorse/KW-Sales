@@ -10,35 +10,42 @@ import SwiftUI
 
 struct ImplementationPlanView: View {
     
-    @ObservedObject var viewModel: ImplementationPlanViewModel
+    //    @ObservedObject var viewModel: ImplementationPlanViewModel
+    @EnvironmentObject var mainViewModel: MainViewModel
+    let districtName: String
+    let districtIndex: Int
     
     var body: some View {
         Form {
-            ForEach(0..<self.viewModel.implmentationPlanViews.count, id: \.self) { index in
-                self.viewModel.implmentationPlanViews[index]
+            if mainViewModel.installationViewModels[self.districtName] != nil {
+                ForEach(0..<self.mainViewModel.installationViewModels[self.districtName]!.count, id: \.self) { index in
+                    InstallationView(index: index, viewModel: self.mainViewModel.installationViewModels[self.districtName]![index])
+                    //                self.mainViewModel.implmentationPlanViews[index]
+                }
             }
             
+            
             Button(action: {
-                self.viewModel.addInstallation()
+                self.mainViewModel.addInstallation(index: self.districtIndex)
             }) {
                 Text("Add School")
                     .foregroundColor(Color.blue)
             }
         }
-        .onAppear() {
-            if self.viewModel.implmentationPlanViews.count > 0 {
-                for view in self.viewModel.implmentationPlanViews {
-                    view.isExpanded = false
-                }
-            }
-        }
-        .navigationBarTitle("Implementation Plan")   
+            //        .onAppear() {
+            //            if self.mainViewModel.installationViewModels.count > 0 {
+            //                for view in self.mainViewModel.implmentationPlanViews {
+            //                    view.isExpanded = false
+            //                }
+            //            }
+            //        }
+            .navigationBarTitle("Implementation Plan")
     }
 }
 
 
-struct CreateImplementationPlanListView_Previews: PreviewProvider {
-    static var previews: some View {
-        ImplementationPlanView(viewModel: ImplementationPlanViewModel())
-    }
-}
+//struct CreateImplementationPlanListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ImplementationPlanView(viewModel: ImplementationPlanViewModel())
+//    }
+//}
