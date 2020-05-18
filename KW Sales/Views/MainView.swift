@@ -13,73 +13,87 @@ struct MainView: View {
     @State var selected = 0
     
     var body: some View {
-        TabView(selection: $selected) {
-            
-            //Add District
+        NavigationView {
+            EditDistrictsView()
+                .navigationBarTitle(
+                    Text("Districts"), displayMode: .inline)
+                .navigationBarItems(leading:
+                        Image("Logo")
+                )
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
+        
+        
+        
+        
+//
+//        TabView(selection: $selected) {
+//
+//            //Add District
+////            NavigationView {
+////                AddDistrictView(with: District())
+////                    .navigationBarTitle(Text("Add District"), displayMode: .inline)
+////            }
+////            .navigationViewStyle(StackNavigationViewStyle())
+////            .tabItem({
+////                Image(systemName: Constants.TabBarImageName.tabBar0)
+////                    .font(.title)
+////                Text("\(Constants.TabBarText.tabBar0)")
+////            }).tag(0)
+//
+//            //Edit
 //            NavigationView {
-//                AddDistrictView(with: District())
-//                    .navigationBarTitle(Text("Add District"), displayMode: .inline)
+//                EditDistrictsView()
+//                    .navigationBarTitle(
+//                        Text("Edit Districts"), displayMode: .inline)
+//                    .navigationBarItems(leading:
+//                            Image("Logo")
+//                    )
 //            }
 //            .navigationViewStyle(StackNavigationViewStyle())
 //            .tabItem({
-//                Image(systemName: Constants.TabBarImageName.tabBar0)
+//                Image(systemName: Constants.TabBarImageName.tabBar3)
 //                    .font(.title)
-//                Text("\(Constants.TabBarText.tabBar0)")
+//                Text("\(Constants.TabBarText.tabBar3)")
 //            }).tag(0)
-            
-            //Edit
-            NavigationView {
-                EditDistrictsView()
-                    .navigationBarTitle(
-                        Text("Edit Districts"), displayMode: .inline)
-                    .navigationBarItems(leading:
-                            Image("Logo")
-                    )
-            }
-            .navigationViewStyle(StackNavigationViewStyle())
-            .tabItem({
-                Image(systemName: Constants.TabBarImageName.tabBar3)
-                    .font(.title)
-                Text("\(Constants.TabBarText.tabBar3)")
-            }).tag(0)
-            
-            //Pending
-            NavigationView {
-                PendingListView()
-                    .navigationBarTitle(
-                        Text("Pending Installs"), displayMode: .inline)
-                    .navigationBarItems(leading:
-                        Image("Logo")
-                )
-                
-            }
-            .navigationViewStyle(StackNavigationViewStyle())
-            .tabItem({
-                Image(systemName: Constants.TabBarImageName.tabBar1)
-                    .font(.title)
-                Text("\(Constants.TabBarText.tabBar1)")
-            }).tag(1)
-            
-            //Completed
-            NavigationView {
-                CompletedListView()
-                    .navigationBarTitle(
-                        Text("Completed Installs"), displayMode: .inline)
-                    .navigationBarItems(leading:
-                        Image("Logo")
-                )
-            }
-            .navigationViewStyle(StackNavigationViewStyle())
-            .tabItem({
-                Image(systemName: Constants.TabBarImageName.tabBar2)
-                    .font(.title)
-                Text("\(Constants.TabBarText.tabBar2)")
-            }).tag(2)
-            
-            
-        }.accentColor(Color.red)
-            .onAppear(){
-        }
+//
+//            //Pending
+//            NavigationView {
+//                PendingListView()
+//                    .navigationBarTitle(
+//                        Text("Pending Installs"), displayMode: .inline)
+//                    .navigationBarItems(leading:
+//                        Image("Logo")
+//                )
+//
+//            }
+//            .navigationViewStyle(StackNavigationViewStyle())
+//            .tabItem({
+//                Image(systemName: Constants.TabBarImageName.tabBar1)
+//                    .font(.title)
+//                Text("\(Constants.TabBarText.tabBar1)")
+//            }).tag(1)
+//
+//            //Completed
+//            NavigationView {
+//                CompletedListView()
+//                    .navigationBarTitle(
+//                        Text("Completed Installs"), displayMode: .inline)
+//                    .navigationBarItems(leading:
+//                        Image("Logo")
+//                )
+//            }
+//            .navigationViewStyle(StackNavigationViewStyle())
+//            .tabItem({
+//                Image(systemName: Constants.TabBarImageName.tabBar2)
+//                    .font(.title)
+//                Text("\(Constants.TabBarText.tabBar2)")
+//            }).tag(2)
+//
+//
+//        }.accentColor(Color.red)
+//            .onAppear(){
+//        }
     }
 }
 

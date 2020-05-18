@@ -59,17 +59,21 @@ class MainViewModel: ObservableObject {
         }
     }
     
-    func addInstallation(index: Int) {
-        var installation = Installation()
-        installation.districtName = self.districts[index].districtName
-        installation.districtContact = self.districts[index].districtContactPerson
-        let viewModel = InstallationViewModel(installation: installation)
+    func addInstallation(districtName: String) {
+        if let index = self.districts.firstIndex(where: {$0.districtName == districtName}) {
+            var installation = Installation()
+            installation.districtName = self.districts[index].districtName
+            installation.districtContact = self.districts[index].districtContactPerson
+            let viewModel = InstallationViewModel(installation: installation)
 
-        if installationViewModels.keys.contains(self.districts[index].districtName) {
-            installationViewModels[self.districts[index].districtName]?.append(viewModel)
-        } else {
-            installationViewModels[self.districts[index].districtName] = [viewModel]
+            if installationViewModels.keys.contains(self.districts[index].districtName) {
+                installationViewModels[self.districts[index].districtName]?.append(viewModel)
+            } else {
+                installationViewModels[self.districts[index].districtName] = [viewModel]
+            }
+            self.districts[index].implementationPlan.append(installation)
         }
+        
     }
     
     func uploadDistrict(district: District, completion: @escaping (_ flag:Bool) -> ()) {

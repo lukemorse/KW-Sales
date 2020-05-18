@@ -21,6 +21,7 @@ struct AddDistrictView: View {
     @State private var addDistrictSuccess = false
     @State private var addDistrictFail = false
     @Binding var district: District
+    let districtIndex: Int
     
 //    init(with district: District) {
 //        self.district = district
@@ -70,7 +71,7 @@ struct AddDistrictView: View {
                 }
             }
             
-            NavigationLink(destination: ImplementationPlanView(district: self.$district)
+            NavigationLink(destination: ImplementationPlanView(district: self.$district, districtIndex: self.districtIndex)
             ) {
                 Text("Implementation Plan")
                     .foregroundColor(Color.blue)
@@ -81,7 +82,8 @@ struct AddDistrictView: View {
         }
             
         .navigationBarTitle("Add District")
-        .navigationBarItems(leading: Image("Logo"), trailing: saveButton)
+        .navigationBarItems(trailing: saveButton)
+//        .navigationBarItems(leading: Image("Logo"), trailing: saveButton)
             
         .alert(isPresented: self.$isShowingAlert) {
             if self.addDistrictSuccess {

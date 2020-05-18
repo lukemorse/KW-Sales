@@ -12,17 +12,18 @@ struct ImplementationPlanView: View {
 
     @EnvironmentObject var mainViewModel: MainViewModel
     @Binding var district: District
+    let districtIndex: Int
     
     var body: some View {
         Form {
-            if self.district.implementationPlan.count > 0 {
-                ForEach(0..<self.district.implementationPlan.count, id: \.self) { index in
+            if self.mainViewModel.districts[self.districtIndex].implementationPlan.count > 0 {
+                ForEach(0..<self.mainViewModel.districts[self.districtIndex].implementationPlan.count, id: \.self) { index in
                     InstallationView(index: index, viewModel: self.mainViewModel.installationViewModels[self.district.districtName]![index])
                 }
             }
             
             Button(action: {
-                self.district.implementationPlan.append(Installation())
+                self.mainViewModel.addInstallation(districtName: self.district.districtName)
             }) {
                 Text("Add School")
                     .foregroundColor(Color.blue)
@@ -32,9 +33,9 @@ struct ImplementationPlanView: View {
     }
 }
 
-
-struct CreateImplementationPlanListView_Previews: PreviewProvider {
-    static var previews: some View {
-        ImplementationPlanView(district: .constant(District()))
-    }
-}
+//
+//struct CreateImplementationPlanListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ImplementationPlanView(district: .constant(District()))
+//    }
+//}
