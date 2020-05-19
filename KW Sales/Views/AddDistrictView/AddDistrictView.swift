@@ -13,19 +13,19 @@ import Combine
 struct AddDistrictView: View {
     @EnvironmentObject var mainViewModel: MainViewModel
     @ObservedObject private var keyboard = KeyboardResponder()
-//    @ObservedObject var viewModel = AddDistrictViewModel()
     @ObservedObject var locationSearchService = LocationSearchService()
     @State private var numPodsString = ""
     @State private var isShowingAlert = false
     @State private var isFieldsIncomplete = false
     @State private var addDistrictSuccess = false
     @State private var addDistrictFail = false
-    @Binding var district: District
+    @Binding var district: District?
     let districtIndex: Int
     
-//    init(with district: District) {
-//        self.district = district
-//    }
+    init(districtIndex: Int) {
+        self.districtIndex = districtIndex
+        self._district = .constant(nil)
+    }
     
     var body: some View {
         Form {
@@ -41,7 +41,7 @@ struct AddDistrictView: View {
             Section(header: Text("General")) {
                 Group {
                     districtNameField
-                    numPodPicker
+//                    numPodPicker
                     startDatePicker
                 }
             }
@@ -71,7 +71,7 @@ struct AddDistrictView: View {
                 }
             }
             
-            NavigationLink(destination: ImplementationPlanView(district: self.$district, districtIndex: self.districtIndex)
+            NavigationLink(destination: ImplementationPlanView(district: self.mainViewModel.getDistrict(index: districtIndex), districtIndex: self.districtIndex)
             ) {
                 Text("Implementation Plan")
                     .foregroundColor(Color.blue)
@@ -106,17 +106,18 @@ struct AddDistrictView: View {
     //MARK: - Buttons
     var sendPodOrderButton: some View {
         //Button is red until email is valid
-        SendPodOrderButtonView(numPods: district.numPodsNeeded , email: district.districtEmail , textColor: validateEmail(enteredEmail: district.districtEmail ) ? Color.green : Color.red)
+        let district = self.mainViewModel.getDistrict(index: districtIndex).wrappedValue
+        return SendPodOrderButtonView(numPods: district.numPodsNeeded , email: district.districtEmail , textColor: validateEmail(enteredEmail: district.districtEmail ) ? Color.green : Color.red)
     }
     
     var saveButton: some View {
         Button(action: {
-            if self.district.districtName.isEmpty {
+            if self.mainViewModel.getDistrict(index: self.districtIndex).districtName.wrappedValue.isEmpty {
                 self.isFieldsIncomplete = true
                 self.isShowingAlert = true
                 return
             }
-            self.mainViewModel.uploadDistrict(district: &self.district) { success in
+            self.mainViewModel.uploadDistrict(districtIndex: self.districtIndex) { success in
                 if success {
                     self.addDistrictSuccess = true
                     self.isShowingAlert = true
@@ -156,30 +157,29 @@ struct AddDistrictView: View {
 
 extension AddDistrictView {
     // MARK: - Form Items
-    var numPodPicker: some View {
-        VStack(alignment: .leading) {
-            Text("Number of PODs Needed")
-                .font(.headline)
-            NumberField(placeholder: "Enter Number of PODs", text: self.$numPodsString, keyType: UIKeyboardType.numberPad)
-                .onReceive(Just(self.numPodsString)) { newVal in
-                    let filtered = newVal.filter {"0123456789".contains($0)}
-                    if filtered != newVal {
-                        self.numPodsString = filtered
-                        self.district.numPodsNeeded = Int(filtered) ?? 0
-                    }
-            }
-            .padding(.all)
-        }
-    }
+//    var numPodPicker: some View {
+//        VStack(alignment: .leading) {
+//            Text("Number of PODs Needed")
+//                .font(.headline)
+//            NumberField(placeholder: "Enter Number of PODs", text: self.$numPodsString, keyType: UIKeyboardType.numberPad)
+//                .onReceive(Just(self.numPodsString)) { newVal in
+//                    let filtered = newVal.filter {"0123456789".contains($0)}
+//                    if filtered != newVal {
+//                        self.numPodsString = filtered
+//                        self.mainViewModel.getDistrict(index: self.districtIndex).numPodsNeeded = 5
+////                        self.mainViewModel.getDistrict(index: self.districtIndex).numPodsNeeded = Int(filtered)
+//                    }
+//            }
+//            .padding(.all)
+//        }
+//    }
     
     var startDatePicker: some View {
         VStack(alignment: .leading) {
             Text("Start Date")
                 .font(.headline)
             
-            DatePicker(selection: Binding<Date>(
-                get: {self.district.startDate },
-                set: {self.district.startDate = $0}), displayedComponents: .date) {
+            DatePicker(selection: self.mainViewModel.getDistrict(index: self.districtIndex).startDate, displayedComponents: .date) {
                     Text("")
             }
         }
@@ -189,10 +189,7 @@ extension AddDistrictView {
         VStack(alignment: .leading) {
             Text("District Name")
                 .font(.headline)
-            TextField("Enter District Name", text: Binding<String>(
-                get: {self.district.districtName },
-                set: {self.district.districtName = $0}
-            ))
+            TextField("Enter District Name", text: self.mainViewModel.getDistrict(index: self.districtIndex).districtName)
                 .padding(.all)
         }
     }
@@ -203,9 +200,7 @@ extension AddDistrictView {
                 .font(.headline)
             
             Picker(selection:
-                Binding<Int>(
-                    get: {self.district.numPreKSchools },
-                    set: {self.district.numPreKSchools = $0}),
+                self.mainViewModel.getDistrict(index: self.districtIndex).numPreKSchools,
                    
                    label: Text(""), content: {
                     ForEach(0..<50, id: \.self) { idx in
@@ -220,9 +215,7 @@ extension AddDistrictView {
                 .font(.headline)
             
             Picker(selection:
-                Binding<Int>(
-                    get: {self.district.numElementarySchools },
-                    set: {self.district.numElementarySchools = $0}),
+                self.mainViewModel.getDistrict(index: self.districtIndex).numElementarySchools,
                    
                    label: Text(""), content: {
                     ForEach(0..<50, id: \.self) { idx in
@@ -237,9 +230,7 @@ extension AddDistrictView {
                 .font(.headline)
             
             Picker(selection:
-                Binding<Int>(
-                    get: {self.district.numMiddleSchools },
-                    set: {self.district.numMiddleSchools = $0}),
+                self.mainViewModel.getDistrict(index: self.districtIndex).numMiddleSchools,
                    
                    label: Text(""), content: {
                     ForEach(0..<50, id: \.self) { idx in
@@ -254,10 +245,7 @@ extension AddDistrictView {
                 .font(.headline)
             
             Picker(selection:
-                Binding<Int>(
-                    get: {self.district.numHighSchools },
-                    set: {self.district.numHighSchools = $0}),
-                   
+                self.mainViewModel.getDistrict(index: self.districtIndex).numHighSchools,
                    label: Text(""), content: {
                     ForEach(0..<50, id: \.self) { idx in
                         Text(String(idx))
@@ -269,10 +257,7 @@ extension AddDistrictView {
         VStack(alignment: .leading) {
             Text("District Contact Person")
                 .font(.headline)
-            TextField("Enter District Contact Name", text: Binding<String>(
-                get: {self.district.districtContactPerson },
-                set: {self.district.districtContactPerson = $0}
-            ))
+            TextField("Enter District Contact Name", text: self.mainViewModel.getDistrict(index: self.districtIndex).districtContactPerson)
                 .padding(.all)
         }
     }
@@ -281,10 +266,7 @@ extension AddDistrictView {
         VStack(alignment: .leading) {
             Text("District Email")
                 .font(.headline)
-            TextField("Enter District Email", text: Binding<String>(
-                get: {self.district.districtEmail },
-                set: {self.district.districtEmail = $0}
-            ))
+            TextField("Enter District Email", text: self.mainViewModel.getDistrict(index: self.districtIndex).districtEmail)
                 .padding(.all)
         }
     }
@@ -293,24 +275,19 @@ extension AddDistrictView {
         VStack(alignment: .leading) {
             Text("District Phone Number")
                 .font(.headline)
-            TextField("Enter District Phone Number", text: Binding<String>(
-                get: {self.district.districtPhoneNumber },
-                set: {self.district.districtPhoneNumber = $0}
-            ))
+            TextField("Enter District Phone Number", text: self.mainViewModel.getDistrict(index: self.districtIndex).districtPhoneNumber)
                 .padding(.all)
         }
     }
     
     var readyToInstallToggle: some View {
-        Toggle(isOn: Binding<Bool>(
-            get: {(self.district.readyToInstall )},
-            set: {self.district.readyToInstall = $0}
-        ))  {
+        Toggle(isOn: self.mainViewModel.getDistrict(index: self.districtIndex).readyToInstall)  {
             Text("Ready To Install")
         }
     }
     
     func formIsEmpty() -> Bool {
+        let district = self.mainViewModel.getDistrict(index: self.districtIndex).wrappedValue
         return district.districtContactPerson.isEmpty ||
             district.districtEmail.isEmpty ||
             district.districtPhoneNumber.isEmpty ||

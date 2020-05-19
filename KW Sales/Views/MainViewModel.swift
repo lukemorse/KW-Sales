@@ -9,12 +9,23 @@
 import Foundation
 import FirebaseFirestore
 import CodableFirebase
+import SwiftUI
 
 class MainViewModel: ObservableObject {
     @Published var districts: [District] = []
     @Published var teams: [Team] = []
     @Published var numSchools = 0
     private var installationViewModels: [String: [InstallationViewModel]] = [:]
+    
+    func addDistrict() -> Binding<District> {
+        districts.append(District())
+        let index = districts.count - 1
+        return Binding<District>(get: {return self.districts[index]}, set: {self.districts[index] = $0})
+    }
+    
+    func getDistrict(index: Int) -> Binding<District> {
+        return Binding<District>(get: {return self.districts[index]}, set: {self.districts[index] = $0})
+    }
     
     func getInstallationViewModels(for districtName: String) -> [InstallationViewModel] {
         if self.installationViewModels.keys.contains(districtName) {
@@ -23,7 +34,7 @@ class MainViewModel: ObservableObject {
         return []
     }
     
-    func getDistricts() {
+    func fetchDistricts() {
         districts = []
         Firestore.firestore().collection(Constants.kDistrictCollection).getDocuments { (snapshot, error) in
             if let error = error {
@@ -83,15 +94,21 @@ class MainViewModel: ObservableObject {
         
     }
     
-    func uploadDistrict(district: inout District, completion: @escaping (_ flag:Bool) -> ()) {
+    func uploadDistrict(districtIndex: Int, completion: @escaping (_ flag:Bool) -> ()) {
     //        if let implementationPlanListViewModel = self.implementationPlanListViewModel {
     //            district.implementationPlan = implementationPlanListViewModel.getInstallations()
     //        }
             //encode district file
+        var district = self.districts[districtIndex]
         var implementationPlan: [Installation] = []
-        for vm in installationViewModels[district.districtName]! {
-            implementationPlan.append(vm.installation)
+        if installationViewModels.keys.contains(district.districtName) {
+            if installationViewModels[district.districtName]!.count > 0 {
+                for vm in installationViewModels[district.districtName]! {
+                    implementationPlan.append(vm.installation)
+                }
+            }
         }
+        
         district.implementationPlan = implementationPlan
             do {
                 let districtData = try FirestoreEncoder().encode(district)

@@ -12,50 +12,79 @@ import CodableFirebase
 
 struct EditDistrictsView: View {
     @EnvironmentObject var viewModel: MainViewModel
+    @State private var addedDistrict: Binding<District>?
+    @State private var addedDistrictIndex = 0
+    @State private var shouldNavigate = false
     
     var body: some View {
         listView
             .onAppear() {
                 if(self.viewModel.districts.isEmpty) {
-                    self.viewModel.getDistricts()
+                    self.viewModel.fetchDistricts()
                     self.viewModel.fetchTeams()
                 }
-                
-                
         }
     }
     
     var listView: some View {
-        if self.viewModel.districts.count > 0 {
-            return AnyView(List {
-                
-                //                addDistrictButton
-                
-                ForEach(0..<viewModel.districts.count, id: \.self) { index in
-                    NavigationLink(self.viewModel.districts[index].districtName, destination: AddDistrictView(district: self.$viewModel.districts[index], districtIndex: index))
-                }})
-        }
-        return AnyView(EmptyView())
+            AnyView(List {
+                addDistrictButton
+                if self.viewModel.districts.count > 0 {
+                    ForEach(0..<viewModel.districts.count, id: \.self) { index in
+                        NavigationLink(self.viewModel.districts[index].districtName, destination: AddDistrictView(districtIndex: index))
+                    }
+                }
+                navLink
+            })
+        
+        //        return AnyView(EmptyView())
         //        return AnyView(List{addDistrictButton})
     }
     
-    //    var addDistrictButton: some View {
-    //        NavigationLink(destination: AddDistrictView(with: District())) {
-    //            Text("Add District")
-    //                .frame(maxWidth: .infinity)
-    //                .padding()
-    //                .foregroundColor(Color.white)
-    //                .background(Color.blue)
-    //                .multilineTextAlignment(.center)
-    //                .cornerRadius(5)
-    //                .shadow(radius: 5)
+    //        var addDistrictButton: some View {
+    //            let index = self.viewModel.districts.count
+    //            return NavigationLink(destination: AddDistrictView(district: self.viewModel.addDistrict(), districtIndex: index)) {
+    //                Text("Add District")
+    //                    .frame(maxWidth: .infinity)
+    //                    .padding()
+    //                    .foregroundColor(Color.white)
+    //                    .background(Color.blue)
+    //                    .multilineTextAlignment(.center)
+    //                    .cornerRadius(5)
+    //                    .shadow(radius: 5)
+    //            }
+    //            .buttonStyle(PlainButtonStyle())
     //        }
-    //        .buttonStyle(PlainButtonStyle())
-    //    }
+    
+    var navLink: some View {
+        NavigationLink(destination: AddDistrictView( districtIndex: self.addedDistrictIndex), isActive: self.$shouldNavigate) {
+            Text("").hidden()
+        }
+    }
+    
+    var addDistrictButton: some View {
+        
+        return Button(action: {
+            self.addedDistrictIndex = self.viewModel.districts.count
+            self.addedDistrict = self.viewModel.addDistrict()
+            self.shouldNavigate = true
+            
+        }) {
+            Text("Add District")
+                .frame(maxWidth: .infinity)
+                .padding()
+                .foregroundColor(Color.white)
+                .background(Color.blue)
+                .multilineTextAlignment(.center)
+                .cornerRadius(5)
+                .shadow(radius: 5)
+        }
+        .buttonStyle(PlainButtonStyle())
+    }
 }
 
 struct EditDistrictTest_Previews: PreviewProvider {
     static var previews: some View {
-        EditDistrictsView()
+        EditDistrictsView().environmentObject(MainViewModel())
     }
 }

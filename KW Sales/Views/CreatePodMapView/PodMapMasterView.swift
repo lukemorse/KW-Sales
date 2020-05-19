@@ -56,17 +56,17 @@ struct PodMapMasterView: View {
     }
 }
 
-//struct PodMapMasterView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let viewModel = InstallationViewModel(installation: .constant(Installation()))
-//        viewModel.floorPlanImages.append(Image(systemName: "plus"))
-//        viewModel.floorPlanImages.append(Image(systemName: "plus"))
-//        return
-//            NavigationView {
-//                PodMapMasterView(viewModel: viewModel)
-//        }
-//    }
-//}
+struct PodMapMasterView_Previews: PreviewProvider {
+    static var previews: some View {
+        let viewModel = InstallationViewModel(installation: Installation())
+        viewModel.floorPlanImages.append(Image(systemName: "plus"))
+        viewModel.floorPlanImages.append(Image(systemName: "plus"))
+        return
+            NavigationView {
+                PodMapMasterView(viewModel: viewModel)
+        }
+    }
+}
 
 extension View {
     func inExpandingRectangle() -> some View {
