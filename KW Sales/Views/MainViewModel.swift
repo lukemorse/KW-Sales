@@ -91,13 +91,13 @@ class MainViewModel: ObservableObject {
             }
             self.districts[index].implementationPlan.append(installation)
         }
-        
+    }
+    
+    func setNumPods(numPods: Int, districtIndex: Int) {
+        districts[districtIndex].numPodsNeeded = numPods
     }
     
     func uploadDistrict(districtIndex: Int, completion: @escaping (_ flag:Bool) -> ()) {
-    //        if let implementationPlanListViewModel = self.implementationPlanListViewModel {
-    //            district.implementationPlan = implementationPlanListViewModel.getInstallations()
-    //        }
             //encode district file
         var district = self.districts[districtIndex]
         var implementationPlan: [Installation] = []

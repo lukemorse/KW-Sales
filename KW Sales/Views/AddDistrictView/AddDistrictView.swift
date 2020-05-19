@@ -36,12 +36,12 @@ struct AddDistrictView: View {
 //                }) {
 //                    Text("Import CSV")
 //                }
-//            }
+//            }x
             
             Section(header: Text("General")) {
                 Group {
                     districtNameField
-//                    numPodPicker
+                    numPodPicker
                     startDatePicker
                 }
             }
@@ -157,22 +157,22 @@ struct AddDistrictView: View {
 
 extension AddDistrictView {
     // MARK: - Form Items
-//    var numPodPicker: some View {
-//        VStack(alignment: .leading) {
-//            Text("Number of PODs Needed")
-//                .font(.headline)
-//            NumberField(placeholder: "Enter Number of PODs", text: self.$numPodsString, keyType: UIKeyboardType.numberPad)
-//                .onReceive(Just(self.numPodsString)) { newVal in
-//                    let filtered = newVal.filter {"0123456789".contains($0)}
-//                    if filtered != newVal {
-//                        self.numPodsString = filtered
-//                        self.mainViewModel.getDistrict(index: self.districtIndex).numPodsNeeded = 5
-////                        self.mainViewModel.getDistrict(index: self.districtIndex).numPodsNeeded = Int(filtered)
-//                    }
-//            }
-//            .padding(.all)
-//        }
-//    }
+    var numPodPicker: some View {
+        VStack(alignment: .leading) {
+            Text("Number of PODs Needed")
+                .font(.headline)
+            NumberField(placeholder: "Enter Number of PODs", text: self.$numPodsString, keyType: UIKeyboardType.numberPad)
+                .onReceive(Just(self.numPodsString)) { newVal in
+                    let filtered = newVal.filter {"0123456789".contains($0)}
+                    if filtered != newVal {
+                        self.numPodsString = filtered
+                        self.mainViewModel.setNumPods(numPods: Int(filtered) ?? 0, districtIndex: self.districtIndex)
+//                        self.mainViewModel.getDistrict(index: self.districtIndex).numPodsNeeded = Int(filtered)
+                    }
+            }
+            .padding(.all)
+        }
+    }
     
     var startDatePicker: some View {
         VStack(alignment: .leading) {
