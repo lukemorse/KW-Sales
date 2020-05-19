@@ -49,10 +49,6 @@ struct InstallationView: View {
         }
     }
     
-//    func getInstallation() -> Installation {
-//        return viewModel.installation
-//    }
-    
 }
 
 extension InstallationView {

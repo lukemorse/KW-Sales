@@ -14,7 +14,14 @@ class MainViewModel: ObservableObject {
     @Published var districts: [District] = []
     @Published var teams: [Team] = []
     @Published var numSchools = 0
-    @Published var installationViewModels: [String: [InstallationViewModel]] = [:]
+    private var installationViewModels: [String: [InstallationViewModel]] = [:]
+    
+    func getInstallationViewModels(for districtName: String) -> [InstallationViewModel] {
+        if self.installationViewModels.keys.contains(districtName) {
+           return self.installationViewModels[districtName]!
+        }
+        return []
+    }
     
     func getDistricts() {
         districts = []
@@ -76,11 +83,16 @@ class MainViewModel: ObservableObject {
         
     }
     
-    func uploadDistrict(district: District, completion: @escaping (_ flag:Bool) -> ()) {
+    func uploadDistrict(district: inout District, completion: @escaping (_ flag:Bool) -> ()) {
     //        if let implementationPlanListViewModel = self.implementationPlanListViewModel {
     //            district.implementationPlan = implementationPlanListViewModel.getInstallations()
     //        }
             //encode district file
+        var implementationPlan: [Installation] = []
+        for vm in installationViewModels[district.districtName]! {
+            implementationPlan.append(vm.installation)
+        }
+        district.implementationPlan = implementationPlan
             do {
                 let districtData = try FirestoreEncoder().encode(district)
                 //send district file to database

@@ -38,16 +38,12 @@ struct CreatePodMapView: View {
     
     var body: some View {
         VStack {
-            
-            
             ZStack {
-                //                self.image != nil ? self.image?.resizable() : Image("blankImage").resizable()
                 self.image != nil ? self.image?.resizable() : Image("blankImage").resizable()
                 self.podGroup
                 if isLoading {
                     ActivityIndicator()
-                }
-                
+                }   
             }
             .coordinateSpace(name: "custom")
             .overlay(podPlacementGesture)
@@ -64,7 +60,7 @@ struct CreatePodMapView: View {
                         .resizable()
                     self.isLoading = true
                     self.viewModel.floorPlanImages.append(Image(uiImage: image))
-                    self.viewModel.uploadFloorPlan(image: image) { success in
+                    self.viewModel.uploadFloorPlan(image: image, index: self.floorPlanIndex) { success in
                         if success {
                             self.isLoading = false
                         } else {
@@ -132,7 +128,6 @@ struct CreatePodMapView: View {
     var saveButton: some View {
         Button(action: {
             self.isShowingAlert = true
-            print("pressed save")
         }) {
             Text("Save")
                 .foregroundColor(.blue)
@@ -188,7 +183,7 @@ struct CreatePodMapView: View {
             return
         }
         self.pods.append(pod)
-//        self.isPlacingPod = false
+        //        self.isPlacingPod = false
         
         //add to implementation plan
         let key = self.viewModel.installation.floorPlanUrls[floorPlanIndex]
@@ -200,11 +195,11 @@ struct CreatePodMapView: View {
     }
 }
 
-struct CreatePodMapView_Previews: PreviewProvider {
-    static var previews: some View {
-        CreatePodMapView(viewModel: InstallationViewModel(installation: Installation()), floorPlanIndex: 0)
-    }
-}
+//struct CreatePodMapView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CreatePodMapView(viewModel: InstallationViewModel(installation: .constant(Installation())), floorPlanIndex: 0)
+//    }
+//}
 
 extension CreatePodMapView {
     

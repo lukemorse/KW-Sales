@@ -16,7 +16,8 @@ struct Pod: Encodable, Hashable, Identifiable {
     var position: CGPoint
     
     func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
+        hasher.combine(position.x)
+        hasher.combine(position.y)
         hasher.combine(podType)
     }
     

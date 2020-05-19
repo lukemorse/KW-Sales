@@ -116,7 +116,7 @@ struct AddDistrictView: View {
                 self.isShowingAlert = true
                 return
             }
-            self.mainViewModel.uploadDistrict(district: self.district) { success in
+            self.mainViewModel.uploadDistrict(district: &self.district) { success in
                 if success {
                     self.addDistrictSuccess = true
                     self.isShowingAlert = true

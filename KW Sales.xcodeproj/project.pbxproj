@@ -19,6 +19,7 @@
 		A30C9B8D2444C1CB0049E4FC /* KW_SalesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30C9B8C2444C1CB0049E4FC /* KW_SalesUITests.swift */; };
 		A30F4BF5244526B300B59F8B /* CompletedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30F4BF4244526B300B59F8B /* CompletedListView.swift */; };
 		A30F4BF7244530A800B59F8B /* InstallationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30F4BF6244530A800B59F8B /* InstallationView.swift */; };
+		A3155E532473801900E1843D /* InstallationVMTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3155E522473801900E1843D /* InstallationVMTest.swift */; };
 		A31F80782445FFE500ADC66A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A31F80772445FFE500ADC66A /* GoogleService-Info.plist */; };
 		A3295BCC2448EC7800F26E1F /* PodNodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3295BCB2448EC7800F26E1F /* PodNodeView.swift */; };
 		A3295BD1244A044A00F26E1F /* CSVTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3295BD0244A044A00F26E1F /* CSVTest.swift */; };
@@ -95,6 +96,7 @@
 		A30C9B8E2444C1CB0049E4FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A30F4BF4244526B300B59F8B /* CompletedListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedListView.swift; sourceTree = "<group>"; };
 		A30F4BF6244530A800B59F8B /* InstallationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallationView.swift; sourceTree = "<group>"; };
+		A3155E522473801900E1843D /* InstallationVMTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallationVMTest.swift; sourceTree = "<group>"; };
 		A31F80772445FFE500ADC66A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A3295BCB2448EC7800F26E1F /* PodNodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodNodeView.swift; sourceTree = "<group>"; };
 		A3295BD0244A044A00F26E1F /* CSVTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVTest.swift; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 			children = (
 				A3A2F0F724478D8400079243 /* ImplementationPlanView.swift */,
 				A30F4BF6244530A800B59F8B /* InstallationView.swift */,
+				A3155E522473801900E1843D /* InstallationVMTest.swift */,
 				A368EA5E244DE82B00FE7685 /* InstallationViewModel.swift */,
 				A3B1B5EF2463599200CE71A0 /* SearchBar.swift */,
 				A3557C4B244A3E7400C747FE /* ImagePicker.swift */,
@@ -593,6 +596,7 @@
 				A3E53D87246E388F00FED80A /* EditDistrictsView.swift in Sources */,
 				A368EA5F244DE82B00FE7685 /* InstallationViewModel.swift in Sources */,
 				A3DD6C542459D23C00319147 /* ActivityIndicator.swift in Sources */,
+				A3155E532473801900E1843D /* InstallationVMTest.swift in Sources */,
 				A3295BCC2448EC7800F26E1F /* PodNodeView.swift in Sources */,
 				A3AD36372452160D00BCDA4D /* CompletedListViewModel.swift in Sources */,
 				A3295BD1244A044A00F26E1F /* CSVTest.swift in Sources */,

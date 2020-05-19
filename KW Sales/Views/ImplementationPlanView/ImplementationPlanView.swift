@@ -18,7 +18,8 @@ struct ImplementationPlanView: View {
         Form {
             if self.mainViewModel.districts[self.districtIndex].implementationPlan.count > 0 {
                 ForEach(0..<self.mainViewModel.districts[self.districtIndex].implementationPlan.count, id: \.self) { index in
-                    InstallationView(index: index, viewModel: self.mainViewModel.installationViewModels[self.district.districtName]![index])
+//                    InstallationView(index: index, viewModel: self.mainViewModel.installationViewModels[self.district.districtName]![index])
+                    InstallationView(index: index, viewModel: self.mainViewModel.getInstallationViewModels(for: self.district.districtName)[index])
                 }
             }
             
