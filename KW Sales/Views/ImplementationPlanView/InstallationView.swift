@@ -47,6 +47,9 @@ struct InstallationView: View {
                 }
             }
         }
+        .onAppear() {
+            self.numPodsString = "\(self.viewModel.installation.numPods)"
+        }
     }
     
 }

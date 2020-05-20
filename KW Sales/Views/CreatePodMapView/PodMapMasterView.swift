@@ -30,6 +30,7 @@ struct PodMapMasterView: View {
         }
         .onAppear() {
             self.selection = nil
+            self.viewModel.downloadFloorplans()
         }
         .navigationBarItems(trailing: saveButton)
     }

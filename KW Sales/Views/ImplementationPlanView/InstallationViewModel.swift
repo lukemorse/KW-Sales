@@ -14,15 +14,34 @@ import SwiftUI
 
 class InstallationViewModel: ObservableObject {
     @Published var installation: Installation
-    @Published var address: String
+//    @Published var address: String
     @Published var teamIndex = 0
     @Published var floorPlanImages: [Image] = []
+    var storageRef: StorageReference
     var docRef: DocumentReference?
-    var childKeys: [String] = []
     
     init(installation: Installation) {
         self.installation = installation
-        self.address = ""
+//        self.address = ""
+//        database = FIRDatabase.database()
+        self.storageRef = Storage.storage().reference()
+    }
+    
+    func downloadFloorplans() {
+        if installation.floorPlanUrls.count > floorPlanImages.count {
+            for url in installation.floorPlanUrls {
+                Storage.storage().reference(forURL: url).getData(maxSize: INT64_MAX) { (data, error) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        let image = Image(uiImage: UIImage(data: data!)!)
+                        self.floorPlanImages.append(image)
+                    }
+                }
+            }
+        }
     }
 
     func uploadFloorPlan(image: UIImage, index: Int = 0, completion: @escaping (_ flag:Bool) -> ()) {

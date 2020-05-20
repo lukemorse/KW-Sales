@@ -100,6 +100,7 @@ struct AddDistrictView: View {
         }
         .onAppear() {
 //            self.viewModel.implementationPlanListViewModel = self.implementationPlanViewModel
+            self.numPodsString = "\(self.mainViewModel.getDistrict(index: self.districtIndex).numPodsNeeded.wrappedValue)"
         }
     }
     
@@ -284,6 +285,11 @@ extension AddDistrictView {
         Toggle(isOn: self.mainViewModel.getDistrict(index: self.districtIndex).readyToInstall)  {
             Text("Ready To Install")
         }
+    }
+    
+    var addressSearchBar: some View {
+        return AddressSearchBar(labelText: "District Office Address", locationSearchService: locationSearchService)
+        .padding(.bottom, keyboard.currentHeight)
     }
     
     func formIsEmpty() -> Bool {

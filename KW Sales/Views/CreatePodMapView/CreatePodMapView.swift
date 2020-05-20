@@ -30,7 +30,8 @@ struct CreatePodMapView: View {
     @State var lastDrag: CGSize = CGSize.zero
     
     @State var pods: [Pod] = []
-    @State var isPlacingPod: Bool = false
+    @State var willPlacePod: Bool = false
+//    @State var currentlyPlacingPod: Bool = false
     @State var nextPodType: PodType = .vertical_hallway
     @State var podIndex = 0
     
@@ -51,9 +52,6 @@ struct CreatePodMapView: View {
             .animation(.none)
             .scaleEffect(self.scale)
             .offset(self.dragSize)
-                
-                
-                
             .sheet(isPresented: $showImagePicker) {
                 ImagePicker(sourceType: .photoLibrary) { image in
                     self.image = Image(uiImage: image)
@@ -89,7 +87,7 @@ struct CreatePodMapView: View {
     
     var podPlacementGesture: some View {
         
-        if self.isPlacingPod {
+        if self.willPlacePod {
             return AnyView(GeometryReader {geo in
                 Color.clear.contentShape(Rectangle())
             }
@@ -109,10 +107,11 @@ struct CreatePodMapView: View {
             return AnyView(
                 Group {
                     ForEach(0..<pods.count, id: \.self) { index in
-                        PodNodeView(podType: self.pods[index].podType, pos: self.pods[index].position)
+                        PodNodeView(pod: self.pods[index])
                             //                            .scaleEffect(1 / self.scale)
                             .onTapGesture {
-                                if !self.isPlacingPod {
+                                print("on tap")
+                                if !self.willPlacePod {
                                     self.pods.remove(at: index)
                                 }
                         }
@@ -152,22 +151,22 @@ struct CreatePodMapView: View {
                 [
                     .default(Text("Outdoor POD"), action: {
                         self.nextPodType = .outdoor
-                        self.isPlacingPod = true
+                        self.willPlacePod = true
                     }),
                     .default(Text("Corner POD"), action: {
                         self.nextPodType = .corner
-                        self.isPlacingPod = true
+                        self.willPlacePod = true
                     }),
                     .default(Text("Horizontal Hallway POD"), action: {
                         self.nextPodType = .horizontal_hallway
-                        self.isPlacingPod = true
+                        self.willPlacePod = true
                     }),
                     .default(Text("Vertical Hallway POD"), action: {
                         self.nextPodType = .vertical_hallway
-                        self.isPlacingPod = true
+                        self.willPlacePod = true
                     }),
                     .default(Text("Delete PODs"), action: {
-                        self.isPlacingPod = false
+                        self.willPlacePod = false
                     }),
                     .cancel()])
         })

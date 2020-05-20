@@ -29,7 +29,7 @@ class MainViewModel: ObservableObject {
     
     func getInstallationViewModels(for districtName: String) -> [InstallationViewModel] {
         if self.installationViewModels.keys.contains(districtName) {
-           return self.installationViewModels[districtName]!
+            return self.installationViewModels[districtName]!
         }
         return []
     }
@@ -83,7 +83,7 @@ class MainViewModel: ObservableObject {
             installation.districtName = self.districts[index].districtName
             installation.districtContact = self.districts[index].districtContactPerson
             let viewModel = InstallationViewModel(installation: installation)
-
+            
             if installationViewModels.keys.contains(self.districts[index].districtName) {
                 installationViewModels[self.districts[index].districtName]?.append(viewModel)
             } else {
@@ -98,7 +98,7 @@ class MainViewModel: ObservableObject {
     }
     
     func uploadDistrict(districtIndex: Int, completion: @escaping (_ flag:Bool) -> ()) {
-            //encode district file
+        //encode district file
         var district = self.districts[districtIndex]
         var implementationPlan: [Installation] = []
         if installationViewModels.keys.contains(district.districtName) {
@@ -107,26 +107,26 @@ class MainViewModel: ObservableObject {
                     implementationPlan.append(vm.installation)
                 }
             }
+            district.implementationPlan = implementationPlan
         }
         
-        district.implementationPlan = implementationPlan
-            do {
-                let districtData = try FirestoreEncoder().encode(district)
-                //send district file to database
-                Firestore.firestore().collection(Constants.kDistrictCollection).document(district.districtName).setData(districtData) { error in
-                    if let error = error {
-                        print("Error writing document: \(error)")
-                        completion(false)
-                    } else {
-                        print("Document successfully written!")
-                        completion(true)
-                    }
+        do {
+            let districtData = try FirestoreEncoder().encode(district)
+            //send district file to database
+            Firestore.firestore().collection(Constants.kDistrictCollection).document(district.districtName).setData(districtData) { error in
+                if let error = error {
+                    print("Error writing document: \(error)")
+                    completion(false)
+                } else {
+                    print("Document successfully written!")
+                    completion(true)
                 }
-            } catch let error {
-                print(error)
-                completion(false)
             }
-            
+        } catch let error {
+            print(error)
+            completion(false)
         }
+        
+    }
     
 }

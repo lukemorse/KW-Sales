@@ -10,28 +10,30 @@ import SwiftUI
 
 struct PodNodeView: Identifiable, Hashable, Equatable, View {
     
-    var podType: PodType
     var id: Int { hashValue }
-    var uuid = UUID()
-    var pos: CGPoint
+    var pod: Pod
+    var isDragging = false
+    
     @State private var position = CGSize.zero
     
     static func == (lhs: PodNodeView, rhs: PodNodeView) -> Bool {
-        return lhs.id == rhs.id && lhs.uuid == rhs.uuid
+        return lhs.pod == rhs.pod && lhs.pod == rhs.pod
     }
     
     func hash(into hasher: inout Hasher) {
-        hasher.combine(uuid)
+        hasher.combine(pod.position.x)
+        hasher.combine(pod.position.y)
+        hasher.combine(pod.podType)
     }
     
     var body: some View {
-        Image(podImageDict[self.podType] ?? "")
+        Image(podImageDict[self.pod.podType] ?? "")
             .resizable()
             .scaledToFit()
             .frame(
-                width: self.podType == .horizontal_hallway ? 25 : 15,
-                height: self.podType == .vertical_hallway ? 25 : 15)
-            .position(pos)
+                width: self.pod.podType == .horizontal_hallway ? 25 : 15,
+                height: self.pod.podType == .vertical_hallway ? 25 : 15)
+            .position(pod.position)
             .colorMultiply(Color.red)
     }
 }
@@ -66,9 +68,7 @@ let podImageDict: [PodType : String] = [
 struct PodNodeView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            PodNodeView(podType: .horizontal_hallway, pos: CGPoint(x: 250, y: 250))
-            PodNodeView(podType: .vertical_hallway, pos: CGPoint(x: 250, y: 250))
-            PodNodeView(podType: .outdoor, pos: CGPoint(x: 250, y: 250))
+            PodNodeView(pod: Pod(podType: .corner, position: CGPoint(x: 100, y: 100)))
         }
         
     }
