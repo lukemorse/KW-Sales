@@ -102,7 +102,10 @@ struct EditDistrictDetailView: View {
         }
         .onAppear() {
 //            self.viewModel.implementationPlanListViewModel = self.implementationPlanViewModel
-            self.numPodsString = "\(self.mainViewModel.getDistrict(index: self.districtIndex).numPodsNeeded.wrappedValue)"
+            if self.mainViewModel.getDistrict(index: self.districtIndex).numPodsNeeded.wrappedValue != 0 {
+                self.numPodsString = "\(self.mainViewModel.getDistrict(index: self.districtIndex).numPodsNeeded.wrappedValue)"
+            }
+            
         }
     }
     
@@ -166,6 +169,8 @@ extension EditDistrictDetailView {
                 .font(.headline)
             NumberField(placeholder: "Enter Number of PODs", text: self.$numPodsString, keyType: UIKeyboardType.numberPad)
                 .onReceive(Just(self.numPodsString)) { newVal in
+                    print(self.numPodsString)
+                    print(newVal)
                     let filtered = newVal.filter {"0123456789".contains($0)}
                     if filtered != newVal {
                         self.numPodsString = filtered

@@ -57,10 +57,11 @@ struct CreatePodMapView: View {
                     self.image = Image(uiImage: image)
                         .resizable()
                     self.isLoading = true
-                    self.viewModel.floorPlanImages.append(Image(uiImage: image))
+                    
                     self.viewModel.uploadFloorPlan(image: image, index: self.floorPlanIndex) { success in
                         if success {
                             self.isLoading = false
+                            self.viewModel.floorPlanImages.append(Image(uiImage: image))
                         } else {
                             self.isLoading = false
                             print("error uploading image")
