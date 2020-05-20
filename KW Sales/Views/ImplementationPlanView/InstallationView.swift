@@ -14,6 +14,7 @@ import MapKit
 struct InstallationView: View {
     let index: Int
     @ObservedObject var viewModel: InstallationViewModel
+    @ObservedObject private var keyboard = KeyboardResponder()
     @EnvironmentObject var mainViewModel: MainViewModel
 //    @Binding var installation: Installation
     @ObservedObject var locationSearchService =  LocationSearchService()
@@ -40,10 +41,13 @@ struct InstallationView: View {
                 formItem(with: $viewModel.installation.schoolContact, label: "School Contact Person")
                 
                 AddressSearchBar(labelText: "School Address", locationSearchService: locationSearchService)
+                    .padding(.bottom, keyboard.currentHeight)
                 
                 NavigationLink(destination: PodMapMasterView(viewModel: self.viewModel)) {
-                    Text("Pod Maps")
+                    Text("📍 Pod Maps")
+                        .font(.title)
                         .foregroundColor(Color.blue)
+                        .padding()
                 }
             }
         }
@@ -184,11 +188,11 @@ extension InstallationView {
     }
 }
 
-//struct InstallationView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        InstallationView(index: 0, viewModel: InstallationViewModel(installation: Installation(), teams: [Team()]), locationSearchService: LocationSearchService(), isExpanded: true)
-//    }
-//}
+struct InstallationView_Previews: PreviewProvider {
+    static var previews: some View {
+        InstallationView(index: 0, viewModel: InstallationViewModel(installation: Installation())   , locationSearchService: LocationSearchService(), isExpanded: true)
+    }
+}
 
 enum SchoolType: Int, Codable, CaseIterable, Hashable, Identifiable {
     var id: Int { hashValue }

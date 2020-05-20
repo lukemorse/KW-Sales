@@ -33,6 +33,7 @@ struct EditDistrictsView: View {
             if self.viewModel.districts.count > 0 {
                 ForEach(0..<viewModel.districts.count, id: \.self) { index in
                     NavigationLink(self.viewModel.districts[index].districtName, destination: AddDistrictView(districtIndex: index))
+                        .font(.title)
                 }
             }
             //            navLink

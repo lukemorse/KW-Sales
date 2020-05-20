@@ -287,11 +287,6 @@ extension AddDistrictView {
         }
     }
     
-    var addressSearchBar: some View {
-        return AddressSearchBar(labelText: "District Office Address", locationSearchService: locationSearchService)
-        .padding(.bottom, keyboard.currentHeight)
-    }
-    
     func formIsEmpty() -> Bool {
         let district = self.mainViewModel.getDistrict(index: self.districtIndex).wrappedValue
         return district.districtContactPerson.isEmpty ||
