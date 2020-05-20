@@ -31,7 +31,7 @@ struct CreatePodMapView: View {
     
     @State var pods: [Pod] = []
     @State var willPlacePod: Bool = false
-//    @State var currentlyPlacingPod: Bool = false
+    @State var draggedPodView: PodNodeView?
     @State var nextPodType: PodType = .vertical_hallway
     @State var podIndex = 0
     
@@ -93,9 +93,12 @@ struct CreatePodMapView: View {
             }
             .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .named(AnyHashable("custom")))
             .onChanged({ (value) in
-                print(value.location)
-                self.addPod(pod: Pod(podType: self.nextPodType, position: value.location))
+                    self.draggedPodView = PodNodeView(pod: Pod(podType: self.nextPodType, position: value.location))
             })
+                .onEnded({ (value) in
+                    self.draggedPodView = nil
+                    self.addPod(pod: Pod(podType: self.nextPodType, position: value.location))
+                })
             ))
         } else {
             return AnyView(EmptyView())
@@ -108,13 +111,16 @@ struct CreatePodMapView: View {
                 Group {
                     ForEach(0..<pods.count, id: \.self) { index in
                         PodNodeView(pod: self.pods[index])
-                            //                            .scaleEffect(1 / self.scale)
                             .onTapGesture {
                                 print("on tap")
                                 if !self.willPlacePod {
                                     self.pods.remove(at: index)
                                 }
                         }
+                    }
+                    if self.draggedPodView != nil {
+                        self.draggedPodView
+//                            .position(self.dragPosition)
                     }
                 }
             )
@@ -194,12 +200,6 @@ struct CreatePodMapView: View {
     }
 }
 
-//struct CreatePodMapView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CreatePodMapView(viewModel: InstallationViewModel(installation: .constant(Installation())), floorPlanIndex: 0)
-//    }
-//}
-
 extension CreatePodMapView {
     
     var moveAndScaleButtons: some View {
@@ -246,12 +246,12 @@ extension CreatePodMapView {
     }
     var button_moveLeft: some View {
         getButton(imageName: "arrow.left", action: {
-            self.dragSize.width += 40 / self.scale
+            self.dragSize.width += 80 / self.scale
         })
     }
     var button_moveRight: some View {
         getButton(imageName: "arrow.right", action: {
-            self.dragSize.width -= 40 / self.scale
+            self.dragSize.width -= 80 / self.scale
         })
     }
     
@@ -268,3 +268,8 @@ extension CreatePodMapView {
 }
 
 
+struct CreatePodMapView_Previews: PreviewProvider {
+    static var previews: some View {
+        CreatePodMapView(viewModel: InstallationViewModel(installation: Installation()), floorPlanIndex: 0, image: Image("floorPlan"))
+    }
+}
