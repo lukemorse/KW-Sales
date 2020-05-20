@@ -19,7 +19,6 @@ struct CreatePodMapView: View {
     @State var isLoading = false
     @State var showingActionSheet = false
     @State private var position = CGSize.zero
-    //    @State var podNodes: [PodNodeView] = []
     
     @State var scale: CGFloat = 1.0
     @State var newScaleValue: CGFloat = 1.0
@@ -121,7 +120,6 @@ struct CreatePodMapView: View {
                     }
                     if self.draggedPodView != nil {
                         self.draggedPodView
-//                            .position(self.dragPosition)
                     }
                 }
             )

@@ -20,7 +20,6 @@ struct EditDistrictsMasterView: View {
     
     var body: some View {
         listView
-            //        testButton
             .onAppear() {
                 if(self.viewModel.districts.isEmpty) {
                     self.viewModel.fetchDistricts()
@@ -28,7 +27,7 @@ struct EditDistrictsMasterView: View {
                 }
         }
         .navigationBarItems(leading: Image("Logo"), trailing: filterButton)
-        .actionOver(presented: $showFilterMenu, title: "Filter Districts", message: nil, buttons: actionButtons, ipadAndMacConfiguration: ipadMacConfig)
+        .actionOver(presented: $showFilterMenu, title: "Filter Districts", message: nil, buttons: actionButtons, ipadAndMacConfiguration: getIpadMacConfig())
     }
     
     var filterButton: some View {
@@ -67,10 +66,33 @@ struct EditDistrictsMasterView: View {
                         .padding()
                 }
             }
-            //            navLink
         })
     }
     
+    var addDistrictButton: some View {
+        return Button(action: {
+            self.addedDistrictIndex = self.viewModel.districts.count
+            self.addedDistrict = self.viewModel.addDistrict()
+            self.shouldNavigate = true
+        }) {
+            NavigationLink(destination: EditDistrictDetailView( districtIndex: self.addedDistrictIndex, newFlag: true), isActive: self.$shouldNavigate) {
+                Text("Add District")
+                    .font(.title)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .foregroundColor(Color.white)
+                    .background(Color.blue)
+                    .multilineTextAlignment(.center)
+                    .cornerRadius(5)
+                    .shadow(radius: 5)
+            }.buttonStyle(PlainButtonStyle())
+        }
+    }
+}
+
+//ActionOver
+extension EditDistrictsMasterView {
     var actionButtons: [ActionOverButton] {
         [
             ActionOverButton(title: "Pending", type: .normal) {
@@ -91,36 +113,8 @@ struct EditDistrictsMasterView: View {
         ]
     }
     
-    private var ipadMacConfig = {
+    private func getIpadMacConfig() -> IpadAndMacConfiguration {
         return IpadAndMacConfiguration(anchor: UnitPoint.topTrailing, arrowEdge: .trailing)
-    }()
-    
-    //    func getConfig() -> IpadAndMacConfiguration {
-    //        var anchor = UnitPoint.topTrailing
-    //        anchor.x -= 100
-    //        return IpadAndMacConfiguration(anchor: anchor, arrowEdge: .trailing)
-    //    }
-    
-    var addDistrictButton: some View {
-        return Button(action: {
-            self.addedDistrictIndex = self.viewModel.districts.count
-            self.addedDistrict = self.viewModel.addDistrict()
-            self.shouldNavigate = true
-        }) {
-            NavigationLink(destination: EditDistrictDetailView( districtIndex: self.addedDistrictIndex, newFlag: true), isActive: self.$shouldNavigate) {
-                Text("Add District")
-                    .font(.largeTitle)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .foregroundColor(Color.white)
-                    .background(Color.blue)
-                    .multilineTextAlignment(.center)
-                    .cornerRadius(5)
-                    .shadow(radius: 5)
-            }.buttonStyle(PlainButtonStyle())
-            
-        }
     }
     
     var testButton: some View {

@@ -14,16 +14,14 @@ import SwiftUI
 
 class InstallationViewModel: ObservableObject {
     @Published var installation: Installation
-//    @Published var address: String
     @Published var teamIndex = 0
     @Published var floorPlanImages: [Image] = []
+    
     var storageRef: StorageReference
     var docRef: DocumentReference?
     
     init(installation: Installation) {
         self.installation = installation
-//        self.address = ""
-//        database = FIRDatabase.database()
         self.storageRef = Storage.storage().reference()
     }
     

@@ -16,10 +16,8 @@ struct InstallationView: View {
     @ObservedObject var viewModel: InstallationViewModel
     @ObservedObject private var keyboard = KeyboardResponder()
     @EnvironmentObject var mainViewModel: MainViewModel
-//    @Binding var installation: Installation
     @ObservedObject var locationSearchService =  LocationSearchService()
     
-    //    @State var floorPlanIndex = 0
     @State var isExpanded: Bool = true
     @State private var numPods = 0
     @State private var numPodsString = ""
@@ -57,8 +55,6 @@ struct InstallationView: View {
                 self.numPods = self.viewModel.installation.numPods
                 self.numPodsString = "\(self.numPods)"
             }
-            
-//            self.numPodsString = "\(self.numPods)"
         }
     }
     

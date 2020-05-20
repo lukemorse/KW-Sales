@@ -39,7 +39,7 @@ struct EditDistrictDetailView: View {
             //                }) {
             //                    Text("Import CSV")
             //                }
-            //            }x
+            //            }
             
             Section(header: Text("General")) {
                 Group {
@@ -81,7 +81,6 @@ struct EditDistrictDetailView: View {
             }
             
             sendPodOrderButton
-            //            addDistrictButton
         }
             
         .navigationBarTitle(newFlag ? "New District" : "Edit District")
@@ -135,28 +134,6 @@ struct EditDistrictDetailView: View {
                 .foregroundColor(Color.blue)
         }
     }
-    
-    //    var addDistrictButton: some View {
-    //        Button(action: {
-    //            if self.formIsEmpty() {
-    //                self.isFieldsIncomplete = true
-    //                self.isShowingAlert = true
-    //                return
-    //            }
-    //            self.viewModel.uploadDistrict() { success in
-    //                if success {
-    //                    self.addDistrictSuccess = true
-    //                    self.isShowingAlert = true
-    //                } else {
-    //                    self.addDistrictFail = true
-    //                    self.isShowingAlert = true
-    //                }
-    //            }
-    //        }) {
-    //            Text("Add District")
-    //                .foregroundColor(self.formIsEmpty() ? Color.red : Color.green)
-    //        }
-    //    }
 }
 
 extension EditDistrictDetailView {
