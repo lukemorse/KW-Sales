@@ -10,7 +10,7 @@ import SwiftUI
 import FirebaseFirestore
 import Combine
 
-struct AddDistrictView: View {
+struct EditDistrictDetailView: View {
     @EnvironmentObject var mainViewModel: MainViewModel
     @ObservedObject private var keyboard = KeyboardResponder()
     @ObservedObject var locationSearchService = LocationSearchService()
@@ -21,10 +21,12 @@ struct AddDistrictView: View {
     @State private var addDistrictFail = false
     @Binding var district: District?
     let districtIndex: Int
+    let newFlag: Bool
     
-    init(districtIndex: Int) {
+    init(districtIndex: Int, newFlag: Bool) {
         self.districtIndex = districtIndex
         self._district = .constant(nil)
+        self.newFlag = newFlag
     }
     
     var body: some View {
@@ -81,7 +83,7 @@ struct AddDistrictView: View {
 //            addDistrictButton
         }
             
-        .navigationBarTitle("Add District")
+        .navigationBarTitle(newFlag ? "New District" : "Edit District")
         .navigationBarItems(trailing: saveButton)
 //        .navigationBarItems(leading: Image("Logo"), trailing: saveButton)
             
@@ -156,7 +158,7 @@ struct AddDistrictView: View {
 //    }
 }
 
-extension AddDistrictView {
+extension EditDistrictDetailView {
     // MARK: - Form Items
     var numPodPicker: some View {
         VStack(alignment: .leading) {

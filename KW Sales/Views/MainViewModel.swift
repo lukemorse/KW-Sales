@@ -13,12 +13,15 @@ import SwiftUI
 
 class MainViewModel: ObservableObject {
     @Published var districts: [District] = []
+    @Published var filteredDistricts: [District] = []
+    @Published var currentFilter = 0
     @Published var teams: [Team] = []
     @Published var numSchools = 0
     private var installationViewModels: [String: [InstallationViewModel]] = [:]
     
     func addDistrict() -> Binding<District> {
         districts.append(District())
+        changeFilter(filterIndex: currentFilter)
         let index = districts.count - 1
         return Binding<District>(get: {return self.districts[index]}, set: {self.districts[index] = $0})
     }
@@ -32,6 +35,55 @@ class MainViewModel: ObservableObject {
             return self.installationViewModels[districtName]!
         }
         return []
+    }
+    
+    //filters:
+    //0 = pending
+    //1 = complete
+    //2 = current user added
+    //3 = remove filter/show all
+    func changeFilter(filterIndex: Int) {
+        filteredDistricts = []
+        currentFilter = filterIndex
+        switch filterIndex {
+        case 0:
+            filteredDistricts = districts
+        case 1:
+            for district in districts {
+                for installation in district.implementationPlan {
+                    if installation.status == .inProgress {
+                        filteredDistricts.append(district)
+                        break
+                    }
+                }
+            }
+            break
+        case 2:
+            var add = false
+            for district in districts {
+                for installation in district.implementationPlan {
+                    if installation.status != .complete {
+                        add = false
+                    }
+                }
+                if add {
+                    filteredDistricts.append(district)
+                    add = false
+                }
+            }
+            break
+        case 3:
+            for district in districts {
+                //replace with user check
+                if true {
+                    filteredDistricts.append(district)
+                    break
+                }
+            }
+            break
+        default:
+            break
+        }
     }
     
     func fetchDistricts() {
@@ -58,6 +110,7 @@ class MainViewModel: ObservableObject {
                         print(error.localizedDescription)
                     }
                 }
+                self.filteredDistricts = self.districts
             }
         }
     }

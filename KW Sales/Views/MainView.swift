@@ -14,12 +14,12 @@ struct MainView: View {
     
     var body: some View {
         NavigationView {
-            EditDistrictsView()
+            EditDistrictsMasterView()
                 .navigationBarTitle(
                     Text("Districts"), displayMode: .inline)
-                .navigationBarItems(leading:
-                        Image("Logo")
-                )
+//                .navigationBarItems(leading:
+//                        Image("Logo")
+//                )
         }
         .navigationViewStyle(StackNavigationViewStyle())
         
