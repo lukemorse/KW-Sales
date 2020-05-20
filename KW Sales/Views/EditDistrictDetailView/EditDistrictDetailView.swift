@@ -14,6 +14,7 @@ struct EditDistrictDetailView: View {
     @EnvironmentObject var mainViewModel: MainViewModel
     @ObservedObject private var keyboard = KeyboardResponder()
     @ObservedObject var locationSearchService = LocationSearchService()
+    @State private var numPodsNeeded = 0
     @State private var numPodsString = ""
     @State private var isShowingAlert = false
     @State private var isFieldsIncomplete = false
@@ -32,18 +33,18 @@ struct EditDistrictDetailView: View {
     var body: some View {
         Form {
             //Uncomment for Mac App
-//            Group {
-//                Button(action: {
-//                    self.viewModel.importCSV()
-//                }) {
-//                    Text("Import CSV")
-//                }
-//            }x
+            //            Group {
+            //                Button(action: {
+            //                    self.viewModel.importCSV()
+            //                }) {
+            //                    Text("Import CSV")
+            //                }
+            //            }x
             
             Section(header: Text("General")) {
                 Group {
                     districtNameField
-                    numPodPicker
+                    numPodField
                     startDatePicker
                 }
             }
@@ -80,32 +81,29 @@ struct EditDistrictDetailView: View {
             }
             
             sendPodOrderButton
-//            addDistrictButton
+            //            addDistrictButton
         }
             
         .navigationBarTitle(newFlag ? "New District" : "Edit District")
         .navigationBarItems(trailing: saveButton)
-//        .navigationBarItems(leading: Image("Logo"), trailing: saveButton)
+            //        .navigationBarItems(leading: Image("Logo"), trailing: saveButton)
             
-        .alert(isPresented: self.$isShowingAlert) {
-            if self.addDistrictSuccess {
-                return Alert(title: Text("Successfully Uploaded District Data"))
-            } else if self.addDistrictFail {
-                return Alert(title: Text("Failed to Upload District Data"))
-            } else if self.isFieldsIncomplete {
-                return Alert(title: Text("Please enter District Name"))
-            } else {
-                return Alert(title: Text("Something went wrong"))
-            }
-            
-            
+            .alert(isPresented: self.$isShowingAlert) {
+                if self.addDistrictSuccess {
+                    return Alert(title: Text("Successfully Uploaded District Data"))
+                } else if self.addDistrictFail {
+                    return Alert(title: Text("Failed to Upload District Data"))
+                } else if self.isFieldsIncomplete {
+                    return Alert(title: Text("Please enter District Name"))
+                } else {
+                    return Alert(title: Text("Something went wrong"))
+                }
         }
         .onAppear() {
-//            self.viewModel.implementationPlanListViewModel = self.implementationPlanViewModel
             if self.mainViewModel.getDistrict(index: self.districtIndex).numPodsNeeded.wrappedValue != 0 {
-                self.numPodsString = "\(self.mainViewModel.getDistrict(index: self.districtIndex).numPodsNeeded.wrappedValue)"
+                self.numPodsNeeded = self.mainViewModel.getDistrict(index: self.districtIndex).numPodsNeeded.wrappedValue
+                self.numPodsString = "\(self.numPodsNeeded)"
             }
-            
         }
     }
     
@@ -138,44 +136,42 @@ struct EditDistrictDetailView: View {
         }
     }
     
-//    var addDistrictButton: some View {
-//        Button(action: {
-//            if self.formIsEmpty() {
-//                self.isFieldsIncomplete = true
-//                self.isShowingAlert = true
-//                return
-//            }
-//            self.viewModel.uploadDistrict() { success in
-//                if success {
-//                    self.addDistrictSuccess = true
-//                    self.isShowingAlert = true
-//                } else {
-//                    self.addDistrictFail = true
-//                    self.isShowingAlert = true
-//                }
-//            }
-//        }) {
-//            Text("Add District")
-//                .foregroundColor(self.formIsEmpty() ? Color.red : Color.green)
-//        }
-//    }
+    //    var addDistrictButton: some View {
+    //        Button(action: {
+    //            if self.formIsEmpty() {
+    //                self.isFieldsIncomplete = true
+    //                self.isShowingAlert = true
+    //                return
+    //            }
+    //            self.viewModel.uploadDistrict() { success in
+    //                if success {
+    //                    self.addDistrictSuccess = true
+    //                    self.isShowingAlert = true
+    //                } else {
+    //                    self.addDistrictFail = true
+    //                    self.isShowingAlert = true
+    //                }
+    //            }
+    //        }) {
+    //            Text("Add District")
+    //                .foregroundColor(self.formIsEmpty() ? Color.red : Color.green)
+    //        }
+    //    }
 }
 
 extension EditDistrictDetailView {
     // MARK: - Form Items
-    var numPodPicker: some View {
+    var numPodField: some View {
         VStack(alignment: .leading) {
             Text("Number of PODs Needed")
                 .font(.headline)
-            NumberField(placeholder: "Enter Number of PODs", text: self.$numPodsString, keyType: UIKeyboardType.numberPad)
+            TextField("Enter Number of PODs", text: self.$numPodsString)
+                .keyboardType(.numberPad)
                 .onReceive(Just(self.numPodsString)) { newVal in
-                    print(self.numPodsString)
-                    print(newVal)
                     let filtered = newVal.filter {"0123456789".contains($0)}
-                    if filtered != newVal {
-                        self.numPodsString = filtered
-                        self.mainViewModel.setNumPods(numPods: Int(filtered) ?? 0, districtIndex: self.districtIndex)
-//                        self.mainViewModel.getDistrict(index: self.districtIndex).numPodsNeeded = Int(filtered)
+                    self.numPodsNeeded = Int(filtered) ?? 0
+                    if self.numPodsNeeded != self.mainViewModel.getDistrict(index: self.districtIndex).numPodsNeeded.wrappedValue {
+                        self.mainViewModel.setNumPods(numPods: self.numPodsNeeded, districtIndex: self.districtIndex)
                     }
             }
             .padding(.all)
@@ -188,7 +184,7 @@ extension EditDistrictDetailView {
                 .font(.headline)
             
             DatePicker(selection: self.mainViewModel.getDistrict(index: self.districtIndex).startDate, displayedComponents: .date) {
-                    Text("")
+                Text("")
             }
         }
     }

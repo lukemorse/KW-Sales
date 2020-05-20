@@ -56,7 +56,6 @@
 		A3F4259C24475E4F004D2CCE /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F4259B24475E4F004D2CCE /* MailView.swift */; };
 		AF3C1D21247570E0008BC1B9 /* TestActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3C1D20247570E0008BC1B9 /* TestActionSheet.swift */; };
 		AF3C1D24247575B6008BC1B9 /* ActionOver in Frameworks */ = {isa = PBXBuildFile; productRef = AF3C1D23247575B6008BC1B9 /* ActionOver */; };
-		AFAFD5252474D34500332E4A /* NumberField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAFD5242474D34500332E4A /* NumberField.swift */; };
 		C0BA6CE5438A0624E1669621 /* Pods_KW_SalesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54DB61A8258D93544EE8F4D6 /* Pods_KW_SalesTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -623,7 +622,6 @@
 				A30C9B6D2444C1C80049E4FC /* SceneDelegate.swift in Sources */,
 				A30C9B6F2444C1C80049E4FC /* LoginView.swift in Sources */,
 				A3F4259C24475E4F004D2CCE /* MailView.swift in Sources */,
-				AFAFD5252474D34500332E4A /* NumberField.swift in Sources */,
 				A32D00B7245BBCF200BF6B1A /* GeoTest.swift in Sources */,
 				A3DFBD42245736EA0099A53C /* CompletedDetailView.swift in Sources */,
 				A3B1B5F02463599200CE71A0 /* SearchBar.swift in Sources */,

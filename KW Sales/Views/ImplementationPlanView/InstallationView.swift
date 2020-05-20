@@ -21,7 +21,8 @@ struct InstallationView: View {
     
     //    @State var floorPlanIndex = 0
     @State var isExpanded: Bool = true
-    @State var numPodsString = ""
+    @State private var numPods = 0
+    @State private var numPodsString = ""
     @State var teamIndex = 0
     
     var body: some View {
@@ -52,7 +53,12 @@ struct InstallationView: View {
             }
         }
         .onAppear() {
-            self.numPodsString = "\(self.viewModel.installation.numPods)"
+            if (self.viewModel.installation.numPods != 0) {
+                self.numPods = self.viewModel.installation.numPods
+                self.numPodsString = "\(self.numPods)"
+            }
+            
+//            self.numPodsString = "\(self.numPods)"
         }
     }
     
@@ -65,12 +71,14 @@ extension InstallationView {
         VStack(alignment: .leading) {
             Text("Number of PODs Needed")
                 .font(.headline)
-            NumberField(placeholder: "Enter Number of PODs", text: self.$numPodsString, keyType: UIKeyboardType.numberPad)
+            TextField("Enter Number of PODs", text: self.$numPodsString)
+                .keyboardType(.numberPad)
                 .onReceive(Just(self.numPodsString)) { newVal in
                     let filtered = newVal.filter {"0123456789".contains($0)}
-                    if filtered != newVal {
-                        self.numPodsString = filtered
-                        self.viewModel.installation.numPods = Int(filtered) ?? 0
+                    self.numPods = Int(filtered) ?? 0
+                    if self.numPods != self.viewModel.installation.numPods {
+                        self.viewModel.installation.numPods = self.numPods
+                        print(self.viewModel.installation.numPods)
                     }
             }
             .padding(.all)

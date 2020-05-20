@@ -64,6 +64,7 @@ struct EditDistrictsMasterView: View {
                 ForEach(0..<viewModel.districts.count, id: \.self) { index in
                     NavigationLink(self.viewModel.districts[index].districtName, destination: EditDistrictDetailView(districtIndex: index, newFlag: false))
                         .font(.title)
+                        .padding()
                 }
             }
             //            navLink
@@ -72,20 +73,20 @@ struct EditDistrictsMasterView: View {
     
     var actionButtons: [ActionOverButton] {
         [
-        ActionOverButton(title: "Pending", type: .normal) {
-            self.viewModel.changeFilter(filterIndex: 1)
-        },
-        ActionOverButton(title: "Complete", type: .normal) {
-            self.viewModel.changeFilter(filterIndex: 2)
-        },
-        ActionOverButton(title: "Added By Me", type: .normal) {
-            self.viewModel.changeFilter(filterIndex: 3)
-        },
-        ActionOverButton(title: "Remove Filter", type: .normal) {
-            self.viewModel.changeFilter(filterIndex: 0)
-        },
-        ActionOverButton(title: "Cancel", type: .cancel) {
-            self.showFilterMenu = false
+            ActionOverButton(title: "Pending", type: .normal) {
+                self.viewModel.changeFilter(filterIndex: 1)
+            },
+            ActionOverButton(title: "Complete", type: .normal) {
+                self.viewModel.changeFilter(filterIndex: 2)
+            },
+            ActionOverButton(title: "Added By Me", type: .normal) {
+                self.viewModel.changeFilter(filterIndex: 3)
+            },
+            ActionOverButton(title: "Remove Filter", type: .normal) {
+                self.viewModel.changeFilter(filterIndex: 0)
+            },
+            ActionOverButton(title: "Cancel", type: .cancel) {
+                self.showFilterMenu = false
             }
         ]
     }
@@ -94,11 +95,11 @@ struct EditDistrictsMasterView: View {
         return IpadAndMacConfiguration(anchor: UnitPoint.topTrailing, arrowEdge: .trailing)
     }()
     
-//    func getConfig() -> IpadAndMacConfiguration {
-//        var anchor = UnitPoint.topTrailing
-//        anchor.x -= 100
-//        return IpadAndMacConfiguration(anchor: anchor, arrowEdge: .trailing)
-//    }
+    //    func getConfig() -> IpadAndMacConfiguration {
+    //        var anchor = UnitPoint.topTrailing
+    //        anchor.x -= 100
+    //        return IpadAndMacConfiguration(anchor: anchor, arrowEdge: .trailing)
+    //    }
     
     var addDistrictButton: some View {
         return Button(action: {
@@ -108,6 +109,8 @@ struct EditDistrictsMasterView: View {
         }) {
             NavigationLink(destination: EditDistrictDetailView( districtIndex: self.addedDistrictIndex, newFlag: true), isActive: self.$shouldNavigate) {
                 Text("Add District")
+                    .font(.largeTitle)
+                    .padding()
                     .frame(maxWidth: .infinity)
                     .padding()
                     .foregroundColor(Color.white)
