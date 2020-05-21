@@ -14,7 +14,7 @@ struct Team: Encodable, Hashable, Identifiable {
     var id: Int { hashValue }
     
     let name: String
-    let leader: String
+    let leader: User
     let members: [User]
     var installations: [Installation]
     
@@ -26,7 +26,7 @@ struct Team: Encodable, Hashable, Identifiable {
     }
     
     init(name: String = "",
-         leader: String = "",
+         leader: User = User(uid: "", name: "", email: "", phone: ""),
          members: [User] = [],
          installations: [Installation] = []) {
         self.name = name
@@ -55,7 +55,7 @@ extension Team: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         name = try container.decode(String.self, forKey: .name)
-        leader = try container.decode(String.self, forKey: .leader)
+        leader = try container.decode(User.self, forKey: .leader)
         members = try container.decode([User].self, forKey: .members)
         installations = try container.decode([Installation].self, forKey: .installations)
     }
