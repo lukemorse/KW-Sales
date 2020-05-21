@@ -31,8 +31,8 @@ struct PodNodeView: Identifiable, Hashable, Equatable, View {
             .resizable()
             .scaledToFit()
             .frame(
-                width: self.pod.podType == .horizontal_hallway ? 25 : 15,
-                height: self.pod.podType == .vertical_hallway ? 25 : 15)
+            width: self.pod.podType == .horizontal_hallway ? 8 : 5,
+            height: self.pod.podType == .vertical_hallway ? 8 : 5)
             .position(pod.position)
             .colorMultiply(Color.red)
     }

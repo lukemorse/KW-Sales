@@ -64,7 +64,7 @@ struct TestDB {
         result.districtContactPerson = "Jonathan"
         result.districtEmail = "Jonathan@test.com"
         result.districtPhoneNumber = "555-123-4413"
-        result.districtOfficeAddress = GeoPoint(latitude: 23, longitude: 13)
+        result.districtOfficeAddress = ""
         result.numPodsNeeded = 150
         result.startDate = Date()
         result.implementationPlan = [testInstallation1,testInstallation2]

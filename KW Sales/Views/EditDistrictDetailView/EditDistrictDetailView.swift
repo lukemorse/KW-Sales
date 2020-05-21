@@ -63,8 +63,9 @@ struct EditDistrictDetailView: View {
                     districtContactPersonField
                     districtEmailField
                     districtPhoneField
-                    AddressSearchBar(labelText: "District Office Address", locationSearchService: locationSearchService)
-                        .padding(.bottom, keyboard.currentHeight)
+                    districtAddressField
+//                    AddressSearchBar(labelText: "District Office Address", locationSearchService: locationSearchService)
+//                        .padding(.bottom, keyboard.currentHeight)
                 }
             }
             
@@ -175,6 +176,15 @@ extension EditDistrictDetailView {
         }
     }
     
+    var districtAddressField: some View {
+        VStack(alignment: .leading) {
+            Text("District Office Address")
+                .font(.headline)
+            TextField("Enter District Office Address", text: self.mainViewModel.getDistrict(index: self.districtIndex).districtOfficeAddress)
+                .padding(.all)
+        }
+    }
+    
     var numPreKSchoolsPicker: some View {
         VStack(alignment: .leading) {
             Text("Number of Pre-K Schools")
@@ -272,7 +282,7 @@ extension EditDistrictDetailView {
         return district.districtContactPerson.isEmpty ||
             district.districtEmail.isEmpty ||
             district.districtPhoneNumber.isEmpty ||
-            district.districtOfficeAddress == GeoPoint(latitude: 0, longitude: 0)
+            district.districtOfficeAddress.isEmpty
     }
 }
 
