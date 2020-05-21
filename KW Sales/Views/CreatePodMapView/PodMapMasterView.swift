@@ -12,6 +12,7 @@ struct PodMapMasterView: View {
     @ObservedObject var viewModel: InstallationViewModel
     @State var selectedImageIndex = 0
     @State var selection: Int?
+    @State var showSaveAlert = false
     
     var body : some View {
         let array = self.getImageArrayWithPlusSign().chunked(into: 2)
@@ -33,11 +34,19 @@ struct PodMapMasterView: View {
             self.viewModel.downloadFloorplans()
         }
         .navigationBarItems(trailing: saveButton)
+        .alert(isPresented: self.$showSaveAlert) {
+            Alert(title: Text("Saved POD Maps"))
+        }
     }
     
     var saveButton: some View {
-        Text("Save")
+        Button(action: {
+            self.showSaveAlert = true
+        }) {
+            Text("Save")
             .foregroundColor(.blue)
+        }
+        
     }
     
     func getImageArrayWithPlusSign() -> [Image] {

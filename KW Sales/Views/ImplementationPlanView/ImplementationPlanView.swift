@@ -9,9 +9,10 @@
 import SwiftUI
 
 struct ImplementationPlanView: View {
-
+    
     @EnvironmentObject var mainViewModel: MainViewModel
     @Binding var district: District
+    @State var showSaveAlert = false
     let districtIndex: Int
     
     var body: some View {
@@ -29,7 +30,20 @@ struct ImplementationPlanView: View {
                     .foregroundColor(Color.blue)
             }
         }
-        .navigationBarTitle("Implementation Plan")   
+        .navigationBarItems(trailing: saveButton)
+        .navigationBarTitle("Implementation Plan")
+        .alert(isPresented: self.$showSaveAlert) {
+            Alert(title: Text("Saved Implementation Plan"))
+        }
+    }
+    
+    var saveButton: some View {
+        Button(action: {
+            self.showSaveAlert = true
+        }) {
+            Text("Save")
+                .foregroundColor(Color.blue)
+        }
     }
 }
 

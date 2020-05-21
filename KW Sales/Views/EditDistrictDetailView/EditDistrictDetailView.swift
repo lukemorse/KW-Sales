@@ -65,6 +65,7 @@ struct EditDistrictDetailView: View {
                     districtPhoneField
                     AddressSearchBar(labelText: "District Office Address", locationSearchService: locationSearchService)
                         .padding(.bottom, keyboard.currentHeight)
+                    
                 }
             }
             
