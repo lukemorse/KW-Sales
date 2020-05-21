@@ -68,6 +68,7 @@ class LocationSearchService: NSObject, ObservableObject, MKLocalSearchCompleterD
     }
     
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
+        print(completer.results)
         self.completions = completer.results
     }
 }
@@ -94,7 +95,7 @@ struct AddressSearchBar: View {
                     }
                     Spacer()
                 }
-            } else {
+            } else if !locationSearchService.completions.isEmpty {
                 List(locationSearchService.completions) { completion in
                     VStack(alignment: .leading) {
                         Text(completion.title)
@@ -112,6 +113,7 @@ struct AddressSearchBar: View {
                     }
                 }
             }
+            Spacer()
         }
     }
     

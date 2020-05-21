@@ -63,8 +63,11 @@ struct EditDistrictDetailView: View {
                     districtContactPersonField
                     districtEmailField
                     districtPhoneField
-                    AddressSearchBar(labelText: "District Office Address", locationSearchService: locationSearchService)
-                        .padding(.bottom, keyboard.currentHeight)
+                    NavigationLink(destination: AddressSearchBar(labelText: "District Office Address", locationSearchService: locationSearchService)) {
+                        Text(locationSearchService.completions.count > 0 ? locationSearchService.completions[0].title : "choose address")
+                    }
+//                    AddressSearchBar(labelText: "District Office Address", locationSearchService: locationSearchService)
+                        
                     
                 }
             }
@@ -75,7 +78,13 @@ struct EditDistrictDetailView: View {
                 }
             }
             
-            NavigationLink(destination: ImplementationPlanView(district: self.mainViewModel.getDistrict(index: districtIndex), districtIndex: self.districtIndex)
+//            NavigationLink(destination: ImplementationPlanView(district: self.mainViewModel.getDistrict(index: districtIndex), districtIndex: self.districtIndex)
+//            ) {
+//                Text("Implementation Plan")
+//                    .foregroundColor(Color.blue)
+//            }
+            
+            NavigationLink(destination: MockImplementationPlanView()
             ) {
                 Text("Implementation Plan")
                     .foregroundColor(Color.blue)
@@ -104,6 +113,7 @@ struct EditDistrictDetailView: View {
                 self.numPodsNeeded = self.mainViewModel.getDistrict(index: self.districtIndex).numPodsNeeded.wrappedValue
                 self.numPodsString = "\(self.numPodsNeeded)"
             }
+            print("Selected: \(self.locationSearchService.selectedAddress)")
         }
     }
     

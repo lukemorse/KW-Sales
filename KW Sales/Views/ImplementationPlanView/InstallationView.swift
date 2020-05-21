@@ -28,7 +28,7 @@ struct InstallationView: View {
             if !viewModel.installation.schoolName.isEmpty {
                 expandedButton
             }
-            
+
             if isExpanded {
                 teamPicker()
                 formItem(with: $viewModel.installation.schoolName, label: "School Name")
@@ -38,10 +38,11 @@ struct InstallationView: View {
                 formItem(with: $viewModel.installation.numRooms, label: "Number of Rooms")
                 numPodPicker
                 formItem(with: $viewModel.installation.schoolContact, label: "School Contact Person")
-                
-                AddressSearchBar(labelText: "School Address", locationSearchService: locationSearchService)
-                    .padding(.bottom, keyboard.currentHeight)
-                
+
+                NavigationLink(destination: AddressSearchBar(labelText: "District Office Address", locationSearchService: locationSearchService)) {
+                    Text(locationSearchService.completions.count > 0 ? locationSearchService.completions[0].title : "choose address")
+                }
+
                 NavigationLink(destination: PodMapMasterView(viewModel: self.viewModel)) {
                     Text("📍 Pod Maps")
                         .font(.title)

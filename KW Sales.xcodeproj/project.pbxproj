@@ -52,6 +52,7 @@
 		A3F4259A24475DB8004D2CCE /* SendPodOrderButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F4259924475DB8004D2CCE /* SendPodOrderButtonView.swift */; };
 		A3F4259C24475E4F004D2CCE /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F4259B24475E4F004D2CCE /* MailView.swift */; };
 		AF3C1D24247575B6008BC1B9 /* ActionOver in Frameworks */ = {isa = PBXBuildFile; productRef = AF3C1D23247575B6008BC1B9 /* ActionOver */; };
+		AF6B10FA2476D9F6005BFE5A /* MockImplementationPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6B10F92476D9F6005BFE5A /* MockImplementationPlanView.swift */; };
 		AF6FA3FF2475D65D009FD719 /* TestSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6FA3FE2475D65D009FD719 /* TestSearchBar.swift */; };
 		C0BA6CE5438A0624E1669621 /* Pods_KW_SalesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54DB61A8258D93544EE8F4D6 /* Pods_KW_SalesTests.framework */; };
 /* End PBXBuildFile section */
@@ -127,6 +128,7 @@
 		A3F4259924475DB8004D2CCE /* SendPodOrderButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPodOrderButtonView.swift; sourceTree = "<group>"; };
 		A3F4259B24475E4F004D2CCE /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		A9F6FC5B3B907EB6981549FC /* Pods_KW_Sales.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KW_Sales.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF6B10F92476D9F6005BFE5A /* MockImplementationPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockImplementationPlanView.swift; sourceTree = "<group>"; };
 		AF6FA3FE2475D65D009FD719 /* TestSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSearchBar.swift; sourceTree = "<group>"; };
 		B3F10BB24EC3F6484A435780 /* Pods-KW Sales.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KW Sales.release.xcconfig"; path = "Target Support Files/Pods-KW Sales/Pods-KW Sales.release.xcconfig"; sourceTree = "<group>"; };
 		EAF76A91E66C7CB5B06866F6 /* Pods-KW SalesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KW SalesTests.debug.xcconfig"; path = "Target Support Files/Pods-KW SalesTests/Pods-KW SalesTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				A3A2F0F724478D8400079243 /* ImplementationPlanView.swift */,
+				AF6B10F92476D9F6005BFE5A /* MockImplementationPlanView.swift */,
 				A30F4BF6244530A800B59F8B /* InstallationView.swift */,
 				AF6FA3FE2475D65D009FD719 /* TestSearchBar.swift */,
 				A368EA5E244DE82B00FE7685 /* InstallationViewModel.swift */,
@@ -604,6 +607,7 @@
 				A38C39B72447F034005BECFB /* CreatePodMapView.swift in Sources */,
 				A3A2F0F824478D8400079243 /* ImplementationPlanView.swift in Sources */,
 				A3F4259A24475DB8004D2CCE /* SendPodOrderButtonView.swift in Sources */,
+				AF6B10FA2476D9F6005BFE5A /* MockImplementationPlanView.swift in Sources */,
 				A3EE48D52444FFB000C6A554 /* PendingDetailView.swift in Sources */,
 				A30C9B6D2444C1C80049E4FC /* SceneDelegate.swift in Sources */,
 				A30C9B6F2444C1C80049E4FC /* LoginView.swift in Sources */,
