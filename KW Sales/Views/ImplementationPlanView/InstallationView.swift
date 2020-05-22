@@ -85,12 +85,14 @@ extension InstallationView {
     
     var expandedButton: some View {
         return HStack {
-            Spacer()
             Text(viewModel.installation.schoolName)
                 .foregroundColor(Color.white)
                 .padding()
-                .multilineTextAlignment(.center)
             Spacer()
+                statusIndicator
+                    .padding()
+                    .font(.title)
+                
         }
         .onTapGesture {
             self.isExpanded.toggle()
@@ -98,6 +100,19 @@ extension InstallationView {
         .background(Color.blue)
         .cornerRadius(5)
         .shadow(radius: 5)
+    }
+    
+    var statusIndicator: some View {
+        if viewModel.installation.status == InstallationStatus.complete {
+            return Image(systemName: "checkmark.square.fill")
+                .foregroundColor(Color.green)
+        } else if viewModel.installation.status == InstallationStatus.inProgress {
+            return Image(systemName: "ellipsis.circle.fill")
+                .foregroundColor(Color.yellow)
+        } else {
+            return Image(systemName: "square")
+            .foregroundColor(Color.black)
+        }
     }
     
     func formItem(with name: Binding<String>, label: String) -> some
@@ -196,7 +211,12 @@ extension InstallationView {
 
 struct InstallationView_Previews: PreviewProvider {
     static var previews: some View {
-        InstallationView(index: 0, viewModel: InstallationViewModel(installation: Installation())   , locationSearchService: LocationSearchService(), isExpanded: true)
+        var installation = Installation()
+        installation.status = .complete
+        installation.schoolName = "Fancy School"
+        return Form {
+        InstallationView(index: 0, viewModel: InstallationViewModel(installation: installation)   , locationSearchService: LocationSearchService(), isExpanded: true).environmentObject(MainViewModel())
+        }
     }
 }
 
