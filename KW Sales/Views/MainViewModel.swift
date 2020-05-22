@@ -40,9 +40,8 @@ class MainViewModel: ObservableObject {
                                 self.installationViewModels[district.districtName] = [viewModel]
                             }
                         }
-                        
                     } catch let error {
-                        print(error.localizedDescription)
+                        print(error)
                     }
                 }
                 self.filteredDistricts = self.districts
@@ -58,7 +57,6 @@ class MainViewModel: ObservableObject {
             } else {
                 for document in snapshot!.documents {
                     let team = try! FirestoreDecoder().decode(Team.self, from: document.data())
-                    print(team.name)
                     self.teams.append(team)
                 }
             }
