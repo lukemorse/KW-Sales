@@ -8,17 +8,25 @@
 
 import SwiftUI
 
-//testing
-let correctUsername = "test"
-let correctPassword = "1234"
-
 struct StartView: View {
+    @EnvironmentObject var mainViewModel: MainViewModel
     @State private var isLoggedIn = false
     @State private var showingLoginAlert = false
+    @State var loggedInUser: User?
+    
     var body: some View {
         Group {
             isLoggedIn ? AnyView(MainView()) : AnyView(LoginView { (username, password, callBack: (Bool) -> Void) in
-                let result = username == correctUsername && password == correctPassword
+                var result = false
+                let adjustedUsername = username.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+                
+                if LogInData.data.keys.contains(adjustedUsername) {
+                    if LogInData.data[adjustedUsername] == password {
+                        result = true
+                        self.mainViewModel.currentUser = adjustedUsername
+                    }
+                }
+//                let result = username == correctUsername && password == correctPassword
                 self.setLoggedIn(newVal: result)
                 if !result {
                     self.showingLoginAlert = true

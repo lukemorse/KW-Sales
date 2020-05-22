@@ -17,10 +17,11 @@ struct LoginView: View {
     
     var body: some View {
         VStack(spacing: 20.0) {
-            Image("Logo")
+            Image("Launch Image")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 125, alignment: .center)
+                .frame(width: 300)
+//                .frame(width: 125, alignment: .center)
             TextField("Enter email/username", text: $username)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .textContentType(.oneTimeCode)
@@ -30,7 +31,6 @@ struct LoginView: View {
             .textFieldStyle(RoundedBorderTextFieldStyle())
             Button(action: {
                 self.attemptLogin()
-                
             }) {
                 Text("Submit")
                     .fontWeight(.bold)
