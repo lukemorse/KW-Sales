@@ -94,10 +94,10 @@ extension InstallationView {
                     .font(.title)
                 
         }
-        .onTapGesture {
-            self.isExpanded.toggle()
-        }
         .background(Color.blue)
+            .onTapGesture {
+                self.isExpanded.toggle()
+            }
         .cornerRadius(5)
         .shadow(radius: 5)
     }
