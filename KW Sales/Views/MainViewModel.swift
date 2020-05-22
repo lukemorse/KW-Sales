@@ -58,8 +58,8 @@ class MainViewModel: ObservableObject {
             } else {
                 for document in snapshot!.documents {
                     let team = try! FirestoreDecoder().decode(Team.self, from: document.data())
+                    print(team.name)
                     self.teams.append(team)
-                    print(team)
                 }
             }
         }

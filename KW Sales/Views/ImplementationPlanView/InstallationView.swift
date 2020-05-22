@@ -132,12 +132,12 @@ extension InstallationView {
             Picker(selection:
                 Binding<Int>(
                     get: {self.teamIndex},
-                    set: {
-                        self.teamIndex = $0
-                        self.viewModel.installation.team = self.mainViewModel.teams[$0]
+                    set: { index in
+                        self.teamIndex = index
+                        self.viewModel.installation.team = self.mainViewModel.teams[index]
                 }),
                 label:
-                Text(viewModel.installation.team.name),
+                Text(""),
                 content: {
                     ForEach(0..<self.mainViewModel.teams.count, id: \.self) { idx in
                         Text(self.mainViewModel.teams[idx].name).tag(idx)
