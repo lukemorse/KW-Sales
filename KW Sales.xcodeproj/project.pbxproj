@@ -52,7 +52,7 @@
 		A3F4259A24475DB8004D2CCE /* SendPodOrderButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F4259924475DB8004D2CCE /* SendPodOrderButtonView.swift */; };
 		A3F4259C24475E4F004D2CCE /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F4259B24475E4F004D2CCE /* MailView.swift */; };
 		AF3C1D24247575B6008BC1B9 /* ActionOver in Frameworks */ = {isa = PBXBuildFile; productRef = AF3C1D23247575B6008BC1B9 /* ActionOver */; };
-		AFC83A7F2478159700C02C10 /* LogInData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC83A7E2478159700C02C10 /* LogInData.swift */; };
+		AFC83A8224782EFC00C02C10 /* LogInData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC83A7E2478159700C02C10 /* LogInData.swift */; };
 		C0BA6CE5438A0624E1669621 /* Pods_KW_SalesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54DB61A8258D93544EE8F4D6 /* Pods_KW_SalesTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -127,7 +127,7 @@
 		A3F4259924475DB8004D2CCE /* SendPodOrderButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPodOrderButtonView.swift; sourceTree = "<group>"; };
 		A3F4259B24475E4F004D2CCE /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		A9F6FC5B3B907EB6981549FC /* Pods_KW_Sales.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KW_Sales.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AFC83A7E2478159700C02C10 /* LogInData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInData.swift; sourceTree = "<group>"; };
+		AFC83A7E2478159700C02C10 /* LogInData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LogInData.swift; path = "KW Sales/LogInData.swift"; sourceTree = SOURCE_ROOT; };
 		B3F10BB24EC3F6484A435780 /* Pods-KW Sales.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KW Sales.release.xcconfig"; path = "Target Support Files/Pods-KW Sales/Pods-KW Sales.release.xcconfig"; sourceTree = "<group>"; };
 		EAF76A91E66C7CB5B06866F6 /* Pods-KW SalesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KW SalesTests.debug.xcconfig"; path = "Target Support Files/Pods-KW SalesTests/Pods-KW SalesTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -215,6 +215,7 @@
 				A336F853247476D6008196C5 /* TestDB.swift */,
 				A3295BD0244A044A00F26E1F /* CSVTest.swift */,
 				A3EE48CE2444D5C700C6A554 /* Constants.swift */,
+				AFC83A7E2478159700C02C10 /* LogInData.swift */,
 				A30C9B702444C1CB0049E4FC /* Assets.xcassets */,
 				A3B133AB246061C80082A618 /* AppIcon.appiconset */,
 				A30C9B752444C1CB0049E4FC /* LaunchScreen.storyboard */,
@@ -335,7 +336,6 @@
 				A39878D4246C3936000F99AC /* User.swift */,
 				A3AD363A2452677200BCDA4D /* Installation.swift */,
 				A30A7881245A01CA00271993 /* Pod.swift */,
-				AFC83A7E2478159700C02C10 /* LogInData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -575,12 +575,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFC83A8224782EFC00C02C10 /* LogInData.swift in Sources */,
 				A3EE48CF2444D5C700C6A554 /* Constants.swift in Sources */,
 				A30C9B6B2444C1C80049E4FC /* AppDelegate.swift in Sources */,
 				A3EE48D12444D9DC00C6A554 /* EditDistrictDetailView.swift in Sources */,
 				A3557C4E244A424200C747FE /* StartView.swift in Sources */,
 				A3EE48CD2444D3E500C6A554 /* MainView.swift in Sources */,
-				AFC83A7F2478159700C02C10 /* LogInData.swift in Sources */,
 				A30A7882245A01CA00271993 /* Pod.swift in Sources */,
 				A3AD36392452165D00BCDA4D /* PendingListViewModel.swift in Sources */,
 				A38206E0246F13DE0078496D /* KeyboardResponder.swift in Sources */,

@@ -12,7 +12,6 @@ struct StartView: View {
     @EnvironmentObject var mainViewModel: MainViewModel
     @State private var isLoggedIn = false
     @State private var showingLoginAlert = false
-    @State var loggedInUser: User?
     
     var body: some View {
         Group {
