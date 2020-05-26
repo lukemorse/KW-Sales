@@ -13,7 +13,7 @@ import CodableFirebase
 struct Team: Encodable, Hashable, Identifiable {
     var id: Int { hashValue }
     
-    let name: String
+    var name: String
     let leader: User
     let members: [User]
     var installations: [Installation]

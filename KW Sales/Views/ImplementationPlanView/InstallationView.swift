@@ -21,7 +21,6 @@ struct InstallationView: View {
     @State var isExpanded: Bool = true
     @State private var numPods = 0
     @State private var numPodsString = ""
-    @State var teamIndex = 0
     
     var body: some View {
         Section {
@@ -57,7 +56,6 @@ struct InstallationView: View {
                 self.numPods = self.viewModel.installation.numPods
                 self.numPodsString = "\(self.numPods)"
             }
-            self.updateTeamIndex()
         }
     }
     
@@ -144,19 +142,13 @@ extension InstallationView {
         return VStack(alignment: .leading) {
             Text("Assigned Team")
                 .font(.headline)
-
             Picker(selection:
-                Binding<Int>(
-                    get: {self.teamIndex},
-                    set: { index in
-                        self.teamIndex = index
-                        self.viewModel.installation.team = self.mainViewModel.teams[index]
-                }),
+                $viewModel.installation.team,
                 label:
                 Text(""),
                 content: {
-                    ForEach(0..<self.mainViewModel.teams.count, id: \.self) { idx in
-                        Text(self.mainViewModel.teams[idx].name).tag(idx)
+                    ForEach(self.mainViewModel.teams, id: \.self) { team in
+                        Text(team.name).tag(team.name)
                     }
             })}
     }
@@ -208,24 +200,28 @@ extension InstallationView {
         
         return formatter.string(from: date as Date)
     }
-    
-    func updateTeamIndex() {
-        for (index, team) in self.mainViewModel.teams.enumerated() {
-            if self.viewModel.installation.team.name == team.name {
-                self.teamIndex = index
-            }
-        }
-        self.teamIndex = 0
-    }
 }
 
 struct InstallationView_Previews: PreviewProvider {
     static var previews: some View {
+        
+        let mvm = MainViewModel()
+        var team1 = Team()
+        team1.name = "Team one"
+        var team2 = Team()
+        team2.name = "Team two"
+        mvm.teams = [team1, team2]
+        
         var installation = Installation()
         installation.status = .complete
         installation.schoolName = "Fancy School"
-        return Form {
-        InstallationView(index: 0, viewModel: InstallationViewModel(installation: installation)   , locationSearchService: LocationSearchService(), isExpanded: true).environmentObject(MainViewModel())
+        installation.team = mvm.teams[1]
+        
+        
+        return NavigationView {
+            Form {
+                InstallationView(index: 0, viewModel: InstallationViewModel(installation: installation)   , locationSearchService: LocationSearchService(), isExpanded: true).environmentObject(mvm)
+            }
         }
     }
 }
