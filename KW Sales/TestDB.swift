@@ -12,8 +12,9 @@ import Firebase
 struct TestDB {
     static var testInstallation1: Installation {
         var result = Installation()
-        result.address = GeoPoint(latitude: 44, longitude: 19)
-        result.team = Team(name: "Team 1", leader: "Leader 1", members: [User(uid: UUID().uuidString, name: "Sarah", email: "Sarah@test.com", phone: "333-444-1423")], installations: [])
+//        result.address = GeoPoint(latitude: 44, longitude: 19)
+        result.address = ""
+        result.team = Team(name: "Team 1", leader: User(uid: "", name: "", email: "", phone: ""), members: [User(uid: UUID().uuidString, name: "Sarah", email: "Sarah@test.com", phone: "333-444-1423")], installations: [])
         result.status = .notStarted
         result.schoolType = .elementary
         result.districtContact = "Jerry"
@@ -32,8 +33,8 @@ struct TestDB {
     
     static var testInstallation2: Installation {
         var result = Installation()
-        result.address = GeoPoint(latitude: 44, longitude: 19)
-        result.team = Team(name: "Team 1", leader: "Leader 1", members: [User(uid: UUID().uuidString, name: "Sarah", email: "Sarah@test.com", phone: "333-444-1423")], installations: [])
+        result.address = ""
+        result.team = Team(name: "Team 1", leader: User(uid: "", name: "", email: "", phone: ""), members: [User(uid: UUID().uuidString, name: "Sarah", email: "Sarah@test.com", phone: "333-444-1423")], installations: [])
         result.status = .complete
         result.schoolType = .elementary
         result.districtContact = "Jerry"
@@ -63,7 +64,7 @@ struct TestDB {
         result.districtContactPerson = "Jonathan"
         result.districtEmail = "Jonathan@test.com"
         result.districtPhoneNumber = "555-123-4413"
-        result.districtOfficeAddress = GeoPoint(latitude: 23, longitude: 13)
+        result.districtOfficeAddress = ""
         result.numPodsNeeded = 150
         result.startDate = Date()
         result.implementationPlan = [testInstallation1,testInstallation2]

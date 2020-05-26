@@ -63,12 +63,9 @@ struct EditDistrictDetailView: View {
                     districtContactPersonField
                     districtEmailField
                     districtPhoneField
-                    NavigationLink(destination: AddressSearchBar(labelText: "District Office Address", locationSearchService: locationSearchService)) {
-                        Text(locationSearchService.completions.count > 0 ? locationSearchService.completions[0].title : "choose address")
-                    }
+                    districtAddressField
 //                    AddressSearchBar(labelText: "District Office Address", locationSearchService: locationSearchService)
-                        
-                    
+//                        .padding(.bottom, keyboard.currentHeight)
                 }
             }
             
@@ -78,13 +75,7 @@ struct EditDistrictDetailView: View {
                 }
             }
             
-//            NavigationLink(destination: ImplementationPlanView(district: self.mainViewModel.getDistrict(index: districtIndex), districtIndex: self.districtIndex)
-//            ) {
-//                Text("Implementation Plan")
-//                    .foregroundColor(Color.blue)
-//            }
-            
-            NavigationLink(destination: MockImplementationPlanView()
+            NavigationLink(destination: ImplementationPlanView(district: self.mainViewModel.getDistrict(index: districtIndex), districtIndex: self.districtIndex)
             ) {
                 Text("Implementation Plan")
                     .foregroundColor(Color.blue)
@@ -113,7 +104,6 @@ struct EditDistrictDetailView: View {
                 self.numPodsNeeded = self.mainViewModel.getDistrict(index: self.districtIndex).numPodsNeeded.wrappedValue
                 self.numPodsString = "\(self.numPodsNeeded)"
             }
-            print("Selected: \(self.locationSearchService.selectedAddress)")
         }
     }
     
@@ -182,6 +172,15 @@ extension EditDistrictDetailView {
             Text("District Name")
                 .font(.headline)
             TextField("Enter District Name", text: self.mainViewModel.getDistrict(index: self.districtIndex).districtName)
+                .padding(.all)
+        }
+    }
+    
+    var districtAddressField: some View {
+        VStack(alignment: .leading) {
+            Text("District Office Address")
+                .font(.headline)
+            TextField("Enter District Office Address", text: self.mainViewModel.getDistrict(index: self.districtIndex).districtOfficeAddress)
                 .padding(.all)
         }
     }
@@ -283,7 +282,7 @@ extension EditDistrictDetailView {
         return district.districtContactPerson.isEmpty ||
             district.districtEmail.isEmpty ||
             district.districtPhoneNumber.isEmpty ||
-            district.districtOfficeAddress == GeoPoint(latitude: 0, longitude: 0)
+            district.districtOfficeAddress.isEmpty
     }
 }
 

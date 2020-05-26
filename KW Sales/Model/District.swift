@@ -14,6 +14,7 @@ import CodableFirebase
 
 struct District: Encodable {
     var districtID: String
+    var uploadedBy: String
     var districtName: String
     var readyToInstall: Bool
     var numPreKSchools: Int
@@ -23,13 +24,14 @@ struct District: Encodable {
     var districtContactPerson: String
     var districtEmail: String
     var districtPhoneNumber: String
-    var districtOfficeAddress: GeoPoint
+    var districtOfficeAddress: String
     var numPodsNeeded: Int
     var startDate: Date
     var implementationPlan: [Installation]
     
     init() {
         self.districtID = UUID().uuidString
+        self.uploadedBy = ""
         self.districtName = ""
         self.readyToInstall = false
         self.numPreKSchools = 0
@@ -39,7 +41,7 @@ struct District: Encodable {
         self.districtContactPerson = ""
         self.districtEmail = ""
         self.districtPhoneNumber = ""
-        self.districtOfficeAddress = Constants.chicagoGeoPoint
+        self.districtOfficeAddress = ""
         self.numPodsNeeded = 0
         self.startDate = Date()
         self.implementationPlan = []
@@ -47,6 +49,7 @@ struct District: Encodable {
 
     private enum CodingKeys: String, CodingKey {
         case districtID
+        case uploadedBy
         case districtName
         case readyToInstall
         case numPreKSchools
@@ -65,6 +68,7 @@ struct District: Encodable {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(districtID, forKey: .districtID)
+        try container.encode(uploadedBy, forKey: .uploadedBy)
         try container.encode(districtName, forKey: .districtName)
         try container.encode(readyToInstall, forKey: .readyToInstall)
         try container.encode(numPreKSchools, forKey: .numPreKSchools)
@@ -85,6 +89,7 @@ extension District: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         districtID = try container.decode(String.self, forKey: .districtID)
+        uploadedBy = try container.decode(String.self, forKey: .uploadedBy)
         districtName = try container.decode(String.self, forKey: .districtName)
         readyToInstall = try container.decode(Bool.self, forKey: .readyToInstall)
         numPreKSchools = try container.decode(Int.self, forKey: .numPreKSchools)
@@ -94,7 +99,7 @@ extension District: Decodable {
         districtContactPerson = try container.decode(String.self, forKey: .districtContactPerson)
         districtEmail = try container.decode(String.self, forKey: .districtEmail)
         districtPhoneNumber = try container.decode(String.self, forKey: .districtPhoneNumber)
-        districtOfficeAddress = try container.decode(GeoPoint.self, forKey: .districtOfficeAddress)
+        districtOfficeAddress = try container.decode(String.self, forKey: .districtOfficeAddress)
         numPodsNeeded = try container.decode(Int.self, forKey: .numPodsNeeded)
         implementationPlan = try container.decode([Installation].self, forKey: .implementationPlan)
         

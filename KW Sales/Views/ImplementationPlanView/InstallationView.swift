@@ -28,7 +28,7 @@ struct InstallationView: View {
             if !viewModel.installation.schoolName.isEmpty {
                 expandedButton
             }
-
+            
             if isExpanded {
                 teamPicker()
                 formItem(with: $viewModel.installation.schoolName, label: "School Name")
@@ -38,11 +38,12 @@ struct InstallationView: View {
                 formItem(with: $viewModel.installation.numRooms, label: "Number of Rooms")
                 numPodPicker
                 formItem(with: $viewModel.installation.schoolContact, label: "School Contact Person")
-
-                NavigationLink(destination: AddressSearchBar(labelText: "District Office Address", locationSearchService: locationSearchService)) {
-                    Text(locationSearchService.completions.count > 0 ? locationSearchService.completions[0].title : "choose address")
-                }
-
+                
+                formItem(with: $viewModel.installation.address, label: "School Address")
+                
+//                AddressSearchBar(labelText: "School Address", locationSearchService: locationSearchService)
+//                    .padding(.bottom, keyboard.currentHeight)
+                
                 NavigationLink(destination: PodMapMasterView(viewModel: self.viewModel)) {
                     Text("📍 Pod Maps")
                         .font(.title)
@@ -84,19 +85,34 @@ extension InstallationView {
     
     var expandedButton: some View {
         return HStack {
-            Spacer()
             Text(viewModel.installation.schoolName)
                 .foregroundColor(Color.white)
                 .padding()
-                .multilineTextAlignment(.center)
             Spacer()
-        }
-        .onTapGesture {
-            self.isExpanded.toggle()
+                statusIndicator
+                    .padding()
+                    .font(.title)
+                
         }
         .background(Color.blue)
+            .onTapGesture {
+                self.isExpanded.toggle()
+            }
         .cornerRadius(5)
         .shadow(radius: 5)
+    }
+    
+    var statusIndicator: some View {
+        if viewModel.installation.status == InstallationStatus.complete {
+            return Image(systemName: "checkmark.square.fill")
+                .foregroundColor(Color.green)
+        } else if viewModel.installation.status == InstallationStatus.inProgress {
+            return Image(systemName: "ellipsis.circle.fill")
+                .foregroundColor(Color.yellow)
+        } else {
+            return Image(systemName: "square")
+            .foregroundColor(Color.black)
+        }
     }
     
     func formItem(with name: Binding<String>, label: String) -> some
@@ -131,12 +147,12 @@ extension InstallationView {
             Picker(selection:
                 Binding<Int>(
                     get: {self.teamIndex},
-                    set: {
-                        self.teamIndex = $0
-                        self.viewModel.installation.team = self.mainViewModel.teams[$0]
+                    set: { index in
+                        self.teamIndex = index
+                        self.viewModel.installation.team = self.mainViewModel.teams[index]
                 }),
                 label:
-                Text(viewModel.installation.team.name),
+                Text(""),
                 content: {
                     ForEach(0..<self.mainViewModel.teams.count, id: \.self) { idx in
                         Text(self.mainViewModel.teams[idx].name).tag(idx)
@@ -195,7 +211,12 @@ extension InstallationView {
 
 struct InstallationView_Previews: PreviewProvider {
     static var previews: some View {
-        InstallationView(index: 0, viewModel: InstallationViewModel(installation: Installation())   , locationSearchService: LocationSearchService(), isExpanded: true)
+        var installation = Installation()
+        installation.status = .complete
+        installation.schoolName = "Fancy School"
+        return Form {
+        InstallationView(index: 0, viewModel: InstallationViewModel(installation: installation)   , locationSearchService: LocationSearchService(), isExpanded: true).environmentObject(MainViewModel())
+        }
     }
 }
 

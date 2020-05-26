@@ -170,7 +170,7 @@ struct CreatePodMapView: View {
                         self.nextPodType = .vertical_hallway
                         self.willPlacePod = true
                     }),
-                    .default(Text("Delete PODs"), action: {
+                    .default(Text("Delete POD"), action: {
                         self.willPlacePod = false
                     }),
                     .cancel()])

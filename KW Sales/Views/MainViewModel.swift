@@ -17,6 +17,7 @@ class MainViewModel: ObservableObject {
     @Published var currentFilter = 0
     @Published var teams: [Team] = []
     @Published var numSchools = 0
+    var currentUser = ""
     private var installationViewModels: [String: [InstallationViewModel]] = [:]
     
     //Networking
@@ -39,9 +40,8 @@ class MainViewModel: ObservableObject {
                                 self.installationViewModels[district.districtName] = [viewModel]
                             }
                         }
-                        
                     } catch let error {
-                        print(error.localizedDescription)
+                        print(error)
                     }
                 }
                 self.filteredDistricts = self.districts
@@ -58,7 +58,6 @@ class MainViewModel: ObservableObject {
                 for document in snapshot!.documents {
                     let team = try! FirestoreDecoder().decode(Team.self, from: document.data())
                     self.teams.append(team)
-                    print(team)
                 }
             }
         }
@@ -67,6 +66,7 @@ class MainViewModel: ObservableObject {
     func uploadDistrict(districtIndex: Int, completion: @escaping (_ flag:Bool) -> ()) {
         //encode district file
         var district = self.districts[districtIndex]
+        district.uploadedBy = currentUser
         var implementationPlan: [Installation] = []
         if installationViewModels.keys.contains(district.districtName) {
             if installationViewModels[district.districtName]!.count > 0 {
@@ -174,7 +174,7 @@ extension MainViewModel {
         case 3:
             for district in districts {
                 //replace with user check
-                if true {
+                if district.uploadedBy == self.currentUser {
                     filteredDistricts.append(district)
                     break
                 }

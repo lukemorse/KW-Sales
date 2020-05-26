@@ -14,7 +14,6 @@ import SwiftUI
 
 class InstallationViewModel: ObservableObject {
     @Published var installation: Installation
-    @Published var teamIndex = 0
     @Published var floorPlanImages: [Image] = []
     
     var storageRef: StorageReference

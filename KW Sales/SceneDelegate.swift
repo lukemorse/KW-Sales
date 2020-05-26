@@ -20,9 +20,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
         // Create the SwiftUI view that provides the window contents.
-//        let contentView = NavigationView { Form { InstallationView(index: 0, viewModel: InstallationViewModel(installation: Installation())).environmentObject(mainViewModel)}}
+        
+        mainViewModel.currentUser = "brigittec"
+//        let contentView = StartView().environmentObject(mainViewModel)
         let contentView = MainView().environmentObject(mainViewModel)
-
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

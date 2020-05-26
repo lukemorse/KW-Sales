@@ -19,7 +19,7 @@ struct Installation: Encodable, Identifiable, Hashable  {
     var team: Team
     var status: InstallationStatus
     var schoolType: SchoolType
-    var address: GeoPoint
+    var address: String
     var districtContact: String
     var districtName: String
     var schoolContact: String
@@ -36,7 +36,7 @@ struct Installation: Encodable, Identifiable, Hashable  {
         self.status = .notStarted
         self.team = Team()
         self.schoolType = .elementary
-        self.address = Constants.chicagoGeoPoint
+        self.address = ""
         self.districtContact = ""
         self.districtName = ""
         self.schoolContact = ""
@@ -94,7 +94,7 @@ extension Installation: Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         status = try container.decode(InstallationStatus.self, forKey: .status)
         team = try container.decode(Team.self, forKey: .team)
-        address = try container.decode(GeoPoint.self, forKey: .address)
+        address = try container.decode(String.self, forKey: .address)
         districtContact = try container.decode(String.self, forKey: .districtContact)
         districtName = try container.decode(String.self, forKey: .districtName)
         schoolContact = try container.decode(String.self, forKey: .schoolContact)
