@@ -30,7 +30,7 @@ struct InstallationView: View {
             }
             
             if isExpanded {
-                teamPicker()
+                teamPicker
                 formItem(with: $viewModel.installation.schoolName, label: "School Name")
                 startDatePicker()
                 formItem(with: $viewModel.installation.schoolType, label: "School Type")
@@ -57,6 +57,7 @@ struct InstallationView: View {
                 self.numPods = self.viewModel.installation.numPods
                 self.numPodsString = "\(self.numPods)"
             }
+            self.updateTeamIndex()
         }
     }
     
@@ -139,7 +140,7 @@ extension InstallationView {
             }
     }
     
-    func teamPicker() -> some View {
+    var teamPicker: some View {
         return VStack(alignment: .leading) {
             Text("Assigned Team")
                 .font(.headline)
@@ -206,6 +207,15 @@ extension InstallationView {
         formatter.timeStyle = .medium
         
         return formatter.string(from: date as Date)
+    }
+    
+    func updateTeamIndex() {
+        for (index, team) in self.mainViewModel.teams.enumerated() {
+            if self.viewModel.installation.team.name == team.name {
+                self.teamIndex = index
+            }
+        }
+        self.teamIndex = 0
     }
 }
 
