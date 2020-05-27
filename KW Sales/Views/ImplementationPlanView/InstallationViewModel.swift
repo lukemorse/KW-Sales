@@ -24,22 +24,31 @@ class InstallationViewModel: ObservableObject {
         self.storageRef = Storage.storage().reference()
     }
     
-    func downloadFloorplans() {
-        if installation.floorPlanUrls.count > floorPlanImages.count {
-            for url in installation.floorPlanUrls {
-                Storage.storage().reference(forURL: url).getData(maxSize: INT64_MAX) { (data, error) in
-                    if let error = error {
-                        print(error.localizedDescription)
-                        return
-                    }
-                    DispatchQueue.main.async {
-                        let image = Image(uiImage: UIImage(data: data!)!)
-                        self.floorPlanImages.append(image)
-                    }
-                }
-            }
-        }
-    }
+//    func downloadFloorplans() {
+//        if installation.floorPlanUrls.count > floorPlanImages.count {
+//            for url in installation.floorPlanUrls {
+//                Storage.storage().reference(forURL: url).getData(maxSize: INT64_MAX) { (data, error) in
+//                    if let error = error {
+//                        print(error.localizedDescription)
+//                        return
+//                    }
+//                    DispatchQueue.main.async {
+//                        let image = Image(uiImage: UIImage(data: data!)!)
+//                        self.floorPlanImages.append(image)
+//                    }
+//                }
+//            }
+//        }
+//    }
+    
+//    func downloadFloorplans() {
+//        if installation.floorPlanUrls.count > floorPlanImages.count {
+//            for url in installation.floorPlanUrls {
+//                let image = AsyncImage(url: URL(string: url)!)
+//                self.floorPlanImages.append(image)
+//            }
+//        }
+//    }
 
     func uploadFloorPlan(image: UIImage, index: Int = 0, completion: @escaping (_ flag:Bool) -> ()) {
         guard let data = image.jpegData(compressionQuality: 1.0) else {

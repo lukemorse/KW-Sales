@@ -10,11 +10,13 @@ import SwiftUI
 import FirebaseFirestore
 
 struct CreatePodMapView: View {
+    @Environment(\.imageCache) var cache: ImageCache
     var viewModel: InstallationViewModel
     var floorPlanIndex: Int
+    let shouldOpenImagePicker: Bool
+    @State var image: Image
     
     @State var showImagePicker: Bool = false
-    @State var image: Image?
     @State private var isShowingAlert = false
     @State var isLoading = false
     @State var showingActionSheet = false
@@ -28,22 +30,20 @@ struct CreatePodMapView: View {
     @State var dragSize: CGSize = CGSize.zero
     @State var lastDrag: CGSize = CGSize.zero
     
-    @State var pods: [Pod] = []
+//    @State var pods: [Pod] = []
     @State var willPlacePod: Bool = false
     @State var draggedPodView: PodNodeView?
     @State var nextPodType: PodType = .vertical_hallway
-    @State var podIndex = 0
-    
-    @GestureState private var dragOffset = CGSize.zero
     
     var body: some View {
         VStack {
             ZStack {
-                self.image != nil ? self.image?.resizable() : Image("blankImage").resizable()
+                AsyncImage(url: URL(string: viewModel.installation.floorPlanUrls[floorPlanIndex])!, cache: self.cache, placeholder: Image(systemName: "plus").resizable(), configuration: {$0.resizable()})
+                    .scaledToFit()
                 self.podGroup
                 if isLoading {
                     ActivityIndicator()
-                }   
+                }
             }
             .coordinateSpace(name: "custom")
             .overlay(podPlacementGesture)
@@ -53,10 +53,8 @@ struct CreatePodMapView: View {
             .offset(self.dragSize)
             .sheet(isPresented: $showImagePicker) {
                 ImagePicker(sourceType: .photoLibrary) { image in
-                    self.image = Image(uiImage: image)
-                        .resizable()
                     self.isLoading = true
-                    
+
                     self.viewModel.uploadFloorPlan(image: image, index: self.floorPlanIndex) { success in
                         if success {
                             self.isLoading = false
@@ -68,7 +66,7 @@ struct CreatePodMapView: View {
                     }
                 }
             }
-            
+
             Spacer()
             moveAndScaleButtons
             actionSheetButton
@@ -77,10 +75,9 @@ struct CreatePodMapView: View {
             return Alert(title: Text("Successfully Saved POD Map"))
         }
         .onAppear() {
-            if self.image == nil {
+            if self.shouldOpenImagePicker {
                 self.showImagePicker.toggle()
             }
-            self.getPods()
         }
         .navigationBarItems(trailing: saveButton)
     }
@@ -106,27 +103,27 @@ struct CreatePodMapView: View {
     }
     
     var podGroup: some View {
-        if pods.count > 0 {
-            return AnyView(
-                Group {
-                    ForEach(0..<pods.count, id: \.self) { index in
-                        PodNodeView(pod: self.pods[index])
-                            .onTapGesture {
-                                print("on tap")
-                                if !self.willPlacePod {
-                                    self.pods.remove(at: index)
-                                }
+        if let pods = viewModel.installation.pods[viewModel.installation.floorPlanUrls[floorPlanIndex]] {
+            if pods.count > 0 {
+                return AnyView(
+                    Group {
+                        ForEach(0..<pods.count, id: \.self) { index in
+                            PodNodeView(pod: pods[index])
+                                .onTapGesture {
+                                    print("on tap")
+                                    if !self.willPlacePod {
+                                        self.viewModel.installation.pods[self.viewModel.installation.floorPlanUrls[self.floorPlanIndex]]?.remove(at: index)
+                                    }
+                            }
+                        }
+                        if self.draggedPodView != nil {
+                            self.draggedPodView
                         }
                     }
-                    if self.draggedPodView != nil {
-                        self.draggedPodView
-                    }
-                }
-            )
+                )
+            }
         }
-        else {
-            return AnyView(EmptyView())
-        }
+        return AnyView(EmptyView())
     }
     
     var saveButton: some View {
@@ -177,18 +174,10 @@ struct CreatePodMapView: View {
         })
     }
     
-    func getPods() {
-        let key = floorPlanIndex >= viewModel.installation.floorPlanUrls.count ? "" : viewModel.installation.floorPlanUrls[floorPlanIndex]
-        self.pods = viewModel.installation.pods[key] ?? []
-    }
-    
     func addPod(pod: Pod) {
         if isLoading {
             return
         }
-        self.pods.append(pod)
-        //        self.isPlacingPod = false
-        
         //add to implementation plan
         let key = self.viewModel.installation.floorPlanUrls[floorPlanIndex]
         if self.viewModel.installation.pods.keys.contains(key) {
@@ -268,7 +257,16 @@ extension CreatePodMapView {
 
 
 struct CreatePodMapView_Previews: PreviewProvider {
+    @State static var circleColor = Color.blue
     static var previews: some View {
-        CreatePodMapView(viewModel: InstallationViewModel(installation: Installation()), floorPlanIndex: 0, image: Image("floorPlan"))
+        ZStack {
+//            AsyncImage(url: URL(string: "https://www.roomsketcher.com/wp-content/uploads/2017/08/RoomSketcher-Custom-2D-Floor-Plan-Branding.jpg")!, cache: nil, placeholder: Text("Loading..."), configuration: {$0.resizable()}).scaledToFit()
+            Image("blankImage")
+            Circle().foregroundColor(self.circleColor)
+                .frame(width: 100)
+        }
+        .onAppear() {
+            self.circleColor = Color.red
+        }
     }
 }
