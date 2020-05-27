@@ -35,6 +35,7 @@ class ImageLoader: ObservableObject {
 
         if let image = cache?[url] {
             self.image = image
+            print(image.size.height)
             return
         }
         
