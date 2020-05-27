@@ -39,7 +39,7 @@ struct CreatePodMapView: View {
         VStack {
             ZStack {
                 AsyncImage(url: URL(string: viewModel.installation.floorPlanUrls[floorPlanIndex])!, cache: self.cache, placeholder: Image(systemName: "plus").resizable(), configuration: {$0.resizable()})
-                    .scaledToFit()
+//                    .scaledToFit()
                 self.podGroup
                 if isLoading {
                     ActivityIndicator()
@@ -260,13 +260,11 @@ struct CreatePodMapView_Previews: PreviewProvider {
     @State static var circleColor = Color.blue
     static var previews: some View {
         ZStack {
-//            AsyncImage(url: URL(string: "https://www.roomsketcher.com/wp-content/uploads/2017/08/RoomSketcher-Custom-2D-Floor-Plan-Branding.jpg")!, cache: nil, placeholder: Text("Loading..."), configuration: {$0.resizable()}).scaledToFit()
-            Image("blankImage")
-            Circle().foregroundColor(self.circleColor)
-                .frame(width: 100)
-        }
-        .onAppear() {
-            self.circleColor = Color.red
+            AsyncImage(url: URL(string: "https://www.roomsketcher.com/wp-content/uploads/2017/08/RoomSketcher-Custom-2D-Floor-Plan-Branding.jpg")!, cache: nil, placeholder: Text("Loading..."), configuration: {$0.resizable()})
+//                .scaledToFit()
+//            Image("blankImage")
+//            Circle().foregroundColor(self.circleColor)
+//                .frame(width: 100)
         }
     }
 }
