@@ -79,7 +79,6 @@ class InstallationViewModel: ObservableObject {
                 }
                 
                 let urlString = url.absoluteString
-                self.installation.floorPlanUrls.append(urlString)
                 
                 let data = [
                     "imageURL": urlString,
@@ -93,6 +92,7 @@ class InstallationViewModel: ObservableObject {
                             return
                         }
                         completion(true, urlString)
+                        self.installation.floorPlanUrls.append(urlString)
                         print("successfully added image to database")
                     }
                 }

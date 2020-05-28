@@ -41,8 +41,9 @@ struct PodMapMasterView: View {
                 self.isLoading = true
                 self.viewModel.uploadFloorPlan(image: image) { (success, urlString) in
                     if success {
-//                        let url = URL(string: urlString!)!
-//                        self.cache.setImage(image, url: url)
+                        let url = URL(string: urlString!)!
+                        self.cache.setImage(image, url: url)
+                        self.cache.debugCache()
                         self.isLoading = false
                     } else {
                         self.isLoading = false
@@ -62,10 +63,8 @@ struct PodMapMasterView: View {
     }
     
     func getNavLink(index: Int, size: CGSize) -> some View {
-        let asyncImage = AsyncImage(url: URL(string: self.viewModel.installation.floorPlanUrls[index])!, cache: self.cache, placeholder: Text("Loading..."), configuration:
+        let asyncImage = AsyncImage(url: URL(string: self.viewModel.installation.floorPlanUrls[index])!, cache: self.cache, placeholder: Text("Loading...").padding(), configuration:
         {$0.resizable()})
-        
-        var image: Image = asyncImage.getImage() ?? Image("blankImage")
         
         return NavigationLink(destination: CreatePodMapView(viewModel: self.viewModel, floorPlanIndex: index), tag: index, selection: $selection) {
             asyncImage
@@ -73,8 +72,6 @@ struct PodMapMasterView: View {
                 .border(Color.black)
                 .frame(width: size.width / 2.5)
                 .onTapGesture {
-                    image = asyncImage.getImage() ?? Image("blankImage")
-                    print(image)
                     self.selection = index
             }
         }

@@ -35,7 +35,6 @@ class ImageLoader: ObservableObject {
 
         if let image = cache?[url] {
             self.image = image
-            print(image.size.height)
             return
         }
         
@@ -93,13 +92,6 @@ struct AsyncImage<Placeholder: View>: View {
                 placeholder
             }
         }
-    }
-    
-    public func getImage() -> Image? {
-        if let uiImage = loader.image {
-            return Image(uiImage: uiImage)
-        }
-        return nil
     }
 }
 
