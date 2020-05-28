@@ -14,7 +14,7 @@ import SwiftUI
 
 class InstallationViewModel: ObservableObject {
     @Published var installation: Installation
-    @Published var floorPlanImages: [Image] = []
+//    @Published var floorPlanImages: [Image] = []
     
     var storageRef: StorageReference
     var docRef: DocumentReference?
@@ -50,7 +50,7 @@ class InstallationViewModel: ObservableObject {
 //        }
 //    }
 
-    func uploadFloorPlan(image: UIImage, index: Int = 0, completion: @escaping (_ flag:Bool) -> ()) {
+    func uploadFloorPlan(image: UIImage, completion: @escaping (_ flag:Bool, _ url: String?) -> ()) {
         guard let data = image.jpegData(compressionQuality: 1.0) else {
             print("could not create data from image")
             return
@@ -59,12 +59,12 @@ class InstallationViewModel: ObservableObject {
         let imageRef = Storage.storage().reference().child(Constants.kFloorPlanFolder).child(uuid)
         imageRef.putData(data, metadata: nil) { (metaData, error) in
             if let error = error {
-                print(error.localizedDescription)
+                print(error)
                 return
             }
             imageRef.downloadURL { (url, error) in
                 if let error = error {
-                    print(error.localizedDescription)
+                    print(error)
                     return
                 }
                 guard let url = url else {
@@ -89,10 +89,10 @@ class InstallationViewModel: ObservableObject {
                     parentDocRef.setData(data, merge: true) { (error) in
                         if let error = error {
                             print(error.localizedDescription)
-                            completion(false)
+                            completion(false, nil)
                             return
                         }
-                        completion(true)
+                        completion(true, urlString)
                         print("successfully added image to database")
                     }
                 }

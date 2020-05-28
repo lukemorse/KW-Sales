@@ -12,59 +12,62 @@ struct PodMapMasterView: View {
     @Environment(\.imageCache) var cache: ImageCache
     @ObservedObject var viewModel: InstallationViewModel
     @State var selection: Int?
-    @State var showSaveAlert = false
+    @State var showImagePicker: Bool = false
+    @State var isLoading = false
     
     var body : some View {
         let urlArray = viewModel.installation.floorPlanUrls.chunked(into: 2)
-        return GeometryReader { geometry in
-            ScrollView(.vertical, showsIndicators: true) {
-                VStack {
-                    ForEach(0..<urlArray.count, id: \.self) { row in // create number of rows
-                        HStack {
-                            ForEach(0..<urlArray[row].count, id: \.self) { column in // create 2 columns
-                                self.getNavLink(index: row * 2 + column, size: geometry.size, isNew: false)
-                            }
-                        }.padding()
+        return ZStack {
+            GeometryReader { geometry in
+                ScrollView(.vertical, showsIndicators: true) {
+                    VStack {
+                        ForEach(0..<urlArray.count, id: \.self) { row in // create number of rows
+                            HStack {
+                                ForEach(0..<urlArray[row].count, id: \.self) { column in // create 2 columns
+                                    self.getNavLink(index: row * 2 + column, size: geometry.size)
+                                }
+                            }.padding()
+                        }
+                    }
+                }
+            }
+            if isLoading {
+                ActivityIndicator()
+            }
+        }
+        .navigationBarItems(trailing: addButton)
+        .sheet(isPresented: $showImagePicker) {
+            ImagePicker(sourceType: .photoLibrary) { image in
+                self.isLoading = true
+                self.viewModel.uploadFloorPlan(image: image) { (success, urlString) in
+                    if success {
+//                        let url = URL(string: urlString!)!
+//                        self.cache.setImage(image, url: url)
+                        self.isLoading = false
+                    } else {
+                        self.isLoading = false
+                        print("error uploading image")
                     }
                 }
             }
         }
-        .onAppear() {
-            self.selection = nil
-//            self.viewModel.downloadFloorplans()
-        }
-        .navigationBarItems(trailing: addButton)
-//        .alert(isPresented: self.$showSaveAlert) {
-//            Alert(title: Text("Saved POD Maps"))
-//        }
     }
-    
-//    var saveButton: some View {
-//        Button(action: {
-//            self.showSaveAlert = true
-//        }) {
-//            Text("Save")
-//            .foregroundColor(.blue)
-//        }
-//    }
     
     var addButton: some View {
-        NavigationLink(destination: CreatePodMapView(viewModel: self.viewModel, floorPlanIndex: self.viewModel.floorPlanImages.count, shouldOpenImagePicker: true, image: Image("blankImage") )) {
-            Image(systemName: "plus")
+        Button(action: {
+            self.showImagePicker = true
+        }) {
+            Text("New")
         }
     }
     
-//    func getImageArrayWithPlusSign() -> [Image] {
-//        return viewModel.floorPlanImages + [Image(systemName: "plus")]
-//    }
-    
-    func getNavLink(index: Int, size: CGSize, isNew: Bool) -> some View {
+    func getNavLink(index: Int, size: CGSize) -> some View {
         let asyncImage = AsyncImage(url: URL(string: self.viewModel.installation.floorPlanUrls[index])!, cache: self.cache, placeholder: Text("Loading..."), configuration:
         {$0.resizable()})
         
         var image: Image = asyncImage.getImage() ?? Image("blankImage")
         
-        return NavigationLink(destination: CreatePodMapView(viewModel: self.viewModel, floorPlanIndex: index, shouldOpenImagePicker: isNew, image: image), tag: index, selection: $selection) {
+        return NavigationLink(destination: CreatePodMapView(viewModel: self.viewModel, floorPlanIndex: index), tag: index, selection: $selection) {
             asyncImage
                 .aspectRatio(contentMode: .fit)
                 .border(Color.black)

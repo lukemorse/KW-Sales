@@ -105,11 +105,16 @@ struct AsyncImage<Placeholder: View>: View {
 
 protocol ImageCache {
     subscript(_ url: URL) -> UIImage? { get set }
+    func setImage(_ image: UIImage, url: URL)
     func debugCache()
 }
 
 struct TemporaryImageCache: ImageCache {
     private let cache = NSCache<NSURL, UIImage>()
+    
+    func setImage(_ image: UIImage, url: URL) {
+        cache.setObject(image, forKey: url as NSURL)
+    }
     
     subscript(_ key: URL) -> UIImage? {
         get { cache.object(forKey: key as NSURL) }
