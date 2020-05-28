@@ -11,6 +11,7 @@ import SwiftUI
 struct ImplementationPlanView: View {
     
     @EnvironmentObject var mainViewModel: MainViewModel
+    @ObservedObject private var keyboard = KeyboardResponder()
     @Binding var district: District
     @State var showSaveAlert = false
     let districtIndex: Int
@@ -36,6 +37,7 @@ struct ImplementationPlanView: View {
         .alert(isPresented: self.$showSaveAlert) {
             Alert(title: Text("Saved Implementation Plan"))
         }
+        .padding(.bottom, keyboard.currentHeight)
     }
     
     var saveButton: some View {

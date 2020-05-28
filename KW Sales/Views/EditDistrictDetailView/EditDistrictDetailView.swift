@@ -105,6 +105,7 @@ struct EditDistrictDetailView: View {
                 self.numPodsString = "\(self.numPodsNeeded)"
             }
         }
+        .padding(.bottom, keyboard.currentHeight)
     }
     
     //MARK: - Buttons

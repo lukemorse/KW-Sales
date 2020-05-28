@@ -43,7 +43,6 @@ struct PodMapMasterView: View {
                     if success {
                         let url = URL(string: urlString!)!
                         self.cache.setImage(image, url: url)
-                        self.cache.debugCache()
                         self.isLoading = false
                     } else {
                         self.isLoading = false
