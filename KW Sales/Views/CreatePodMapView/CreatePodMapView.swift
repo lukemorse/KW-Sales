@@ -21,11 +21,9 @@ struct CreatePodMapView: View {
     
     @State var scale: CGFloat = 1.0
     @State var newScaleValue: CGFloat = 1.0
-    @State var lastScaleValue: CGFloat = 1.0
     
     @State var tapPoint: CGPoint = CGPoint.zero
     @State var dragSize: CGSize = CGSize.zero
-    @State var lastDrag: CGSize = CGSize.zero
     
     @State var willPlacePod: Bool = false
     @State var draggedPodView: PodNodeView?
@@ -148,9 +146,6 @@ struct CreatePodMapView: View {
     }
     
     func addPod(pod: Pod) {
-//        if isLoading {
-//            return
-//        }
         //add to implementation plan
         let key = self.viewModel.installation.floorPlanUrls[floorPlanIndex]
         if self.viewModel.installation.pods.keys.contains(key) {

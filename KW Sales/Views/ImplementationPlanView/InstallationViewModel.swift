@@ -14,7 +14,6 @@ import SwiftUI
 
 class InstallationViewModel: ObservableObject {
     @Published var installation: Installation
-//    @Published var floorPlanImages: [Image] = []
     
     var storageRef: StorageReference
     var docRef: DocumentReference?
@@ -24,32 +23,6 @@ class InstallationViewModel: ObservableObject {
         self.storageRef = Storage.storage().reference()
     }
     
-//    func downloadFloorplans() {
-//        if installation.floorPlanUrls.count > floorPlanImages.count {
-//            for url in installation.floorPlanUrls {
-//                Storage.storage().reference(forURL: url).getData(maxSize: INT64_MAX) { (data, error) in
-//                    if let error = error {
-//                        print(error.localizedDescription)
-//                        return
-//                    }
-//                    DispatchQueue.main.async {
-//                        let image = Image(uiImage: UIImage(data: data!)!)
-//                        self.floorPlanImages.append(image)
-//                    }
-//                }
-//            }
-//        }
-//    }
-    
-//    func downloadFloorplans() {
-//        if installation.floorPlanUrls.count > floorPlanImages.count {
-//            for url in installation.floorPlanUrls {
-//                let image = AsyncImage(url: URL(string: url)!)
-//                self.floorPlanImages.append(image)
-//            }
-//        }
-//    }
-
     func uploadFloorPlan(image: UIImage, completion: @escaping (_ flag:Bool, _ url: String?) -> ()) {
         guard let data = image.jpegData(compressionQuality: 1.0) else {
             print("could not create data from image")
@@ -79,10 +52,7 @@ class InstallationViewModel: ObservableObject {
                 }
                 
                 let urlString = url.absoluteString
-                
-                let data = [
-                    "imageURL": urlString,
-                    ]
+                let data = ["imageURL": urlString]
                 
                 if let parentDocRef = self.docRef {
                     parentDocRef.setData(data, merge: true) { (error) in
