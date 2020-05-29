@@ -116,18 +116,6 @@ extension EditDistrictsMasterView {
     private func getIpadMacConfig() -> IpadAndMacConfiguration {
         return IpadAndMacConfiguration(anchor: UnitPoint.topTrailing, arrowEdge: .trailing)
     }
-    
-    var testButton: some View {
-        Button(action: {
-            self.viewModel.addDistrict()
-            self.viewModel.districts[0] = TestDB.district1
-            self.viewModel.uploadDistrict(districtIndex: 0) { (success) in
-                print(success)
-            }
-        }) {
-            Text("TEST")
-        }
-    }
 }
 
 struct EditDistrictTest_Previews: PreviewProvider {

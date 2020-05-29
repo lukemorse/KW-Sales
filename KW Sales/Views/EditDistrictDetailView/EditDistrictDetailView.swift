@@ -86,7 +86,6 @@ struct EditDistrictDetailView: View {
             
         .navigationBarTitle(newFlag ? "New District" : "Edit District")
         .navigationBarItems(trailing: saveButton)
-            //        .navigationBarItems(leading: Image("Logo"), trailing: saveButton)
             
             .alert(isPresented: self.$isShowingAlert) {
                 if self.addDistrictSuccess {
