@@ -40,16 +40,16 @@ struct EditDistrictsMasterView: View {
             ActionSheet(title: Text("Filter Districts"), message: Text("Add or remove filter"), buttons:
                 [
                     .default(Text("Pending Districts"), action: {
-                        self.viewModel.changeFilter(filterIndex: 1)
+                        self.viewModel.changeFilter(districtFilter: .pending)
                     }),
                     .default(Text("Complete Districts"), action: {
-                        self.viewModel.changeFilter(filterIndex: 2)
+                        self.viewModel.changeFilter(districtFilter: .complete)
                     }),
                     .default(Text("Added By Me"), action: {
-                        self.viewModel.changeFilter(filterIndex: 3)
+                        self.viewModel.changeFilter(districtFilter: .currentUser)
                     }),
                     .default(Text("Remove Filter"), action: {
-                        self.viewModel.changeFilter(filterIndex: 0)
+                        self.viewModel.changeFilter(districtFilter: .noFilter)
                     }),
                     .cancel()])
         }
@@ -96,16 +96,16 @@ extension EditDistrictsMasterView {
     var actionButtons: [ActionOverButton] {
         [
             ActionOverButton(title: "Pending", type: .normal) {
-                self.viewModel.changeFilter(filterIndex: 1)
+                self.viewModel.changeFilter(districtFilter: .pending)
             },
             ActionOverButton(title: "Complete", type: .normal) {
-                self.viewModel.changeFilter(filterIndex: 2)
+                self.viewModel.changeFilter(districtFilter: .complete)
             },
             ActionOverButton(title: "Added By Me", type: .normal) {
-                self.viewModel.changeFilter(filterIndex: 3)
+                self.viewModel.changeFilter(districtFilter: .currentUser)
             },
             ActionOverButton(title: "Remove Filter", type: .normal) {
-                self.viewModel.changeFilter(filterIndex: 0)
+                self.viewModel.changeFilter(districtFilter: .noFilter)
             },
             ActionOverButton(title: "Cancel", type: .cancel) {
                 self.showFilterMenu = false

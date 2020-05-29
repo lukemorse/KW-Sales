@@ -14,7 +14,7 @@ import SwiftUI
 class MainViewModel: ObservableObject {
     @Published var districts: [District] = []
     @Published var filteredDistricts: [District] = []
-    @Published var currentFilter = 0
+    @Published var currentFilter: DistrictFilter = .noFilter
     @Published var teams: [Team] = []
     @Published var numSchools = 0
     var currentUser = ""
@@ -98,7 +98,7 @@ class MainViewModel: ObservableObject {
     //Edit District Info
     func addDistrict() -> Binding<District> {
         districts.append(District())
-        changeFilter(filterIndex: currentFilter)
+        changeFilter(districtFilter: currentFilter)
         let index = districts.count - 1
         return Binding<District>(get: {return self.districts[index]}, set: {self.districts[index] = $0})
     }
@@ -135,43 +135,45 @@ class MainViewModel: ObservableObject {
     }
 }
 
+enum DistrictFilter {
+    case noFilter, pending, complete, currentUser
+}
+
 extension MainViewModel {
-    //filters:
-    //0 = pending
-    //1 = complete
-    //2 = current user added
-    //3 = remove filter/show all
-    func changeFilter(filterIndex: Int) {
+    func changeFilter(districtFilter: DistrictFilter) {
         filteredDistricts = []
-        currentFilter = filterIndex
-        switch filterIndex {
-        case 0:
+        currentFilter = districtFilter
+        switch districtFilter {
+        case .noFilter:
             filteredDistricts = districts
-        case 1:
+        case .pending:
             for district in districts {
+                var shouldAdd = false
                 for installation in district.implementationPlan {
                     if installation.status == .inProgress {
-                        filteredDistricts.append(district)
-                        break
+                        shouldAdd = true
                     }
+                }
+                if shouldAdd {
+                    filteredDistricts.append(district)
                 }
             }
             break
-        case 2:
-            var add = false
+        case .complete:
             for district in districts {
+                var shouldAdd = true
                 for installation in district.implementationPlan {
                     if installation.status != .complete {
-                        add = false
+                        shouldAdd = false
                     }
                 }
-                if add {
+                if shouldAdd {
                     filteredDistricts.append(district)
-                    add = false
+                    shouldAdd = false
                 }
             }
             break
-        case 3:
+        case .currentUser:
             for district in districts {
                 //replace with user check
                 if district.uploadedBy == self.currentUser {
