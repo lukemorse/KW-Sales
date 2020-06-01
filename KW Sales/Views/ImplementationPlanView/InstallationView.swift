@@ -13,7 +13,7 @@ import MapKit
 
 struct InstallationView: View {
     @EnvironmentObject var mainViewModel: MainViewModel
-    @EnvironmentObject var viewModel: InstallationViewModel
+    @ObservedObject var viewModel: InstallationViewModel
     @ObservedObject private var keyboard = KeyboardResponder()
     @ObservedObject var locationSearchService =  LocationSearchService()
     
@@ -42,7 +42,7 @@ struct InstallationView: View {
                 AddressSearchBar(labelText: "School Address", locationSearchService: locationSearchService)
 //                    .padding(.bottom, keyboard.currentHeight)
                 
-                NavigationLink(destination: PodMapMasterView().environmentObject(self.viewModel)) {
+                NavigationLink(destination: PodMapMasterView(viewModel: self.viewModel).equatable()) {
                     Text("📍 Pod Maps")
                         .font(.title)
                         .foregroundColor(Color.blue)

@@ -41,7 +41,6 @@ struct CreatePodMapView: View {
             .animation(.none)
             .scaleEffect(self.scale)
             .offset(self.dragSize)
-            
 
             Spacer()
             moveAndScaleButtons
@@ -81,7 +80,6 @@ struct CreatePodMapView: View {
                         ForEach(0..<pods.count, id: \.self) { index in
                             PodNodeView(pod: pods[index])
                                 .onTapGesture {
-                                    print("on tap")
                                     if !self.willPlacePod {
                                         self.viewModel.installation.pods[self.viewModel.installation.floorPlanUrls[self.floorPlanIndex]]?.remove(at: index)
                                     }

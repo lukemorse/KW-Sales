@@ -8,9 +8,9 @@
 
 import SwiftUI
 
-struct PodMapMasterView: View {
+struct PodMapMasterView: View, Equatable {
     @Environment(\.imageCache) var cache: ImageCache
-    @EnvironmentObject var viewModel: InstallationViewModel
+    @ObservedObject var viewModel: InstallationViewModel
     @State var selection: Int?
     @State var showImagePicker: Bool = false
     @State var isLoading = false
@@ -77,7 +77,39 @@ struct PodMapMasterView: View {
         .buttonStyle(PlainButtonStyle())
         .inExpandingRectangle()
     }
+    
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.viewModel.installation.floorPlanUrls.count == rhs.viewModel.installation.floorPlanUrls.count &&
+            lhs.selection == rhs.selection
+    }
 }
+
+struct ThumbnailNavLinkView: View, Equatable {
+    let url: URL
+    let cache: ImageCache
+    let index: Int
+    let size: CGSize
+    @State var selection: Int?
+    
+    
+    var body: some View {
+        let asyncImage = AsyncImage(url: url, cache: self.cache, placeholder: Text("Loading...").padding(), configuration:
+        {$0.resizable()})
+        
+        return NavigationLink(destination: CreatePodMapView(floorPlanIndex: index), tag: index, selection: $selection) {
+            asyncImage
+                .aspectRatio(contentMode: .fit)
+                .border(Color.black)
+                .frame(width: size.width / 2.5)
+        }
+    }
+    
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.url == rhs.url
+    }
+}
+
+
 
 //struct PodMapMasterView_Previews: PreviewProvider {
 //    static var previews: some View {
