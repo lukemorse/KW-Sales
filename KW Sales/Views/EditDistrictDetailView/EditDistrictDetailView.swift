@@ -74,7 +74,7 @@ struct EditDistrictDetailView: View {
                 }
             }
             
-            NavigationLink(destination: ImplementationPlanView(district: self.$district)
+            NavigationLink(destination: ImplementationPlanView(districtId: self.district.districtID)
             ) {
                 Text("Implementation Plan")
                     .foregroundColor(Color.blue)

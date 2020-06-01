@@ -11,7 +11,7 @@ import FirebaseFirestore
 
 struct CreatePodMapView: View {
     @Environment(\.imageCache) var cache: ImageCache
-    var viewModel: InstallationViewModel
+    @EnvironmentObject var viewModel: InstallationViewModel
     var floorPlanIndex: Int
     
     @State var showImagePicker: Bool = false
@@ -32,7 +32,7 @@ struct CreatePodMapView: View {
     var body: some View {
         VStack {
             ZStack {
-                AsyncImage(url: URL(string: viewModel.installation.floorPlanUrls[floorPlanIndex])!, cache: self.cache, placeholder: Image(systemName: "blankImage").resizable(), configuration: {$0.resizable()})
+                AsyncImage(url: URL(string: viewModel.installation.floorPlanUrls[floorPlanIndex])!, cache: self.cache, placeholder: Text("Loading..."), configuration: {$0.resizable()})
                 self.podGroup
             }
             .coordinateSpace(name: "custom")
@@ -224,8 +224,8 @@ extension CreatePodMapView {
 }
 
 
-struct CreatePodMapView_Previews: PreviewProvider {
-    static var previews: some View {
-        CreatePodMapView(viewModel: InstallationViewModel(installation: Installation()), floorPlanIndex: 0, showImagePicker: false)
-    }
-}
+//struct CreatePodMapView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CreatePodMapView(viewModel: InstallationViewModel(installation: Installation()), floorPlanIndex: 0, showImagePicker: false)
+//    }
+//}

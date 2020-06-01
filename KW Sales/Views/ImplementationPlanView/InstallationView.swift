@@ -12,9 +12,9 @@ import FirebaseFirestore
 import MapKit
 
 struct InstallationView: View {
-    @ObservedObject var viewModel: InstallationViewModel
-    @ObservedObject private var keyboard = KeyboardResponder()
     @EnvironmentObject var mainViewModel: MainViewModel
+    @EnvironmentObject var viewModel: InstallationViewModel
+    @ObservedObject private var keyboard = KeyboardResponder()
     @ObservedObject var locationSearchService =  LocationSearchService()
     
     @State var isExpanded: Bool = true
@@ -37,12 +37,12 @@ struct InstallationView: View {
                 numPodPicker
                 formItem(with: $viewModel.installation.schoolContact, label: "School Contact Person")
                 
-                formItem(with: $viewModel.installation.address, label: "School Address")
+//                formItem(with: $viewModel.installation.address, label: "School Address")
                 
-//                AddressSearchBar(labelText: "School Address", locationSearchService: locationSearchService)
+                AddressSearchBar(labelText: "School Address", locationSearchService: locationSearchService)
 //                    .padding(.bottom, keyboard.currentHeight)
                 
-                NavigationLink(destination: PodMapMasterView(viewModel: self.viewModel)) {
+                NavigationLink(destination: PodMapMasterView().environmentObject(self.viewModel)) {
                     Text("📍 Pod Maps")
                         .font(.title)
                         .foregroundColor(Color.blue)
@@ -199,29 +199,29 @@ extension InstallationView {
     }
 }
 
-struct InstallationView_Previews: PreviewProvider {
-    static var previews: some View {
-        
-        let mvm = MainViewModel()
-        var team1 = Team()
-        team1.name = "Team one"
-        var team2 = Team()
-        team2.name = "Team two"
-        mvm.teams = [team1, team2]
-        
-        var installation = Installation()
-        installation.status = .complete
-        installation.schoolName = "Fancy School"
-        installation.team = mvm.teams[1]
-        
-        
-        return NavigationView {
-            Form {
-                InstallationView(viewModel: InstallationViewModel(installation: installation)   , locationSearchService: LocationSearchService(), isExpanded: true).environmentObject(mvm)
-            }
-        }
-    }
-}
+//struct InstallationView_Previews: PreviewProvider {
+//    static var previews: some View {
+//
+//        let mvm = MainViewModel()
+//        var team1 = Team()
+//        team1.name = "Team one"
+//        var team2 = Team()
+//        team2.name = "Team two"
+//        mvm.teams = [team1, team2]
+//
+//        var installation = Installation()
+//        installation.status = .complete
+//        installation.schoolName = "Fancy School"
+//        installation.team = mvm.teams[1]
+//
+//
+//        return NavigationView {
+//            Form {
+//                InstallationView(locationSearchService: LocationSearchService(), isExpanded: true).envi
+//            }
+//        }
+//    }
+//}
 
 enum SchoolType: Int, Codable, CaseIterable, Hashable, Identifiable {
     var id: Int { hashValue }

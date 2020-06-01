@@ -10,7 +10,7 @@ import SwiftUI
 
 struct PodMapMasterView: View {
     @Environment(\.imageCache) var cache: ImageCache
-    @ObservedObject var viewModel: InstallationViewModel
+    @EnvironmentObject var viewModel: InstallationViewModel
     @State var selection: Int?
     @State var showImagePicker: Bool = false
     @State var isLoading = false
@@ -65,7 +65,7 @@ struct PodMapMasterView: View {
         let asyncImage = AsyncImage(url: URL(string: self.viewModel.installation.floorPlanUrls[index])!, cache: self.cache, placeholder: Text("Loading...").padding(), configuration:
         {$0.resizable()})
         
-        return NavigationLink(destination: CreatePodMapView(viewModel: self.viewModel, floorPlanIndex: index), tag: index, selection: $selection) {
+        return NavigationLink(destination: CreatePodMapView(floorPlanIndex: index).environmentObject(self.viewModel), tag: index, selection: $selection) {
             asyncImage
                 .aspectRatio(contentMode: .fit)
                 .border(Color.black)

@@ -12,19 +12,20 @@ struct ImplementationPlanView: View {
     
     @EnvironmentObject var mainViewModel: MainViewModel
     @ObservedObject private var keyboard = KeyboardResponder()
-    @Binding var district: District
+    let districtId: String
     @State var showSaveAlert = false
     
     var body: some View {
-        Form {
-            if self.district.implementationPlan.count > 0 {
-                ForEach(0..<self.district.implementationPlan.count, id: \.self) { index in
-                    InstallationView(viewModel: self.mainViewModel.getInstallationViewModels(for: self.district.districtName)[index])
+        let district = self.mainViewModel.getDistrict(id: districtId).wrappedValue
+        return Form {
+            if district.implementationPlan.count > 0 {
+                ForEach(0..<district.implementationPlan.count, id: \.self) { index in
+                    InstallationView().environmentObject(self.mainViewModel.getInstallationViewModels(for: district.districtName)[index])
                 }
             }
             
             Button(action: {
-                self.mainViewModel.addInstallation(districtName: self.district.districtName)
+                self.mainViewModel.addInstallation(districtName: self.mainViewModel.getDistrict(id: self.districtId).wrappedValue.districtName)
             }) {
                 Text("Add School")
                     .foregroundColor(Color.blue)
@@ -49,8 +50,8 @@ struct ImplementationPlanView: View {
 }
 
 
-struct CreateImplementationPlanListView_Previews: PreviewProvider {
-    static var previews: some View {
-        ImplementationPlanView(district: .constant(District()))
-    }
-}
+//struct CreateImplementationPlanListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ImplementationPlanView(district: .constant(District()))
+//    }
+//}

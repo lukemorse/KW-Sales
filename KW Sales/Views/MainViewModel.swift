@@ -129,7 +129,7 @@ class MainViewModel: ObservableObject {
             installation.districtContact = self.districts[index].districtContactPerson
             let viewModel = InstallationViewModel(installation: installation)
             
-            if installationViewModels.keys.contains(self.districts[index].districtName) {
+            if installationViewModels.keys.contains(districtName) {
                 installationViewModels[self.districts[index].districtName]?.append(viewModel)
             } else {
                 installationViewModels[self.districts[index].districtName] = [viewModel]
