@@ -20,7 +20,6 @@ class MainViewModel: ObservableObject {
     @Published var numSchools = 0
     var currentUser = ""
     
-    
     //Networking
     func fetchDistricts() {
         districts = []
@@ -110,10 +109,6 @@ class MainViewModel: ObservableObject {
         return Binding<District>(get: {return self.districts[index]}, set: {self.districts[index] = $0})
     }
     
-    func getDistrict(index: Int) -> Binding<District> {
-        return Binding<District>(get: {return self.districts[index]}, set: {self.districts[index] = $0})
-    }
-    
     func getDistrict(id: String) -> Binding<District> {
         for (index, district) in districts.enumerated() {
             if district.districtID == id {
@@ -124,10 +119,7 @@ class MainViewModel: ObservableObject {
     }
     
     func getInstallationViewModels(for districtName: String) -> [InstallationViewModel] {
-        if self.installationViewModels.keys.contains(districtName) {
-            return self.installationViewModels[districtName]!
-        }
-        return []
+        return self.installationViewModels[districtName] ?? []
     }
     
     func addInstallation(districtName: String) {
@@ -203,8 +195,6 @@ extension MainViewModel {
                     break
                 }
             }
-            break
-        default:
             break
         }
     }
