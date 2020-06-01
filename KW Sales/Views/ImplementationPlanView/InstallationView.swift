@@ -12,7 +12,6 @@ import FirebaseFirestore
 import MapKit
 
 struct InstallationView: View {
-    let index: Int
     @ObservedObject var viewModel: InstallationViewModel
     @ObservedObject private var keyboard = KeyboardResponder()
     @EnvironmentObject var mainViewModel: MainViewModel
@@ -52,10 +51,8 @@ struct InstallationView: View {
             }
         }
         .onAppear() {
-            if (self.viewModel.installation.numPods != 0) {
-                self.numPods = self.viewModel.installation.numPods
-                self.numPodsString = "\(self.numPods)"
-            }
+            self.numPods = self.viewModel.installation.numPods
+            self.numPodsString = "\(self.numPods)"
         }
     }
     
@@ -220,7 +217,7 @@ struct InstallationView_Previews: PreviewProvider {
         
         return NavigationView {
             Form {
-                InstallationView(index: 0, viewModel: InstallationViewModel(installation: installation)   , locationSearchService: LocationSearchService(), isExpanded: true).environmentObject(mvm)
+                InstallationView(viewModel: InstallationViewModel(installation: installation)   , locationSearchService: LocationSearchService(), isExpanded: true).environmentObject(mvm)
             }
         }
     }

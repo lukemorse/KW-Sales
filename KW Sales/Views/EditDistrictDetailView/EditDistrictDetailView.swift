@@ -98,9 +98,7 @@ struct EditDistrictDetailView: View {
                 }
         }
         .onAppear() {
-            if self.district.numPodsNeeded != 0 {
-                self.numPodsString = "\(self.district.numPodsNeeded)"
-            }
+            self.numPodsString = "\(self.district.numPodsNeeded)"
         }
         .padding(.bottom, keyboard.currentHeight)
     }
@@ -114,22 +112,11 @@ struct EditDistrictDetailView: View {
     
     var saveButton: some View {
         Button(action: {
-            if self.$district.districtName.wrappedValue.isEmpty {
+            if self.district.districtName.isEmpty {
                 self.isFieldsIncomplete = true
                 self.isShowingAlert = true
                 return
             }
-            //TODO: change upload district
-            
-            //            self.mainViewModel.uploadDistrict(id: self.district.districtID) { success in
-            //                if success {
-            //                    self.addDistrictSuccess = true
-            //                    self.isShowingAlert = true
-            //                } else {
-            //                    self.addDistrictFail = true
-            //                    self.isShowingAlert = true
-            //                }
-            //            }
             
             self.uploadDistrictHandler(self.district.districtID) { success in
                 if success {
@@ -140,21 +127,6 @@ struct EditDistrictDetailView: View {
                     self.isShowingAlert = true
                 }
             }
-                
-            
-            
-//            let success = self.uploadDistrictHandler(self.district.districtID)
-            
-            
-//            self.uploadDistrictHandler(self.district.districtID) { success in
-//                if success {
-//                    self.addDistrictSuccess = true
-//                    self.isShowingAlert = true
-//                } else {
-//                    self.addDistrictFail = true
-//                    self.isShowingAlert = true
-//                }
-//            }
         }) {
             Text("Save")
                 .foregroundColor(Color.blue)

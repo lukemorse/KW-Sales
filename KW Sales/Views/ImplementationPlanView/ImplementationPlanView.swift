@@ -17,10 +17,9 @@ struct ImplementationPlanView: View {
     
     var body: some View {
         Form {
-//            InstallationView(index: 0, viewModel: InstallationViewModel(installation: Installation()))
             if self.district.implementationPlan.count > 0 {
                 ForEach(0..<self.district.implementationPlan.count, id: \.self) { index in
-                    InstallationView(index: index, viewModel: self.mainViewModel.getInstallationViewModels(for: self.district.districtName)[index])
+                    InstallationView(viewModel: self.mainViewModel.getInstallationViewModels(for: self.district.districtName)[index])
                 }
             }
             
