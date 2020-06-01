@@ -15,10 +15,11 @@ class MainViewModel: ObservableObject {
     @Published var districts: [District] = []
     @Published var filteredDistricts: [District] = []
     @Published var currentFilter: DistrictFilter = .noFilter
+    private var installationViewModels: [String: [InstallationViewModel]] = [:]
     @Published var teams: [Team] = []
     @Published var numSchools = 0
     var currentUser = ""
-    private var installationViewModels: [String: [InstallationViewModel]] = [:]
+    
     
     //Networking
     func fetchDistricts() {
@@ -63,8 +64,14 @@ class MainViewModel: ObservableObject {
         }
     }
     
-    func uploadDistrict(districtIndex: Int, completion: @escaping (_ flag:Bool) -> ()) {
+    func uploadDistrict(id: String, completion: @escaping (_ flag:Bool) -> ()) {
         //encode district file
+        var districtIndex = 0
+        for (index,district) in districts.enumerated() {
+            if district.districtID == id {
+                districtIndex = index
+            }
+        }
         var district = self.districts[districtIndex]
         district.uploadedBy = currentUser
         var implementationPlan: [Installation] = []
@@ -107,6 +114,15 @@ class MainViewModel: ObservableObject {
         return Binding<District>(get: {return self.districts[index]}, set: {self.districts[index] = $0})
     }
     
+    func getDistrict(id: String) -> Binding<District> {
+        for (index, district) in districts.enumerated() {
+            if district.districtID == id {
+                return Binding<District>(get: {return self.districts[index]}, set: {self.districts[index] = $0})
+            }
+        }
+        return .constant(District())
+    }
+    
     func getInstallationViewModels(for districtName: String) -> [InstallationViewModel] {
         if self.installationViewModels.keys.contains(districtName) {
             return self.installationViewModels[districtName]!
@@ -130,7 +146,13 @@ class MainViewModel: ObservableObject {
         }
     }
     
-    func setNumPods(numPods: Int, districtIndex: Int) {
+    func setNumPods(numPods: Int, districtId: String) {
+        var districtIndex = 0
+        for (index,district) in districts.enumerated() {
+            if district.districtID == districtId {
+                districtIndex = index
+            }
+        }
         districts[districtIndex].numPodsNeeded = numPods
     }
 }

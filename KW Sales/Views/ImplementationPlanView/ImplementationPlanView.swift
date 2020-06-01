@@ -14,13 +14,12 @@ struct ImplementationPlanView: View {
     @ObservedObject private var keyboard = KeyboardResponder()
     @Binding var district: District
     @State var showSaveAlert = false
-    let districtIndex: Int
     
     var body: some View {
         Form {
 //            InstallationView(index: 0, viewModel: InstallationViewModel(installation: Installation()))
-            if self.mainViewModel.districts[self.districtIndex].implementationPlan.count > 0 {
-                ForEach(0..<self.mainViewModel.districts[self.districtIndex].implementationPlan.count, id: \.self) { index in
+            if self.district.implementationPlan.count > 0 {
+                ForEach(0..<self.district.implementationPlan.count, id: \.self) { index in
                     InstallationView(index: index, viewModel: self.mainViewModel.getInstallationViewModels(for: self.district.districtName)[index])
                 }
             }
@@ -53,6 +52,6 @@ struct ImplementationPlanView: View {
 
 struct CreateImplementationPlanListView_Previews: PreviewProvider {
     static var previews: some View {
-        ImplementationPlanView(district: .constant(District()), districtIndex: 0)
+        ImplementationPlanView(district: .constant(District()))
     }
 }

@@ -14,7 +14,6 @@ import ActionOver
 struct EditDistrictsMasterView: View {
     @EnvironmentObject var viewModel: MainViewModel
     @State private var addedDistrict: Binding<District>?
-    @State private var addedDistrictIndex = 0
     @State private var shouldNavigate = false
     @State private var showFilterMenu = false
     
@@ -60,8 +59,8 @@ struct EditDistrictsMasterView: View {
         AnyView(List {
             addDistrictButton
             if self.viewModel.filteredDistricts.count > 0 {
-                ForEach(0..<viewModel.districts.count, id: \.self) { index in
-                    NavigationLink(self.viewModel.districts[index].districtName, destination: EditDistrictDetailView(districtIndex: index, newFlag: false))
+                ForEach(0..<viewModel.filteredDistricts.count, id: \.self) { index in
+                    NavigationLink(self.viewModel.districts[index].districtName, destination: EditDistrictDetailView(district: self.$viewModel.filteredDistricts[index], newFlag: false, uploadDistrictHandler: self.viewModel.uploadDistrict))
                         .font(.title)
                         .padding()
                 }
@@ -71,11 +70,10 @@ struct EditDistrictsMasterView: View {
     
     var addDistrictButton: some View {
         return Button(action: {
-            self.addedDistrictIndex = self.viewModel.districts.count
             self.addedDistrict = self.viewModel.addDistrict()
             self.shouldNavigate = true
         }) {
-            NavigationLink(destination: EditDistrictDetailView( districtIndex: self.addedDistrictIndex, newFlag: true), isActive: self.$shouldNavigate) {
+            NavigationLink(destination: EditDistrictDetailView(district: self.addedDistrict ?? .constant(District()), newFlag: true, uploadDistrictHandler: self.viewModel.uploadDistrict), isActive: self.$shouldNavigate) {
                 Text("Add District")
                     .font(.title)
                     .padding()
