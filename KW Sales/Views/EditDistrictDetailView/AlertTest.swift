@@ -18,6 +18,8 @@ import SwiftUI
 struct AlertTestView: View {
 
     @State private var alertItem: AlertItem?
+    @ObservedObject var locationSearchService = LocationSearchService()
+    @ObservedObject var keyboard = KeyboardResponder()
 
     var body: some View {
         VStack {

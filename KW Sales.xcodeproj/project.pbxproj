@@ -48,6 +48,7 @@
 		AF3C1D24247575B6008BC1B9 /* ActionOver in Frameworks */ = {isa = PBXBuildFile; productRef = AF3C1D23247575B6008BC1B9 /* ActionOver */; };
 		AFC83A8224782EFC00C02C10 /* LogInData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC83A7E2478159700C02C10 /* LogInData.swift */; };
 		AFCA09C42486AC5A002279E6 /* AlertTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCA09C32486AC5A002279E6 /* AlertTest.swift */; };
+		AFCA09C62486B88E002279E6 /* AlertItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCA09C52486B88E002279E6 /* AlertItem.swift */; };
 		AFDB822D247DAE510076401C /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDB822C247DAE510076401C /* AsyncImage.swift */; };
 		C0BA6CE5438A0624E1669621 /* Pods_KW_SalesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54DB61A8258D93544EE8F4D6 /* Pods_KW_SalesTests.framework */; };
 /* End PBXBuildFile section */
@@ -119,6 +120,7 @@
 		A9F6FC5B3B907EB6981549FC /* Pods_KW_Sales.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KW_Sales.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFC83A7E2478159700C02C10 /* LogInData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LogInData.swift; path = "KW Sales/LogInData.swift"; sourceTree = SOURCE_ROOT; };
 		AFCA09C32486AC5A002279E6 /* AlertTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertTest.swift; sourceTree = "<group>"; };
+		AFCA09C52486B88E002279E6 /* AlertItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertItem.swift; sourceTree = "<group>"; };
 		AFDB822C247DAE510076401C /* AsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImage.swift; sourceTree = "<group>"; };
 		B3F10BB24EC3F6484A435780 /* Pods-KW Sales.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KW Sales.release.xcconfig"; path = "Target Support Files/Pods-KW Sales/Pods-KW Sales.release.xcconfig"; sourceTree = "<group>"; };
 		EAF76A91E66C7CB5B06866F6 /* Pods-KW SalesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KW SalesTests.debug.xcconfig"; path = "Target Support Files/Pods-KW SalesTests/Pods-KW SalesTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -324,6 +326,7 @@
 			isa = PBXGroup;
 			children = (
 				A3295BDD244A2E9500F26E1F /* HelperFunctions.swift */,
+				AFCA09C52486B88E002279E6 /* AlertItem.swift */,
 				A38206DF246F13DE0078496D /* KeyboardResponder.swift */,
 				AFDB822C247DAE510076401C /* AsyncImage.swift */,
 			);
@@ -577,6 +580,7 @@
 				A368EA5F244DE82B00FE7685 /* InstallationViewModel.swift in Sources */,
 				A3DD6C542459D23C00319147 /* ActivityIndicator.swift in Sources */,
 				A3295BCC2448EC7800F26E1F /* PodNodeView.swift in Sources */,
+				AFCA09C62486B88E002279E6 /* AlertItem.swift in Sources */,
 				A3295BD1244A044A00F26E1F /* CSVTest.swift in Sources */,
 				A3557C4C244A3E7400C747FE /* ImagePicker.swift in Sources */,
 				A336F85524747707008196C5 /* TestDB.swift in Sources */,
