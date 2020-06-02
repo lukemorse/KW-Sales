@@ -137,16 +137,6 @@ class MainViewModel: ObservableObject {
             self.districts[index].implementationPlan.append(installation)
         }
     }
-    
-    func setNumPods(numPods: Int, districtId: String) {
-        var districtIndex = 0
-        for (index,district) in districts.enumerated() {
-            if district.districtID == districtId {
-                districtIndex = index
-            }
-        }
-        districts[districtIndex].numPodsNeeded = numPods
-    }
 }
 
 enum DistrictFilter {

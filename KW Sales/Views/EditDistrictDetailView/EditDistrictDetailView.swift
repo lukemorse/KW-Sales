@@ -87,7 +87,9 @@ struct EditDistrictDetailView: View {
             Alert(title: alertItem.title, message: alertItem.message, dismissButton: alertItem.dismissButton)
         }
         .onAppear() {
-            self.numPodsString = "\(self.district.numPodsNeeded)"
+            if self.district.numPodsNeeded != 0 {
+                self.numPodsString = "\(self.district.numPodsNeeded)"
+            }
         }
         //        .padding(.bottom, keyboard.currentHeight)
     }

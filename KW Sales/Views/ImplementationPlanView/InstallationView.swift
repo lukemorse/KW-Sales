@@ -52,7 +52,9 @@ struct InstallationView: View {
         }
         .onAppear() {
             self.numPods = self.viewModel.installation.numPods
-            self.numPodsString = "\(self.numPods)"
+            if self.numPods != 0 {
+                self.numPodsString = "\(self.numPods)"
+            }
         }
     }
     
