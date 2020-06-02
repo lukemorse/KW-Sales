@@ -40,7 +40,7 @@ struct InstallationView: View {
 //                formItem(with: $viewModel.installation.address, label: "School Address")
                 
                 AddressSearchBar(labelText: "School Address", locationSearchService: locationSearchService)
-//                    .padding(.bottom, keyboard.currentHeight)
+                    .padding(.bottom, keyboard.currentHeight)
                 
                 NavigationLink(destination: PodMapMasterView(viewModel: self.viewModel).equatable()) {
                     Text("📍 Pod Maps")

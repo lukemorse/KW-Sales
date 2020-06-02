@@ -10,6 +10,13 @@ import SwiftUI
 import FirebaseFirestore
 import Combine
 
+struct AlertItem: Identifiable {
+    var id = UUID()
+    var title: Text
+    var message: Text?
+    var dismissButton: Alert.Button?
+}
+
 struct EditDistrictDetailView: View {
 //    @EnvironmentObject var mainViewModel: MainViewModel
     @ObservedObject private var keyboard = KeyboardResponder()
@@ -19,11 +26,14 @@ struct EditDistrictDetailView: View {
     @State private var isFieldsIncomplete = false
     @State private var addDistrictSuccess = false
     @State private var addDistrictFail = false
+    @State private var alertItem: AlertItem?
+    
     @Binding var district: District
     let newFlag: Bool
     let uploadDistrictHandler: (String, @escaping (Bool) -> ()) -> ()
     
-    init(district: Binding<District>, newFlag: Bool, uploadDistrictHandler: @escaping (String, @escaping (Bool) -> ()) -> ()) {
+    init(district: Binding<District>, newFlag: Bool,
+         uploadDistrictHandler: @escaping (String, @escaping (Bool) -> ()) -> ()) {
         self.newFlag = newFlag
         self._district = district
         self.uploadDistrictHandler = uploadDistrictHandler
@@ -62,7 +72,8 @@ struct EditDistrictDetailView: View {
                     districtContactPersonField
                     districtEmailField
                     districtPhoneField
-                    districtAddressField
+//                    districtAddressField
+                    saveButton
 //                    AddressSearchBar(labelText: "District Office Address", locationSearchService: locationSearchService)
 //                        .padding(.bottom, keyboard.currentHeight)
                 }
@@ -83,19 +94,22 @@ struct EditDistrictDetailView: View {
             sendPodOrderButton
         }
             
-        .navigationBarTitle(newFlag ? "New District" : "Edit District")
+        .navigationBarTitle(Text(newFlag ? "New District" : "Edit District"), displayMode: .inline)
         .navigationBarItems(trailing: saveButton)
             
-            .alert(isPresented: self.$isShowingAlert) {
-                if self.addDistrictSuccess {
-                    return Alert(title: Text("Successfully Uploaded District Data"))
-                } else if self.addDistrictFail {
-                    return Alert(title: Text("Failed to Upload District Data"))
-                } else if self.isFieldsIncomplete {
-                    return Alert(title: Text("Please enter District Name"))
-                } else {
-                    return Alert(title: Text("Something went wrong"))
-                }
+//            .alert(isPresented: self.$isShowingAlert) {
+            .alert(item: $alertItem) {alertItem in
+                Alert(title: alertItem.title, message: alertItem.message, dismissButton: alertItem.dismissButton)
+                
+//                if self.addDistrictSuccess {
+//                    return Alert(title: Text("Successfully Uploaded District Data"), dismissButton: .default(Text("OK")))
+//                } else if self.addDistrictFail {
+//                    return Alert(title: Text("Failed to Upload District Data"), dismissButton: .default(Text("OK")))
+//                } else if self.isFieldsIncomplete {
+//                    return Alert(title: Text("Please enter District Name"), dismissButton: .default(Text("OK")))
+//                } else {
+//                    return Alert(title: Text("Something went wrong"), dismissButton: .default(Text("OK")))
+//                }
         }
         .onAppear() {
             self.numPodsString = "\(self.district.numPodsNeeded)"
@@ -114,6 +128,7 @@ struct EditDistrictDetailView: View {
         Button(action: {
             if self.district.districtName.isEmpty {
                 self.isFieldsIncomplete = true
+                self.alertItem = AlertItem(title: Text("Enter District Name"), message: nil, dismissButton: .cancel(Text("OK")))
                 self.isShowingAlert = true
                 return
             }
@@ -121,9 +136,11 @@ struct EditDistrictDetailView: View {
             self.uploadDistrictHandler(self.district.districtID) { success in
                 if success {
                     self.addDistrictSuccess = true
+                    self.alertItem = AlertItem(title: Text("Successfully uploaded district data"), message: nil, dismissButton: .cancel(Text("OK")))
                     self.isShowingAlert = true
                 } else {
                     self.addDistrictFail = true
+                    self.alertItem = AlertItem(title: Text("Error uploading district"), message: nil, dismissButton: .cancel(Text("OK")))
                     self.isShowingAlert = true
                 }
             }
