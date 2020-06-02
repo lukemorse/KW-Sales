@@ -21,7 +21,7 @@ struct EditDistrictsMasterView: View {
         listView
             .onAppear() {
                 if(self.viewModel.districts.isEmpty) {
-//                    self.viewModel.fetchDistricts()
+                    self.viewModel.fetchDistricts()
                     self.viewModel.fetchTeams()
                 }
         }

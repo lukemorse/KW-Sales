@@ -37,10 +37,10 @@ struct InstallationView: View {
                 numPodPicker
                 formItem(with: $viewModel.installation.schoolContact, label: "School Contact Person")
                 
-//                formItem(with: $viewModel.installation.address, label: "School Address")
+                formItem(with: $viewModel.installation.address, label: "School Address")
                 
-                AddressSearchBar(labelText: "School Address", locationSearchService: locationSearchService)
-                    .padding(.bottom, keyboard.currentHeight)
+//                AddressSearchBar(labelText: "School Address", locationSearchService: locationSearchService)
+//                    .padding(.bottom, keyboard.currentHeight)
                 
                 NavigationLink(destination: PodMapMasterView(viewModel: self.viewModel).equatable()) {
                     Text("📍 Pod Maps")
