@@ -11,7 +11,6 @@ import FirebaseFirestore
 import Combine
 
 struct EditDistrictDetailView: View {
-    //    @ObservedObject private var keyboard = KeyboardResponder()
     //    @ObservedObject var locationSearchService = LocationSearchService()
     @State private var numPodsString = ""
     @State private var alertItem: AlertItem?
@@ -28,59 +27,47 @@ struct EditDistrictDetailView: View {
     }
     
     var body: some View {
-        Form {
-            //Uncomment for Mac App
-            //            Group {
-            //                Button(action: {
-            //                    self.viewModel.importCSV()
-            //                }) {
-            //                    Text("Import CSV")
-            //                }
-            //            }
-            
-            Section(header: Text("General")) {
-                Group {
-                    districtNameField
-                    numPodField
-                    startDatePicker
+        VStack {
+            Form {
+                Section(header: Text("General")) {
+                    Group {
+                        districtNameField
+                        numPodField
+                        startDatePicker
+                    }
                 }
-            }
-            
-            Section(header: Text("District Information")){
-                Group {
-                    numPreKSchoolsPicker
-                    numElementarySchoolsPicker
-                    numMiddleSchoolsPicker
-                    numHighSchoolsPicker
+                Section(header: Text("District Information")){
+                    Group {
+                        numPreKSchoolsPicker
+                        numElementarySchoolsPicker
+                        numMiddleSchoolsPicker
+                        numHighSchoolsPicker
+                    }
                 }
-            }
-            
-            Section(header: Text("Contact Information")) {
-                Group {
-                    districtContactPersonField
-                    districtEmailField
-                    districtPhoneField
-                    districtAddressField
-                    //                    AddressSearchBar(labelText: "District Office Address", locationSearchService: locationSearchService)
-                    //                        .padding(.bottom, keyboard.currentHeight)
+                Section(header: Text("Contact Information")) {
+                    Group {
+                        districtContactPersonField
+                        districtEmailField
+                        districtPhoneField
+                        districtAddressField
+                    }
                 }
-            }
-            
-            Section {
-                Group {
-                    readyToInstallToggle
+                Section {
+                    Group {
+                        readyToInstallToggle
+                    }
                 }
+                
+                NavigationLink(destination: ImplementationPlanView(districtId: self.district.districtID)
+                ) {
+                    Text("Implementation Plan")
+                        .foregroundColor(Color.blue)
+                }
+                
+                sendPodOrderButton
             }
-            
-            NavigationLink(destination: ImplementationPlanView(districtId: self.district.districtID)
-            ) {
-                Text("Implementation Plan")
-                    .foregroundColor(Color.blue)
-            }
-            
-            sendPodOrderButton
         }
-            
+        .keyboardAdaptive()
         .navigationBarTitle(Text(newFlag ? "New District" : "Edit District"), displayMode: .inline)
         .navigationBarItems(trailing: saveButton)
         .alert(item: $alertItem) {alertItem in

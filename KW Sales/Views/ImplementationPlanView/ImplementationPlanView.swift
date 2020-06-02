@@ -11,7 +11,6 @@ import SwiftUI
 struct ImplementationPlanView: View {
     
     @EnvironmentObject var mainViewModel: MainViewModel
-    @ObservedObject private var keyboard = KeyboardResponder()
     let districtId: String
     @State var showSaveAlert = false
     
@@ -31,12 +30,14 @@ struct ImplementationPlanView: View {
                     .foregroundColor(Color.blue)
             }
         }
+        
         .navigationBarItems(trailing: saveButton)
         .navigationBarTitle("Implementation Plan")
         .alert(isPresented: self.$showSaveAlert) {
             Alert(title: Text("Saved Implementation Plan"))
         }
-        .padding(.bottom, keyboard.currentHeight)
+        .keyboardAdaptive()
+        .padding(.bottom, 10)
     }
     
     var saveButton: some View {
@@ -55,3 +56,9 @@ struct ImplementationPlanView: View {
 //        ImplementationPlanView(district: .constant(District()))
 //    }
 //}
+
+struct ImplementationPlanView_Previews: PreviewProvider {
+    static var previews: some View {
+        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
+    }
+}
