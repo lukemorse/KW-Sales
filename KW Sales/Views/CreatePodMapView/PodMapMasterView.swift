@@ -30,6 +30,7 @@ struct PodMapMasterView: View, Equatable {
                         }
                     }
                 }
+                .frame(width: geometry.size.width)
             }
             if isLoading {
                 ActivityIndicator()
@@ -41,9 +42,8 @@ struct PodMapMasterView: View, Equatable {
                 self.isLoading = true
                 self.viewModel.uploadFloorPlan(image: image) { (success, urlString) in
                     if success {
-                        let url = URL(string: urlString!)!
-                        self.cache.setImage(image, url: url)
                         self.isLoading = false
+                        self.showImagePicker = true
                     } else {
                         self.isLoading = false
                         print("error uploading image")
@@ -79,8 +79,7 @@ struct PodMapMasterView: View, Equatable {
     }
     
     static func == (lhs: Self, rhs: Self) -> Bool {
-        lhs.viewModel.installation.floorPlanUrls.count == rhs.viewModel.installation.floorPlanUrls.count &&
-            lhs.selection == rhs.selection
+        lhs.selection == rhs.selection
     }
 }
 

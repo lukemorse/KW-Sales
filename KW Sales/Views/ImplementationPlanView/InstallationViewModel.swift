@@ -54,8 +54,8 @@ class InstallationViewModel: ObservableObject {
                 let urlString = url.absoluteString
                 let data = ["imageURL": urlString]
                 
-                if let parentDocRef = self.docRef {
-                    parentDocRef.setData(data, merge: true) { (error) in
+                if let docRef = self.docRef {
+                    docRef.setData(data, merge: true) { (error) in
                         if let error = error {
                             print(error.localizedDescription)
                             completion(false, nil)
