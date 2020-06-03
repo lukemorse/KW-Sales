@@ -26,8 +26,10 @@ struct SendPodOrderButtonView: View {
             self.isShowingMailView.toggle()
         })
         {
-            Text("Send Pod Order")
-                .foregroundColor(self.textColor)
+            Text("✉️ Send Pod Order")
+                .font(.title)
+                .foregroundColor(Color.blue)
+                .padding()
         }
         .disabled(!MFMailComposeViewController.canSendMail())
         .sheet(isPresented: $isShowingMailView) {

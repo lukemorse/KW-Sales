@@ -53,23 +53,22 @@ struct EditDistrictDetailView: View {
                     }
                 }
                 Section {
-                    Group {
-                        readyToInstallToggle
-                    }
+                    readyToInstallToggle
                 }
-                
-                NavigationLink(destination: ImplementationPlanView(districtId: self.district.districtID)
-                ) {
-                    Text("Implementation Plan")
-                        .foregroundColor(Color.blue)
+                Section {
+                    implementationPlanNavLink
+                    sendPodOrderButton
                 }
-                
-                sendPodOrderButton
+//                Section {
+                    saveButton
+//                }
+//                .background(Color.green)
             }
         }
         .keyboardAdaptive()
+            
         .navigationBarTitle(Text(newFlag ? "New District" : "Edit District"), displayMode: .inline)
-        .navigationBarItems(trailing: saveButton)
+//        .navigationBarItems(trailing: saveButton)
         .alert(item: $alertItem) {alertItem in
             Alert(title: alertItem.title, message: alertItem.message, dismissButton: alertItem.dismissButton)
         }
@@ -88,6 +87,16 @@ struct EditDistrictDetailView: View {
         return SendPodOrderButtonView(numPods: district.numPodsNeeded , email: district.districtEmail , textColor: validateEmail(enteredEmail: district.districtEmail ) ? Color.green : Color.red)
     }
     
+    var implementationPlanNavLink: some View {
+        NavigationLink(destination: ImplementationPlanView(districtId: self.district.districtID)
+        ) {
+            Text("📋 Implementation Plan")
+                .font(.title)
+                .foregroundColor(Color.blue)
+                .padding()
+        }
+    }
+    
     var saveButton: some View {
         Button(action: {
             if self.district.districtName.isEmpty {
@@ -103,8 +112,15 @@ struct EditDistrictDetailView: View {
                 }
             }
         }) {
-            Text("Save")
-                .foregroundColor(Color.blue)
+            HStack {
+                Spacer()
+                Text("💾  Save")
+                    .font(.title)
+                    .foregroundColor(Color.blue)
+                    .padding()
+                Spacer()
+            }.background(Color.green)
+            .cornerRadius(10)
         }
     }
 }
@@ -261,6 +277,8 @@ extension EditDistrictDetailView {
     var readyToInstallToggle: some View {
         Toggle(isOn: self.$district.readyToInstall)  {
             Text("Ready To Install")
+            .font(.title)
+            .padding()
         }
     }
     
@@ -285,7 +303,9 @@ struct EditDistrictDetailView_Previews: PreviewProvider {
         mvm.districts = [district]
         
         return NavigationView {
-            EditDistrictDetailView(district: .constant(district), newFlag: true, uploadDistrictHandler: handler).environmentObject(mvm)
+            EditDistrictDetailView(district: .constant(district), newFlag: true, uploadDistrictHandler: handler)
+                .environmentObject(mvm)
+            .environmentObject(LocationSearchService())
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
