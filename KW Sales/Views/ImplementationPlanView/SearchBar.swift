@@ -79,6 +79,7 @@ struct AddressSearchBar: View {
     let labelText: String
     @State var didSelect = false
     @ObservedObject var locationSearchService: LocationSearchService
+    let callback: (String) -> ()
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -106,14 +107,14 @@ struct AddressSearchBar: View {
                                 .font(.subheadline)
                                 .foregroundColor(.gray)
                         }.buttonStyle(BorderlessButtonStyle())
-                        
-                        //                    Text(completion.subtitle)
-                        //                        .font(.subheadline)
-                        //                        .foregroundColor(.gray)
                     }
                 }
             }
             Spacer()
+        }
+        .onDisappear() {
+            self.locationSearchService.searchQuery = ""
+            self.locationSearchService.completions = []
         }
     }
     
@@ -122,6 +123,7 @@ struct AddressSearchBar: View {
         self.locationSearchService.searchQuery = address
         self.locationSearchService.completions = []
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
+        callback(address)
         
         let geoCoder = CLGeocoder()
         geoCoder.geocodeAddressString(address) { (placemarks, error) in
@@ -140,8 +142,9 @@ struct AddressSearchBar: View {
     }
 }
 
-struct AddressSearchBar_Previews: PreviewProvider {
-    static var previews: some View {
-        AddressSearchBar(labelText: "School Address", locationSearchService: LocationSearchService())
-    }
-}
+//struct AddressSearchBar_Previews: PreviewProvider {
+//    static var locationService = LocationSearchService()
+//    static var previews: some View {
+//        AddressSearchBar(labelText: "School Address", locationSearchService: locationService)
+//    }
+//}

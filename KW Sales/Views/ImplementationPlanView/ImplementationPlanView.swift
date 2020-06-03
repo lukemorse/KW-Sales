@@ -43,6 +43,7 @@ struct ImplementationPlanView: View {
     var saveButton: some View {
         Button(action: {
             self.showSaveAlert = true
+            print("save")
         }) {
             Text("Save")
                 .foregroundColor(Color.blue)
@@ -51,14 +52,18 @@ struct ImplementationPlanView: View {
 }
 
 
-//struct CreateImplementationPlanListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ImplementationPlanView(district: .constant(District()))
-//    }
-//}
-
-struct ImplementationPlanView_Previews: PreviewProvider {
+struct CreateImplementationPlanListView_Previews: PreviewProvider {
     static var previews: some View {
-        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
+        
+        let mvm = MainViewModel()
+        var district = District()
+        district.districtID = "123"
+        mvm.districts = [district]
+        
+        return
+            NavigationView {
+            ImplementationPlanView(districtId: "123").environmentObject(mvm)
+        }
+    .navigationViewStyle(StackNavigationViewStyle())
     }
 }

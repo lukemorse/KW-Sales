@@ -11,7 +11,7 @@ import FirebaseFirestore
 import Combine
 
 struct EditDistrictDetailView: View {
-    //    @ObservedObject var locationSearchService = LocationSearchService()
+    @EnvironmentObject var locationSearchService: LocationSearchService
     @State private var numPodsString = ""
     @State private var alertItem: AlertItem?
     
@@ -49,7 +49,7 @@ struct EditDistrictDetailView: View {
                         districtContactPersonField
                         districtEmailField
                         districtPhoneField
-                        districtAddressField
+                        addressPickerNavLink
                     }
                 }
                 Section {
@@ -111,6 +111,24 @@ struct EditDistrictDetailView: View {
 
 extension EditDistrictDetailView {
     // MARK: - Form Items
+    
+    var addressPickerNavLink: some View {
+        NavigationLink(destination: AddressPicker(locationSearchService: locationSearchService, label: "District Office Address", callback: { address in
+            self.district.districtOfficeAddress = address
+            
+        })) {
+            HStack {
+                Text("🏢 District Office Address")
+                    .font(.title)
+                    .foregroundColor(Color.blue)
+                    .padding()
+                Spacer()
+                Text(self.district.districtOfficeAddress)
+                    .foregroundColor(Color.gray)
+            }
+        }
+    }
+    
     var numPodField: some View {
         VStack(alignment: .leading) {
             Text("Number of PODs Needed")
@@ -255,10 +273,20 @@ extension EditDistrictDetailView {
     }
 }
 
-//struct AddDistrictView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NavigationView {
-//            AddDistrictView(with: District())
-//        }
-//    }
-//}
+
+
+struct EditDistrictDetailView_Previews: PreviewProvider {
+    static func handler(id: String, completion: @escaping (_ flag:Bool) -> ()) {}
+    static var previews: some View {
+        
+        let mvm = MainViewModel()
+        var district = District()
+        district.districtID = "123"
+        mvm.districts = [district]
+        
+        return NavigationView {
+            EditDistrictDetailView(district: .constant(district), newFlag: true, uploadDistrictHandler: handler).environmentObject(mvm)
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
+    }
+}

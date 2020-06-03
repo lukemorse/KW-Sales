@@ -14,7 +14,7 @@ import MapKit
 struct InstallationView: View {
     @EnvironmentObject var mainViewModel: MainViewModel
     @ObservedObject var viewModel: InstallationViewModel
-    @ObservedObject var locationSearchService =  LocationSearchService()
+    @EnvironmentObject var locationSearchService: LocationSearchService
     
     @State var isExpanded: Bool = true
     @State private var numPods = 0
@@ -35,15 +35,8 @@ struct InstallationView: View {
                 formItem(with: $viewModel.installation.numRooms, label: "Number of Rooms")
                 numPodPicker
                 formItem(with: $viewModel.installation.schoolContact, label: "School Contact Person")
-                
-                formItem(with: $viewModel.installation.address, label: "School Address")
-                
-                NavigationLink(destination: PodMapMasterView(viewModel: self.viewModel).equatable()) {
-                    Text("📍 Pod Maps")
-                        .font(.title)
-                        .foregroundColor(Color.blue)
-                        .padding()
-                }
+                addressPickerNavLink
+                podMapNavLink
             }
         }
         .onAppear() {
@@ -195,31 +188,47 @@ extension InstallationView {
         
         return formatter.string(from: date as Date)
     }
+    
+    var addressPickerNavLink: some View {
+        NavigationLink(destination: AddressPicker(locationSearchService: locationSearchService, label: "School Address", callback: { address in
+            self.viewModel.installation.address = address
+            
+        })) {
+            HStack {
+                Text("🏫 School Address")
+                    .font(.title)
+                    .foregroundColor(Color.blue)
+                    .padding()
+                Spacer()
+                Text(self.viewModel.installation.address)
+                    .foregroundColor(Color.gray)
+            }
+        }
+    }
+    
+    var podMapNavLink: some View {
+        NavigationLink(destination: PodMapMasterView(viewModel: self.viewModel).equatable()) {
+            Text("📍 Pod Maps")
+                .font(.title)
+                .foregroundColor(Color.blue)
+                .padding()
+        }
+    }
 }
 
-//struct InstallationView_Previews: PreviewProvider {
-//    static var previews: some View {
-//
-//        let mvm = MainViewModel()
-//        var team1 = Team()
-//        team1.name = "Team one"
-//        var team2 = Team()
-//        team2.name = "Team two"
-//        mvm.teams = [team1, team2]
-//
-//        var installation = Installation()
-//        installation.status = .complete
-//        installation.schoolName = "Fancy School"
-//        installation.team = mvm.teams[1]
-//
-//
-//        return NavigationView {
-//            Form {
-//                InstallationView(locationSearchService: LocationSearchService(), isExpanded: true).envi
-//            }
-//        }
-//    }
-//}
+struct InstallationView_Previews: PreviewProvider {
+    static var previews: some View {
+
+        return NavigationView {
+            Form {
+                InstallationView(viewModel: InstallationViewModel(installation: Installation()), isExpanded: true)
+                    .environmentObject(MainViewModel())
+                    .environmentObject(LocationSearchService())
+            }
+        }
+    .navigationViewStyle(StackNavigationViewStyle())
+    }
+}
 
 enum SchoolType: Int, Codable, CaseIterable, Hashable, Identifiable {
     var id: Int { hashValue }

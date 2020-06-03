@@ -13,6 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     var mainViewModel = MainViewModel()
+    var locationSearchService = LocationSearchService()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -24,6 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         mainViewModel.currentUser = "brigittec"
 //        let contentView = StartView().environmentObject(mainViewModel)
         let contentView = MainView().environmentObject(mainViewModel)
+            .environmentObject(locationSearchService)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
