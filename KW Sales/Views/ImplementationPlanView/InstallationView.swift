@@ -229,23 +229,3 @@ struct InstallationView_Previews: PreviewProvider {
     .navigationViewStyle(StackNavigationViewStyle())
     }
 }
-
-enum SchoolType: Int, Codable, CaseIterable, Hashable, Identifiable {
-    var id: Int { hashValue }
-    
-    case unknown
-    case preKSchool
-    case elementary
-    case middleSchool
-    case highSchool
-    
-    var description: String {
-        switch self {
-        case .unknown: return "Unknown School Type"
-        case .preKSchool: return "Pre K School"
-        case .elementary: return "Elementary School"
-        case .middleSchool: return "Middle School"
-        case .highSchool: return "High School"
-        }
-    }
-}

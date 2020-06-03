@@ -49,9 +49,9 @@
 		AF7343262486D9F000826BCF /* KeyboardAdaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7343242486D9F000826BCF /* KeyboardAdaptive.swift */; };
 		AF7343282486DA6E00826BCF /* UIResponder+Current.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7343272486DA6E00826BCF /* UIResponder+Current.swift */; };
 		AFC83A8224782EFC00C02C10 /* LogInData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC83A7E2478159700C02C10 /* LogInData.swift */; };
-		AFCA09C42486AC5A002279E6 /* AlertTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCA09C32486AC5A002279E6 /* AlertTest.swift */; };
 		AFCA09C62486B88E002279E6 /* AlertItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCA09C52486B88E002279E6 /* AlertItem.swift */; };
-		AFD879B82488230A00F5F800 /* AddressPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD879B72488230A00F5F800 /* AddressPicker.swift */; };
+		AFD879BA24882DE900F5F800 /* SchoolType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD879B924882DE900F5F800 /* SchoolType.swift */; };
+		AFD879BC24882E2900F5F800 /* AddressPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD879BB24882E2900F5F800 /* AddressPicker.swift */; };
 		AFDB822D247DAE510076401C /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDB822C247DAE510076401C /* AsyncImage.swift */; };
 		C0BA6CE5438A0624E1669621 /* Pods_KW_SalesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54DB61A8258D93544EE8F4D6 /* Pods_KW_SalesTests.framework */; };
 /* End PBXBuildFile section */
@@ -124,9 +124,9 @@
 		AF7343242486D9F000826BCF /* KeyboardAdaptive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardAdaptive.swift; sourceTree = "<group>"; };
 		AF7343272486DA6E00826BCF /* UIResponder+Current.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIResponder+Current.swift"; sourceTree = "<group>"; };
 		AFC83A7E2478159700C02C10 /* LogInData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LogInData.swift; path = "KW Sales/LogInData.swift"; sourceTree = SOURCE_ROOT; };
-		AFCA09C32486AC5A002279E6 /* AlertTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertTest.swift; sourceTree = "<group>"; };
 		AFCA09C52486B88E002279E6 /* AlertItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertItem.swift; sourceTree = "<group>"; };
-		AFD879B72488230A00F5F800 /* AddressPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressPicker.swift; sourceTree = "<group>"; };
+		AFD879B924882DE900F5F800 /* SchoolType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolType.swift; sourceTree = "<group>"; };
+		AFD879BB24882E2900F5F800 /* AddressPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressPicker.swift; sourceTree = "<group>"; };
 		AFDB822C247DAE510076401C /* AsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImage.swift; sourceTree = "<group>"; };
 		B3F10BB24EC3F6484A435780 /* Pods-KW Sales.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KW Sales.release.xcconfig"; path = "Target Support Files/Pods-KW Sales/Pods-KW Sales.release.xcconfig"; sourceTree = "<group>"; };
 		EAF76A91E66C7CB5B06866F6 /* Pods-KW SalesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KW SalesTests.debug.xcconfig"; path = "Target Support Files/Pods-KW SalesTests/Pods-KW SalesTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -282,9 +282,7 @@
 			children = (
 				A3A2F0F724478D8400079243 /* ImplementationPlanView.swift */,
 				A30F4BF6244530A800B59F8B /* InstallationView.swift */,
-				AFD879B72488230A00F5F800 /* AddressPicker.swift */,
 				A368EA5E244DE82B00FE7685 /* InstallationViewModel.swift */,
-				A3B1B5EF2463599200CE71A0 /* SearchBar.swift */,
 				A3557C4B244A3E7400C747FE /* ImagePicker.swift */,
 			);
 			path = ImplementationPlanView;
@@ -301,7 +299,6 @@
 				A3295BCD2448EF8400F26E1F /* CreatePodMapView */,
 				A30C9B6E2444C1C80049E4FC /* LoginView.swift */,
 				A3557C4D244A424200C747FE /* StartView.swift */,
-				A3DD6C532459D23C00319147 /* ActivityIndicator.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -322,7 +319,6 @@
 			isa = PBXGroup;
 			children = (
 				A3EE48D02444D9DC00C6A554 /* EditDistrictDetailView.swift */,
-				AFCA09C32486AC5A002279E6 /* AlertTest.swift */,
 				A3F4259924475DB8004D2CCE /* SendPodOrderButtonView.swift */,
 				A3F4259B24475E4F004D2CCE /* MailView.swift */,
 			);
@@ -333,6 +329,10 @@
 			isa = PBXGroup;
 			children = (
 				A3295BDD244A2E9500F26E1F /* HelperFunctions.swift */,
+				A3DD6C532459D23C00319147 /* ActivityIndicator.swift */,
+				AFD879B924882DE900F5F800 /* SchoolType.swift */,
+				AFD879BB24882E2900F5F800 /* AddressPicker.swift */,
+				A3B1B5EF2463599200CE71A0 /* SearchBar.swift */,
 				AFCA09C52486B88E002279E6 /* AlertItem.swift */,
 				AFDB822C247DAE510076401C /* AsyncImage.swift */,
 				AF7343242486D9F000826BCF /* KeyboardAdaptive.swift */,
@@ -569,7 +569,6 @@
 			files = (
 				AFC83A8224782EFC00C02C10 /* LogInData.swift in Sources */,
 				A3EE48CF2444D5C700C6A554 /* Constants.swift in Sources */,
-				AFCA09C42486AC5A002279E6 /* AlertTest.swift in Sources */,
 				A30C9B6B2444C1C80049E4FC /* AppDelegate.swift in Sources */,
 				A3EE48D12444D9DC00C6A554 /* EditDistrictDetailView.swift in Sources */,
 				A3557C4E244A424200C747FE /* StartView.swift in Sources */,
@@ -581,6 +580,7 @@
 				A30F4BF7244530A800B59F8B /* InstallationView.swift in Sources */,
 				A38E202F246C792100891910 /* PodMapMasterView.swift in Sources */,
 				A3B37B892446204200D8CE40 /* District.swift in Sources */,
+				AFD879BA24882DE900F5F800 /* SchoolType.swift in Sources */,
 				A3295BDE244A2E9500F26E1F /* HelperFunctions.swift in Sources */,
 				A3C26386246EDA8B003616AB /* MainViewModel.swift in Sources */,
 				A3AD363B2452677200BCDA4D /* Installation.swift in Sources */,
@@ -589,7 +589,7 @@
 				A3E53D87246E388F00FED80A /* EditDistrictsMasterView.swift in Sources */,
 				A368EA5F244DE82B00FE7685 /* InstallationViewModel.swift in Sources */,
 				A3DD6C542459D23C00319147 /* ActivityIndicator.swift in Sources */,
-				AFD879B82488230A00F5F800 /* AddressPicker.swift in Sources */,
+				AFD879BC24882E2900F5F800 /* AddressPicker.swift in Sources */,
 				A3295BCC2448EC7800F26E1F /* PodNodeView.swift in Sources */,
 				AFCA09C62486B88E002279E6 /* AlertItem.swift in Sources */,
 				A3295BD1244A044A00F26E1F /* CSVTest.swift in Sources */,
