@@ -49,7 +49,7 @@ struct EditDistrictDetailView: View {
                     Group {
                         districtContactPersonField
                         districtEmailField
-                        districtPhoneField
+                        phoneNumberField
                         addressPickerNavLink
                     }
                 }
@@ -268,14 +268,23 @@ extension EditDistrictDetailView {
         }
     }
     
-    var districtPhoneField: some View {
+    var phoneNumberField: some View {
         VStack(alignment: .leading) {
-            Text("District Phone Number")
-                .font(.headline)
-            TextField("Enter District Phone Number", text: self.mainViewModel.getDistrict(id: self.districtID).districtPhoneNumber)
-                .padding(.all)
+        Text("District Phone Number")
+            .font(.headline)
+            PhoneNumberField(phoneNumber: self.mainViewModel.getDistrict(id: self.districtID).districtPhoneNumber)
+            .padding()
         }
     }
+    
+//    var districtPhoneField: some View {
+//        VStack(alignment: .leading) {
+//            Text("District Phone Number")
+//                .font(.headline)
+//            TextField("Enter District Phone Number", text: self.mainViewModel.getDistrict(id: self.districtID).districtPhoneNumber)
+//                .padding(.all)
+//        }
+//    }
     
     var readyToInstallToggle: some View {
         Toggle(isOn: self.mainViewModel.getDistrict(id: self.districtID).readyToInstall)  {
