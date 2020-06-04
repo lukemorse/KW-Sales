@@ -122,6 +122,14 @@ class MainViewModel: ObservableObject {
         return self.installationViewModels[districtName] ?? []
     }
     
+    func setNumPods(numPods: Int, districtID: String) {
+        for (index, district) in districts.enumerated() {
+            if district.districtID == districtID {
+                districts[index].numPodsNeeded = numPods
+            }
+        }
+    }
+    
     func addInstallation(districtName: String) {
         if let index = self.districts.firstIndex(where: {$0.districtName == districtName}) {
             var installation = Installation()

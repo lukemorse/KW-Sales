@@ -100,11 +100,17 @@ struct EditDistrictDetailView: View {
     
     var saveButton: some View {
         Button(action: {
+            //show warning if district name is empty
             if self.self.mainViewModel.getDistrict(id: self.districtID).wrappedValue.districtName.isEmpty {
                 self.alertItem = AlertItem(title: Text("Enter District Name"), message: nil, dismissButton: .cancel(Text("OK")))
                 return
             }
             
+            //filter out any alpha chars in numPodsString
+            let filtered = self.numPodsString.filter {"0123456789".contains($0)}
+            self.mainViewModel.setNumPods(numPods: Int(filtered) ?? 0, districtID: self.districtID)
+            
+                //upload district
             self.uploadDistrictHandler(self.mainViewModel.getDistrict(id: self.districtID).wrappedValue.districtID) { success in
                 if success {
                     self.alertItem = AlertItem(title: Text("Successfully Uploaded District Data"), message: nil, dismissButton: .cancel(Text("OK")))
@@ -152,11 +158,6 @@ extension EditDistrictDetailView {
                 .font(.headline)
             TextField("Enter Number of PODs", text: self.$numPodsString)
                 .keyboardType(.numberPad)
-                .onReceive(Just(self.numPodsString)) { newVal in
-                    print(newVal)
-                    let filtered = newVal.filter {"0123456789".contains($0)}
-                    self.mainViewModel.getDistrict(id: self.districtID).wrappedValue.numPodsNeeded = Int(filtered) ?? 0
-            }
             .padding(.all)
         }
     }
