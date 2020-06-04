@@ -34,10 +34,10 @@ class MainViewModel: ObservableObject {
                         //get implementation plan
                         for installation in district.implementationPlan {
                             let viewModel = InstallationViewModel(installation: installation)
-                            if self.installationViewModels.keys.contains(district.districtName) {
-                                self.installationViewModels[district.districtName]?.append(viewModel)
+                            if self.installationViewModels.keys.contains(district.districtID) {
+                                self.installationViewModels[district.districtID]?.append(viewModel)
                             } else {
-                                self.installationViewModels[district.districtName] = [viewModel]
+                                self.installationViewModels[district.districtID] = [viewModel]
                             }
                         }
                     } catch let error {
@@ -74,9 +74,9 @@ class MainViewModel: ObservableObject {
         var district = self.districts[districtIndex]
         district.uploadedBy = currentUser
         var implementationPlan: [Installation] = []
-        if installationViewModels.keys.contains(district.districtName) {
-            if installationViewModels[district.districtName]!.count > 0 {
-                for vm in installationViewModels[district.districtName]! {
+        if installationViewModels.keys.contains(district.districtID) {
+            if installationViewModels[district.districtID]!.count > 0 {
+                for vm in installationViewModels[district.districtID]! {
                     implementationPlan.append(vm.installation)
                 }
             }
@@ -118,8 +118,17 @@ class MainViewModel: ObservableObject {
         return .constant(District())
     }
     
-    func getInstallationViewModels(for districtName: String) -> [InstallationViewModel] {
-        return self.installationViewModels[districtName] ?? []
+//    func getInstallationViewModels(for districtName: String) -> [InstallationViewModel] {
+//        return self.installationViewModels[districtName] ?? []
+//    }
+    
+    func getInstallationViewModels(for districtID: String) -> [InstallationViewModel] {
+        for district in districts {
+            if district.districtID == districtID {
+                return self.installationViewModels[districtID] ?? []
+            }
+        }
+        return []
     }
     
     func setNumPods(numPods: Int, districtID: String) {
