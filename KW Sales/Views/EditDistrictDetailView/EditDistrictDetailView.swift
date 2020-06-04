@@ -11,18 +11,19 @@ import FirebaseFirestore
 import Combine
 
 struct EditDistrictDetailView: View {
+    @EnvironmentObject var mainViewModel: MainViewModel
     @EnvironmentObject var locationSearchService: LocationSearchService
     @State private var numPodsString = ""
     @State private var alertItem: AlertItem?
     
-    @Binding var district: District
+    let districtID: String
     let newFlag: Bool
     let uploadDistrictHandler: (String, @escaping (Bool) -> ()) -> ()
     
-    init(district: Binding<District>, newFlag: Bool,
+    init(districtID: String, newFlag: Bool,
          uploadDistrictHandler: @escaping (String, @escaping (Bool) -> ()) -> ()) {
         self.newFlag = newFlag
-        self._district = district
+        self.districtID = districtID
         self.uploadDistrictHandler = uploadDistrictHandler
     }
     
@@ -72,23 +73,23 @@ struct EditDistrictDetailView: View {
         .alert(item: $alertItem) {alertItem in
             Alert(title: alertItem.title, message: alertItem.message, dismissButton: alertItem.dismissButton)
         }
-        .onAppear() {
-            if self.district.numPodsNeeded != 0 {
-                self.numPodsString = "\(self.district.numPodsNeeded)"
-            }
-        }
+//        .onAppear() {
+//            if self.mainViewModel.getDistrict(id: self.districtID).wrappedValue.numPodsNeeded != 0 {
+//                self.numPodsString = "\(self.mainViewModel.getDistrict(id: self.districtID).numPodsNeeded)"
+//            }
+//        }
         //        .padding(.bottom, keyboard.currentHeight)
     }
     
     //MARK: - Buttons
     var sendPodOrderButton: some View {
         //Button is red until email is valid
-        let district = self.$district.wrappedValue
+        let district = self.mainViewModel.getDistrict(id: self.districtID).wrappedValue
         return SendPodOrderButtonView(numPods: district.numPodsNeeded , email: district.districtEmail , textColor: validateEmail(enteredEmail: district.districtEmail ) ? Color.green : Color.red)
     }
     
     var implementationPlanNavLink: some View {
-        NavigationLink(destination: ImplementationPlanView(districtId: self.district.districtID)
+        NavigationLink(destination: ImplementationPlanView(districtId: self.mainViewModel.getDistrict(id: self.districtID).wrappedValue.districtID)
         ) {
             Text("📋 Implementation Plan")
                 .font(.title)
@@ -99,12 +100,12 @@ struct EditDistrictDetailView: View {
     
     var saveButton: some View {
         Button(action: {
-            if self.district.districtName.isEmpty {
+            if self.self.mainViewModel.getDistrict(id: self.districtID).wrappedValue.districtName.isEmpty {
                 self.alertItem = AlertItem(title: Text("Enter District Name"), message: nil, dismissButton: .cancel(Text("OK")))
                 return
             }
             
-            self.uploadDistrictHandler(self.district.districtID) { success in
+            self.uploadDistrictHandler(self.mainViewModel.getDistrict(id: self.districtID).wrappedValue.districtID) { success in
                 if success {
                     self.alertItem = AlertItem(title: Text("Successfully Uploaded District Data"), message: nil, dismissButton: .cancel(Text("OK")))
                 } else {
@@ -130,7 +131,7 @@ extension EditDistrictDetailView {
     
     var addressPickerNavLink: some View {
         NavigationLink(destination: AddressPicker(locationSearchService: locationSearchService, label: "District Office Address", callback: { address in
-            self.district.districtOfficeAddress = address
+            self.mainViewModel.getDistrict(id: self.districtID).wrappedValue.districtOfficeAddress = address
             
         })) {
             HStack {
@@ -139,7 +140,7 @@ extension EditDistrictDetailView {
                     .foregroundColor(Color.blue)
                     .padding()
                 Spacer()
-                Text(self.district.districtOfficeAddress)
+                Text(self.mainViewModel.getDistrict(id: self.districtID).wrappedValue.districtOfficeAddress)
                     .foregroundColor(Color.gray)
             }
         }
@@ -152,8 +153,9 @@ extension EditDistrictDetailView {
             TextField("Enter Number of PODs", text: self.$numPodsString)
                 .keyboardType(.numberPad)
                 .onReceive(Just(self.numPodsString)) { newVal in
+                    print(newVal)
                     let filtered = newVal.filter {"0123456789".contains($0)}
-                    self.district.numPodsNeeded = Int(filtered) ?? 0
+                    self.mainViewModel.getDistrict(id: self.districtID).wrappedValue.numPodsNeeded = Int(filtered) ?? 0
             }
             .padding(.all)
         }
@@ -164,7 +166,7 @@ extension EditDistrictDetailView {
             Text("Start Date")
                 .font(.headline)
             
-            DatePicker(selection: self.$district.startDate, displayedComponents: .date) {
+            DatePicker(selection: self.mainViewModel.getDistrict(id: self.districtID).startDate, displayedComponents: .date) {
                 Text("")
             }
         }
@@ -174,7 +176,7 @@ extension EditDistrictDetailView {
         VStack(alignment: .leading) {
             Text("District Name")
                 .font(.headline)
-            TextField("Enter District Name", text: self.$district.districtName)
+            TextField("Enter District Name", text: self.mainViewModel.getDistrict(id: self.districtID).districtName)
                 .padding(.all)
         }
     }
@@ -183,7 +185,7 @@ extension EditDistrictDetailView {
         VStack(alignment: .leading) {
             Text("District Office Address")
                 .font(.headline)
-            TextField("Enter District Office Address", text: self.$district.districtOfficeAddress)
+            TextField("Enter District Office Address", text: self.mainViewModel.getDistrict(id: self.districtID).districtOfficeAddress)
                 .padding(.all)
         }
     }
@@ -194,7 +196,7 @@ extension EditDistrictDetailView {
                 .font(.headline)
             
             Picker(selection:
-                self.$district.numPreKSchools,
+                self.mainViewModel.getDistrict(id: self.districtID).numPreKSchools,
                    
                    label: Text(""), content: {
                     ForEach(0..<50, id: \.self) { idx in
@@ -209,7 +211,7 @@ extension EditDistrictDetailView {
                 .font(.headline)
             
             Picker(selection:
-                self.$district.numElementarySchools,
+                self.mainViewModel.getDistrict(id: self.districtID).numElementarySchools,
                    
                    label: Text(""), content: {
                     ForEach(0..<50, id: \.self) { idx in
@@ -224,7 +226,7 @@ extension EditDistrictDetailView {
                 .font(.headline)
             
             Picker(selection:
-                self.$district.numMiddleSchools,
+                self.mainViewModel.getDistrict(id: self.districtID).numMiddleSchools,
                    
                    label: Text(""), content: {
                     ForEach(0..<50, id: \.self) { idx in
@@ -239,7 +241,7 @@ extension EditDistrictDetailView {
                 .font(.headline)
             
             Picker(selection:
-                self.$district.numHighSchools,
+                self.mainViewModel.getDistrict(id: self.districtID).numHighSchools,
                    label: Text(""), content: {
                     ForEach(0..<50, id: \.self) { idx in
                         Text(String(idx))
@@ -251,7 +253,7 @@ extension EditDistrictDetailView {
         VStack(alignment: .leading) {
             Text("District Contact Person")
                 .font(.headline)
-            TextField("Enter District Contact Name", text: self.$district.districtContactPerson)
+            TextField("Enter District Contact Name", text: self.mainViewModel.getDistrict(id: self.districtID).districtContactPerson)
                 .padding(.all)
         }
     }
@@ -260,7 +262,7 @@ extension EditDistrictDetailView {
         VStack(alignment: .leading) {
             Text("District Email")
                 .font(.headline)
-            TextField("Enter District Email", text: self.$district.districtEmail)
+            TextField("Enter District Email", text: self.mainViewModel.getDistrict(id: self.districtID).districtEmail)
                 .padding(.all)
         }
     }
@@ -269,13 +271,13 @@ extension EditDistrictDetailView {
         VStack(alignment: .leading) {
             Text("District Phone Number")
                 .font(.headline)
-            TextField("Enter District Phone Number", text: self.$district.districtPhoneNumber)
+            TextField("Enter District Phone Number", text: self.mainViewModel.getDistrict(id: self.districtID).districtPhoneNumber)
                 .padding(.all)
         }
     }
     
     var readyToInstallToggle: some View {
-        Toggle(isOn: self.$district.readyToInstall)  {
+        Toggle(isOn: self.mainViewModel.getDistrict(id: self.districtID).readyToInstall)  {
             Text("Ready To Install")
             .font(.title)
             .padding()
@@ -283,7 +285,7 @@ extension EditDistrictDetailView {
     }
     
     func formIsEmpty() -> Bool {
-        let district = self.$district.wrappedValue
+        let district = self.mainViewModel.getDistrict(id: self.districtID).wrappedValue
         return district.districtContactPerson.isEmpty ||
             district.districtEmail.isEmpty ||
             district.districtPhoneNumber.isEmpty ||
@@ -303,7 +305,7 @@ struct EditDistrictDetailView_Previews: PreviewProvider {
         mvm.districts = [district]
         
         return NavigationView {
-            EditDistrictDetailView(district: .constant(district), newFlag: true, uploadDistrictHandler: handler)
+            EditDistrictDetailView(districtID: "123", newFlag: true, uploadDistrictHandler: handler)
                 .environmentObject(mvm)
             .environmentObject(LocationSearchService())
         }

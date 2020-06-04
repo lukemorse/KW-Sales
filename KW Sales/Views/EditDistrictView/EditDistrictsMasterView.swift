@@ -60,7 +60,7 @@ struct EditDistrictsMasterView: View {
             addDistrictButton
             if self.viewModel.filteredDistricts.count > 0 {
                 ForEach(0..<viewModel.filteredDistricts.count, id: \.self) { index in
-                    NavigationLink(self.viewModel.districts[index].districtName, destination: EditDistrictDetailView(district: self.$viewModel.filteredDistricts[index], newFlag: false, uploadDistrictHandler: self.viewModel.uploadDistrict
+                    NavigationLink(self.viewModel.districts[index].districtName, destination: EditDistrictDetailView(districtID: self.viewModel.filteredDistricts[index].districtID, newFlag: false, uploadDistrictHandler: self.viewModel.uploadDistrict
                     ))
                         .font(.title)
                         .padding()
@@ -74,7 +74,7 @@ struct EditDistrictsMasterView: View {
             self.addedDistrict = self.viewModel.addDistrict()
             self.shouldNavigate = true
         }) {
-            NavigationLink(destination: EditDistrictDetailView(district: self.addedDistrict ?? .constant(District()), newFlag: true, uploadDistrictHandler: self.viewModel.uploadDistrict
+            NavigationLink(destination: EditDistrictDetailView(districtID: self.addedDistrict?.wrappedValue.districtID ?? "", newFlag: true, uploadDistrictHandler: self.viewModel.uploadDistrict
             ), isActive: self.$shouldNavigate) {
                 Text("Add District")
                     .font(.title)
