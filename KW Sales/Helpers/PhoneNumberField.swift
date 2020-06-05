@@ -84,5 +84,10 @@ struct PhoneFieldContainer: UIViewRepresentable {
             let newPosition = textField.endOfDocument
             textField.selectedTextRange = textField.textRange(from: newPosition, to: newPosition)
         }
+        
+        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+             textField.resignFirstResponder()
+            return true
+        }
     }
 }

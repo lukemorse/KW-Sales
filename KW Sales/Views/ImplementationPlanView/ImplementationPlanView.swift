@@ -30,13 +30,12 @@ struct ImplementationPlanView: View {
                     .foregroundColor(Color.blue)
             }
         }
-        
+        .enableKeyboardOffset()
         .navigationBarItems(trailing: saveButton)
         .navigationBarTitle("Implementation Plan")
         .alert(isPresented: self.$showSaveAlert) {
             Alert(title: Text("Saved Implementation Plan"))
         }
-        .keyboardAdaptive()
         .padding(.bottom, 10)
     }
     

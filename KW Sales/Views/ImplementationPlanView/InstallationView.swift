@@ -57,6 +57,7 @@ extension InstallationView {
             Text("Number of PODs Needed")
                 .font(.headline)
             TextField("Enter Number of PODs", text: self.$numPodsString)
+                .hideKeyboardOnTap()
                 .keyboardType(.numberPad)
                 .onReceive(Just(self.numPodsString)) { newVal in
                     let filtered = newVal.filter {"0123456789".contains($0)}
@@ -108,6 +109,7 @@ extension InstallationView {
                 Text(label)
                     .font(.headline)
                 TextField("Enter " + label, text: name)
+                    .hideKeyboardOnTap()
                     .padding([.top, .bottom])
             }
     }

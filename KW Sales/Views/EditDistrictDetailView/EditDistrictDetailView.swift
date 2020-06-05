@@ -60,25 +60,16 @@ struct EditDistrictDetailView: View {
                     implementationPlanNavLink
                     sendPodOrderButton
                 }
-//                Section {
                     saveButton
-//                }
-//                .background(Color.green)
             }
+        .enableKeyboardOffset()
         }
-        .keyboardAdaptive()
             
         .navigationBarTitle(Text(newFlag ? "New District" : "Edit District"), displayMode: .inline)
 //        .navigationBarItems(trailing: saveButton)
         .alert(item: $alertItem) {alertItem in
             Alert(title: alertItem.title, message: alertItem.message, dismissButton: alertItem.dismissButton)
         }
-//        .onAppear() {
-//            if self.mainViewModel.getDistrict(id: self.districtID).wrappedValue.numPodsNeeded != 0 {
-//                self.numPodsString = "\(self.mainViewModel.getDistrict(id: self.districtID).numPodsNeeded)"
-//            }
-//        }
-        //        .padding(.bottom, keyboard.currentHeight)
     }
     
     //MARK: - Buttons
@@ -157,6 +148,7 @@ extension EditDistrictDetailView {
             Text("Number of PODs Needed")
                 .font(.headline)
             TextField("Enter Number of PODs", text: self.$numPodsString)
+                .hideKeyboardOnTap()
                 .keyboardType(.numberPad)
             .padding(.all)
         }
@@ -178,6 +170,7 @@ extension EditDistrictDetailView {
             Text("District Name")
                 .font(.headline)
             TextField("Enter District Name", text: self.mainViewModel.getDistrict(id: self.districtID).districtName)
+                .hideKeyboardOnTap()
                 .padding(.all)
         }
     }
@@ -187,6 +180,7 @@ extension EditDistrictDetailView {
             Text("District Office Address")
                 .font(.headline)
             TextField("Enter District Office Address", text: self.mainViewModel.getDistrict(id: self.districtID).districtOfficeAddress)
+                .hideKeyboardOnTap()
                 .padding(.all)
         }
     }
@@ -255,6 +249,7 @@ extension EditDistrictDetailView {
             Text("District Contact Person")
                 .font(.headline)
             TextField("Enter District Contact Name", text: self.mainViewModel.getDistrict(id: self.districtID).districtContactPerson)
+                .hideKeyboardOnTap()
                 .padding(.all)
         }
     }
@@ -264,6 +259,7 @@ extension EditDistrictDetailView {
             Text("District Email")
                 .font(.headline)
             TextField("Enter District Email", text: self.mainViewModel.getDistrict(id: self.districtID).districtEmail)
+                .hideKeyboardOnTap()
                 .padding(.all)
         }
     }
