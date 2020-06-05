@@ -24,7 +24,7 @@ struct ImplementationPlanView: View {
             }
             
             Button(action: {
-                self.mainViewModel.addInstallation(districtName: self.mainViewModel.getDistrict(id: self.districtId).wrappedValue.districtName)
+                self.mainViewModel.addInstallation(districtID: self.mainViewModel.getDistrict(id: self.districtId).wrappedValue.districtID)
             }) {
                 Text("Add School")
                     .foregroundColor(Color.blue)

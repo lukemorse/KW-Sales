@@ -139,17 +139,17 @@ class MainViewModel: ObservableObject {
         }
     }
     
-    func addInstallation(districtName: String) {
-        if let index = self.districts.firstIndex(where: {$0.districtName == districtName}) {
+    func addInstallation(districtID: String) {
+        if let index = self.districts.firstIndex(where: {$0.districtID == districtID}) {
             var installation = Installation()
             installation.districtName = self.districts[index].districtName
             installation.districtContact = self.districts[index].districtContactPerson
             let viewModel = InstallationViewModel(installation: installation)
             
-            if installationViewModels.keys.contains(districtName) {
-                installationViewModels[self.districts[index].districtName]?.append(viewModel)
+            if installationViewModels.keys.contains(districtID) {
+                installationViewModels[self.districts[index].districtID]?.append(viewModel)
             } else {
-                installationViewModels[self.districts[index].districtName] = [viewModel]
+                installationViewModels[self.districts[index].districtID] = [viewModel]
             }
             self.districts[index].implementationPlan.append(installation)
         }
