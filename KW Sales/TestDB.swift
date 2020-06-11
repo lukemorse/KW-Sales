@@ -27,7 +27,6 @@ struct TestDB {
         result.numPods = 200
         result.date = Date()
         result.floorPlanUrls = []
-        result.pods = [:]
         return result
     }
     
@@ -47,7 +46,6 @@ struct TestDB {
         result.numPods = 200
         result.date = Date()
         result.floorPlanUrls = []
-        result.pods = [:]
         return result
     }
     

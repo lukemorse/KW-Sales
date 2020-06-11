@@ -11,20 +11,20 @@ import SwiftUI
 struct ImplementationPlanView: View {
     
     @EnvironmentObject var mainViewModel: MainViewModel
-    let districtId: String
+    @Binding var district: District
     @State var showSaveAlert = false
     
     var body: some View {
-        let district = self.mainViewModel.getDistrict(id: districtId).wrappedValue
         return Form {
             if district.implementationPlan.count > 0 {
                 ForEach(0..<district.implementationPlan.count, id: \.self) { index in
-                    InstallationView(viewModel: self.mainViewModel.getInstallationViewModels(for: district.districtID)[index])
+                    InstallationView(installation: self.district.implementationPlan[index])
                 }
             }
             
             Button(action: {
-                self.mainViewModel.addInstallation(districtID: self.mainViewModel.getDistrict(id: self.districtId).wrappedValue.districtID)
+                var installation = Installation()
+                self.district.implementationPlan.append(installation)
             }) {
                 Text("Add School")
                     .foregroundColor(Color.blue)
@@ -51,18 +51,18 @@ struct ImplementationPlanView: View {
 }
 
 
-struct CreateImplementationPlanListView_Previews: PreviewProvider {
-    static var previews: some View {
-        
-        let mvm = MainViewModel()
-        var district = District()
-        district.districtID = "123"
-        mvm.districts = [district]
-        
-        return
-            NavigationView {
-            ImplementationPlanView(districtId: "123").environmentObject(mvm)
-        }
-    .navigationViewStyle(StackNavigationViewStyle())
-    }
-}
+//struct CreateImplementationPlanListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//
+//        let mvm = MainViewModel()
+//        var district = District()
+//        district.districtID = "123"
+//        mvm.districts = [district]
+//
+//        return
+//            NavigationView {
+//            ImplementationPlanView(districtId: "123").environmentObject(mvm)
+//        }
+//    .navigationViewStyle(StackNavigationViewStyle())
+//    }
+//}

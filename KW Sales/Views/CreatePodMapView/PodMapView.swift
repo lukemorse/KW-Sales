@@ -9,9 +9,9 @@
 import SwiftUI
 import FirebaseFirestore
 
-struct CreatePodMapView: View {
+struct PodMapView: View {
     @Environment(\.imageCache) var cache: ImageCache
-    @EnvironmentObject var viewModel: InstallationViewModel
+    @ObservedObject var viewModel: PodMapViewModel
     var floorPlanIndex: Int
     
     @State var showImagePicker: Bool = false
@@ -32,7 +32,7 @@ struct CreatePodMapView: View {
     var body: some View {
         VStack {
             ZStack {
-                AsyncImage(url: URL(string: viewModel.installation.floorPlanUrls[floorPlanIndex])!, cache: self.cache, placeholder: Text("Loading..."), configuration: {$0.resizable()})
+                AsyncImage(url: viewModel.url, cache: self.cache, placeholder: Text("Loading..."), configuration: {$0.resizable()})
                 self.podGroup
             }
             .coordinateSpace(name: "custom")
@@ -64,7 +64,8 @@ struct CreatePodMapView: View {
             })
                 .onEnded({ (value) in
                     self.draggedPodView = nil
-                    self.addPod(pod: Pod(podType: self.nextPodType, position: value.location))
+                    let pod = Pod(podType: self.nextPodType, position: value.location)
+                    self.viewModel.pods.append(pod)
                 })
             ))
         } else {
@@ -73,24 +74,22 @@ struct CreatePodMapView: View {
     }
     
     var podGroup: some View {
-        if let pods = viewModel.installation.pods[viewModel.installation.floorPlanUrls[floorPlanIndex]] {
-            if pods.count > 0 {
-                return AnyView(
-                    Group {
-                        ForEach(0..<pods.count, id: \.self) { index in
-                            PodNodeView(pod: pods[index])
-                                .onTapGesture {
-                                    if !self.willPlacePod {
-                                        self.viewModel.installation.pods[self.viewModel.installation.floorPlanUrls[self.floorPlanIndex]]?.remove(at: index)
-                                    }
-                            }
-                        }
-                        if self.draggedPodView != nil {
-                            self.draggedPodView
+        if viewModel.pods.count > 0 {
+            return AnyView(
+                Group {
+                    ForEach(0..<self.viewModel.pods.count, id: \.self) { index in
+                        PodNodeView(pod: self.viewModel.pods[index])
+                            .onTapGesture {
+                                if !self.willPlacePod {
+                                    self.viewModel.pods.remove(at: index)
+                                }
                         }
                     }
-                )
-            }
+                    if self.draggedPodView != nil {
+                        self.draggedPodView
+                    }
+                }
+            )
         }
         return AnyView(EmptyView())
     }
@@ -142,19 +141,9 @@ struct CreatePodMapView: View {
                     .cancel()])
         })
     }
-    
-    func addPod(pod: Pod) {
-        //add to implementation plan
-        let key = self.viewModel.installation.floorPlanUrls[floorPlanIndex]
-        if self.viewModel.installation.pods.keys.contains(key) {
-            self.viewModel.installation.pods[key]?.append(pod)
-        } else {
-            self.viewModel.installation.pods[key] = [pod]
-        }
-    }
 }
 
-extension CreatePodMapView {
+extension PodMapView {
     
     var moveAndScaleButtons: some View {
         HStack {

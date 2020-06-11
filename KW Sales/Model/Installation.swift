@@ -30,7 +30,6 @@ struct Installation: Encodable, Identifiable, Hashable  {
     var numPods: Int
     var date: Date
     var floorPlanUrls: [String]
-    var pods: [String:[Pod]]
     
     init() {
         self.status = .notStarted
@@ -47,7 +46,6 @@ struct Installation: Encodable, Identifiable, Hashable  {
         self.numPods = 0
         self.date = Date()
         self.floorPlanUrls = []
-        self.pods = [:]
     }
     
     private enum CodingKeys: String, CodingKey {
@@ -66,7 +64,6 @@ struct Installation: Encodable, Identifiable, Hashable  {
         case numPods
         case date
         case floorPlanURLs
-        case pods
     }
     
     func encode(to encoder: Encoder) throws {
@@ -85,7 +82,6 @@ struct Installation: Encodable, Identifiable, Hashable  {
         try container.encode(numPods, forKey: .numPods)
         try container.encode(Timestamp(date: date), forKey: .date)
         try container.encode(floorPlanUrls, forKey: .floorPlanURLs)
-        try container.encode(pods, forKey: .pods)
     }
 }
 
@@ -104,7 +100,6 @@ extension Installation: Decodable {
         numRooms = try container.decode(Int.self, forKey: .numRooms)
         numPods = try container.decode(Int.self, forKey: .numPods)
         floorPlanUrls = try container.decode([String].self, forKey: .floorPlanURLs)
-        pods = try container.decode([String:[Pod]].self, forKey: .pods)
         
         let timeStamp: Timestamp = try container.decode(Timestamp.self, forKey: .date)
         date = timeStamp.dateValue()

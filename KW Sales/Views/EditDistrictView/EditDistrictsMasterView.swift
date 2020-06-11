@@ -13,15 +13,15 @@ import ActionOver
 
 struct EditDistrictsMasterView: View {
     @EnvironmentObject var viewModel: MainViewModel
-    @State private var addedDistrict: Binding<District>?
+    @State private var addedDistrict: District?
     @State private var shouldNavigate = false
     @State private var showFilterMenu = false
     
     var body: some View {
         listView
             .onAppear() {
-                if(self.viewModel.districts.isEmpty) {
-                    self.viewModel.fetchDistricts()
+                if(self.viewModel.filteredDistrictNames.isEmpty) {
+                    self.viewModel.fetchDistrictList()
                     self.viewModel.fetchTeams()
                 }
         }
@@ -58,9 +58,9 @@ struct EditDistrictsMasterView: View {
     var listView: some View {
         AnyView(List {
             addDistrictButton
-            if self.viewModel.filteredDistricts.count > 0 {
-                ForEach(0..<viewModel.filteredDistricts.count, id: \.self) { index in
-                    NavigationLink(self.viewModel.districts[index].districtName, destination: EditDistrictDetailView(districtID: self.viewModel.filteredDistricts[index].districtID, newFlag: false, uploadDistrictHandler: self.viewModel.uploadDistrict
+            if viewModel.filteredDistrictNames.count > 0 {
+                ForEach(0..<viewModel.filteredDistrictNames.count, id: \.self) { index in
+                    NavigationLink(self.viewModel.filteredDistrictNames[index], destination: EditDistrictDetailView(docPath: self.viewModel.filteredDistricts[index].districtID, newFlag: false, uploadDistrictHandler: self.viewModel.uploadDistrict
                     ))
                         .font(.title)
                         .padding()
@@ -71,11 +71,11 @@ struct EditDistrictsMasterView: View {
     
     var addDistrictButton: some View {
         return Button(action: {
-            self.addedDistrict = self.viewModel.addDistrict()
+            self.addedDistrict = District()
             self.shouldNavigate = true
         }) {
-            NavigationLink(destination: EditDistrictDetailView(districtID: self.addedDistrict?.wrappedValue.districtID ?? "", newFlag: true, uploadDistrictHandler: self.viewModel.uploadDistrict
-            ), isActive: self.$shouldNavigate) {
+            NavigationLink(destination:
+                EditDistrictDetailView(docPath: self.addedDistrict?.districtID ?? "", newFlag: true), isActive: self.$shouldNavigate) {
                 Text("Add District")
                     .font(.title)
                     .padding()

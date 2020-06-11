@@ -65,7 +65,7 @@ struct PodMapMasterView: View, Equatable {
         let asyncImage = AsyncImage(url: URL(string: self.viewModel.installation.floorPlanUrls[index])!, cache: self.cache, placeholder: Text("Loading...").padding(), configuration:
         {$0.resizable()})
         
-        return NavigationLink(destination: CreatePodMapView(floorPlanIndex: index).environmentObject(self.viewModel), tag: index, selection: $selection) {
+        return NavigationLink(destination: PodMapView(floorPlanIndex: index).environmentObject(self.viewModel), tag: index, selection: $selection) {
             asyncImage
                 .aspectRatio(contentMode: .fit)
                 .border(Color.black)
@@ -95,7 +95,7 @@ struct ThumbnailNavLinkView: View, Equatable {
         let asyncImage = AsyncImage(url: url, cache: self.cache, placeholder: Text("Loading...").padding(), configuration:
         {$0.resizable()})
         
-        return NavigationLink(destination: CreatePodMapView(floorPlanIndex: index), tag: index, selection: $selection) {
+        return NavigationLink(destination: PodMapView(floorPlanIndex: index), tag: index, selection: $selection) {
             asyncImage
                 .aspectRatio(contentMode: .fit)
                 .border(Color.black)

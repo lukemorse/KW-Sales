@@ -27,7 +27,7 @@
 		A3557C4C244A3E7400C747FE /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3557C4B244A3E7400C747FE /* ImagePicker.swift */; };
 		A3557C4E244A424200C747FE /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3557C4D244A424200C747FE /* StartView.swift */; };
 		A368EA5F244DE82B00FE7685 /* InstallationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A368EA5E244DE82B00FE7685 /* InstallationViewModel.swift */; };
-		A38C39B72447F034005BECFB /* CreatePodMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38C39B62447F034005BECFB /* CreatePodMapView.swift */; };
+		A38C39B72447F034005BECFB /* PodMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38C39B62447F034005BECFB /* PodMapView.swift */; };
 		A38E202F246C792100891910 /* PodMapMasterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38E202E246C792100891910 /* PodMapMasterView.swift */; };
 		A39878D5246C3936000F99AC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39878D4246C3936000F99AC /* User.swift */; };
 		A3A2F0F824478D8400079243 /* ImplementationPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A2F0F724478D8400079243 /* ImplementationPlanView.swift */; };
@@ -46,12 +46,14 @@
 		A3F4259C24475E4F004D2CCE /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F4259B24475E4F004D2CCE /* MailView.swift */; };
 		AF22C08B248995CC003A4C2E /* PhoneNumberField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF22C08A248995CC003A4C2E /* PhoneNumberField.swift */; };
 		AF3C1D24247575B6008BC1B9 /* ActionOver in Frameworks */ = {isa = PBXBuildFile; productRef = AF3C1D23247575B6008BC1B9 /* ActionOver */; };
+		AF55795E2492C1FD0015D8A6 /* PodMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF55795D2492C1FD0015D8A6 /* PodMapViewModel.swift */; };
 		AF71D6F7248A85EE0035A48B /* KeyboardOffsetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF71D6F4248A85EE0035A48B /* KeyboardOffsetModifier.swift */; };
 		AF71D6F8248A85EE0035A48B /* KeyboardDismissModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF71D6F5248A85EE0035A48B /* KeyboardDismissModifier.swift */; };
 		AF71D6F9248A85EE0035A48B /* FormValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF71D6F6248A85EE0035A48B /* FormValidator.swift */; };
 		AF7343252486D9F000826BCF /* KeyboardHeightPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7343232486D9F000826BCF /* KeyboardHeightPublisher.swift */; };
 		AF7343262486D9F000826BCF /* KeyboardAdaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7343242486D9F000826BCF /* KeyboardAdaptive.swift */; };
 		AF7343282486DA6E00826BCF /* UIResponder+Current.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7343272486DA6E00826BCF /* UIResponder+Current.swift */; };
+		AFC2386B2492AD8400651363 /* EditDistrictDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC2386A2492AD8400651363 /* EditDistrictDetailViewModel.swift */; };
 		AFC83A8224782EFC00C02C10 /* LogInData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC83A7E2478159700C02C10 /* LogInData.swift */; };
 		AFCA09C62486B88E002279E6 /* AlertItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCA09C52486B88E002279E6 /* AlertItem.swift */; };
 		AFD879BA24882DE900F5F800 /* SchoolType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD879B924882DE900F5F800 /* SchoolType.swift */; };
@@ -106,7 +108,7 @@
 		A3557C4B244A3E7400C747FE /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		A3557C4D244A424200C747FE /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		A368EA5E244DE82B00FE7685 /* InstallationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallationViewModel.swift; sourceTree = "<group>"; };
-		A38C39B62447F034005BECFB /* CreatePodMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePodMapView.swift; sourceTree = "<group>"; };
+		A38C39B62447F034005BECFB /* PodMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodMapView.swift; sourceTree = "<group>"; };
 		A38E202E246C792100891910 /* PodMapMasterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodMapMasterView.swift; sourceTree = "<group>"; };
 		A39878D4246C3936000F99AC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A3A2F0F724478D8400079243 /* ImplementationPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImplementationPlanView.swift; sourceTree = "<group>"; };
@@ -125,12 +127,14 @@
 		A3F4259B24475E4F004D2CCE /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		A9F6FC5B3B907EB6981549FC /* Pods_KW_Sales.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KW_Sales.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF22C08A248995CC003A4C2E /* PhoneNumberField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberField.swift; sourceTree = "<group>"; };
+		AF55795D2492C1FD0015D8A6 /* PodMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodMapViewModel.swift; sourceTree = "<group>"; };
 		AF71D6F4248A85EE0035A48B /* KeyboardOffsetModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardOffsetModifier.swift; sourceTree = "<group>"; };
 		AF71D6F5248A85EE0035A48B /* KeyboardDismissModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardDismissModifier.swift; sourceTree = "<group>"; };
 		AF71D6F6248A85EE0035A48B /* FormValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormValidator.swift; sourceTree = "<group>"; };
 		AF7343232486D9F000826BCF /* KeyboardHeightPublisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardHeightPublisher.swift; sourceTree = "<group>"; };
 		AF7343242486D9F000826BCF /* KeyboardAdaptive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardAdaptive.swift; sourceTree = "<group>"; };
 		AF7343272486DA6E00826BCF /* UIResponder+Current.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIResponder+Current.swift"; sourceTree = "<group>"; };
+		AFC2386A2492AD8400651363 /* EditDistrictDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDistrictDetailViewModel.swift; sourceTree = "<group>"; };
 		AFC83A7E2478159700C02C10 /* LogInData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LogInData.swift; path = "KW Sales/LogInData.swift"; sourceTree = SOURCE_ROOT; };
 		AFCA09C52486B88E002279E6 /* AlertItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertItem.swift; sourceTree = "<group>"; };
 		AFD879B924882DE900F5F800 /* SchoolType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolType.swift; sourceTree = "<group>"; };
@@ -263,7 +267,8 @@
 			isa = PBXGroup;
 			children = (
 				A38E202E246C792100891910 /* PodMapMasterView.swift */,
-				A38C39B62447F034005BECFB /* CreatePodMapView.swift */,
+				A38C39B62447F034005BECFB /* PodMapView.swift */,
+				AF55795D2492C1FD0015D8A6 /* PodMapViewModel.swift */,
 				A3295BCB2448EC7800F26E1F /* PodNodeView.swift */,
 			);
 			path = CreatePodMapView;
@@ -327,6 +332,7 @@
 			isa = PBXGroup;
 			children = (
 				A3EE48D02444D9DC00C6A554 /* EditDistrictDetailView.swift */,
+				AFC2386A2492AD8400651363 /* EditDistrictDetailViewModel.swift */,
 				A3F4259924475DB8004D2CCE /* SendPodOrderButtonView.swift */,
 				A3F4259B24475E4F004D2CCE /* MailView.swift */,
 			);
@@ -584,6 +590,7 @@
 				A3EE48CF2444D5C700C6A554 /* Constants.swift in Sources */,
 				AF22C08B248995CC003A4C2E /* PhoneNumberField.swift in Sources */,
 				A30C9B6B2444C1C80049E4FC /* AppDelegate.swift in Sources */,
+				AF55795E2492C1FD0015D8A6 /* PodMapViewModel.swift in Sources */,
 				A3EE48D12444D9DC00C6A554 /* EditDistrictDetailView.swift in Sources */,
 				A3557C4E244A424200C747FE /* StartView.swift in Sources */,
 				AFDB822D247DAE510076401C /* AsyncImage.swift in Sources */,
@@ -601,6 +608,7 @@
 				AF7343282486DA6E00826BCF /* UIResponder+Current.swift in Sources */,
 				A39878D5246C3936000F99AC /* User.swift in Sources */,
 				A3E53D87246E388F00FED80A /* EditDistrictsMasterView.swift in Sources */,
+				AFC2386B2492AD8400651363 /* EditDistrictDetailViewModel.swift in Sources */,
 				A368EA5F244DE82B00FE7685 /* InstallationViewModel.swift in Sources */,
 				A3DD6C542459D23C00319147 /* ActivityIndicator.swift in Sources */,
 				AFD879BC24882E2900F5F800 /* AddressPicker.swift in Sources */,
@@ -611,7 +619,7 @@
 				AF71D6F8248A85EE0035A48B /* KeyboardDismissModifier.swift in Sources */,
 				A3557C4C244A3E7400C747FE /* ImagePicker.swift in Sources */,
 				A336F85524747707008196C5 /* TestDB.swift in Sources */,
-				A38C39B72447F034005BECFB /* CreatePodMapView.swift in Sources */,
+				A38C39B72447F034005BECFB /* PodMapView.swift in Sources */,
 				A3A2F0F824478D8400079243 /* ImplementationPlanView.swift in Sources */,
 				A3F4259A24475DB8004D2CCE /* SendPodOrderButtonView.swift in Sources */,
 				A30C9B6D2444C1C80049E4FC /* SceneDelegate.swift in Sources */,

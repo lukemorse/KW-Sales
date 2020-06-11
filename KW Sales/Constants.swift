@@ -25,6 +25,10 @@ struct Constants {
         static let tabBar3 = "Edit"
     }
     
+    static let kPendingDistrictNameCollection = "pendingDistrictNames"
+    static let kCompleteDistrictNameCollection = "completeDistrictNames"
+    static let kAddedByUserDistrictNameCollection = "addedByUserDistrictNames"
+    
     static let kFloorPlanCollection = "floorPlansCollection"
     static let kFloorPlanFolder = "floorPlansFolder"
     static let kDistrictCollection = "districts"

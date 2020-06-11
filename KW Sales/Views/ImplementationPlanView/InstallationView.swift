@@ -20,6 +20,11 @@ struct InstallationView: View {
     @State private var numPods = 0
     @State private var numPodsString = ""
     
+    init(installation: Installation) {
+        let viewModel = InstallationViewModel(installation: installation)
+        self.viewModel = viewModel
+    }
+    
     var body: some View {
         Section {
             if !viewModel.installation.schoolName.isEmpty {
@@ -218,16 +223,16 @@ extension InstallationView {
     }
 }
 
-struct InstallationView_Previews: PreviewProvider {
-    static var previews: some View {
-
-        return NavigationView {
-            Form {
-                InstallationView(viewModel: InstallationViewModel(installation: Installation()), isExpanded: true)
-                    .environmentObject(MainViewModel())
-                    .environmentObject(LocationSearchService())
-            }
-        }
-    .navigationViewStyle(StackNavigationViewStyle())
-    }
-}
+//struct InstallationView_Previews: PreviewProvider {
+//    static var previews: some View {
+//
+//        return NavigationView {
+//            Form {
+//                InstallationView(viewModel: InstallationViewModel(installation: Installation()), isExpanded: true)
+//                    .environmentObject(MainViewModel())
+//                    .environmentObject(LocationSearchService())
+//            }
+//        }
+//    .navigationViewStyle(StackNavigationViewStyle())
+//    }
+//}
