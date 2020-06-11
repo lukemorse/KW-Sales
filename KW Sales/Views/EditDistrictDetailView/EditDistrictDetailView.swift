@@ -17,12 +17,11 @@ struct EditDistrictDetailView: View {
     @State private var numPodsString = ""
     @State private var alertItem: AlertItem?
     
-    let docPath: String
     let newFlag: Bool
     
-    init(docPath: String, newFlag: Bool) {
+    init(viewModel: EditDistrictDetailViewModel, newFlag: Bool) {
+        self.viewModel = viewModel
         self.newFlag = newFlag
-        self.docPath = docPath
     }
     
     var body: some View {
@@ -78,7 +77,8 @@ struct EditDistrictDetailView: View {
     }
     
     var implementationPlanNavLink: some View {
-        NavigationLink(destination: ImplementationPlanView(districtId: self.viewModel.district.districtID)
+        NavigationLink(destination:
+            ImplementationPlanView(district: Binding<District>(get: {return self.viewModel.district}, set: {self.viewModel.district = $0}))
         ) {
             Text("📋 Implementation Plan")
                 .font(.title)
@@ -102,7 +102,7 @@ struct EditDistrictDetailView: View {
             }
 
                 //upload district
-            self.uploadDistrictHandler(self.viewModel.district.districtID) { success in
+            self.viewModel.uploadDistrict() { success in
                 if success {
                     self.alertItem = AlertItem(title: Text("Successfully Uploaded District Data"), message: nil, dismissButton: .cancel(Text("OK")))
                 } else {

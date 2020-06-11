@@ -23,7 +23,7 @@ struct ImplementationPlanView: View {
             }
             
             Button(action: {
-                var installation = Installation()
+                let installation = Installation()
                 self.district.implementationPlan.append(installation)
             }) {
                 Text("Add School")

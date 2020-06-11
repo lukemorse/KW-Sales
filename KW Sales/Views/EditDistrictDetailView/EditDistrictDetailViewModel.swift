@@ -34,7 +34,7 @@ class EditDistrictDetailViewModel: ObservableObject {
         }
     }
     
-    func uploadDistrict(completion: (Bool) -> Void) {
+    func uploadDistrict(completion: @escaping (Bool) -> Void) {
         do {
             let data = try FirestoreEncoder().encode(self.district)
             docRef.setData(data) { error in
@@ -45,8 +45,10 @@ class EditDistrictDetailViewModel: ObservableObject {
                     print("Document successfully written!")
                     completion(true)
                 }
-            } catch {
+            }
+        } catch {
             print(error)
+            
         }
     }
 }

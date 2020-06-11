@@ -96,7 +96,11 @@ struct PodMapView: View {
     
     var saveButton: some View {
         Button(action: {
-            self.isShowingAlert = true
+            self.viewModel.setPods() { success in
+                if success {
+                    self.isShowingAlert = true
+                }
+            }
         }) {
             Text("Save")
                 .foregroundColor(.blue)

@@ -65,7 +65,7 @@ struct PodMapMasterView: View, Equatable {
         let asyncImage = AsyncImage(url: URL(string: self.viewModel.installation.floorPlanUrls[index])!, cache: self.cache, placeholder: Text("Loading...").padding(), configuration:
         {$0.resizable()})
         
-        return NavigationLink(destination: PodMapView(floorPlanIndex: index).environmentObject(self.viewModel), tag: index, selection: $selection) {
+        return NavigationLink(destination: PodMapView(viewModel: PodMapViewModel(url: URL(string: viewModel.installation.floorPlanUrls[index])!), floorPlanIndex: index).environmentObject(self.viewModel), tag: index, selection: $selection) {
             asyncImage
                 .aspectRatio(contentMode: .fit)
                 .border(Color.black)
@@ -83,30 +83,30 @@ struct PodMapMasterView: View, Equatable {
     }
 }
 
-struct ThumbnailNavLinkView: View, Equatable {
-    let url: URL
-    let cache: ImageCache
-    let index: Int
-    let size: CGSize
-    @State var selection: Int?
-    
-    
-    var body: some View {
-        let asyncImage = AsyncImage(url: url, cache: self.cache, placeholder: Text("Loading...").padding(), configuration:
-        {$0.resizable()})
-        
-        return NavigationLink(destination: PodMapView(floorPlanIndex: index), tag: index, selection: $selection) {
-            asyncImage
-                .aspectRatio(contentMode: .fit)
-                .border(Color.black)
-                .frame(width: size.width / 2.5)
-        }
-    }
-    
-    static func == (lhs: Self, rhs: Self) -> Bool {
-        lhs.url == rhs.url
-    }
-}
+//struct ThumbnailNavLinkView: View, Equatable {
+//    let url: URL
+//    let cache: ImageCache
+//    let index: Int
+//    let size: CGSize
+//    @State var selection: Int?
+//
+//
+//    var body: some View {
+//        let asyncImage = AsyncImage(url: url, cache: self.cache, placeholder: Text("Loading...").padding(), configuration:
+//        {$0.resizable()})
+//
+//        return NavigationLink(destination: PodMapView(floorPlanIndex: index, viewModel: <#PodMapViewModel#>), tag: index, selection: $selection) {
+//            asyncImage
+//                .aspectRatio(contentMode: .fit)
+//                .border(Color.black)
+//                .frame(width: size.width / 2.5)
+//        }
+//    }
+//
+//    static func == (lhs: Self, rhs: Self) -> Bool {
+//        lhs.url == rhs.url
+//    }
+//}
 
 
 

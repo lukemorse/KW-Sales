@@ -35,4 +35,21 @@ class PodMapViewModel: ObservableObject {
             }
         }
     }
+    
+    func setPods(completion: @escaping (Bool) -> Void) {
+        do {
+            let data = try FirestoreEncoder().encode(self.pods)
+            docRef.setData(data) { error in
+                if let error = error {
+                    print(error)
+                    completion(false)
+                } else {
+                    completion(true)
+                }
+            }
+        } catch {
+            print(error)
+        }
+        
+    }
 }

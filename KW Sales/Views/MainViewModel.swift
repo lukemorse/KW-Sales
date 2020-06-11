@@ -13,9 +13,10 @@ import SwiftUI
 
 class MainViewModel: ObservableObject {
     
-    @Published var pendingDistrictNames: [String] = []
-    @Published var completeDistrictNames: [String] = []
-    @Published var addedByUserDistrictNames: [String] = []
+    @Published var pendingDistrictNameDict: [String: String] = [:]
+    @Published var completedDistrictNameDict: [String: String] = [:]
+    @Published var addedByUserDistrictNameDict: [String: String] = [:]
+    @Published var filteredDistrictNameDict: [String: String] = [:]
     @Published var filteredDistrictNames: [String] = []
     
     @Published var currentFilter: DistrictFilter = .noFilter
@@ -49,7 +50,7 @@ class MainViewModel: ObservableObject {
             } else {
                 for document in snapshot!.documents {
                     if let dict = document.data() as? [String:String] {
-                        self.pendingDistrictNames.append(contentsOf: dict.values)
+                        self.pendingDistrictNameDict = dict
                     }
                 }
             }
@@ -61,7 +62,7 @@ class MainViewModel: ObservableObject {
             } else {
                 for document in snapshot!.documents {
                     if let dict = document.data() as? [String:String] {
-                        self.completeDistrictNames.append(contentsOf: dict.values)
+                        self.completedDistrictNameDict = dict
                     }
                 }
             }
@@ -74,7 +75,7 @@ class MainViewModel: ObservableObject {
                 for document in snapshot!.documents {
                     if let dict = document.data() as? [String : [String:String]] {
                         if let currentUserDict = dict[self.currentUser] {
-                            self.addedByUserDistrictNames.append(contentsOf: currentUserDict.values)
+                            self.addedByUserDistrictNameDict = currentUserDict
                         }
                     }
                 }
@@ -199,16 +200,16 @@ extension MainViewModel {
         
         switch districtFilter {
         case .noFilter:
-            filteredDistrictNames = pendingDistrictNames + completeDistrictNames + addedByUserDistrictNames
+            filteredDistrictNames = Array(pendingDistrictNameDict.values) + Array(completedDistrictNameDict.values) + Array(addedByUserDistrictNameDict.values)
             break
         case .pending:
-            filteredDistrictNames = pendingDistrictNames
+            filteredDistrictNames = Array(pendingDistrictNameDict.values)
             break
         case .complete:
-            filteredDistrictNames = completeDistrictNames
+            filteredDistrictNames = Array(completedDistrictNameDict.values)
             break
         case .currentUser:
-            filteredDistrictNames = addedByUserDistrictNames
+            filteredDistrictNames = Array(addedByUserDistrictNameDict.values)
             break
         }
     }
