@@ -15,12 +15,14 @@ import SwiftUI
 class InstallationViewModel: ObservableObject {
     @Published var installation: Installation
     
-    var storageRef: StorageReference
-    var docRef: DocumentReference?
+    private var storageRef: StorageReference
+    private var installDocRef: DocumentReference
+    private var floorPlanDocRef: DocumentReference?
     
-    init(installation: Installation) {
-        self.installation = installation
+    init(docId: String) {
         self.storageRef = Storage.storage().reference()
+        self.installDocRef = Firestore.firestore().collection(Constants.kFloorPlanCollection).document(docId)
+        self.installation = Installation()
     }
     
     func uploadFloorPlan(image: UIImage, completion: @escaping (_ flag:Bool, _ url: String?) -> ()) {
@@ -28,6 +30,7 @@ class InstallationViewModel: ObservableObject {
             print("could not create data from image")
             return
         }
+        
         let uuid = UUID().uuidString
         let imageRef = Storage.storage().reference().child(Constants.kFloorPlanFolder).child(uuid)
         imageRef.putData(data, metadata: nil) { (metaData, error) in
@@ -46,15 +49,15 @@ class InstallationViewModel: ObservableObject {
                 }
                 
                 //if this is the first floorplan for the installation, make a new folder
-                if self.docRef == nil {
+                if self.floorPlanDocRef == nil {
                     let docID = String(self.installation.id)
-                    self.docRef = Firestore.firestore().collection(Constants.kFloorPlanCollection).document(docID)
+                    self.floorPlanDocRef = Firestore.firestore().collection(Constants.kFloorPlanCollection).document(docID)
                 }
                 
                 let urlString = url.absoluteString
                 let data = ["imageURL": urlString]
                 
-                if let docRef = self.docRef {
+                if let docRef = self.floorPlanDocRef {
                     docRef.setData(data, merge: true) { (error) in
                         if let error = error {
                             print(error.localizedDescription)
@@ -67,6 +70,35 @@ class InstallationViewModel: ObservableObject {
                     }
                 }
             }
+        }
+    }
+    
+    func fetchInstallation(docId: String) {
+        self.installDocRef.getDocument { (document, error) in
+            if let error = error {
+                print(error)
+            }
+            if let document = document, document.exists {
+                do {
+                    let installation = try FirebaseDecoder().decode(Installation.self, from: document.data()!)
+                    self.installation = installation
+                } catch {
+                    print(error)
+                }
+            }
+        }
+    }
+    
+    func setInstallation() {
+        do {
+            let data = try FirestoreEncoder().encode(self.installation)
+            self.installDocRef.setData(data) {error in
+                if let error = error {
+                    print(error)
+                }
+            }
+        } catch {
+            print(error)
         }
     }
     

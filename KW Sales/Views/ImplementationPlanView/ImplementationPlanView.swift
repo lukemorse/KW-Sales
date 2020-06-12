@@ -7,24 +7,27 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
+import CodableFirebase
 
 struct ImplementationPlanView: View {
     
     @EnvironmentObject var mainViewModel: MainViewModel
+    @ObservedObject var viewModel = ViewModel()
     @Binding var district: District
     @State var showSaveAlert = false
     
     var body: some View {
         return Form {
-            if district.implementationPlan.count > 0 {
-                ForEach(0..<district.implementationPlan.count, id: \.self) { index in
-                    InstallationView(installation: self.district.implementationPlan[index])
+            if viewModel.installations.count > 0 {
+                ForEach(0..<viewModel.installations.count, id: \.self) { index in
+                    InstallationView(docId: self.viewModel.installations[index].installationID)
+//                    InstallationView(docId: self.district.installations[key] ?? "")
                 }
             }
             
             Button(action: {
-                let installation = Installation()
-                self.district.implementationPlan.append(installation)
+                self.viewModel.installations.append(Installation())
             }) {
                 Text("Add School")
                     .foregroundColor(Color.blue)
@@ -37,6 +40,11 @@ struct ImplementationPlanView: View {
             Alert(title: Text("Saved Implementation Plan"))
         }
         .padding(.bottom, 10)
+        .onAppear() {
+            if let installationsDocRef = self.district.installationsDocRef {
+                self.viewModel.fetchInstallations(docRef: installationsDocRef)
+            }
+        }
     }
     
     var saveButton: some View {
@@ -46,6 +54,26 @@ struct ImplementationPlanView: View {
         }) {
             Text("Save")
                 .foregroundColor(Color.blue)
+        }
+    }
+    
+    class ViewModel: ObservableObject {
+        @Published var installations: [Installation] = []
+        
+        public func fetchInstallations(docRef: DocumentReference) {
+            docRef.getDocument { (snapshot, error) in
+                if let error = error {
+                    print(error)
+                }
+                if let snapshot = snapshot, snapshot.exists {
+                    do {
+                        let array = try FirebaseDecoder().decode([Installation].self, from: snapshot.data()!)
+                        self.installations = array
+                    } catch {
+                        print(error)
+                    }
+                }
+            }
         }
     }
 }

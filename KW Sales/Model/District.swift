@@ -13,8 +13,10 @@ import FirebaseFirestore
 import CodableFirebase
 
 struct District: Encodable {
+    
     var districtID: String
     var uploadedBy: String
+    var status: DistrictStatus
     var districtName: String
     var readyToInstall: Bool
     var numPreKSchools: Int
@@ -27,11 +29,12 @@ struct District: Encodable {
     var districtOfficeAddress: String
     var numPodsNeeded: Int
     var startDate: Date
-    var implementationPlan: [Installation]
+    var installationsDocRef: DocumentReference?
     
     init() {
         self.districtID = UUID().uuidString
         self.uploadedBy = ""
+        self.status = .pending
         self.districtName = ""
         self.readyToInstall = false
         self.numPreKSchools = 0
@@ -44,12 +47,13 @@ struct District: Encodable {
         self.districtOfficeAddress = ""
         self.numPodsNeeded = 0
         self.startDate = Date()
-        self.implementationPlan = []
+//        self.installations
     }
 
     private enum CodingKeys: String, CodingKey {
         case districtID
         case uploadedBy
+        case status
         case districtName
         case readyToInstall
         case numPreKSchools
@@ -62,13 +66,14 @@ struct District: Encodable {
         case districtOfficeAddress
         case numPodsNeeded
         case startDate
-        case implementationPlan
+        case installationsDocRef
     }
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(districtID, forKey: .districtID)
         try container.encode(uploadedBy, forKey: .uploadedBy)
+        try container.encode(status, forKey: .status)
         try container.encode(districtName, forKey: .districtName)
         try container.encode(readyToInstall, forKey: .readyToInstall)
         try container.encode(numPreKSchools, forKey: .numPreKSchools)
@@ -81,7 +86,7 @@ struct District: Encodable {
         try container.encode(districtOfficeAddress, forKey: .districtOfficeAddress)
         try container.encode(numPodsNeeded, forKey: .numPodsNeeded)
         try container.encode(Timestamp(date: startDate), forKey: .startDate)
-        try container.encode(implementationPlan, forKey: .implementationPlan)
+        try container.encode(installationsDocRef, forKey: .installationsDocRef)
     }
 }
 
@@ -90,6 +95,7 @@ extension District: Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         districtID = try container.decode(String.self, forKey: .districtID)
         uploadedBy = try container.decode(String.self, forKey: .uploadedBy)
+        status = try container.decode(DistrictStatus.self, forKey: .status)
         districtName = try container.decode(String.self, forKey: .districtName)
         readyToInstall = try container.decode(Bool.self, forKey: .readyToInstall)
         numPreKSchools = try container.decode(Int.self, forKey: .numPreKSchools)
@@ -101,7 +107,7 @@ extension District: Decodable {
         districtPhoneNumber = try container.decode(String.self, forKey: .districtPhoneNumber)
         districtOfficeAddress = try container.decode(String.self, forKey: .districtOfficeAddress)
         numPodsNeeded = try container.decode(Int.self, forKey: .numPodsNeeded)
-        implementationPlan = try container.decode([Installation].self, forKey: .implementationPlan)
+        installationsDocRef = try container.decode(DocumentReference.self, forKey: .installationsDocRef)
         
         let timeStamp: Timestamp = try container.decode(Timestamp.self, forKey: .startDate)
         startDate = timeStamp.dateValue()

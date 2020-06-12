@@ -20,8 +20,10 @@ struct EditDistrictsMasterView: View {
     var body: some View {
         listView
             .onAppear() {
-                if(self.viewModel.filteredDistrictNames.isEmpty) {
-                    self.viewModel.fetchDistrictList()
+                if(self.viewModel.districtList.isEmpty) {
+                    self.viewModel.fetchDistricts()
+                }
+                if self.viewModel.teams.isEmpty {
                     self.viewModel.fetchTeams()
                 }
         }
@@ -58,9 +60,9 @@ struct EditDistrictsMasterView: View {
     var listView: some View {
         AnyView(List {
             addDistrictButton
-            if viewModel.filteredDistrictNames.count > 0 {
-                ForEach(0..<viewModel.filteredDistrictNames.count, id: \.self) { index in
-                    self.getListNavLink(name: self.viewModel.filteredDistrictNames[index], newFlag: false)
+            if viewModel.districtList.count > 0 {
+                ForEach(0..<viewModel.districtList.count, id: \.self) { index in
+                    self.getListNavLink(name: self.viewModel.districtList[index].districtName, newFlag: false)
                         .font(.title)
                         .padding()
                 }
@@ -68,13 +70,15 @@ struct EditDistrictsMasterView: View {
         })
     }
     
-    func getListNavLink(name: String, newFlag: Bool) -> some View {
-        if let docPath = self.viewModel.filteredDistrictNameDict[name] {
+    func getListNavLink(index: Int, newFlag: Bool) -> some View {
+        if let docPath = self.viewModel.districtList[index].districtID
             let model = EditDistrictDetailViewModel(docPath: docPath)
             let view = EditDistrictDetailView(viewModel: model, newFlag: newFlag)
-            return AnyView(NavigationLink(destination: view ) {Text(name)})
-        }
-        return AnyView(EmptyView())
+            return AnyView(NavigationLink(destination: view ) {
+                Text(name)  
+            })
+        
+//        return AnyView(EmptyView())
     }
     
     var addDistrictButton: some View {
@@ -83,7 +87,7 @@ struct EditDistrictsMasterView: View {
             self.shouldNavigate = true
         }) {
             NavigationLink(destination:
-                EditDistrictDetailView(viewModel: EditDistrictDetailViewModel(docPath: self.addedDistrict?.districtID ?? ""), newFlag: true), isActive: self.$shouldNavigate) {
+                EditDistrictDetailView(viewModel: EditDistrictDetailViewModel(docPath: self.addedDistrict?.districtID ?? " "), newFlag: true), isActive: self.$shouldNavigate) {
                 Text("Add District")
                     .font(.title)
                     .padding()

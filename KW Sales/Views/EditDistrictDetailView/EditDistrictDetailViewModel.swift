@@ -36,13 +36,17 @@ class EditDistrictDetailViewModel: ObservableObject {
     
     func uploadDistrict(completion: @escaping (Bool) -> Void) {
         do {
-            let data = try FirestoreEncoder().encode(self.district)
-            docRef.setData(data) { error in
+            let districtData = try FirestoreEncoder().encode(self.district)
+            let dict = [self.district.districtID: self.district.districtName]
+            
+            let batch = Firestore.firestore().batch()
+            batch.setData(districtData, forDocument: docRef)
+            batch.setData(dict, forDocument: Firestore.firestore().collection(Constants.kCompleteDistrictNameCollection).document())
+            batch.commit { (error) in
                 if let error = error {
-                    print("Error writing document: \(error)")
+                    print(error)
                     completion(false)
                 } else {
-                    print("Document successfully written!")
                     completion(true)
                 }
             }

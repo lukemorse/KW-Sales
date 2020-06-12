@@ -65,7 +65,7 @@ struct TestDB {
         result.districtOfficeAddress = ""
         result.numPodsNeeded = 150
         result.startDate = Date()
-        result.implementationPlan = [testInstallation1,testInstallation2]
+//        result.implementationPlan = [testInstallation1,testInstallation2]
         return result
     }
 }

@@ -18,7 +18,6 @@
 		A30C9B822444C1CB0049E4FC /* KW_SalesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30C9B812444C1CB0049E4FC /* KW_SalesTests.swift */; };
 		A30C9B8D2444C1CB0049E4FC /* KW_SalesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30C9B8C2444C1CB0049E4FC /* KW_SalesUITests.swift */; };
 		A30F4BF7244530A800B59F8B /* InstallationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30F4BF6244530A800B59F8B /* InstallationView.swift */; };
-		A31F80782445FFE500ADC66A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A31F80772445FFE500ADC66A /* GoogleService-Info.plist */; };
 		A3295BCC2448EC7800F26E1F /* PodNodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3295BCB2448EC7800F26E1F /* PodNodeView.swift */; };
 		A3295BD1244A044A00F26E1F /* CSVTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3295BD0244A044A00F26E1F /* CSVTest.swift */; };
 		A3295BDC244A0CE700F26E1F /* SampleCSV.csv in Resources */ = {isa = PBXBuildFile; fileRef = A3295BDB244A0CE700F26E1F /* SampleCSV.csv */; };
@@ -46,6 +45,8 @@
 		A3F4259C24475E4F004D2CCE /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F4259B24475E4F004D2CCE /* MailView.swift */; };
 		AF22C08B248995CC003A4C2E /* PhoneNumberField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF22C08A248995CC003A4C2E /* PhoneNumberField.swift */; };
 		AF3C1D24247575B6008BC1B9 /* ActionOver in Frameworks */ = {isa = PBXBuildFile; productRef = AF3C1D23247575B6008BC1B9 /* ActionOver */; };
+		AF452B0C2493CB1C00E5B04D /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF452B0B2493CB1C00E5B04D /* Enums.swift */; };
+		AF452B0E2493DAD500E5B04D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF452B0D2493DAD500E5B04D /* GoogleService-Info.plist */; };
 		AF55795E2492C1FD0015D8A6 /* PodMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF55795D2492C1FD0015D8A6 /* PodMapViewModel.swift */; };
 		AF71D6F7248A85EE0035A48B /* KeyboardOffsetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF71D6F4248A85EE0035A48B /* KeyboardOffsetModifier.swift */; };
 		AF71D6F8248A85EE0035A48B /* KeyboardDismissModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF71D6F5248A85EE0035A48B /* KeyboardDismissModifier.swift */; };
@@ -99,7 +100,6 @@
 		A30C9B8C2444C1CB0049E4FC /* KW_SalesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KW_SalesUITests.swift; sourceTree = "<group>"; };
 		A30C9B8E2444C1CB0049E4FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A30F4BF6244530A800B59F8B /* InstallationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallationView.swift; sourceTree = "<group>"; };
-		A31F80772445FFE500ADC66A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A3295BCB2448EC7800F26E1F /* PodNodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodNodeView.swift; sourceTree = "<group>"; };
 		A3295BD0244A044A00F26E1F /* CSVTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVTest.swift; sourceTree = "<group>"; };
 		A3295BDB244A0CE700F26E1F /* SampleCSV.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SampleCSV.csv; sourceTree = "<group>"; };
@@ -127,6 +127,8 @@
 		A3F4259B24475E4F004D2CCE /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		A9F6FC5B3B907EB6981549FC /* Pods_KW_Sales.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KW_Sales.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF22C08A248995CC003A4C2E /* PhoneNumberField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberField.swift; sourceTree = "<group>"; };
+		AF452B0B2493CB1C00E5B04D /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		AF452B0D2493DAD500E5B04D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AF55795D2492C1FD0015D8A6 /* PodMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodMapViewModel.swift; sourceTree = "<group>"; };
 		AF71D6F4248A85EE0035A48B /* KeyboardOffsetModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardOffsetModifier.swift; sourceTree = "<group>"; };
 		AF71D6F5248A85EE0035A48B /* KeyboardDismissModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardDismissModifier.swift; sourceTree = "<group>"; };
@@ -231,7 +233,7 @@
 				A3B133AB246061C80082A618 /* AppIcon.appiconset */,
 				A30C9B752444C1CB0049E4FC /* LaunchScreen.storyboard */,
 				A30C9B782444C1CB0049E4FC /* Info.plist */,
-				A31F80772445FFE500ADC66A /* GoogleService-Info.plist */,
+				AF452B0D2493DAD500E5B04D /* GoogleService-Info.plist */,
 				A30C9B722444C1CB0049E4FC /* Preview Content */,
 			);
 			path = "KW Sales";
@@ -349,6 +351,7 @@
 				AF22C08A248995CC003A4C2E /* PhoneNumberField.swift */,
 				A3B1B5EF2463599200CE71A0 /* SearchBar.swift */,
 				AFCA09C52486B88E002279E6 /* AlertItem.swift */,
+				AF452B0B2493CB1C00E5B04D /* Enums.swift */,
 				AFDB822C247DAE510076401C /* AsyncImage.swift */,
 				AF7343242486D9F000826BCF /* KeyboardAdaptive.swift */,
 				AF7343232486D9F000826BCF /* KeyboardHeightPublisher.swift */,
@@ -476,10 +479,10 @@
 			files = (
 				A30C9B772444C1CB0049E4FC /* LaunchScreen.storyboard in Resources */,
 				A3295BDC244A0CE700F26E1F /* SampleCSV.csv in Resources */,
-				A31F80782445FFE500ADC66A /* GoogleService-Info.plist in Resources */,
 				A30C9B742444C1CB0049E4FC /* Preview Assets.xcassets in Resources */,
 				A3B133AC246061C80082A618 /* AppIcon.appiconset in Resources */,
 				A30C9B712444C1CB0049E4FC /* Assets.xcassets in Resources */,
+				AF452B0E2493DAD500E5B04D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -607,6 +610,7 @@
 				A3AD363B2452677200BCDA4D /* Installation.swift in Sources */,
 				AF7343282486DA6E00826BCF /* UIResponder+Current.swift in Sources */,
 				A39878D5246C3936000F99AC /* User.swift in Sources */,
+				AF452B0C2493CB1C00E5B04D /* Enums.swift in Sources */,
 				A3E53D87246E388F00FED80A /* EditDistrictsMasterView.swift in Sources */,
 				AFC2386B2492AD8400651363 /* EditDistrictDetailViewModel.swift in Sources */,
 				A368EA5F244DE82B00FE7685 /* InstallationViewModel.swift in Sources */,
@@ -804,7 +808,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.lukemorse.KW-Sales";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lukemorse.KW-Sales-Test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_SWIFT_SYMBOLS = NO;
@@ -828,7 +832,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.lukemorse.KW-Sales";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lukemorse.KW-Sales-Test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -20,8 +20,8 @@ struct InstallationView: View {
     @State private var numPods = 0
     @State private var numPodsString = ""
     
-    init(installation: Installation) {
-        let viewModel = InstallationViewModel(installation: installation)
+    init(docId: String) {
+        let viewModel = InstallationViewModel(docId: docId)
         self.viewModel = viewModel
     }
     

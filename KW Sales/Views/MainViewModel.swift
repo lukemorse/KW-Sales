@@ -12,71 +12,39 @@ import CodableFirebase
 import SwiftUI
 
 class MainViewModel: ObservableObject {
-    
-    @Published var pendingDistrictNameDict: [String: String] = [:]
-    @Published var completedDistrictNameDict: [String: String] = [:]
-    @Published var addedByUserDistrictNameDict: [String: String] = [:]
-    @Published var filteredDistrictNameDict: [String: String] = [:]
-    @Published var filteredDistrictNames: [String] = []
-    
-    @Published var currentFilter: DistrictFilter = .noFilter
-    private var installationViewModels: [String: [InstallationViewModel]] = [:]
+    @Published var districtList: [District] = []
+    @Published var currentFilter: DistrictFilter = .currentUser
     @Published var teams: [Team] = []
     @Published var numSchools = 0
     var currentUser = ""
     
-    func fetchDistrict(docPath: String, completion: @escaping (District) -> Void) {
-        let ref = Firestore.firestore().collection(Constants.kDistrictCollection).document(docPath)
-        ref.getDocument { (document, error) in
+    //Networking
+    func fetchDistricts() {
+        let ref = Firestore.firestore().collection(Constants.kDistrictCollection)
+        var query: Query
+        
+        switch self.currentFilter {
+        case .noFilter:
+            query = ref.limit(to: 10)
+            break
+        case .currentUser:
+            query = ref.whereField("uploadedBy", isEqualTo: currentUser)
+        case .complete:
+            query = ref.whereField("status", isEqualTo: DistrictStatus.complete)
+        case .pending:
+            query = ref.whereField("status", isEqualTo: DistrictStatus.pending)
+        }
+        
+        query.getDocuments { (snapshot, error) in
             if let error = error {
                 print(error)
-            }
-            if let document = document, document.exists {
-                do {
-                    let district = try FirebaseDecoder().decode(District.self, from: document.data() ?? District())
-                    completion(district)
-                } catch {
-                    print(error)
-                }
-            }
-        }
-    }
-    
-    //Networking
-    func fetchDistrictList() {
-        Firestore.firestore().collection(Constants.kPendingDistrictNameCollection).getDocuments { (snapshot, error) in
-            if let error = error {
-                print("Error getting documents: \(error)")
             } else {
                 for document in snapshot!.documents {
-                    if let dict = document.data() as? [String:String] {
-                        self.pendingDistrictNameDict = dict
-                    }
-                }
-            }
-        }
-        
-        Firestore.firestore().collection(Constants.kCompleteDistrictNameCollection).getDocuments { (snapshot, error) in
-            if let error = error {
-                print("Error getting documents: \(error)")
-            } else {
-                for document in snapshot!.documents {
-                    if let dict = document.data() as? [String:String] {
-                        self.completedDistrictNameDict = dict
-                    }
-                }
-            }
-        }
-        
-        Firestore.firestore().collection(Constants.kAddedByUserDistrictNameCollection).getDocuments { (snapshot, error) in
-            if let error = error {
-                print("Error getting documents: \(error)")
-            } else {
-                for document in snapshot!.documents {
-                    if let dict = document.data() as? [String : [String:String]] {
-                        if let currentUserDict = dict[self.currentUser] {
-                            self.addedByUserDistrictNameDict = currentUserDict
-                        }
+                    do {
+                        let district = try FirebaseDecoder().decode(District.self, from: document.data())
+                        self.districtList.append(district)
+                    } catch {
+                        print(error)
                     }
                 }
             }
@@ -96,124 +64,13 @@ class MainViewModel: ObservableObject {
             }
         }
     }
-//
-//    func uploadDistrict(id: String, completion: @escaping (_ flag:Bool) -> ()) {
-//        //encode district file
-//        var districtIndex = 0
-//        for (index,district) in districts.enumerated() {
-//            if district.districtID == id {
-//                districtIndex = index
-//            }
-//        }
-//        var district = self.districts[districtIndex]
-//        district.uploadedBy = currentUser
-//        var implementationPlan: [Installation] = []
-//        if installationViewModels.keys.contains(district.districtID) {
-//            if installationViewModels[district.districtID]!.count > 0 {
-//                for vm in installationViewModels[district.districtID]! {
-//                    implementationPlan.append(vm.installation)
-//                }
-//            }
-//            district.implementationPlan = implementationPlan
-//        }
-//
-//        do {
-//            let districtData = try FirestoreEncoder().encode(district)
-//            //send district file to database
-//            Firestore.firestore().collection(Constants.kDistrictCollection).document(district.districtName).setData(districtData) { error in
-//                if let error = error {
-//                    print("Error writing document: \(error)")
-//                    completion(false)
-//                } else {
-//                    print("Document successfully written!")
-//                    completion(true)
-//                }
-//            }
-//        } catch let error {
-//            print(error)
-//            completion(false)
-//        }
-//    }
     
-    //Edit District Info
-//    func addDistrict() -> Binding<District> {
-//        districts.append(District())
-//        changeFilter(districtFilter: currentFilter)
-//        let index = districts.count - 1
-//        return Binding<District>(get: {return self.districts[index]}, set: {self.districts[index] = $0})
-//    }
-    
-//    func getDistrict(id: String) -> Binding<District> {
-//        for (index, district) in districts.enumerated() {
-//            if district.districtID == id {
-//                return Binding<District>(get: {return self.districts[index]}, set: {self.districts[index] = $0})
-//            }
-//        }
-//        return .constant(District())
-//    }
-    
-//    func getInstallationViewModels(for districtName: String) -> [InstallationViewModel] {
-//        return self.installationViewModels[districtName] ?? []
-//    }
-    
-//    func getInstallationViewModels(for districtID: String) -> [InstallationViewModel] {
-//        for district in districts {
-//            if district.districtID == districtID {
-//                return self.installationViewModels[districtID] ?? []
-//            }
-//        }
-//        return []
-//    }
-    
-//    func setNumPods(numPods: Int, districtID: String) {
-//        for (index, district) in districts.enumerated() {
-//            if district.districtID == districtID {
-//                districts[index].numPodsNeeded = numPods
-//            }
-//        }
-//    }
-//
-//    func addInstallation(districtID: String) {
-//        if let index = self.districts.firstIndex(where: {$0.districtID == districtID}) {
-//            var installation = Installation()
-//            installation.districtName = self.districts[index].districtName
-//            installation.districtContact = self.districts[index].districtContactPerson
-//            let viewModel = InstallationViewModel(installation: installation)
-//
-//            if installationViewModels.keys.contains(districtID) {
-//                installationViewModels[self.districts[index].districtID]?.append(viewModel)
-//            } else {
-//                installationViewModels[self.districts[index].districtID] = [viewModel]
-//            }
-//            self.districts[index].implementationPlan.append(installation)
-//        }
-//    }
-}
-
-enum DistrictFilter {
-    case noFilter, pending, complete, currentUser
-}
-
-extension MainViewModel {
     func changeFilter(districtFilter: DistrictFilter) {
         currentFilter = districtFilter
-        
-        switch districtFilter {
-        case .noFilter:
-            filteredDistrictNames = Array(pendingDistrictNameDict.values) + Array(completedDistrictNameDict.values) + Array(addedByUserDistrictNameDict.values)
-            break
-        case .pending:
-            filteredDistrictNames = Array(pendingDistrictNameDict.values)
-            break
-        case .complete:
-            filteredDistrictNames = Array(completedDistrictNameDict.values)
-            break
-        case .currentUser:
-            filteredDistrictNames = Array(addedByUserDistrictNameDict.values)
-            break
-        }
+        fetchDistricts()
     }
 }
+
 
 //SAVE FOR MAC APP
 //func importCSV() {
