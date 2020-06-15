@@ -44,10 +44,6 @@ struct InstallationView: View {
             }
         }
         .onAppear() {
-//            if self.viewModel.installation.schoolName == "" {
-//                self.viewModel.fetchInstallation()
-//            }
-            
             self.numPods = self.viewModel.installation.numPods
             if self.numPods != 0 {
                 self.numPodsString = "\(self.numPods)"

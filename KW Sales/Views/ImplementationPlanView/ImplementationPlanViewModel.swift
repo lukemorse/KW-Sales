@@ -28,8 +28,8 @@ class ImplementationPlanViewModel: ObservableObject {
                 do {
                     let install = try FirestoreDecoder().decode(Installation.self, from: document.data())
                     self.installations.append(install)
-                            let vm = InstallationViewModel(implementationPlanCollectionRef: self.collectionRef, installation: install)
-                            self.installationViewModels.append(vm)
+                    let vm = InstallationViewModel(implementationPlanCollectionRef: self.collectionRef, installation: install)
+                    self.installationViewModels.append(vm)
                     
                 } catch {
                     print(error)
