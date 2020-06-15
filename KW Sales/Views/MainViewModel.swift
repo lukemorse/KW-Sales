@@ -13,7 +13,7 @@ import SwiftUI
 
 class MainViewModel: ObservableObject {
     @Published var districtList: [District] = []
-    @Published var currentFilter: DistrictFilter = .currentUser
+    @Published var currentFilter: DistrictFilter = .noFilter
     @Published var teams: [Team] = []
     @Published var numSchools = 0
     var currentUser = ""
@@ -41,7 +41,7 @@ class MainViewModel: ObservableObject {
             } else {
                 for document in snapshot!.documents {
                     do {
-                        let district = try FirebaseDecoder().decode(District.self, from: document.data())
+                        let district = try FirestoreDecoder().decode(District.self, from: document.data())
                         self.districtList.append(district)
                     } catch {
                         print(error)

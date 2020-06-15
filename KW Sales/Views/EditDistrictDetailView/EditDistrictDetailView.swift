@@ -11,7 +11,6 @@ import FirebaseFirestore
 import Combine
 
 struct EditDistrictDetailView: View {
-    @EnvironmentObject var mainViewModel: MainViewModel
     @EnvironmentObject var locationSearchService: LocationSearchService
     @ObservedObject var viewModel: EditDistrictDetailViewModel
     @State private var numPodsString = ""
@@ -77,14 +76,15 @@ struct EditDistrictDetailView: View {
     }
     
     var implementationPlanNavLink: some View {
-        NavigationLink(destination:
-            ImplementationPlanView(district: Binding<District>(get: {return self.viewModel.district}, set: {self.viewModel.district = $0}))
+        let subCollectionRef = Firestore.firestore().collection(Constants.kDistrictCollection).document(viewModel.district.districtID).collection(Constants.kInstallSubCollection)
+        return AnyView(NavigationLink(destination:
+            ImplementationPlanView(viewModel: ImplementationPlanViewModel(docRef: subCollectionRef), district: Binding<District>(get: {return self.viewModel.district}, set: {self.viewModel.district = $0}))
         ) {
             Text("📋 Implementation Plan")
                 .font(.title)
                 .foregroundColor(Color.blue)
                 .padding()
-        }
+        })
     }
     
     var saveButton: some View {

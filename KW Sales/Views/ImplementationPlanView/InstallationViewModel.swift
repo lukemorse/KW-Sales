@@ -15,17 +15,16 @@ import SwiftUI
 class InstallationViewModel: ObservableObject {
     @Published var installation: Installation
     
-    private var storageRef: StorageReference
-    private var installDocRef: DocumentReference
+    private var storageRef = Storage.storage().reference()
     private var floorPlanDocRef: DocumentReference?
+    private var implementationPlanCollectionRef: CollectionReference
     
-    init(docId: String) {
-        self.storageRef = Storage.storage().reference()
-        self.installDocRef = Firestore.firestore().collection(Constants.kFloorPlanCollection).document(docId)
-        self.installation = Installation()
+    init(implementationPlanCollectionRef: CollectionReference, installation: Installation) {
+        self.implementationPlanCollectionRef = implementationPlanCollectionRef
+        self.installation = installation
     }
     
-    func uploadFloorPlan(image: UIImage, completion: @escaping (_ flag:Bool, _ url: String?) -> ()) {
+    public func uploadFloorPlan(image: UIImage, completion: @escaping (_ flag:Bool, _ url: String?) -> ()) {
         guard let data = image.jpegData(compressionQuality: 1.0) else {
             print("could not create data from image")
             return
@@ -70,35 +69,6 @@ class InstallationViewModel: ObservableObject {
                     }
                 }
             }
-        }
-    }
-    
-    func fetchInstallation(docId: String) {
-        self.installDocRef.getDocument { (document, error) in
-            if let error = error {
-                print(error)
-            }
-            if let document = document, document.exists {
-                do {
-                    let installation = try FirebaseDecoder().decode(Installation.self, from: document.data()!)
-                    self.installation = installation
-                } catch {
-                    print(error)
-                }
-            }
-        }
-    }
-    
-    func setInstallation() {
-        do {
-            let data = try FirestoreEncoder().encode(self.installation)
-            self.installDocRef.setData(data) {error in
-                if let error = error {
-                    print(error)
-                }
-            }
-        } catch {
-            print(error)
         }
     }
     

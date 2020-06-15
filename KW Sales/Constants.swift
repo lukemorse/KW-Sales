@@ -25,15 +25,11 @@ struct Constants {
         static let tabBar3 = "Edit"
     }
     
-    static let kPendingDistrictNameCollection = "pendingDistrictNames"
-    static let kCompleteDistrictNameCollection = "completeDistrictNames"
-    static let kAddedByUserDistrictNameCollection = "addedByUserDistrictNames"
-    
     static let kFloorPlanCollection = "floorPlansCollection"
     static let kFloorPlanFolder = "floorPlansFolder"
     static let kDistrictCollection = "districts"
     static let kTeamCollection = "teams"
-    static let kImplementationPlanCollection = "implementationPlans"
+    static let kInstallSubCollection = "installs"
     
     static let chicagoGeoPoint = GeoPoint(latitude: 41.8781, longitude: -87.6298)
 }

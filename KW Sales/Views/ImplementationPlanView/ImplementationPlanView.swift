@@ -13,21 +13,20 @@ import CodableFirebase
 struct ImplementationPlanView: View {
     
     @EnvironmentObject var mainViewModel: MainViewModel
-    @ObservedObject var viewModel = ViewModel()
+    @ObservedObject var viewModel: ImplementationPlanViewModel
     @Binding var district: District
     @State var showSaveAlert = false
     
     var body: some View {
         return Form {
-            if viewModel.installations.count > 0 {
+            if viewModel.installations.count > 0 && viewModel.installationViewModels.count > 0 {
                 ForEach(0..<viewModel.installations.count, id: \.self) { index in
-                    InstallationView(docId: self.viewModel.installations[index].installationID)
-//                    InstallationView(docId: self.district.installations[key] ?? "")
+                    InstallationView(viewModel: self.viewModel.installationViewModels[index])
                 }
             }
             
             Button(action: {
-                self.viewModel.installations.append(Installation())
+                self.viewModel.addInstallation()
             }) {
                 Text("Add School")
                     .foregroundColor(Color.blue)
@@ -41,39 +40,23 @@ struct ImplementationPlanView: View {
         }
         .padding(.bottom, 10)
         .onAppear() {
-            if let installationsDocRef = self.district.installationsDocRef {
-                self.viewModel.fetchInstallations(docRef: installationsDocRef)
+            if self.viewModel.installations.count == 0 {
+                self.viewModel.fetchInstallations()
             }
         }
     }
     
     var saveButton: some View {
         Button(action: {
-            self.showSaveAlert = true
+            self.viewModel.saveImplementationPlan { (success) in
+                if success {
+                    self.showSaveAlert = true
+                }
+            }
             print("save")
         }) {
             Text("Save")
                 .foregroundColor(Color.blue)
-        }
-    }
-    
-    class ViewModel: ObservableObject {
-        @Published var installations: [Installation] = []
-        
-        public func fetchInstallations(docRef: DocumentReference) {
-            docRef.getDocument { (snapshot, error) in
-                if let error = error {
-                    print(error)
-                }
-                if let snapshot = snapshot, snapshot.exists {
-                    do {
-                        let array = try FirebaseDecoder().decode([Installation].self, from: snapshot.data()!)
-                        self.installations = array
-                    } catch {
-                        print(error)
-                    }
-                }
-            }
         }
     }
 }

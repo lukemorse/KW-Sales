@@ -47,6 +47,7 @@
 		AF3C1D24247575B6008BC1B9 /* ActionOver in Frameworks */ = {isa = PBXBuildFile; productRef = AF3C1D23247575B6008BC1B9 /* ActionOver */; };
 		AF452B0C2493CB1C00E5B04D /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF452B0B2493CB1C00E5B04D /* Enums.swift */; };
 		AF452B0E2493DAD500E5B04D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF452B0D2493DAD500E5B04D /* GoogleService-Info.plist */; };
+		AF452B1024941D9400E5B04D /* ImplementationPlanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF452B0F24941D9400E5B04D /* ImplementationPlanViewModel.swift */; };
 		AF55795E2492C1FD0015D8A6 /* PodMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF55795D2492C1FD0015D8A6 /* PodMapViewModel.swift */; };
 		AF71D6F7248A85EE0035A48B /* KeyboardOffsetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF71D6F4248A85EE0035A48B /* KeyboardOffsetModifier.swift */; };
 		AF71D6F8248A85EE0035A48B /* KeyboardDismissModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF71D6F5248A85EE0035A48B /* KeyboardDismissModifier.swift */; };
@@ -129,6 +130,7 @@
 		AF22C08A248995CC003A4C2E /* PhoneNumberField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberField.swift; sourceTree = "<group>"; };
 		AF452B0B2493CB1C00E5B04D /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		AF452B0D2493DAD500E5B04D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AF452B0F24941D9400E5B04D /* ImplementationPlanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImplementationPlanViewModel.swift; sourceTree = "<group>"; };
 		AF55795D2492C1FD0015D8A6 /* PodMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodMapViewModel.swift; sourceTree = "<group>"; };
 		AF71D6F4248A85EE0035A48B /* KeyboardOffsetModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardOffsetModifier.swift; sourceTree = "<group>"; };
 		AF71D6F5248A85EE0035A48B /* KeyboardDismissModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardDismissModifier.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 			isa = PBXGroup;
 			children = (
 				A3A2F0F724478D8400079243 /* ImplementationPlanView.swift */,
+				AF452B0F24941D9400E5B04D /* ImplementationPlanViewModel.swift */,
 				A30F4BF6244530A800B59F8B /* InstallationView.swift */,
 				A368EA5E244DE82B00FE7685 /* InstallationViewModel.swift */,
 				A3557C4B244A3E7400C747FE /* ImagePicker.swift */,
@@ -611,6 +614,7 @@
 				AF7343282486DA6E00826BCF /* UIResponder+Current.swift in Sources */,
 				A39878D5246C3936000F99AC /* User.swift in Sources */,
 				AF452B0C2493CB1C00E5B04D /* Enums.swift in Sources */,
+				AF452B1024941D9400E5B04D /* ImplementationPlanViewModel.swift in Sources */,
 				A3E53D87246E388F00FED80A /* EditDistrictsMasterView.swift in Sources */,
 				AFC2386B2492AD8400651363 /* EditDistrictDetailViewModel.swift in Sources */,
 				A368EA5F244DE82B00FE7685 /* InstallationViewModel.swift in Sources */,

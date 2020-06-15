@@ -29,7 +29,6 @@ struct District: Encodable {
     var districtOfficeAddress: String
     var numPodsNeeded: Int
     var startDate: Date
-    var installationsDocRef: DocumentReference?
     
     init() {
         self.districtID = UUID().uuidString
@@ -47,7 +46,6 @@ struct District: Encodable {
         self.districtOfficeAddress = ""
         self.numPodsNeeded = 0
         self.startDate = Date()
-//        self.installations
     }
 
     private enum CodingKeys: String, CodingKey {
@@ -66,7 +64,6 @@ struct District: Encodable {
         case districtOfficeAddress
         case numPodsNeeded
         case startDate
-        case installationsDocRef
     }
 
     func encode(to encoder: Encoder) throws {
@@ -86,7 +83,6 @@ struct District: Encodable {
         try container.encode(districtOfficeAddress, forKey: .districtOfficeAddress)
         try container.encode(numPodsNeeded, forKey: .numPodsNeeded)
         try container.encode(Timestamp(date: startDate), forKey: .startDate)
-        try container.encode(installationsDocRef, forKey: .installationsDocRef)
     }
 }
 
@@ -107,7 +103,6 @@ extension District: Decodable {
         districtPhoneNumber = try container.decode(String.self, forKey: .districtPhoneNumber)
         districtOfficeAddress = try container.decode(String.self, forKey: .districtOfficeAddress)
         numPodsNeeded = try container.decode(Int.self, forKey: .numPodsNeeded)
-        installationsDocRef = try container.decode(DocumentReference.self, forKey: .installationsDocRef)
         
         let timeStamp: Timestamp = try container.decode(Timestamp.self, forKey: .startDate)
         startDate = timeStamp.dateValue()
