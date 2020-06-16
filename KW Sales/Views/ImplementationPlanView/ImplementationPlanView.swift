@@ -68,11 +68,12 @@ struct ImplementationPlanView: View {
 //        let mvm = MainViewModel()
 //        var district = District()
 //        district.districtID = "123"
-//        mvm.districts = [district]
+////        mvm.districts = [district]
+//        let collectionRef = Firestore.firestore().collection(Constants.kDistrictCollection)
 //
 //        return
 //            NavigationView {
-//            ImplementationPlanView(districtId: "123").environmentObject(mvm)
+//                ImplementationPlanView(viewModel: ImplementationPlanViewModel(collectionRef: collectionRef), district: .constant(district))
 //        }
 //    .navigationViewStyle(StackNavigationViewStyle())
 //    }

@@ -15,8 +15,8 @@ class ImplementationPlanViewModel: ObservableObject {
     @Published var installationViewModels: [InstallationViewModel] = []
     let collectionRef: CollectionReference
     
-    init(docRef: CollectionReference) {
-        self.collectionRef = docRef
+    init(collectionRef: CollectionReference) {
+        self.collectionRef = collectionRef
     }
     
     public func fetchInstallations() {
