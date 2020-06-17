@@ -11,17 +11,10 @@ import FirebaseFirestore
 import Combine
 
 struct EditDistrictDetailView: View {
-//    @EnvironmentObject var locationSearchService: LocationSearchService
     @ObservedObject var viewModel: EditDistrictDetailViewModel
     @State private var numPodsString = ""
     @State private var alertItem: AlertItem?
-    
     let newFlag: Bool
-    
-    init(viewModel: EditDistrictDetailViewModel, newFlag: Bool) {
-        self.viewModel = viewModel
-        self.newFlag = newFlag
-    }
     
     var body: some View {
         VStack {

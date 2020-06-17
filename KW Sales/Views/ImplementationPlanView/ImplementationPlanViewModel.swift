@@ -17,7 +17,6 @@ class ImplementationPlanViewModel: ObservableObject {
     
     init(collectionRef: CollectionReference) {
         self.collectionRef = collectionRef
-        print("init ImplementationPlanViewModel")
     }
     
     public func fetchInstallations() {
@@ -65,7 +64,4 @@ class ImplementationPlanViewModel: ObservableObject {
         }
     }
     
-    public func setAddress(address: String, for index: Int) {
-        installationViewModels[index].installation.address = address
-    }
 }

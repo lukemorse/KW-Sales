@@ -11,12 +11,10 @@ import FirebaseFirestore
 import CodableFirebase
 
 class EditDistrictDetailViewModel: ObservableObject {
-    //    private var docRef: DocumentReference
     @Published var district: District
     
     init(district: District) {
         self.district = district
-        print("init EditDistrictDetailViewModel")
     }
     
     //    func fetchDistrictData(docPath: String, completion: @escaping (District) -> Void) {
