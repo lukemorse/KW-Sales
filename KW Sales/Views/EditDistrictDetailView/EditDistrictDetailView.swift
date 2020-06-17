@@ -11,7 +11,7 @@ import FirebaseFirestore
 import Combine
 
 struct EditDistrictDetailView: View {
-    @EnvironmentObject var locationSearchService: LocationSearchService
+//    @EnvironmentObject var locationSearchService: LocationSearchService
     @ObservedObject var viewModel: EditDistrictDetailViewModel
     @State private var numPodsString = ""
     @State private var alertItem: AlertItem?
@@ -78,7 +78,7 @@ struct EditDistrictDetailView: View {
     var implementationPlanNavLink: some View {
         let subCollectionRef = Firestore.firestore().collection(Constants.kDistrictCollection).document(viewModel.district.districtID).collection(Constants.kInstallSubCollection)
         return AnyView(NavigationLink(destination:
-            ImplementationPlanView(viewModel: ImplementationPlanViewModel(collectionRef: subCollectionRef), district: Binding<District>(get: {return self.viewModel.district}, set: {self.viewModel.district = $0}))
+            ImplementationPlanView(viewModel: ImplementationPlanViewModel(collectionRef: subCollectionRef))
         ) {
             Text("📋 Implementation Plan")
                 .font(.title)
@@ -127,7 +127,7 @@ extension EditDistrictDetailView {
     // MARK: - Form Items
     
     var addressPickerNavLink: some View {
-        NavigationLink(destination: AddressPicker(locationSearchService: locationSearchService, label: "District Office Address", callback: { address in
+        NavigationLink(destination: AddressPicker(label: "District Office Address", callback: { address in
             self.viewModel.district.districtOfficeAddress = address
             
         })) {

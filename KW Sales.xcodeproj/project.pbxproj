@@ -32,7 +32,7 @@
 		A3A2F0F824478D8400079243 /* ImplementationPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A2F0F724478D8400079243 /* ImplementationPlanView.swift */; };
 		A3AD363B2452677200BCDA4D /* Installation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD363A2452677200BCDA4D /* Installation.swift */; };
 		A3B133AC246061C80082A618 /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = A3B133AB246061C80082A618 /* AppIcon.appiconset */; };
-		A3B1B5F02463599200CE71A0 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B1B5EF2463599200CE71A0 /* SearchBar.swift */; };
+		A3B1B5F02463599200CE71A0 /* AddressSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B1B5EF2463599200CE71A0 /* AddressSearchBar.swift */; };
 		A3B37B892446204200D8CE40 /* District.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B37B882446204200D8CE40 /* District.swift */; };
 		A3B37B90244632B900D8CE40 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B37B8F244632B900D8CE40 /* Team.swift */; };
 		A3C26386246EDA8B003616AB /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C26385246EDA8B003616AB /* MainViewModel.swift */; };
@@ -115,7 +115,7 @@
 		A3A2F0F724478D8400079243 /* ImplementationPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImplementationPlanView.swift; sourceTree = "<group>"; };
 		A3AD363A2452677200BCDA4D /* Installation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Installation.swift; sourceTree = "<group>"; };
 		A3B133AB246061C80082A618 /* AppIcon.appiconset */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppIcon.appiconset; sourceTree = "<group>"; };
-		A3B1B5EF2463599200CE71A0 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		A3B1B5EF2463599200CE71A0 /* AddressSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSearchBar.swift; sourceTree = "<group>"; };
 		A3B37B882446204200D8CE40 /* District.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = District.swift; sourceTree = "<group>"; };
 		A3B37B8F244632B900D8CE40 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		A3C26385246EDA8B003616AB /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
@@ -347,21 +347,21 @@
 		AFDB822B247DAE350076401C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				A3295BDD244A2E9500F26E1F /* HelperFunctions.swift */,
 				A3DD6C532459D23C00319147 /* ActivityIndicator.swift */,
-				AFD879B924882DE900F5F800 /* SchoolType.swift */,
 				AFD879BB24882E2900F5F800 /* AddressPicker.swift */,
-				AF22C08A248995CC003A4C2E /* PhoneNumberField.swift */,
-				A3B1B5EF2463599200CE71A0 /* SearchBar.swift */,
+				A3B1B5EF2463599200CE71A0 /* AddressSearchBar.swift */,
 				AFCA09C52486B88E002279E6 /* AlertItem.swift */,
-				AF452B0B2493CB1C00E5B04D /* Enums.swift */,
 				AFDB822C247DAE510076401C /* AsyncImage.swift */,
-				AF7343242486D9F000826BCF /* KeyboardAdaptive.swift */,
-				AF7343232486D9F000826BCF /* KeyboardHeightPublisher.swift */,
-				AF7343272486DA6E00826BCF /* UIResponder+Current.swift */,
+				AF452B0B2493CB1C00E5B04D /* Enums.swift */,
 				AF71D6F6248A85EE0035A48B /* FormValidator.swift */,
+				A3295BDD244A2E9500F26E1F /* HelperFunctions.swift */,
+				AF7343242486D9F000826BCF /* KeyboardAdaptive.swift */,
 				AF71D6F5248A85EE0035A48B /* KeyboardDismissModifier.swift */,
+				AF7343232486D9F000826BCF /* KeyboardHeightPublisher.swift */,
 				AF71D6F4248A85EE0035A48B /* KeyboardOffsetModifier.swift */,
+				AF22C08A248995CC003A4C2E /* PhoneNumberField.swift */,
+				AFD879B924882DE900F5F800 /* SchoolType.swift */,
+				AF7343272486DA6E00826BCF /* UIResponder+Current.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -634,7 +634,7 @@
 				A30C9B6F2444C1C80049E4FC /* LoginView.swift in Sources */,
 				A3F4259C24475E4F004D2CCE /* MailView.swift in Sources */,
 				AF71D6F7248A85EE0035A48B /* KeyboardOffsetModifier.swift in Sources */,
-				A3B1B5F02463599200CE71A0 /* SearchBar.swift in Sources */,
+				A3B1B5F02463599200CE71A0 /* AddressSearchBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

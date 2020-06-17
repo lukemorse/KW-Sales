@@ -15,13 +15,15 @@ struct InstallationView: View {
     @EnvironmentObject var mainViewModel: MainViewModel
     @ObservedObject var viewModel: InstallationViewModel
     @EnvironmentObject var locationSearchService: LocationSearchService
+    let setAddressCallback: (String, Int) -> Void
     
     @State var isExpanded: Bool = true
     @State private var numPods = 0
     @State private var numPodsString = ""
     
-    init(viewModel: InstallationViewModel) {
+    init(viewModel: InstallationViewModel, setAddressCallback: @escaping (String, Int) -> Void) {
         self.viewModel = viewModel
+        self.setAddressCallback = setAddressCallback
     }
     
     var body: some View {
@@ -196,10 +198,11 @@ extension InstallationView {
     }
     
     var addressPickerNavLink: some View {
-        NavigationLink(destination: AddressPicker(locationSearchService: locationSearchService, label: "School Address", callback: { address in
-            self.viewModel.installation.address = address
+        NavigationLink(destination: AddressPicker(label: "School Address") { address in
+            self.setAddressCallback(address, 0)
+//            self.viewModel.installation.address = address
             
-        })) {
+        }) {
             HStack {
                 Text("🏫 School Address")
                     .font(.title)

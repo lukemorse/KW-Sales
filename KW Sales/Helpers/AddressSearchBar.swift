@@ -68,7 +68,6 @@ class LocationSearchService: NSObject, ObservableObject, MKLocalSearchCompleterD
     }
     
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
-        print(completer.results)
         self.completions = completer.results
     }
 }
@@ -78,7 +77,7 @@ extension MKLocalSearchCompletion: Identifiable {}
 struct AddressSearchBar: View {
     let labelText: String
     @State var didSelect = false
-    @ObservedObject var locationSearchService: LocationSearchService
+    @EnvironmentObject var locationSearchService: LocationSearchService
     let callback: (String) -> ()
     
     var body: some View {

@@ -12,11 +12,12 @@ import CodableFirebase
 
 class ImplementationPlanViewModel: ObservableObject {
     @Published var installations: [Installation] = []
-    @Published var installationViewModels: [InstallationViewModel] = []
+    var installationViewModels: [InstallationViewModel] = []
     let collectionRef: CollectionReference
     
     init(collectionRef: CollectionReference) {
         self.collectionRef = collectionRef
+        print("init ImplementationPlanViewModel")
     }
     
     public func fetchInstallations() {
@@ -62,6 +63,9 @@ class ImplementationPlanViewModel: ObservableObject {
                 print(error)
             }
         }
-        
+    }
+    
+    public func setAddress(address: String, for index: Int) {
+        installationViewModels[index].installation.address = address
     }
 }

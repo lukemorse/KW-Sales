@@ -16,6 +16,7 @@ class EditDistrictDetailViewModel: ObservableObject {
     
     init(district: District) {
         self.district = district
+        print("init EditDistrictDetailViewModel")
     }
     
     //    func fetchDistrictData(docPath: String, completion: @escaping (District) -> Void) {

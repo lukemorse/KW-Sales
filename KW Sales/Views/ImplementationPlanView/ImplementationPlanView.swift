@@ -13,15 +13,24 @@ import CodableFirebase
 struct ImplementationPlanView: View {
     
     @EnvironmentObject var mainViewModel: MainViewModel
+    
     @ObservedObject var viewModel: ImplementationPlanViewModel
-    @Binding var district: District
+//    @Binding var district: District
     @State var showSaveAlert = false
+    
+    init(viewModel: ImplementationPlanViewModel) {
+        self.viewModel = viewModel
+        print("init ImplementationPlanView")
+    }
     
     var body: some View {
         return Form {
             if viewModel.installations.count > 0 && viewModel.installationViewModels.count > 0 {
                 ForEach(0..<viewModel.installations.count, id: \.self) { index in
-                    InstallationView(viewModel: self.viewModel.installationViewModels[index])
+                    InstallationView(viewModel: self.viewModel.installationViewModels[index]) {(address, index) in
+                        self.viewModel.setAddress(address: address, for: index)
+                        
+                    }
                 }
             }
             
