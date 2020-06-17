@@ -17,7 +17,7 @@ class PodMapViewModel: ObservableObject {
     
     init(url: URL) {
         self.url = url
-        self.docRef = Firestore.firestore().collection(Constants.kDistrictCollection).document(url.absoluteString)
+        self.docRef = Firestore.firestore().collection(Constants.kDistrictCollection).document(UUID().uuidString)
     }
     
     func fetchPods() {

@@ -38,14 +38,13 @@ class InstallationViewModel: ObservableObject {
                 return
             }
             imageRef.downloadURL { (url, error) in
-                if let error = error {
-                    print(error)
+                guard let downloadURL = url else {
+                    // Uh-oh, an error occurred!
                     return
                 }
-                guard let url = url else {
-                    print("could not create url")
-                    return
-                }
+                
+                let urlString = downloadURL.absoluteString
+                let data = ["imageURL": urlString]
                 
                 //if this is the first floorplan for the installation, make a new folder
                 if self.floorPlanDocRef == nil {
@@ -53,20 +52,15 @@ class InstallationViewModel: ObservableObject {
                     self.floorPlanDocRef = Firestore.firestore().collection(Constants.kFloorPlanCollection).document(docID)
                 }
                 
-                let urlString = url.absoluteString
-                let data = ["imageURL": urlString]
-                
-                if let docRef = self.floorPlanDocRef {
-                    docRef.setData(data, merge: true) { (error) in
-                        if let error = error {
-                            print(error.localizedDescription)
-                            completion(false, nil)
-                            return
-                        }
-                        completion(true, urlString)
-                        self.installation.floorPlanUrls.append(urlString)
-                        print("successfully added image to database")
+                self.floorPlanDocRef!.setData(data, merge: true) { (error) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                        completion(false, nil)
+                        return
                     }
+                    completion(true, urlString)
+                    self.installation.floorPlanUrls.append(urlString)
+                    print("successfully added image to database")
                 }
             }
         }

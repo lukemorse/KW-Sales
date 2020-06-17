@@ -44,7 +44,7 @@
 		A3F4259A24475DB8004D2CCE /* SendPodOrderButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F4259924475DB8004D2CCE /* SendPodOrderButtonView.swift */; };
 		A3F4259C24475E4F004D2CCE /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F4259B24475E4F004D2CCE /* MailView.swift */; };
 		AF22C08B248995CC003A4C2E /* PhoneNumberField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF22C08A248995CC003A4C2E /* PhoneNumberField.swift */; };
-		AF3C1D24247575B6008BC1B9 /* ActionOver in Frameworks */ = {isa = PBXBuildFile; productRef = AF3C1D23247575B6008BC1B9 /* ActionOver */; };
+		AF2416C3249AA0380088A76A /* ActionOver in Frameworks */ = {isa = PBXBuildFile; productRef = AF2416C2249AA0380088A76A /* ActionOver */; };
 		AF452B0C2493CB1C00E5B04D /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF452B0B2493CB1C00E5B04D /* Enums.swift */; };
 		AF452B0E2493DAD500E5B04D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF452B0D2493DAD500E5B04D /* GoogleService-Info.plist */; };
 		AF452B1024941D9400E5B04D /* ImplementationPlanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF452B0F24941D9400E5B04D /* ImplementationPlanViewModel.swift */; };
@@ -153,7 +153,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF3C1D24247575B6008BC1B9 /* ActionOver in Frameworks */,
+				AF2416C3249AA0380088A76A /* ActionOver in Frameworks */,
 				9D2E534675C5A9B096A4ECB6 /* Pods_KW_Sales.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -385,7 +385,7 @@
 			);
 			name = "KW Sales";
 			packageProductDependencies = (
-				AF3C1D23247575B6008BC1B9 /* ActionOver */,
+				AF2416C2249AA0380088A76A /* ActionOver */,
 			);
 			productName = "KW Sales";
 			productReference = A30C9B672444C1C80049E4FC /* KW Sales.app */;
@@ -462,7 +462,7 @@
 			);
 			mainGroup = A30C9B5E2444C1C80049E4FC;
 			packageReferences = (
-				AF3C1D22247575B6008BC1B9 /* XCRemoteSwiftPackageReference "ActionOver" */,
+				AF2416C1249AA0380088A76A /* XCRemoteSwiftPackageReference "ActionOver" */,
 			);
 			productRefGroup = A30C9B682444C1C80049E4FC /* Products */;
 			projectDirPath = "";
@@ -971,7 +971,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		AF3C1D22247575B6008BC1B9 /* XCRemoteSwiftPackageReference "ActionOver" */ = {
+		AF2416C1249AA0380088A76A /* XCRemoteSwiftPackageReference "ActionOver" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AndreaMiotto/ActionOver.git";
 			requirement = {
@@ -982,9 +982,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		AF3C1D23247575B6008BC1B9 /* ActionOver */ = {
+		AF2416C2249AA0380088A76A /* ActionOver */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AF3C1D22247575B6008BC1B9 /* XCRemoteSwiftPackageReference "ActionOver" */;
+			package = AF2416C1249AA0380088A76A /* XCRemoteSwiftPackageReference "ActionOver" */;
 			productName = ActionOver;
 		};
 /* End XCSwiftPackageProductDependency section */
