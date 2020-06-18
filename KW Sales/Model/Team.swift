@@ -16,13 +16,11 @@ struct Team: Encodable, Hashable, Identifiable {
     var name: String
     let leader: User
     let members: [User]
-    var installations: [Installation]
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(name)
         hasher.combine(leader)
         hasher.combine(members)
-        hasher.combine(installations)
     }
     
     init(name: String = "",
@@ -32,7 +30,6 @@ struct Team: Encodable, Hashable, Identifiable {
         self.name = name
         self.leader = leader
         self.members = members
-        self.installations = installations
     }
     
     private enum CodingKeys: String, CodingKey {
@@ -47,7 +44,6 @@ struct Team: Encodable, Hashable, Identifiable {
         try container.encode(name, forKey: .name)
         try container.encode(leader, forKey: .leader)
         try container.encode(members, forKey: .members)
-        try container.encode(installations, forKey: .installations)
     }
 }
 
@@ -57,6 +53,5 @@ extension Team: Decodable {
         name = try container.decode(String.self, forKey: .name)
         leader = try container.decode(User.self, forKey: .leader)
         members = try container.decode([User].self, forKey: .members)
-        installations = try container.decode([Installation].self, forKey: .installations)
     }
 }

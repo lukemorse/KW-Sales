@@ -23,6 +23,7 @@ struct Installation: Encodable, Identifiable, Hashable  {
     var address: String
     var districtContact: String
     var districtName: String
+    var districtID: String
     var schoolContact: String
     var schoolName: String
     var email: String
@@ -32,7 +33,7 @@ struct Installation: Encodable, Identifiable, Hashable  {
     var date: Date
     var floorPlanUrls: [String]
     
-    init() {
+    init(districtID: String) {
         self.installationID = UUID().uuidString
         self.status = .notStarted
         self.team = Team()
@@ -40,6 +41,7 @@ struct Installation: Encodable, Identifiable, Hashable  {
         self.address = ""
         self.districtContact = ""
         self.districtName = ""
+        self.districtID = districtID
         self.schoolContact = ""
         self.schoolName = ""
         self.email = ""
@@ -59,6 +61,7 @@ struct Installation: Encodable, Identifiable, Hashable  {
         case address
         case districtContact
         case districtName
+        case districtID
         case schoolContact
         case schoolName
         case email
@@ -78,6 +81,7 @@ struct Installation: Encodable, Identifiable, Hashable  {
         try container.encode(address, forKey: .address)
         try container.encode(districtContact, forKey: .districtContact)
         try container.encode(districtName, forKey: .districtName)
+        try container.encode(districtID, forKey: .districtID)
         try container.encode(schoolContact, forKey: .schoolContact)
         try container.encode(schoolName, forKey: .schoolName)
         try container.encode(email, forKey: .email)
@@ -98,6 +102,7 @@ extension Installation: Decodable {
         address = try container.decode(String.self, forKey: .address)
         districtContact = try container.decode(String.self, forKey: .districtContact)
         districtName = try container.decode(String.self, forKey: .districtName)
+        districtID = try container.decode(String.self, forKey: .districtID)
         schoolContact = try container.decode(String.self, forKey: .schoolContact)
         schoolName = try container.decode(String.self, forKey: .schoolName)
         email = try container.decode(String.self, forKey: .email)

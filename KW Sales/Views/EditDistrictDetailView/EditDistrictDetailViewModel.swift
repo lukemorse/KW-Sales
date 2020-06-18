@@ -17,22 +17,6 @@ class EditDistrictDetailViewModel: ObservableObject {
         self.district = district
     }
     
-    //    func fetchDistrictData(docPath: String, completion: @escaping (District) -> Void) {
-    //        docRef.getDocument { (document, error) in
-    //            if let error = error {
-    //                print(error)
-    //            }
-    //            if let document = document, document.exists {
-    //                do {
-    //                    let district = try FirebaseDecoder().decode(District.self, from: document.data()!)
-    //                    completion(district)
-    //                } catch {
-    //                    print(error)
-    //                }
-    //            }
-    //        }
-    //    }
-    
     func uploadDistrict(completion: @escaping (Bool) -> Void) {
         do {
             let districtData = try FirestoreEncoder().encode(self.district)

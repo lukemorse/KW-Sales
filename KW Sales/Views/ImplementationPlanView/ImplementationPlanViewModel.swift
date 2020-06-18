@@ -14,13 +14,17 @@ class ImplementationPlanViewModel: ObservableObject {
     @Published var installations: [Installation] = []
     var installationViewModels: [InstallationViewModel] = []
     let collectionRef: CollectionReference
+    let districtID: String
     
-    init(collectionRef: CollectionReference) {
-        self.collectionRef = collectionRef
+    init(collectionRef: CollectionReference, districtID: String) {
+//        self.collectionRef = collectionRef
+        self.districtID = districtID
+        self.collectionRef = Firestore.firestore().collection(Constants.kInstallSubCollection)
     }
     
     public func fetchInstallations() {
-        collectionRef.getDocuments { (snapshot, error) in
+//        collectionRef.whereField("districtID", isEqualTo: districtID).
+        collectionRef.whereField("districtID", isEqualTo: districtID).getDocuments { (snapshot, error) in
             if let error = error {
                 print(error)
             }
@@ -40,7 +44,7 @@ class ImplementationPlanViewModel: ObservableObject {
     }
     
     public func addInstallation() {
-        let install = Installation()
+        let install = Installation(districtID: districtID)
         let docRef = self.collectionRef.document(install.installationID)
         let vm = InstallationViewModel(installation: install, docRef: docRef)
         self.installationViewModels.append(vm)
