@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
 
 struct PodMapMasterView: View, Equatable {
     @Environment(\.imageCache) var cache: ImageCache
@@ -65,7 +66,9 @@ struct PodMapMasterView: View, Equatable {
         let asyncImage = AsyncImage(url: URL(string: self.viewModel.installation.floorPlanUrls[index])!, cache: self.cache, placeholder: Text("Loading...").padding(), configuration:
         {$0.resizable()})
         
-        let podMapViewModel = PodMapViewModel(url: URL(string: viewModel.installation.floorPlanUrls[index])!)
+        let docRef = viewModel.installDocRef
+        
+        let podMapViewModel = PodMapViewModel(url: URL(string: viewModel.installation.floorPlanUrls[index])!, installationDocRef: docRef)
         
         return NavigationLink(destination: PodMapView(viewModel: podMapViewModel, floorPlanIndex: index).environmentObject(self.viewModel), tag: index, selection: $selection) {
             asyncImage

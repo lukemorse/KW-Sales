@@ -17,11 +17,13 @@ class InstallationViewModel: ObservableObject {
     
     private var storageRef = Storage.storage().reference()
     private var floorPlanDocRef: DocumentReference?
-    private var implementationPlanCollectionRef: CollectionReference
+    private(set) var installDocRef: DocumentReference
+//    private var implementationPlanCollectionRef: CollectionReference
     
-    init(implementationPlanCollectionRef: CollectionReference, installation: Installation) {
-        self.implementationPlanCollectionRef = implementationPlanCollectionRef
+    init(installation: Installation, docRef: DocumentReference) {
+//        self.implementationPlanCollectionRef = implementationPlanCollectionRef
         self.installation = installation
+        self.installDocRef = docRef
     }
     
     public func uploadFloorPlan(image: UIImage, completion: @escaping (_ flag:Bool, _ url: String?) -> ()) {

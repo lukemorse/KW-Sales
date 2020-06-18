@@ -50,10 +50,12 @@ struct PodMapView: View {
             return Alert(title: Text("Successfully Saved POD Map"))
         }
         .navigationBarItems(trailing: saveButton)
+        .onAppear() {
+            self.viewModel.fetchPods(floorNum: self.floorPlanIndex)
+        }
     }
     
     var podPlacementGesture: some View {
-        
         if self.willPlacePod {
             return AnyView(GeometryReader {geo in
                 Color.clear.contentShape(Rectangle())
@@ -74,29 +76,24 @@ struct PodMapView: View {
     }
     
     var podGroup: some View {
-        if viewModel.pods.count > 0 {
-            return AnyView(
-                Group {
-                    ForEach(0..<self.viewModel.pods.count, id: \.self) { index in
-                        PodNodeView(pod: self.viewModel.pods[index])
-                            .onTapGesture {
-                                if !self.willPlacePod {
-                                    self.viewModel.pods.remove(at: index)
-                                }
+        Group {
+            ForEach(0..<self.viewModel.pods.count, id: \.self) { index in
+                PodNodeView(pod: self.viewModel.pods[index])
+                    .onTapGesture {
+                        if !self.willPlacePod {
+                            self.viewModel.pods.remove(at: index)
                         }
-                    }
-                    if self.draggedPodView != nil {
-                        self.draggedPodView
-                    }
                 }
-            )
+            }
+            if self.draggedPodView != nil {
+                self.draggedPodView
+            }
         }
-        return AnyView(EmptyView())
     }
     
     var saveButton: some View {
         Button(action: {
-            self.viewModel.setPods() { success in
+            self.viewModel.setPods(floorNum: self.floorPlanIndex) { success in
                 if success {
                     self.isShowingAlert = true
                 }

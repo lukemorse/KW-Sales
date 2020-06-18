@@ -13,22 +13,25 @@ import CodableFirebase
 class PodMapViewModel: ObservableObject {
     let url: URL
     var pods: [Pod] = []
-    var docRef: DocumentReference
+    var installationDocRef: DocumentReference
     
-    init(url: URL) {
+    init(url: URL, installationDocRef: DocumentReference) {
         self.url = url
-        self.docRef = Firestore.firestore().collection(Constants.kDistrictCollection).document(UUID().uuidString)
+        self.installationDocRef = installationDocRef
     }
     
-    func fetchPods() {
-        docRef.getDocument { (document, error) in
+    func fetchPods(floorNum: Int) {
+        let podDocRef = installationDocRef.collection(Constants.kPodsSubCollection).document("\(floorNum)")
+        podDocRef.getDocument { (document, error) in
             if let error = error {
                 print(error)
             }
             if let document = document, document.exists {
                 do {
-                    let pods = try FirebaseDecoder().decode([Pod].self, from: document.data()!)
-                    self.pods = pods
+                    let podDict = try FirebaseDecoder().decode([String: [Pod]].self, from: document.data()!)
+                    if let pods = podDict["pods"] {
+                        self.pods = pods
+                    }
                 } catch {
                     print(error)
                 }
@@ -36,10 +39,11 @@ class PodMapViewModel: ObservableObject {
         }
     }
     
-    func setPods(completion: @escaping (Bool) -> Void) {
+    func setPods(floorNum: Int, completion: @escaping (Bool) -> Void) {
+        let podDocRef = installationDocRef.collection(Constants.kPodsSubCollection).document("\(floorNum)")
         do {
-            let data = try FirestoreEncoder().encode(self.pods)
-            docRef.setData(data) { error in
+            let data = try FirestoreEncoder().encode(["pods" : self.pods])
+            podDocRef.setData(data) { error in
                 if let error = error {
                     print(error)
                     completion(false)
