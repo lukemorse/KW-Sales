@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A30C9B662444C1C80049E4FC"
-               BuildableName = "KW Sales.app"
+               BuildableName = "KW Sales Test.app"
                BlueprintName = "KW Sales"
                ReferencedContainer = "container:KW Sales.xcodeproj">
             </BuildableReference>
@@ -65,7 +65,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A30C9B662444C1C80049E4FC"
-            BuildableName = "KW Sales.app"
+            BuildableName = "KW Sales Test.app"
             BlueprintName = "KW Sales"
             ReferencedContainer = "container:KW Sales.xcodeproj">
          </BuildableReference>
@@ -99,7 +99,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A30C9B662444C1C80049E4FC"
-            BuildableName = "KW Sales.app"
+            BuildableName = "KW Sales Test.app"
             BlueprintName = "KW Sales"
             ReferencedContainer = "container:KW Sales.xcodeproj">
          </BuildableReference>

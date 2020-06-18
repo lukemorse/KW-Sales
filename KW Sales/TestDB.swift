@@ -14,7 +14,7 @@ struct TestDB {
         var result = Installation(districtID: "TestDistrictID")
 //        result.address = GeoPoint(latitude: 44, longitude: 19)
         result.address = ""
-        result.team = Team(name: "Team 1", leader: User(uid: "", name: "", email: "", phone: ""), members: [User(uid: UUID().uuidString, name: "Sarah", email: "Sarah@test.com", phone: "333-444-1423")], installations: [])
+        result.teamName = "Test Team"
         result.status = .notStarted
         result.schoolType = .elementary
         result.districtContact = "Jerry"
@@ -33,7 +33,7 @@ struct TestDB {
     static var testInstallation2: Installation {
         var result = Installation(districtID: "TestDistrictID")
         result.address = ""
-        result.team = Team(name: "Team 1", leader: User(uid: "", name: "", email: "", phone: ""), members: [User(uid: UUID().uuidString, name: "Sarah", email: "Sarah@test.com", phone: "333-444-1423")], installations: [])
+        result.teamName = "Test Team"
         result.status = .complete
         result.schoolType = .elementary
         result.districtContact = "Jerry"

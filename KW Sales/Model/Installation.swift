@@ -17,7 +17,7 @@ struct Installation: Encodable, Identifiable, Hashable  {
     
     var id: Int {hashValue}
     let installationID: String
-    var team: Team
+    var teamName: String
     var status: InstallationStatus
     var schoolType: SchoolType
     var address: String
@@ -36,7 +36,7 @@ struct Installation: Encodable, Identifiable, Hashable  {
     init(districtID: String) {
         self.installationID = UUID().uuidString
         self.status = .notStarted
-        self.team = Team()
+        self.teamName = ""
         self.schoolType = .elementary
         self.address = ""
         self.districtContact = ""
@@ -56,7 +56,7 @@ struct Installation: Encodable, Identifiable, Hashable  {
         
         case installationID
         case status
-        case team
+        case teamName
         case schoolType
         case address
         case districtContact
@@ -75,7 +75,7 @@ struct Installation: Encodable, Identifiable, Hashable  {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(installationID, forKey: .installationID)
-        try container.encode(team, forKey: .team)
+        try container.encode(teamName, forKey: .teamName)
         try container.encode(status, forKey: .status)
         try container.encode(schoolType.description, forKey: .schoolType)
         try container.encode(address, forKey: .address)
@@ -98,7 +98,7 @@ extension Installation: Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         installationID = try container.decode(String.self, forKey: .installationID)
         status = try container.decode(InstallationStatus.self, forKey: .status)
-        team = try container.decode(Team.self, forKey: .team)
+        teamName = try container.decode(String.self, forKey: .teamName)
         address = try container.decode(String.self, forKey: .address)
         districtContact = try container.decode(String.self, forKey: .districtContact)
         districtName = try container.decode(String.self, forKey: .districtName)
@@ -122,7 +122,4 @@ extension Installation: Decodable {
     }
 }
 
-extension DocumentReference: DocumentReferenceType {}
-extension GeoPoint: GeoPointType {}
-extension FieldValue: FieldValueType {}
-extension Timestamp: TimestampType {}
+

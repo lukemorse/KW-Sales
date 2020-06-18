@@ -11,6 +11,7 @@ import Combine
 import UIKit
 import SwiftUI
 import FirebaseFirestore
+import CodableFirebase
 
 func validateEmail(enteredEmail:String) -> Bool {
 
@@ -52,3 +53,8 @@ extension View {
         }
     }
 }
+
+extension DocumentReference: DocumentReferenceType {}
+extension GeoPoint: GeoPointType {}
+extension FieldValue: FieldValueType {}
+extension Timestamp: TimestampType {}

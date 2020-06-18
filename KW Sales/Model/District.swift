@@ -6,8 +6,6 @@
 //  Copyright © 2020 Luke Morse. All rights reserved.
 //
 
-
-
 import Foundation
 import FirebaseFirestore
 import CodableFirebase

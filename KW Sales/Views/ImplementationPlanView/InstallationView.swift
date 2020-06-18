@@ -133,7 +133,7 @@ extension InstallationView {
             Text("Assigned Team")
                 .font(.headline)
             Picker(selection:
-                $viewModel.installation.team,
+                $viewModel.installation.teamName,
                 label:
                 Text(""),
                 content: {

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import FirebaseFirestore
+import Firebase
 import CodableFirebase
 
 struct Pod: Encodable, Hashable, Identifiable {
@@ -15,6 +15,7 @@ struct Pod: Encodable, Hashable, Identifiable {
     let podType: PodType
     var position: CGPoint
     var isComplete = false
+    var imageUrl: String?
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(podType)
@@ -27,6 +28,7 @@ struct Pod: Encodable, Hashable, Identifiable {
         case podType
         case position
         case isComplete
+        case imageUrl
     }
     
     func encode(to encoder: Encoder) throws {
@@ -34,6 +36,7 @@ struct Pod: Encodable, Hashable, Identifiable {
         try container.encode(podType, forKey: .podType)
         try container.encode(position, forKey: .position)
         try container.encode(isComplete, forKey: .isComplete)
+        try container.encode(imageUrl, forKey: .imageUrl)
     }
 }
 
@@ -43,5 +46,7 @@ extension Pod: Decodable {
         podType = try container.decode(PodType.self, forKey: .podType)
         position = try container.decode(CGPoint.self, forKey: .position)
         isComplete = try container.decode(Bool.self, forKey: .isComplete)
+        imageUrl = try container.decodeIfPresent(String.self, forKey: .imageUrl)
     }
 }
+
