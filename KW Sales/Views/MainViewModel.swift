@@ -66,8 +66,10 @@ class MainViewModel: ObservableObject {
     }
     
     func changeFilter(districtFilter: DistrictFilter) {
-        currentFilter = districtFilter
-        fetchDistricts()
+        if districtFilter != currentFilter {
+            currentFilter = districtFilter
+            fetchDistricts()
+        }
     }
 }
 

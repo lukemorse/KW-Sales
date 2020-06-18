@@ -86,7 +86,7 @@
 		5C30314522E30CD88CC02F10 /* Pods-KW Sales.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KW Sales.debug.xcconfig"; path = "Target Support Files/Pods-KW Sales/Pods-KW Sales.debug.xcconfig"; sourceTree = "<group>"; };
 		995E7B484A7114A29EED9F1C /* Pods-KW SalesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KW SalesTests.release.xcconfig"; path = "Target Support Files/Pods-KW SalesTests/Pods-KW SalesTests.release.xcconfig"; sourceTree = "<group>"; };
 		A30A7881245A01CA00271993 /* Pod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pod.swift; sourceTree = "<group>"; };
-		A30C9B672444C1C80049E4FC /* KW Sales.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KW Sales.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A30C9B672444C1C80049E4FC /* KW Sales Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KW Sales Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A30C9B6A2444C1C80049E4FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A30C9B6C2444C1C80049E4FC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A30C9B6E2444C1C80049E4FC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -212,7 +212,7 @@
 		A30C9B682444C1C80049E4FC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A30C9B672444C1C80049E4FC /* KW Sales.app */,
+				A30C9B672444C1C80049E4FC /* KW Sales Test.app */,
 				A30C9B7D2444C1CB0049E4FC /* KW SalesTests.xctest */,
 				A30C9B882444C1CB0049E4FC /* KW SalesUITests.xctest */,
 			);
@@ -388,7 +388,7 @@
 				AF2416C2249AA0380088A76A /* ActionOver */,
 			);
 			productName = "KW Sales";
-			productReference = A30C9B672444C1C80049E4FC /* KW Sales.app */;
+			productReference = A30C9B672444C1C80049E4FC /* KW Sales Test.app */;
 			productType = "com.apple.product-type.application";
 		};
 		A30C9B7C2444C1CB0049E4FC /* KW SalesTests */ = {
@@ -813,7 +813,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.lukemorse.KW-Sales-Test";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "KW Sales Test";
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_SWIFT_SYMBOLS = NO;
 				SWIFT_VERSION = 5.0;
@@ -837,7 +837,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.lukemorse.KW-Sales-Test";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "KW Sales Test";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

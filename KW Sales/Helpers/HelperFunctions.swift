@@ -9,6 +9,7 @@
 import Foundation
 import Combine
 import UIKit
+import SwiftUI
 import FirebaseFirestore
 
 func validateEmail(enteredEmail:String) -> Bool {
@@ -42,3 +43,12 @@ extension Array {
     }
 }
 
+extension View {
+    func inExpandingRectangle() -> some View {
+        ZStack {
+            Rectangle()
+                .fill(Color.clear)
+            self
+        }
+    }
+}

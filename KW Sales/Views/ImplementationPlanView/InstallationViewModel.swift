@@ -14,14 +14,11 @@ import SwiftUI
 
 class InstallationViewModel: ObservableObject {
     @Published var installation: Installation
-    
     private var storageRef = Storage.storage().reference()
     private var floorPlanDocRef: DocumentReference?
     private(set) var installDocRef: DocumentReference
-//    private var implementationPlanCollectionRef: CollectionReference
     
     init(installation: Installation, docRef: DocumentReference) {
-//        self.implementationPlanCollectionRef = implementationPlanCollectionRef
         self.installation = installation
         self.installDocRef = docRef
     }
@@ -67,5 +64,4 @@ class InstallationViewModel: ObservableObject {
             }
         }
     }
-    
 }
