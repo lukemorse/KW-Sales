@@ -90,6 +90,9 @@ struct PodMapView: View {
             }
         }
     }
+}
+
+extension PodMapView {
     
     var saveButton: some View {
         Button(action: {
@@ -142,9 +145,6 @@ struct PodMapView: View {
                     .cancel()])
         })
     }
-}
-
-extension PodMapView {
     
     var moveAndScaleButtons: some View {
         HStack {

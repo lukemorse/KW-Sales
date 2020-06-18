@@ -12,8 +12,8 @@ import CodableFirebase
 
 class PodMapViewModel: ObservableObject {
     let url: URL
-    var pods: [Pod] = []
     var installationDocRef: DocumentReference
+    @Published var pods: [Pod] = []
     
     init(url: URL, installationDocRef: DocumentReference) {
         self.url = url
