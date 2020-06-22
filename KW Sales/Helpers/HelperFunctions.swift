@@ -62,36 +62,25 @@ func removeTimeStamp(fromDate: Date) -> Date {
 }
 
 extension Date {
-
     func formatForDB() -> Date {
         let calendar = Calendar.current
-
         var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: self)
 
         components.hour = 12
         components.minute = 0
         components.second = 0
-
         return calendar.date(from: components)!
     }
 }
 
-extension Timestamp {
-    func formatForDB(date: Date) -> Timestamp {
-        let calendar = Calendar.current
-
-        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date.self)
-
-        components.hour = 12
-        components.minute = 0
-        components.second = 0
-
-        if let resultDate = calendar.date(from: components) {
-            return Timestamp(date: resultDate)
-        } else {
-            return Timestamp()
-        }
-    }
+func readFromDB(date: Date) -> Date {
+    let calendar = Calendar.current
+    var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+    
+    components.hour = 12
+    components.minute = 0
+    components.second = 0
+    return calendar.date(from: components)!
 }
 
 extension DocumentReference: DocumentReferenceType {}

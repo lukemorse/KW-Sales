@@ -112,7 +112,7 @@ extension Installation: Decodable {
         floorPlanUrls = try container.decode([String].self, forKey: .floorPlanURLs)
         
         let timeStamp: Timestamp = try container.decode(Timestamp.self, forKey: .date)
-        date = timeStamp.dateValue()
+        date =  readFromDB(date: timeStamp.dateValue())
         
         if let schoolTypeValue = try? container.decode(Int.self, forKey: .schoolType) {
             schoolType = SchoolType(rawValue: schoolTypeValue) ?? SchoolType.unknown

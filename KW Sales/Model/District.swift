@@ -80,7 +80,7 @@ struct District: Encodable {
         try container.encode(districtPhoneNumber, forKey: .districtPhoneNumber)
         try container.encode(districtOfficeAddress, forKey: .districtOfficeAddress)
         try container.encode(numPodsNeeded, forKey: .numPodsNeeded)
-        try container.encode(Timestamp(date: startDate), forKey: .startDate)
+        try container.encode(Timestamp(date: startDate.formatForDB()), forKey: .startDate)
     }
 }
 
@@ -103,6 +103,6 @@ extension District: Decodable {
         numPodsNeeded = try container.decode(Int.self, forKey: .numPodsNeeded)
         
         let timeStamp: Timestamp = try container.decode(Timestamp.self, forKey: .startDate)
-        startDate = timeStamp.dateValue()
+        startDate =  readFromDB(date: timeStamp.dateValue())
     }
 }
