@@ -54,6 +54,46 @@ extension View {
     }
 }
 
+func removeTimeStamp(fromDate: Date) -> Date {
+    guard let date = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month, .day], from: fromDate)) else {
+        fatalError("Failed to strip time from Date object")
+    }
+    return date
+}
+
+extension Date {
+
+    func formatForDB() -> Date {
+        let calendar = Calendar.current
+
+        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: self)
+
+        components.hour = 12
+        components.minute = 0
+        components.second = 0
+
+        return calendar.date(from: components)!
+    }
+}
+
+extension Timestamp {
+    func formatForDB(date: Date) -> Timestamp {
+        let calendar = Calendar.current
+
+        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date.self)
+
+        components.hour = 12
+        components.minute = 0
+        components.second = 0
+
+        if let resultDate = calendar.date(from: components) {
+            return Timestamp(date: resultDate)
+        } else {
+            return Timestamp()
+        }
+    }
+}
+
 extension DocumentReference: DocumentReferenceType {}
 extension GeoPoint: GeoPointType {}
 extension FieldValue: FieldValueType {}

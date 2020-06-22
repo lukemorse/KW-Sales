@@ -88,8 +88,8 @@ struct Installation: Encodable, Identifiable, Hashable  {
         try container.encode(numFloors, forKey: .numFloors)
         try container.encode(numRooms, forKey: .numRooms)
         try container.encode(numPods, forKey: .numPods)
-        try container.encode(Timestamp(date: date), forKey: .date)
         try container.encode(floorPlanUrls, forKey: .floorPlanURLs)
+        try container.encode(Timestamp(date: date.formatForDB()), forKey: .date)
     }
 }
 
