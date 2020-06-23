@@ -125,6 +125,7 @@
 		A3F4259B24475E4F004D2CCE /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		A9F6FC5B3B907EB6981549FC /* Pods_KW_Sales.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KW_Sales.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF22C08A248995CC003A4C2E /* PhoneNumberField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberField.swift; sourceTree = "<group>"; };
+		AF4B224824A197C300076D0A /* KW Sales.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "KW Sales.entitlements"; sourceTree = "<group>"; };
 		AF71D6F4248A85EE0035A48B /* KeyboardOffsetModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardOffsetModifier.swift; sourceTree = "<group>"; };
 		AF71D6F5248A85EE0035A48B /* KeyboardDismissModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardDismissModifier.swift; sourceTree = "<group>"; };
 		AF71D6F6248A85EE0035A48B /* FormValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormValidator.swift; sourceTree = "<group>"; };
@@ -214,6 +215,7 @@
 		A30C9B692444C1C80049E4FC /* KW Sales */ = {
 			isa = PBXGroup;
 			children = (
+				AF4B224824A197C300076D0A /* KW Sales.entitlements */,
 				A3EE48D62445031300C6A554 /* Model */,
 				A3EE48CB2444D3D300C6A554 /* Views */,
 				A30C9B6A2444C1C80049E4FC /* AppDelegate.swift */,
@@ -784,7 +786,9 @@
 			baseConfigurationReference = 5C30314522E30CD88CC02F10 /* Pods-KW Sales.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "KW Sales/KW Sales.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEAD_CODE_STRIPPING = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"KW Sales/Preview Content\"";
@@ -810,7 +814,9 @@
 			baseConfigurationReference = B3F10BB24EC3F6484A435780 /* Pods-KW Sales.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "KW Sales/KW Sales.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"KW Sales/Preview Content\"";
 				DEVELOPMENT_TEAM = KRW4A286K8;
 				ENABLE_PREVIEWS = YES;
