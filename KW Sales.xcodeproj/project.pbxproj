@@ -55,6 +55,7 @@
 		AF7343252486D9F000826BCF /* KeyboardHeightPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7343232486D9F000826BCF /* KeyboardHeightPublisher.swift */; };
 		AF7343262486D9F000826BCF /* KeyboardAdaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7343242486D9F000826BCF /* KeyboardAdaptive.swift */; };
 		AF7343282486DA6E00826BCF /* UIResponder+Current.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7343272486DA6E00826BCF /* UIResponder+Current.swift */; };
+		AF874A9024A3DC57008BB052 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF874A8F24A3DC57008BB052 /* CustomTextField.swift */; };
 		AFC2386B2492AD8400651363 /* EditDistrictDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC2386A2492AD8400651363 /* EditDistrictDetailViewModel.swift */; };
 		AFC83A8224782EFC00C02C10 /* LogInData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC83A7E2478159700C02C10 /* LogInData.swift */; };
 		AFCA09C62486B88E002279E6 /* AlertItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCA09C52486B88E002279E6 /* AlertItem.swift */; };
@@ -138,6 +139,7 @@
 		AF7343232486D9F000826BCF /* KeyboardHeightPublisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardHeightPublisher.swift; sourceTree = "<group>"; };
 		AF7343242486D9F000826BCF /* KeyboardAdaptive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardAdaptive.swift; sourceTree = "<group>"; };
 		AF7343272486DA6E00826BCF /* UIResponder+Current.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIResponder+Current.swift"; sourceTree = "<group>"; };
+		AF874A8F24A3DC57008BB052 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		AFC2386A2492AD8400651363 /* EditDistrictDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDistrictDetailViewModel.swift; sourceTree = "<group>"; };
 		AFC83A7E2478159700C02C10 /* LogInData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LogInData.swift; path = "KW Sales/LogInData.swift"; sourceTree = SOURCE_ROOT; };
 		AFCA09C52486B88E002279E6 /* AlertItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertItem.swift; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 			isa = PBXGroup;
 			children = (
 				A3DD6C532459D23C00319147 /* ActivityIndicator.swift */,
+				AF874A8F24A3DC57008BB052 /* CustomTextField.swift */,
 				AFD879BB24882E2900F5F800 /* AddressPicker.swift */,
 				A3B1B5EF2463599200CE71A0 /* AddressSearchBar.swift */,
 				AFCA09C52486B88E002279E6 /* AlertItem.swift */,
@@ -635,6 +638,7 @@
 				A3F4259C24475E4F004D2CCE /* MailView.swift in Sources */,
 				AF71D6F7248A85EE0035A48B /* KeyboardOffsetModifier.swift in Sources */,
 				A3B1B5F02463599200CE71A0 /* AddressSearchBar.swift in Sources */,
+				AF874A9024A3DC57008BB052 /* CustomTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -57,6 +57,13 @@ struct PhoneFieldContainer: UIViewRepresentable {
         innertTextField.placeholder = placeholder
         innertTextField.text = text.wrappedValue
         innertTextField.delegate = context.coordinator
+        innertTextField.keyboardType = .numberPad
+        
+        let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: innertTextField.frame.size.width, height: 44))
+        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(innertTextField.doneButtonTapped(button:)))
+        toolBar.items = [doneButton]
+        toolBar.setItems([doneButton], animated: true)
+        innertTextField.inputAccessoryView = toolBar
 
         context.coordinator.setup(innertTextField)
 

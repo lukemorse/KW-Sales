@@ -140,10 +140,9 @@ extension EditDistrictDetailView {
         VStack(alignment: .leading) {
             Text("Number of PODs Needed")
                 .font(.headline)
-            TextField("Enter Number of PODs", text: self.$numPodsString)
-                .hideKeyboardOnTap()
+            CustomTextfield(text: self.$numPodsString, keyType: .numberPad, placeHolder: "Enter Number of PODs")
                 .keyboardType(.numberPad)
-            .padding(.all)
+                .padding(.all)
         }
     }
     

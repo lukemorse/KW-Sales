@@ -64,9 +64,7 @@ extension InstallationView {
         VStack(alignment: .leading) {
             Text("Number of PODs Needed")
                 .font(.headline)
-            TextField("Enter Number of PODs", text: self.$numPodsString)
-                .hideKeyboardOnTap()
-                .keyboardType(.numberPad)
+            CustomTextfield(text: self.$numPodsString, keyType: .numberPad, placeHolder: "Enter Number of PODs")
                 .onReceive(Just(self.numPodsString)) { newVal in
                     let filtered = newVal.filter {"0123456789".contains($0)}
                     self.numPods = Int(filtered) ?? 0

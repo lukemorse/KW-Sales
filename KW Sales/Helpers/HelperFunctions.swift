@@ -97,3 +97,16 @@ extension DocumentReference: DocumentReferenceType {}
 extension GeoPoint: GeoPointType {}
 extension FieldValue: FieldValueType {}
 extension Timestamp: TimestampType {}
+
+extension UIApplication {
+    func endEditing() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
+extension  UITextField{
+    @objc func doneButtonTapped(button:UIBarButtonItem) -> Void {
+       self.resignFirstResponder()
+    }
+
+}
