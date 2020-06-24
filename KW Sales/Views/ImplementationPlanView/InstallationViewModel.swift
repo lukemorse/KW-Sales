@@ -25,6 +25,7 @@ class InstallationViewModel: ObservableObject {
     }
     
     func addStatusListener() {
+        if listener == nil {
         self.listener = installDocRef.addSnapshotListener { documentSnapshot, error in
             guard let document = documentSnapshot else {
                 print("Error fetching document: \(error!)")
@@ -41,6 +42,7 @@ class InstallationViewModel: ObservableObject {
             catch {
                 print(error)
             }
+        }
         }
     }
     

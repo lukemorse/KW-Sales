@@ -19,6 +19,7 @@ struct InstallationView: View {
     @State var isExpanded: Bool = true
     @State private var numPods = 0
     @State private var numPodsString = ""
+    let shouldAddStatusListeners: Bool
     
     var body: some View {
         Section {
@@ -44,7 +45,10 @@ struct InstallationView: View {
             if self.numPods != 0 {
                 self.numPodsString = "\(self.numPods)"
             }
-            self.viewModel.addStatusListener()
+            if self.shouldAddStatusListeners {
+                self.viewModel.addStatusListener()
+            }
+            
         }
         .onDisappear() {
             self.viewModel.removeStatusListener()

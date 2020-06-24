@@ -15,15 +15,17 @@ struct ImplementationPlanView: View {
     @EnvironmentObject var mainViewModel: MainViewModel
     @ObservedObject var viewModel: ImplementationPlanViewModel
     @State var showSaveAlert = false
+    let shouldAddStatusListeners: Bool
     
-    init(viewModel: ImplementationPlanViewModel) {
+    init(viewModel: ImplementationPlanViewModel, shouldAddStatusListeners: Bool) {
         self.viewModel = viewModel
+        self.shouldAddStatusListeners = shouldAddStatusListeners
     }
     
     var body: some View {
         return Form {
                 ForEach(0..<viewModel.installations.count, id: \.self) { index in
-                    InstallationView(viewModel: self.viewModel.installationViewModels[index])
+                    InstallationView(viewModel: self.viewModel.installationViewModels[index], shouldAddStatusListeners: self.shouldAddStatusListeners)
                 }
             
             Button(action: {
