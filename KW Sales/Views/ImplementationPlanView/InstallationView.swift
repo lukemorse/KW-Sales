@@ -44,6 +44,10 @@ struct InstallationView: View {
             if self.numPods != 0 {
                 self.numPodsString = "\(self.numPods)"
             }
+            self.viewModel.addStatusListener()
+        }
+        .onDisappear() {
+            self.viewModel.removeStatusListener()
         }
     }
     

@@ -17,10 +17,35 @@ class InstallationViewModel: ObservableObject {
     private var storageRef = Storage.storage().reference()
     private var floorPlanDocRef: DocumentReference?
     private(set) var installDocRef: DocumentReference
+    private var listener: ListenerRegistration?
     
     init(installation: Installation, docRef: DocumentReference) {
         self.installation = installation
         self.installDocRef = docRef
+    }
+    
+    func addStatusListener() {
+        self.listener = installDocRef.addSnapshotListener { documentSnapshot, error in
+            guard let document = documentSnapshot else {
+                print("Error fetching document: \(error!)")
+                return
+            }
+            guard let data = document.data() else {
+                print("Document data was empty.")
+                return
+            }
+            do {
+                let install = try FirestoreDecoder().decode(Installation.self, from: data)
+                self.installation.status = install.status
+            }
+            catch {
+                print(error)
+            }
+        }
+    }
+    
+    func removeStatusListener() {
+        listener?.remove()
     }
     
     public func uploadFloorPlan(image: UIImage, completion: @escaping (_ flag:Bool, _ url: String?) -> ()) {
