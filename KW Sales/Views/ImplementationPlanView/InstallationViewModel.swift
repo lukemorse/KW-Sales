@@ -70,24 +70,18 @@ class InstallationViewModel: ObservableObject {
                 }
                 
                 let urlString = downloadURL.absoluteString
-                let data = ["imageURL": urlString]
+                self.addFloorplanURL(url: urlString)
                 
-                //if this is the first floorplan for the installation, make a new folder
-                if self.floorPlanDocRef == nil {
-                    let docID = String(self.installation.id)
-                    self.floorPlanDocRef = Firestore.firestore().collection(Constants.kFloorPlanCollection).document(docID)
-                }
-                
-                self.floorPlanDocRef!.setData(data, merge: true) { (error) in
-                    if let error = error {
-                        print(error.localizedDescription)
-                        completion(false, nil)
-                        return
-                    }
-                    completion(true, urlString)
-                    self.installation.floorPlanUrls.append(urlString)
-                    print("successfully added image to database")
-                }
+                self.installation.floorPlanUrls.append(urlString)
+                completion(true, urlString)
+            }
+        }
+    }
+    
+    func addFloorplanURL(url: String) {
+        installDocRef.updateData(["floorPlanURLs" : FieldValue.arrayUnion([url])]) { (error) in
+            if let error = error {
+                print(error)
             }
         }
     }

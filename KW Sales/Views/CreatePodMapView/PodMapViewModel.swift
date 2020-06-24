@@ -11,11 +11,11 @@ import FirebaseFirestore
 import CodableFirebase
 
 class PodMapViewModel: ObservableObject {
-    let url: URL
     var installationDocRef: DocumentReference
+    let url: URL
     @Published var pods: [Pod] = []
     
-    init(url: URL, installationDocRef: DocumentReference) {
+    init(installationDocRef: DocumentReference, url: URL) {
         self.url = url
         self.installationDocRef = installationDocRef
     }
@@ -54,6 +54,5 @@ class PodMapViewModel: ObservableObject {
         } catch {
             print(error)
         }
-        
     }
 }
