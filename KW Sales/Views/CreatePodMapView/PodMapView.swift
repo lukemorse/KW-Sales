@@ -26,7 +26,7 @@ struct PodMapView: View {
     @State var dragSize: CGSize = CGSize.zero
     
     @State var willPlacePod: Bool = false
-    @State var draggedPodView: PodNodeView?
+    @State var draggedPodView: AnyView = AnyView(EmptyView())
     @State var nextPodType: PodType = .vertical_hallway
     
     var body: some View {
@@ -41,7 +41,7 @@ struct PodMapView: View {
             .animation(.none)
             .scaleEffect(self.scale)
             .offset(self.dragSize)
-
+            
             Spacer()
             moveAndScaleButtons
             actionSheetButton
@@ -56,36 +56,44 @@ struct PodMapView: View {
     }
     
     var podPlacementGesture: some View {
-        if self.willPlacePod {
-            return AnyView(GeometryReader {geo in
-                Color.clear.contentShape(Rectangle())
-            }
-            .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .named(AnyHashable("custom")))
-            .onChanged({ (value) in
-                    self.draggedPodView = PodNodeView(pod: Pod(podType: self.nextPodType, position: value.location))
-            })
-                .onEnded({ (value) in
-                    self.draggedPodView = nil
-                    let pod = Pod(podType: self.nextPodType, position: value.location)
-                    self.viewModel.pods.append(pod)
-                })
-            ))
-        } else {
-            return AnyView(EmptyView())
+        GeometryReader {geo in
+            Color.clear.contentShape(Rectangle())
+                
+                .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .named(AnyHashable("custom")))
+                    .onChanged({ (value) in
+                        if self.willPlacePod {
+                            let xMul = Float(value.location.x / geo.size.width)
+                            let yMul = Float(value.location.y / geo.size.height)
+                        self.draggedPodView = AnyView(PodNodeView(pod: Pod(podType: self.nextPodType, xMul: xMul, yMul: yMul))
+                            .position(value.location))
+                        }
+                    })
+                    .onEnded({ (value) in
+                        if self.willPlacePod {
+                            self.draggedPodView = AnyView(EmptyView())
+                            let xMul = Float(value.location.x / geo.size.width)
+                            let yMul = Float(value.location.y / geo.size.height)
+                            let pod = Pod(podType: self.nextPodType, xMul: xMul, yMul: yMul)
+                            self.viewModel.pods.append(pod)
+                        }
+                    })
+            )
         }
     }
     
+    
     var podGroup: some View {
-        Group {
-            ForEach(0..<self.viewModel.pods.count, id: \.self) { index in
-                PodNodeView(pod: self.viewModel.pods[index])
-                    .onTapGesture {
-                        if !self.willPlacePod {
-                            self.viewModel.pods.remove(at: index)
-                        }
+        GeometryReader { geo in
+            Group {
+                ForEach(0..<self.viewModel.pods.count, id: \.self) { index in
+                    PodNodeView(pod: self.viewModel.pods[index])
+                        .position(CGPoint(x: geo.size.width * CGFloat(self.viewModel.pods[index].xMul), y: geo.size.height * CGFloat(self.viewModel.pods[index].yMul)))
+                        .onTapGesture {
+                            if !self.willPlacePod {
+                                self.viewModel.pods.remove(at: index)
+                            }
+                    }
                 }
-            }
-            if self.draggedPodView != nil {
                 self.draggedPodView
             }
         }

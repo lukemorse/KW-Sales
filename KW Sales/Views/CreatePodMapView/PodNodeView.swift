@@ -21,8 +21,8 @@ struct PodNodeView: Identifiable, Hashable, Equatable, View {
     }
     
     func hash(into hasher: inout Hasher) {
-        hasher.combine(pod.position.x)
-        hasher.combine(pod.position.y)
+        hasher.combine(pod.xMul)
+        hasher.combine(pod.yMul)
         hasher.combine(pod.podType)
     }
     
@@ -33,7 +33,6 @@ struct PodNodeView: Identifiable, Hashable, Equatable, View {
             .frame(
                 width: self.pod.podType == .horizontal_hallway ? 7.5 : 5,
                 height: self.pod.podType == .vertical_hallway ? 7.5 : 5)
-            .position(pod.position)
             .colorMultiply(Color.red)
     }
 }
@@ -68,7 +67,7 @@ let podImageDict: [PodType : String] = [
 struct PodNodeView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            PodNodeView(pod: Pod(podType: .corner, position: CGPoint(x: 100, y: 100)))
+            PodNodeView(pod: Pod(podType: .corner, xMul: 0.5, yMul: 0.5))
         }
         
     }
