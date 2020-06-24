@@ -36,7 +36,7 @@ struct PodMapView: View {
                 self.podGroup
             }
             .coordinateSpace(name: "custom")
-            .overlay(podPlacementGesture)
+            .if(willPlacePod) {$0.overlay(podPlacementGesture)}
             .scaledToFit()
             .animation(.none)
             .scaleEffect(self.scale)
