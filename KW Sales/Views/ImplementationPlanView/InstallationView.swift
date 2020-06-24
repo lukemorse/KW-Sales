@@ -16,7 +16,7 @@ struct InstallationView: View {
     @ObservedObject var viewModel: InstallationViewModel
     @EnvironmentObject var locationSearchService: LocationSearchService
     
-    @State var isExpanded: Bool = true
+    @State var isExpanded: Bool = false
     @State private var numPods = 0
     @State private var numPodsString = ""
     let shouldAddStatusListeners: Bool
