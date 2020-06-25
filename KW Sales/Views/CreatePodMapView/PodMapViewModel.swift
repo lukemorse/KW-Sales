@@ -28,10 +28,8 @@ class PodMapViewModel: ObservableObject {
             }
             if let document = document, document.exists {
                 do {
-                    let podDict = try FirebaseDecoder().decode([String: [Pod]].self, from: document.data()!)
-                    if let pods = podDict["pods"] {
-                        self.pods = pods
-                    }
+                    let podDict = try FirebaseDecoder().decode([String: Pod].self, from: document.data()!)
+                    self.pods = Array(podDict.values)
                 } catch {
                     print(error)
                 }
@@ -42,7 +40,11 @@ class PodMapViewModel: ObservableObject {
     func setPods(floorNum: Int, completion: @escaping (Bool) -> Void) {
         let podDocRef = installationDocRef.collection(Constants.kPodsSubCollection).document("\(floorNum)")
         do {
-            let data = try FirestoreEncoder().encode(["pods" : self.pods])
+            var podDict: [String: Pod] = [:]
+            for pod in pods {
+                podDict[pod.uid] = pod
+            }
+            let data = try FirestoreEncoder().encode(podDict)
             podDocRef.setData(data) { error in
                 if let error = error {
                     print(error)

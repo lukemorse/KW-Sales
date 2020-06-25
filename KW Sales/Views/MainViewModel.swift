@@ -17,28 +17,30 @@ class MainViewModel: ObservableObject {
     @Published var teams: [Team] = []
     @Published var numSchools = 0
     var currentUser = ""
+    let districtsRef = Firestore.firestore().collection(Constants.kDistrictCollection)
     
     //Networking
     func fetchDistricts() {
-        let ref = Firestore.firestore().collection(Constants.kDistrictCollection)
+        
         var query: Query
         
         switch self.currentFilter {
         case .noFilter:
-            query = ref.limit(to: 10)
+            query = districtsRef.limit(to: 10)
             break
         case .currentUser:
-            query = ref.whereField("uploadedBy", isEqualTo: currentUser)
+            query = districtsRef.whereField("uploadedBy", isEqualTo: currentUser).limit(to: 10)
         case .complete:
-            query = ref.whereField("status", isEqualTo: DistrictStatus.complete)
+            query = districtsRef.whereField("status", isEqualTo: DistrictStatus.complete.rawValue).limit(to: 10)
         case .pending:
-            query = ref.whereField("status", isEqualTo: DistrictStatus.pending)
+            query = districtsRef.whereField("status", isEqualTo: DistrictStatus.pending.rawValue).limit(to: 10)
         }
         
         query.getDocuments { (snapshot, error) in
             if let error = error {
                 print(error)
             } else {
+                self.districtList = []
                 for document in snapshot!.documents {
                     do {
                         let district = try FirestoreDecoder().decode(District.self, from: document.data())

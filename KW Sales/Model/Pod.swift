@@ -10,12 +10,9 @@ import Foundation
 import Firebase
 import CodableFirebase
 
-import Foundation
-import Firebase
-import CodableFirebase
-
 struct Pod: Encodable, Hashable, Identifiable {
     var id: Int { hashValue }
+    var uid: String = UUID().uuidString
     let podType: PodType
     var xMul: Float
     var yMul: Float
@@ -30,6 +27,7 @@ struct Pod: Encodable, Hashable, Identifiable {
     
     private enum CodingKeys: String, CodingKey {
         case id
+        case uid
         case podType
         case xMul
         case yMul
@@ -38,6 +36,7 @@ struct Pod: Encodable, Hashable, Identifiable {
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(uid, forKey: .uid)
         try container.encode(podType, forKey: .podType)
         try container.encode(xMul, forKey: .xMul)
         try container.encode(yMul, forKey: .yMul)
@@ -48,6 +47,7 @@ struct Pod: Encodable, Hashable, Identifiable {
 extension Pod: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        uid = try container.decode(String.self, forKey: .uid)
         podType = try container.decode(PodType.self, forKey: .podType)
         xMul = try container.decode(Float.self, forKey: .xMul)
         yMul = try container.decode(Float.self, forKey: .yMul)

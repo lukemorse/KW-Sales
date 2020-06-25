@@ -13,8 +13,8 @@ import MapKit
 
 struct InstallationView: View {
     @EnvironmentObject var mainViewModel: MainViewModel
-    @ObservedObject var viewModel: InstallationViewModel
     @EnvironmentObject var locationSearchService: LocationSearchService
+    @ObservedObject var viewModel: InstallationViewModel
     
     @State var isExpanded: Bool = false
     @State private var numPods = 0
@@ -23,9 +23,7 @@ struct InstallationView: View {
     
     var body: some View {
         Section {
-            if !viewModel.installation.schoolName.isEmpty {
-                expandedButton
-            }
+            expandedButton
             
             if isExpanded {
                 teamPicker
@@ -47,6 +45,9 @@ struct InstallationView: View {
             }
             if self.shouldAddStatusListeners {
                 self.viewModel.addStatusListener()
+            }
+            if self.viewModel.installation.schoolName.isEmpty {
+                self.isExpanded = true
             }
             
         }
@@ -70,7 +71,6 @@ extension InstallationView {
                     self.numPods = Int(filtered) ?? 0
                     if self.numPods != self.viewModel.installation.numPods {
                         self.viewModel.installation.numPods = self.numPods
-                        print(self.viewModel.installation.numPods)
                     }
             }
             .padding(.all)
@@ -224,16 +224,17 @@ extension InstallationView {
     }
 }
 
-//struct InstallationView_Previews: PreviewProvider {
-//    static var previews: some View {
-//
-//        return NavigationView {
-//            Form {
-//                InstallationView(viewModel: InstallationViewModel(installation: Installation()), isExpanded: true)
-//                    .environmentObject(MainViewModel())
-//                    .environmentObject(LocationSearchService())
-//            }
-//        }
-//    .navigationViewStyle(StackNavigationViewStyle())
-//    }
-//}
+struct InstallationView_Previews: PreviewProvider {
+    static var previews: some View {
+        let docRef = Firestore.firestore().document("123")
+
+        return NavigationView {
+            Form {
+                InstallationView(viewModel: InstallationViewModel(installation: Installation(districtID: "123"), docRef: docRef), isExpanded: true, shouldAddStatusListeners: false)
+                    .environmentObject(MainViewModel())
+                    .environmentObject(LocationSearchService())
+            }
+        }
+    .navigationViewStyle(StackNavigationViewStyle())
+    }
+}
