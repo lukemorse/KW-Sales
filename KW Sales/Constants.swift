@@ -29,7 +29,7 @@ struct Constants {
     static let kFloorPlanFolder = "floorPlansFolder"
     static let kDistrictCollection = "districts"
     static let kTeamCollection = "teams"
-    static let kInstallSubCollection = "installs"
+    static let kInstallCollection = "installs"
     static let kPodsSubCollection = "pods"
     
     static let chicagoGeoPoint = GeoPoint(latitude: 41.8781, longitude: -87.6298)

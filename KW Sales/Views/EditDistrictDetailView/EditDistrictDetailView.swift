@@ -69,9 +69,8 @@ struct EditDistrictDetailView: View {
     }
     
     var implementationPlanNavLink: some View {
-        let subCollectionRef = Firestore.firestore().collection(Constants.kDistrictCollection).document(viewModel.district.districtID).collection(Constants.kInstallSubCollection)
         return AnyView(NavigationLink(destination:
-            ImplementationPlanView(viewModel: ImplementationPlanViewModel(collectionRef: subCollectionRef, districtID: self.viewModel.district.districtID), shouldAddStatusListeners: self.viewModel.district.readyToInstall)
+            ImplementationPlanView(viewModel: ImplementationPlanViewModel(districtID: self.viewModel.district.districtID), shouldAddStatusListeners: self.viewModel.district.readyToInstall)
         ) {
             Text("📋 Implementation Plan")
                 .font(.title)

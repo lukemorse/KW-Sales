@@ -13,13 +13,11 @@ import CodableFirebase
 class ImplementationPlanViewModel: ObservableObject {
     @Published var installations: [Installation] = []
     var installationViewModels: [InstallationViewModel] = []
-    let collectionRef: CollectionReference
+    let collectionRef = Firestore.firestore().collection(Constants.kInstallCollection)
     let districtID: String
     
-    init(collectionRef: CollectionReference, districtID: String) {
-//        self.collectionRef = collectionRef
+    init(districtID: String) {
         self.districtID = districtID
-        self.collectionRef = Firestore.firestore().collection(Constants.kInstallSubCollection)
     }
     
     public func fetchInstallations() {
