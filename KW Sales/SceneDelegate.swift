@@ -22,9 +22,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Create the SwiftUI view that provides the window contents.
         
-        mainViewModel.currentUser = "brigittec"
-//        let contentView = StartView().environmentObject(mainViewModel)
-        let contentView = MainView().environmentObject(mainViewModel)
+//        mainViewModel.currentUser = "brigittec"
+        let contentView = StartView().environmentObject(mainViewModel).environmentObject(locationSearchService)
+//        let contentView = MainView().environmentObject(mainViewModel)
             .environmentObject(locationSearchService)
 
         // Use a UIHostingController as window root view controller.

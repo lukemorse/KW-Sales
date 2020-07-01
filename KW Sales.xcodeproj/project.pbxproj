@@ -57,7 +57,6 @@
 		AF7343282486DA6E00826BCF /* UIResponder+Current.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7343272486DA6E00826BCF /* UIResponder+Current.swift */; };
 		AF874A9024A3DC57008BB052 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF874A8F24A3DC57008BB052 /* CustomTextField.swift */; };
 		AFC2386B2492AD8400651363 /* EditDistrictDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC2386A2492AD8400651363 /* EditDistrictDetailViewModel.swift */; };
-		AFC83A8224782EFC00C02C10 /* LogInData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC83A7E2478159700C02C10 /* LogInData.swift */; };
 		AFCA09C62486B88E002279E6 /* AlertItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCA09C52486B88E002279E6 /* AlertItem.swift */; };
 		AFD879BA24882DE900F5F800 /* SchoolType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD879B924882DE900F5F800 /* SchoolType.swift */; };
 		AFD879BC24882E2900F5F800 /* AddressPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD879BB24882E2900F5F800 /* AddressPicker.swift */; };
@@ -141,7 +140,6 @@
 		AF7343272486DA6E00826BCF /* UIResponder+Current.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIResponder+Current.swift"; sourceTree = "<group>"; };
 		AF874A8F24A3DC57008BB052 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		AFC2386A2492AD8400651363 /* EditDistrictDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDistrictDetailViewModel.swift; sourceTree = "<group>"; };
-		AFC83A7E2478159700C02C10 /* LogInData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LogInData.swift; path = "KW Sales/LogInData.swift"; sourceTree = SOURCE_ROOT; };
 		AFCA09C52486B88E002279E6 /* AlertItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertItem.swift; sourceTree = "<group>"; };
 		AFD879B924882DE900F5F800 /* SchoolType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolType.swift; sourceTree = "<group>"; };
 		AFD879BB24882E2900F5F800 /* AddressPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressPicker.swift; sourceTree = "<group>"; };
@@ -232,7 +230,6 @@
 				A336F853247476D6008196C5 /* TestDB.swift */,
 				A3295BD0244A044A00F26E1F /* CSVTest.swift */,
 				A3EE48CE2444D5C700C6A554 /* Constants.swift */,
-				AFC83A7E2478159700C02C10 /* LogInData.swift */,
 				A30C9B702444C1CB0049E4FC /* Assets.xcassets */,
 				A3B133AB246061C80082A618 /* AppIcon.appiconset */,
 				A30C9B752444C1CB0049E4FC /* LaunchScreen.storyboard */,
@@ -595,7 +592,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF71D6F9248A85EE0035A48B /* FormValidator.swift in Sources */,
-				AFC83A8224782EFC00C02C10 /* LogInData.swift in Sources */,
 				A3EE48CF2444D5C700C6A554 /* Constants.swift in Sources */,
 				AF22C08B248995CC003A4C2E /* PhoneNumberField.swift in Sources */,
 				A30C9B6B2444C1C80049E4FC /* AppDelegate.swift in Sources */,

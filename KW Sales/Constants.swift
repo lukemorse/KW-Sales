@@ -25,6 +25,8 @@ struct Constants {
         static let tabBar3 = "Edit"
     }
     
+    static let kLogInDataCollection = "salesLogInData"
+    
     static let kFloorPlanCollection = "floorPlansCollection"
     static let kFloorPlanFolder = "floorPlansFolder"
     static let kDistrictCollection = "districts"

@@ -16,10 +16,12 @@ class MainViewModel: ObservableObject {
     @Published var currentFilter: DistrictFilter = .noFilter
     @Published var teams: [Team] = []
     @Published var numSchools = 0
+    
     var currentUser = ""
     let districtsRef = Firestore.firestore().collection(Constants.kDistrictCollection)
     
     //Networking
+    
     func fetchDistricts() {
         
         var query: Query
