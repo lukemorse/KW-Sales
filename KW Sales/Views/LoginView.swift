@@ -15,7 +15,6 @@ struct LoginView: View {
     @State private var username: String = ""
     @State private var password: String = ""
     @State private var showingLoginAlert = false
-    @State private var isLoading = false
     
     init(logInHandler: @escaping (Bool, String?) -> ()) {
         self.viewModel = ViewModel(logInHandler: logInHandler)
@@ -23,16 +22,20 @@ struct LoginView: View {
     
     var body: some View {
         ZStack {
-            VStack(spacing: 20.0) {
+            VStack(spacing: 25.0) {
                 logo
                 usernameField
                 passwordField
                 logInButton
             }
-            if isLoading {
+            
+            if viewModel.loading {
                 ActivityIndicator()
             }
         }
+        .padding()
+        .enableKeyboardOffset()
+        .animation(.spring())
     }
     
     var logo: some View {
@@ -40,6 +43,7 @@ struct LoginView: View {
         .resizable()
         .aspectRatio(contentMode: .fit)
         .frame(width: 300)
+        .shadow(color: .blue, radius: 5, x: 20, y: 5)
     }
     
     var usernameField: some View {
@@ -56,13 +60,13 @@ struct LoginView: View {
     
     var logInButton: some View {
         Button(action: {
-            self.isLoading = true
             self.viewModel.attemptLogIn(username: self.username, password: self.password)
         }) {
             Text("Submit")
                 .fontWeight(.bold)
                 .font(.title)
                 .padding()
+                .shadow(radius: 200)
                 .background(Color.blue)
                 .foregroundColor(.white)
                 .cornerRadius(15)
@@ -71,28 +75,37 @@ struct LoginView: View {
     
     class ViewModel: ObservableObject {
         let logInHandler: (Bool, String?) -> Void
+        @Published var loading = false
         
         init(logInHandler: @escaping (Bool, String?) -> Void) {
             self.logInHandler = logInHandler
         }
         
         func attemptLogIn(username: String, password: String) {
+            loading = true
             let adjustedUsername = username.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
             Firestore.firestore().collection(Constants.kLogInDataCollection).whereField("username", isEqualTo: adjustedUsername).getDocuments { (snapshot, error) in
                 if let error = error {
                     print(error)
+                    self.loading = false
                 } else {
                     if let doc = snapshot!.documents.first {
                         do {
                             let doc = try FirestoreDecoder().decode([String:String].self, from: doc.data())
                             if doc["password"] == password {
+                                self.loading = false
                                 self.logInHandler(true, adjustedUsername)
                             } else {
+                                self.loading = false
                                 self.logInHandler(false, nil)
                             }
                         } catch {
+                            self.loading = false
                             print(error)
                         }
+                    } else {
+                        self.loading = false
+                        self.logInHandler(false, nil)
                     }
                 }
             }

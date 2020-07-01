@@ -53,7 +53,6 @@
 		AF71D6F8248A85EE0035A48B /* KeyboardDismissModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF71D6F5248A85EE0035A48B /* KeyboardDismissModifier.swift */; };
 		AF71D6F9248A85EE0035A48B /* FormValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF71D6F6248A85EE0035A48B /* FormValidator.swift */; };
 		AF7343252486D9F000826BCF /* KeyboardHeightPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7343232486D9F000826BCF /* KeyboardHeightPublisher.swift */; };
-		AF7343262486D9F000826BCF /* KeyboardAdaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7343242486D9F000826BCF /* KeyboardAdaptive.swift */; };
 		AF7343282486DA6E00826BCF /* UIResponder+Current.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7343272486DA6E00826BCF /* UIResponder+Current.swift */; };
 		AF874A9024A3DC57008BB052 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF874A8F24A3DC57008BB052 /* CustomTextField.swift */; };
 		AFC2386B2492AD8400651363 /* EditDistrictDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC2386A2492AD8400651363 /* EditDistrictDetailViewModel.swift */; };
@@ -136,7 +135,6 @@
 		AF71D6F5248A85EE0035A48B /* KeyboardDismissModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardDismissModifier.swift; sourceTree = "<group>"; };
 		AF71D6F6248A85EE0035A48B /* FormValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormValidator.swift; sourceTree = "<group>"; };
 		AF7343232486D9F000826BCF /* KeyboardHeightPublisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardHeightPublisher.swift; sourceTree = "<group>"; };
-		AF7343242486D9F000826BCF /* KeyboardAdaptive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardAdaptive.swift; sourceTree = "<group>"; };
 		AF7343272486DA6E00826BCF /* UIResponder+Current.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIResponder+Current.swift"; sourceTree = "<group>"; };
 		AF874A8F24A3DC57008BB052 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		AFC2386A2492AD8400651363 /* EditDistrictDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDistrictDetailViewModel.swift; sourceTree = "<group>"; };
@@ -355,7 +353,6 @@
 				AF452B0B2493CB1C00E5B04D /* Enums.swift */,
 				AF71D6F6248A85EE0035A48B /* FormValidator.swift */,
 				A3295BDD244A2E9500F26E1F /* HelperFunctions.swift */,
-				AF7343242486D9F000826BCF /* KeyboardAdaptive.swift */,
 				AF71D6F5248A85EE0035A48B /* KeyboardDismissModifier.swift */,
 				AF7343232486D9F000826BCF /* KeyboardHeightPublisher.swift */,
 				AF71D6F4248A85EE0035A48B /* KeyboardOffsetModifier.swift */,
@@ -601,7 +598,6 @@
 				AFDB822D247DAE510076401C /* AsyncImage.swift in Sources */,
 				A3EE48CD2444D3E500C6A554 /* MainView.swift in Sources */,
 				A30A7882245A01CA00271993 /* Pod.swift in Sources */,
-				AF7343262486D9F000826BCF /* KeyboardAdaptive.swift in Sources */,
 				A3B37B90244632B900D8CE40 /* Team.swift in Sources */,
 				A30F4BF7244530A800B59F8B /* InstallationView.swift in Sources */,
 				A38E202F246C792100891910 /* PodMapMasterView.swift in Sources */,

@@ -86,12 +86,6 @@ struct EditDistrictDetailView: View {
                 self.alertItem = AlertItem(title: Text("Enter District Name"), message: nil, dismissButton: .cancel(Text("OK")))
                 return
             }
-            
-            //filter out any alpha chars in numPodsString
-            let filtered = self.numPodsString.filter {"0123456789".contains($0)}
-            if let numPods = Int(filtered) {
-                self.viewModel.district.numPodsNeeded = numPods
-            }
 
                 //upload district
             self.viewModel.uploadDistrict() { success in
@@ -136,13 +130,20 @@ extension EditDistrictDetailView {
     }
     
     var numPodField: some View {
-        VStack(alignment: .leading) {
+        let numPodsBinding = Binding<String>(get: {return "\(self.viewModel.district.numPodsNeeded)"}, set: {self.viewModel.district.numPodsNeeded = self.stringToInt(str: $0)})
+        return VStack(alignment: .leading) {
             Text("Number of PODs Needed")
                 .font(.headline)
-            CustomTextfield(text: self.$numPodsString, keyType: .numberPad, placeHolder: "Enter Number of PODs")
+            CustomTextfield(text: numPodsBinding, keyType: .numberPad, placeHolder: "Enter Number of PODs")
                 .keyboardType(.numberPad)
                 .padding(.all)
         }
+    }
+    
+    func stringToInt(str: String) -> Int {
+        //filter out any alpha chars in numPodsString
+        let filtered = str.filter {"0123456789".contains($0)}
+        return Int(filtered) ?? 0
     }
     
     var startDatePicker: some View {
