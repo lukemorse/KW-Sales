@@ -283,12 +283,12 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		A36CBF00246DB6F100DFEE61 /* EditDistrictView */ = {
+		A36CBF00246DB6F100DFEE61 /* EditDistrictMasterView */ = {
 			isa = PBXGroup;
 			children = (
 				A3E53D86246E388F00FED80A /* EditDistrictsMasterView.swift */,
 			);
-			path = EditDistrictView;
+			path = EditDistrictMasterView;
 			sourceTree = "<group>";
 		};
 		A3A2F0F624478D6A00079243 /* ImplementationPlanView */ = {
@@ -308,7 +308,7 @@
 			children = (
 				A3EE48CC2444D3E500C6A554 /* MainView.swift */,
 				A3C26385246EDA8B003616AB /* MainViewModel.swift */,
-				A36CBF00246DB6F100DFEE61 /* EditDistrictView */,
+				A36CBF00246DB6F100DFEE61 /* EditDistrictMasterView */,
 				A3F4259824475DA0004D2CCE /* EditDistrictDetailView */,
 				A3A2F0F624478D6A00079243 /* ImplementationPlanView */,
 				A3295BCD2448EF8400F26E1F /* CreatePodMapView */,

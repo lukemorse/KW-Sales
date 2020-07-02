@@ -86,7 +86,6 @@ extension InstallationView {
                 statusIndicator
                     .padding()
                     .font(.title)
-                
         }
         .background(Color.blue)
             .onTapGesture {

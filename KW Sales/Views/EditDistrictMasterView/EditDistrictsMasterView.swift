@@ -18,17 +18,26 @@ struct EditDistrictsMasterView: View {
     @State private var showFilterMenu = false
     
     var body: some View {
-        listView
-            .onAppear() {
-                if(self.viewModel.districtList.isEmpty) {
-                    self.viewModel.fetchDistricts()
-                }
-                if self.viewModel.teams.isEmpty {
-                    self.viewModel.fetchTeams()
-                }
+        VStack {
+            searchBar
+            addDistrictButton
+            listView
+                .onAppear() {
+                    if(self.viewModel.districtList.isEmpty) {
+                        self.viewModel.fetchDistricts()
+                    }
+                    if self.viewModel.teams.isEmpty {
+                        self.viewModel.fetchTeams()
+                    }
+            }
+            .navigationBarItems(leading: Image("Logo"), trailing: filterButton)
+            .actionOver(presented: $showFilterMenu, title: "Filter Districts", message: nil, buttons: actionButtons, ipadAndMacConfiguration: getIpadMacConfig())
         }
-        .navigationBarItems(leading: Image("Logo"), trailing: filterButton)
-        .actionOver(presented: $showFilterMenu, title: "Filter Districts", message: nil, buttons: actionButtons, ipadAndMacConfiguration: getIpadMacConfig())
+    }
+    
+    var searchBar: some View {
+        SearchBar(text: $viewModel.searchText, didSelect: .constant(false))
+        .padding()
     }
     
     var filterButton: some View {
@@ -59,7 +68,6 @@ struct EditDistrictsMasterView: View {
     
     var listView: some View {
         AnyView(List {
-            addDistrictButton
             if viewModel.districtList.count > 0 {
                 ForEach(0..<viewModel.districtList.count, id: \.self) { index in
                     self.getListNavLink(index: index)
@@ -84,7 +92,7 @@ struct EditDistrictsMasterView: View {
             self.shouldNavigate = true
         }) {
             NavigationLink(destination:
-                EditDistrictDetailView(viewModel: EditDistrictDetailViewModel(district: District()), newFlag: true), isActive: self.$shouldNavigate) {
+            EditDistrictDetailView(viewModel: EditDistrictDetailViewModel(district: District()), newFlag: true), isActive: self.$shouldNavigate) {
                 Text("Add District")
                     .font(.title)
                     .padding()
@@ -97,6 +105,7 @@ struct EditDistrictsMasterView: View {
                     .shadow(radius: 5)
             }.buttonStyle(PlainButtonStyle())
         }
+    .padding()
     }
 }
 
@@ -133,6 +142,5 @@ struct EditDistrictTest_Previews: PreviewProvider {
             EditDistrictsMasterView().environmentObject(MainViewModel())
         }
         .navigationViewStyle(StackNavigationViewStyle())
-        
     }
 }
