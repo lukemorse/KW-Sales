@@ -13,11 +13,12 @@ struct PodNodeView: Identifiable, Hashable, Equatable, View {
     var id: Int { hashValue }
     var pod: Pod
     var isDragging = false
+    var scale: CGFloat = 1
     
     @State private var position = CGSize.zero
     
     static func == (lhs: PodNodeView, rhs: PodNodeView) -> Bool {
-        return lhs.pod == rhs.pod && lhs.pod == rhs.pod
+        return lhs.pod == rhs.pod && lhs.pod == rhs.pod && lhs.scale == rhs.scale
     }
     
     func hash(into hasher: inout Hasher) {
@@ -31,8 +32,8 @@ struct PodNodeView: Identifiable, Hashable, Equatable, View {
             .resizable()
             .scaledToFit()
             .frame(
-                width: self.pod.podType == .horizontal_hallway ? 7.5 : 5,
-                height: self.pod.podType == .vertical_hallway ? 7.5 : 5)
+                width: (self.pod.podType == .horizontal_hallway ? 30 : 15) / scale,
+                height: (self.pod.podType == .vertical_hallway ? 30 : 15) / scale)
             .colorMultiply(Color.red)
     }
 }

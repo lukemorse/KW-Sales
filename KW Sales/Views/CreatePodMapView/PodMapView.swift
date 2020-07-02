@@ -86,7 +86,7 @@ struct PodMapView: View {
         GeometryReader { geo in
             Group {
                 ForEach(0..<self.viewModel.pods.count, id: \.self) { index in
-                    PodNodeView(pod: self.viewModel.pods[index])
+                    PodNodeView(pod: self.viewModel.pods[index], scale: self.scale)
                         .position(CGPoint(x: geo.size.width * CGFloat(self.viewModel.pods[index].xMul), y: geo.size.height * CGFloat(self.viewModel.pods[index].yMul)))
                         .onTapGesture {
                             if !self.willPlacePod {
