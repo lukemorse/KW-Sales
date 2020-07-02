@@ -220,8 +220,10 @@ extension PodMapView {
 }
 
 
-//struct CreatePodMapView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CreatePodMapView(viewModel: InstallationViewModel(installation: Installation()), floorPlanIndex: 0, showImagePicker: false)
-//    }
-//}
+struct CreatePodMapView_Previews: PreviewProvider {
+    static var previews: some View {
+        let docRef = Firestore.firestore().document("")
+        let url = URL(fileURLWithPath: "")
+        return PodMapView(viewModel: PodMapViewModel(installationDocRef: docRef, url: url), floorPlanIndex: 0).environmentObject(MainViewModel())
+    }
+}

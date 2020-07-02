@@ -21,7 +21,6 @@ class ImplementationPlanViewModel: ObservableObject {
     }
     
     public func fetchInstallations() {
-//        collectionRef.whereField("districtID", isEqualTo: districtID).
         collectionRef.whereField("districtID", isEqualTo: districtID).getDocuments { (snapshot, error) in
             if let error = error {
                 print(error)

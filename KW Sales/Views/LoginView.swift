@@ -72,7 +72,9 @@ struct LoginView: View {
                 .cornerRadius(15)
         }
     }
-    
+}
+
+extension LoginView {
     class ViewModel: ObservableObject {
         let logInHandler: (Bool, String?) -> Void
         @Published var loading = false
@@ -112,7 +114,6 @@ struct LoginView: View {
         }
     }
 }
-
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {

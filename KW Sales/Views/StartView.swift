@@ -27,8 +27,7 @@ struct StartView: View {
         }
         .alert(isPresented: self.$showingLoginAlert) {
             Alert(title: Text("Incorrect username/password"))
-        }
-        
+        }  
     }
     
     private func setLoggedIn(newVal: Bool) {
