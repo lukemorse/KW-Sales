@@ -12,7 +12,6 @@ import Combine
 
 struct EditDistrictDetailView: View {
     @ObservedObject var viewModel: EditDistrictDetailViewModel
-    @State private var numPodsString = ""
     @State private var alertItem: AlertItem?
     let newFlag: Bool
     
@@ -257,12 +256,18 @@ extension EditDistrictDetailView {
     }
     
     var phoneNumberField: some View {
-        VStack(alignment: .leading) {
+        let phoneNumBinding = Binding<String>(get: {return self.removeCharsFromString(str: self.viewModel.district.districtPhoneNumber)}, set: {self.viewModel.district.districtPhoneNumber = self.removeCharsFromString(str: $0)})
+        return VStack(alignment: .leading) {
         Text("District Phone Number")
             .font(.headline)
-            PhoneNumberField(phoneNumber: self.$viewModel.district.districtPhoneNumber)
+            PhoneNumberField(phoneNumber: phoneNumBinding)
             .padding()
         }
+    }
+    
+    func removeCharsFromString(str: String) -> String {
+        let filtered = str.filter {"0123456789".contains($0)}
+        return filtered
     }
     
 //    var districtPhoneField: some View {
