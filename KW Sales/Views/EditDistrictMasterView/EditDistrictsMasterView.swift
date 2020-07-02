@@ -37,7 +37,7 @@ struct EditDistrictsMasterView: View {
     
     var searchBar: some View {
         SearchBar(text: $viewModel.searchText, didSelect: .constant(false))
-        .padding()
+            .padding()
     }
     
     var filterButton: some View {
@@ -97,7 +97,6 @@ struct EditDistrictsMasterView: View {
                     .font(.title)
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .padding()
                     .foregroundColor(Color.white)
                     .background(Color.blue)
                     .multilineTextAlignment(.center)
@@ -105,7 +104,7 @@ struct EditDistrictsMasterView: View {
                     .shadow(radius: 5)
             }.buttonStyle(PlainButtonStyle())
         }
-    .padding()
+        .padding(.horizontal)
     }
 }
 
