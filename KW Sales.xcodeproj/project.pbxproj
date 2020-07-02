@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9D2E534675C5A9B096A4ECB6 /* Pods_KW_Sales.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9F6FC5B3B907EB6981549FC /* Pods_KW_Sales.framework */; };
+		87662D024460639B35F0CECC /* Pods_KW_Sales.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF1C63DC39C622A4F25B269B /* Pods_KW_Sales.framework */; };
+		8E09ED3FF6EE9121FFB5D4B6 /* Pods_KW_SalesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 120917D6CDEDB3822C60193A /* Pods_KW_SalesTests.framework */; };
 		A30A7882245A01CA00271993 /* Pod.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30A7881245A01CA00271993 /* Pod.swift */; };
 		A30C9B6B2444C1C80049E4FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30C9B6A2444C1C80049E4FC /* AppDelegate.swift */; };
 		A30C9B6D2444C1C80049E4FC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30C9B6C2444C1C80049E4FC /* SceneDelegate.swift */; };
@@ -44,7 +45,7 @@
 		A3F4259A24475DB8004D2CCE /* SendPodOrderButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F4259924475DB8004D2CCE /* SendPodOrderButtonView.swift */; };
 		A3F4259C24475E4F004D2CCE /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F4259B24475E4F004D2CCE /* MailView.swift */; };
 		AF22C08B248995CC003A4C2E /* PhoneNumberField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF22C08A248995CC003A4C2E /* PhoneNumberField.swift */; };
-		AF2416C3249AA0380088A76A /* ActionOver in Frameworks */ = {isa = PBXBuildFile; productRef = AF2416C2249AA0380088A76A /* ActionOver */; };
+		AF2416C3249AA0380088A76A /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = AF2416C2249AA0380088A76A /* SwiftPackageProductDependency */; };
 		AF452B0C2493CB1C00E5B04D /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF452B0B2493CB1C00E5B04D /* Enums.swift */; };
 		AF452B0E2493DAD500E5B04D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF452B0D2493DAD500E5B04D /* GoogleService-Info.plist */; };
 		AF452B1024941D9400E5B04D /* ImplementationPlanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF452B0F24941D9400E5B04D /* ImplementationPlanViewModel.swift */; };
@@ -60,7 +61,6 @@
 		AFD879BA24882DE900F5F800 /* SchoolType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD879B924882DE900F5F800 /* SchoolType.swift */; };
 		AFD879BC24882E2900F5F800 /* AddressPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD879BB24882E2900F5F800 /* AddressPicker.swift */; };
 		AFDB822D247DAE510076401C /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDB822C247DAE510076401C /* AsyncImage.swift */; };
-		C0BA6CE5438A0624E1669621 /* Pods_KW_SalesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54DB61A8258D93544EE8F4D6 /* Pods_KW_SalesTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,9 +81,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		54DB61A8258D93544EE8F4D6 /* Pods_KW_SalesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KW_SalesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5C30314522E30CD88CC02F10 /* Pods-KW Sales.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KW Sales.debug.xcconfig"; path = "Target Support Files/Pods-KW Sales/Pods-KW Sales.debug.xcconfig"; sourceTree = "<group>"; };
-		995E7B484A7114A29EED9F1C /* Pods-KW SalesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KW SalesTests.release.xcconfig"; path = "Target Support Files/Pods-KW SalesTests/Pods-KW SalesTests.release.xcconfig"; sourceTree = "<group>"; };
+		120917D6CDEDB3822C60193A /* Pods_KW_SalesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KW_SalesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		24D1EB98D7515D08246CE24A /* Pods-KW Sales.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KW Sales.debug.xcconfig"; path = "Target Support Files/Pods-KW Sales/Pods-KW Sales.debug.xcconfig"; sourceTree = "<group>"; };
+		51D42759B7414486FD942C32 /* Pods-KW Sales.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KW Sales.release.xcconfig"; path = "Target Support Files/Pods-KW Sales/Pods-KW Sales.release.xcconfig"; sourceTree = "<group>"; };
 		A30A7881245A01CA00271993 /* Pod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pod.swift; sourceTree = "<group>"; };
 		A30C9B672444C1C80049E4FC /* KW Sales Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KW Sales Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A30C9B6A2444C1C80049E4FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -125,7 +125,6 @@
 		A3EE48D02444D9DC00C6A554 /* EditDistrictDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDistrictDetailView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A3F4259924475DB8004D2CCE /* SendPodOrderButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPodOrderButtonView.swift; sourceTree = "<group>"; };
 		A3F4259B24475E4F004D2CCE /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
-		A9F6FC5B3B907EB6981549FC /* Pods_KW_Sales.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KW_Sales.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF22C08A248995CC003A4C2E /* PhoneNumberField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberField.swift; sourceTree = "<group>"; };
 		AF452B0B2493CB1C00E5B04D /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		AF452B0D2493DAD500E5B04D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -142,8 +141,10 @@
 		AFD879B924882DE900F5F800 /* SchoolType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolType.swift; sourceTree = "<group>"; };
 		AFD879BB24882E2900F5F800 /* AddressPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressPicker.swift; sourceTree = "<group>"; };
 		AFDB822C247DAE510076401C /* AsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImage.swift; sourceTree = "<group>"; };
-		B3F10BB24EC3F6484A435780 /* Pods-KW Sales.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KW Sales.release.xcconfig"; path = "Target Support Files/Pods-KW Sales/Pods-KW Sales.release.xcconfig"; sourceTree = "<group>"; };
-		EAF76A91E66C7CB5B06866F6 /* Pods-KW SalesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KW SalesTests.debug.xcconfig"; path = "Target Support Files/Pods-KW SalesTests/Pods-KW SalesTests.debug.xcconfig"; sourceTree = "<group>"; };
+		AFE606CD24AE5A3D00519962 /* KW Sales Test.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "KW Sales Test.entitlements"; sourceTree = "<group>"; };
+		CF1C63DC39C622A4F25B269B /* Pods_KW_Sales.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KW_Sales.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E36B974C11A3C432905166EF /* Pods-KW SalesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KW SalesTests.release.xcconfig"; path = "Target Support Files/Pods-KW SalesTests/Pods-KW SalesTests.release.xcconfig"; sourceTree = "<group>"; };
+		F67761B2EA4F4B40CE2F115F /* Pods-KW SalesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KW SalesTests.debug.xcconfig"; path = "Target Support Files/Pods-KW SalesTests/Pods-KW SalesTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,8 +152,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF2416C3249AA0380088A76A /* ActionOver in Frameworks */,
-				9D2E534675C5A9B096A4ECB6 /* Pods_KW_Sales.framework in Frameworks */,
+				AF2416C3249AA0380088A76A /* BuildFile in Frameworks */,
+				87662D024460639B35F0CECC /* Pods_KW_Sales.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,7 +161,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C0BA6CE5438A0624E1669621 /* Pods_KW_SalesTests.framework in Frameworks */,
+				8E09ED3FF6EE9121FFB5D4B6 /* Pods_KW_SalesTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,19 +178,19 @@
 		504D75BAEBDF2186717E5395 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				5C30314522E30CD88CC02F10 /* Pods-KW Sales.debug.xcconfig */,
-				B3F10BB24EC3F6484A435780 /* Pods-KW Sales.release.xcconfig */,
-				EAF76A91E66C7CB5B06866F6 /* Pods-KW SalesTests.debug.xcconfig */,
-				995E7B484A7114A29EED9F1C /* Pods-KW SalesTests.release.xcconfig */,
+				24D1EB98D7515D08246CE24A /* Pods-KW Sales.debug.xcconfig */,
+				51D42759B7414486FD942C32 /* Pods-KW Sales.release.xcconfig */,
+				F67761B2EA4F4B40CE2F115F /* Pods-KW SalesTests.debug.xcconfig */,
+				E36B974C11A3C432905166EF /* Pods-KW SalesTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		6F5FDDCC78650450029B1189 /* Frameworks */ = {
+		7AEED6375BFB7FBCB1509BB5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A9F6FC5B3B907EB6981549FC /* Pods_KW_Sales.framework */,
-				54DB61A8258D93544EE8F4D6 /* Pods_KW_SalesTests.framework */,
+				CF1C63DC39C622A4F25B269B /* Pods_KW_Sales.framework */,
+				120917D6CDEDB3822C60193A /* Pods_KW_SalesTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -203,7 +204,7 @@
 				A30C9B682444C1C80049E4FC /* Products */,
 				A3295BD2244A06CE00F26E1F /* Resources */,
 				504D75BAEBDF2186717E5395 /* Pods */,
-				6F5FDDCC78650450029B1189 /* Frameworks */,
+				7AEED6375BFB7FBCB1509BB5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -220,6 +221,7 @@
 		A30C9B692444C1C80049E4FC /* KW Sales */ = {
 			isa = PBXGroup;
 			children = (
+				AFE606CD24AE5A3D00519962 /* KW Sales Test.entitlements */,
 				A3EE48D62445031300C6A554 /* Model */,
 				A3EE48CB2444D3D300C6A554 /* Views */,
 				A30C9B6A2444C1C80049E4FC /* AppDelegate.swift */,
@@ -370,11 +372,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A30C9B912444C1CB0049E4FC /* Build configuration list for PBXNativeTarget "KW Sales" */;
 			buildPhases = (
-				3614CE839152D420C62BDA5B /* [CP] Check Pods Manifest.lock */,
+				3CD8A2C2B22CB4A2C34918B0 /* [CP] Check Pods Manifest.lock */,
 				A30C9B632444C1C80049E4FC /* Sources */,
 				A30C9B642444C1C80049E4FC /* Frameworks */,
 				A30C9B652444C1C80049E4FC /* Resources */,
-				23E3A1FD1F7CDDD8391082D4 /* [CP] Embed Pods Frameworks */,
+				79EFCAF23171663815DCEDCE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -382,7 +384,7 @@
 			);
 			name = "KW Sales";
 			packageProductDependencies = (
-				AF2416C2249AA0380088A76A /* ActionOver */,
+				AF2416C2249AA0380088A76A /* SwiftPackageProductDependency */,
 			);
 			productName = "KW Sales";
 			productReference = A30C9B672444C1C80049E4FC /* KW Sales Test.app */;
@@ -392,11 +394,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A30C9B942444C1CB0049E4FC /* Build configuration list for PBXNativeTarget "KW SalesTests" */;
 			buildPhases = (
-				E6075A8F0A507B1509DC5887 /* [CP] Check Pods Manifest.lock */,
+				264EA5954A66E9153C1706B3 /* [CP] Check Pods Manifest.lock */,
 				A30C9B792444C1CB0049E4FC /* Sources */,
 				A30C9B7A2444C1CB0049E4FC /* Frameworks */,
 				A30C9B7B2444C1CB0049E4FC /* Resources */,
-				7E865257868E34C24FFDA8A7 /* [CP] Embed Pods Frameworks */,
+				4F00C28E4CA1002D00BBF9A3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -459,7 +461,7 @@
 			);
 			mainGroup = A30C9B5E2444C1C80049E4FC;
 			packageReferences = (
-				AF2416C1249AA0380088A76A /* XCRemoteSwiftPackageReference "ActionOver" */,
+				AF2416C1249AA0380088A76A /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = A30C9B682444C1C80049E4FC /* Products */;
 			projectDirPath = "";
@@ -503,24 +505,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		23E3A1FD1F7CDDD8391082D4 /* [CP] Embed Pods Frameworks */ = {
+		264EA5954A66E9153C1706B3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
+			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KW Sales/Pods-KW Sales-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KW Sales/Pods-KW Sales-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KW SalesTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KW Sales/Pods-KW Sales-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3614CE839152D420C62BDA5B /* [CP] Check Pods Manifest.lock */ = {
+		3CD8A2C2B22CB4A2C34918B0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -542,7 +549,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7E865257868E34C24FFDA8A7 /* [CP] Embed Pods Frameworks */ = {
+		4F00C28E4CA1002D00BBF9A3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -559,26 +566,21 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KW SalesTests/Pods-KW SalesTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E6075A8F0A507B1509DC5887 /* [CP] Check Pods Manifest.lock */ = {
+		79EFCAF23171663815DCEDCE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KW Sales/Pods-KW Sales-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-KW SalesTests-checkManifestLockResult.txt",
+				"${PODS_ROOT}/Target Support Files/Pods-KW Sales/Pods-KW Sales-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KW Sales/Pods-KW Sales-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -793,9 +795,10 @@
 		};
 		A30C9B922444C1CB0049E4FC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5C30314522E30CD88CC02F10 /* Pods-KW Sales.debug.xcconfig */;
+			baseConfigurationReference = 24D1EB98D7515D08246CE24A /* Pods-KW Sales.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "KW Sales/KW Sales Test.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEAD_CODE_STRIPPING = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -812,6 +815,7 @@
 				PRODUCT_NAME = "KW Sales Test";
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_SWIFT_SYMBOLS = NO;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -819,9 +823,10 @@
 		};
 		A30C9B932444C1CB0049E4FC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B3F10BB24EC3F6484A435780 /* Pods-KW Sales.release.xcconfig */;
+			baseConfigurationReference = 51D42759B7414486FD942C32 /* Pods-KW Sales.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "KW Sales/KW Sales Test.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"KW Sales/Preview Content\"";
 				DEVELOPMENT_TEAM = KRW4A286K8;
@@ -834,6 +839,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.lukemorse.KW-Sales-Test";
 				PRODUCT_NAME = "KW Sales Test";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -841,7 +847,7 @@
 		};
 		A30C9B952444C1CB0049E4FC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EAF76A91E66C7CB5B06866F6 /* Pods-KW SalesTests.debug.xcconfig */;
+			baseConfigurationReference = F67761B2EA4F4B40CE2F115F /* Pods-KW SalesTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -864,7 +870,7 @@
 		};
 		A30C9B962444C1CB0049E4FC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 995E7B484A7114A29EED9F1C /* Pods-KW SalesTests.release.xcconfig */;
+			baseConfigurationReference = E36B974C11A3C432905166EF /* Pods-KW SalesTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -967,7 +973,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		AF2416C1249AA0380088A76A /* XCRemoteSwiftPackageReference "ActionOver" */ = {
+		AF2416C1249AA0380088A76A /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AndreaMiotto/ActionOver.git";
 			requirement = {
@@ -978,9 +984,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		AF2416C2249AA0380088A76A /* ActionOver */ = {
+		AF2416C2249AA0380088A76A /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AF2416C1249AA0380088A76A /* XCRemoteSwiftPackageReference "ActionOver" */;
+			package = AF2416C1249AA0380088A76A /* RemoteSwiftPackageReference */;
 			productName = ActionOver;
 		};
 /* End XCSwiftPackageProductDependency section */

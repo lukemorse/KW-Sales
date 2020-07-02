@@ -7,8 +7,8 @@ target 'KW Sales' do
 
   # Pods for KW Sales
 
-    pod 'Firebase/Analytics'
-    pod 'Firebase/Auth'
+#    pod 'Firebase/Analytics'
+#    pod 'Firebase/Auth'
     pod 'Firebase/Storage'
     pod 'Firebase/Firestore'
     pod 'CodableFirebase'
