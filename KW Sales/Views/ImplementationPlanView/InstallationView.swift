@@ -83,9 +83,10 @@ extension InstallationView {
                 .foregroundColor(Color.white)
                 .padding()
             Spacer()
-                statusIndicator
-                    .padding()
-                    .font(.title)
+            statusIndicator
+                .padding()
+                .font(.title)
+//            .opacity(viewModel.installation.status == InstallationStatus.inProgress ? 0.5 : 1).animation(Animation.easeInOut(duration: 1).repeatForever())
         }
         .background(Color.blue)
             .onTapGesture {

@@ -47,7 +47,7 @@ struct EditDistrictsMasterView: View {
         Button(action: {
             self.showFilterMenu = true
         }) {
-            Image(systemName: "line.horizontal.3.decrease").font(.system(size: 36))
+            Image(systemName: "line.horizontal.3.decrease").font(.system(size: 30))
         }
         .actionOver(
                 presented: $showFilterMenu,
@@ -56,7 +56,6 @@ struct EditDistrictsMasterView: View {
                 buttons: actionButtons,
                 ipadAndMacConfiguration: ipadMacConfig
         )
-        
     }
     
     var listView: some View {
