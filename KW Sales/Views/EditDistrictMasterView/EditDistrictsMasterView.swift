@@ -16,22 +16,35 @@ struct EditDistrictsMasterView: View {
     @State private var addedDistrict: District?
     @State private var shouldNavigate = false
     @State private var showFilterMenu = false
+    @State private var isLoading = false
     
     var body: some View {
         VStack {
             searchBar
             addDistrictButton
-            listView
-                .onAppear() {
-                    if(self.viewModel.districtList.isEmpty) {
-                        self.viewModel.fetchDistricts()
-                    }
-                    if self.viewModel.teams.isEmpty {
-                        self.viewModel.fetchTeams()
-                    }
+            if isLoading {
+                loadingView
+            } else {
+                listView
             }
-            .navigationBarItems(leading: Image("Logo"), trailing: filterButton)
         }
+        .onAppear() {
+            if(self.viewModel.districtList.isEmpty) {
+                self.isLoading = true
+                self.viewModel.fetchDistricts() {success in
+                    if success {
+                        self.isLoading = false
+                    } else {
+                        self.isLoading = false
+                    }
+                }
+            }
+            if self.viewModel.teams.isEmpty {
+                self.viewModel.fetchTeams()
+            }
+        }
+        .navigationBarItems(leading: Image("Logo"), trailing: filterButton)
+        
     }
     
     private var ipadMacConfig = {

@@ -15,6 +15,7 @@ struct ImplementationPlanView: View {
     @EnvironmentObject var mainViewModel: MainViewModel
     @ObservedObject var viewModel: ImplementationPlanViewModel
     @State var showSaveAlert = false
+    @State var isLoading = false
     let shouldAddStatusListeners: Bool
     
     init(viewModel: ImplementationPlanViewModel, shouldAddStatusListeners: Bool) {
@@ -23,10 +24,14 @@ struct ImplementationPlanView: View {
     }
     
     var body: some View {
-        return Form {
+        Form {
+            if isLoading {
+                loadingView
+            } else {
                 ForEach(0..<viewModel.installations.count, id: \.self) { index in
                     InstallationView(viewModel: self.viewModel.installationViewModels[index], shouldAddStatusListeners: self.shouldAddStatusListeners)
                 }
+            }
             
             Button(action: {
                 self.viewModel.addInstallation()
@@ -44,7 +49,14 @@ struct ImplementationPlanView: View {
         .padding(.bottom, 10)
         .onAppear() {
             if self.viewModel.installations.count == 0 {
-                self.viewModel.fetchInstallations()
+                self.isLoading = true
+                self.viewModel.fetchInstallations() { success in
+                    if success {
+                        self.isLoading = false
+                    } else {
+                        self.isLoading = false
+                    }
+                }
             }
         }
     }
