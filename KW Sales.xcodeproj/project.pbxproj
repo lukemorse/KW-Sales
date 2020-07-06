@@ -54,7 +54,6 @@
 		AF71D6F9248A85EE0035A48B /* FormValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF71D6F6248A85EE0035A48B /* FormValidator.swift */; };
 		AF7343252486D9F000826BCF /* KeyboardHeightPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7343232486D9F000826BCF /* KeyboardHeightPublisher.swift */; };
 		AF7343282486DA6E00826BCF /* UIResponder+Current.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7343272486DA6E00826BCF /* UIResponder+Current.swift */; };
-		AF79D2E024B39D6E00876C63 /* HelperViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF79D2DF24B39D6E00876C63 /* HelperViews.swift */; };
 		AF874A9024A3DC57008BB052 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF874A8F24A3DC57008BB052 /* CustomTextField.swift */; };
 		AFC2386B2492AD8400651363 /* EditDistrictDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC2386A2492AD8400651363 /* EditDistrictDetailViewModel.swift */; };
 		AFCA09C62486B88E002279E6 /* AlertItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCA09C52486B88E002279E6 /* AlertItem.swift */; };
@@ -137,7 +136,6 @@
 		AF71D6F6248A85EE0035A48B /* FormValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormValidator.swift; sourceTree = "<group>"; };
 		AF7343232486D9F000826BCF /* KeyboardHeightPublisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardHeightPublisher.swift; sourceTree = "<group>"; };
 		AF7343272486DA6E00826BCF /* UIResponder+Current.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIResponder+Current.swift"; sourceTree = "<group>"; };
-		AF79D2DF24B39D6E00876C63 /* HelperViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperViews.swift; sourceTree = "<group>"; };
 		AF874A8F24A3DC57008BB052 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		AFC2386A2492AD8400651363 /* EditDistrictDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDistrictDetailViewModel.swift; sourceTree = "<group>"; };
 		AFCA09C52486B88E002279E6 /* AlertItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertItem.swift; sourceTree = "<group>"; };
@@ -355,7 +353,6 @@
 				AF452B0B2493CB1C00E5B04D /* Enums.swift */,
 				AF71D6F6248A85EE0035A48B /* FormValidator.swift */,
 				A3295BDD244A2E9500F26E1F /* HelperFunctions.swift */,
-				AF79D2DF24B39D6E00876C63 /* HelperViews.swift */,
 				AF71D6F5248A85EE0035A48B /* KeyboardDismissModifier.swift */,
 				AF7343232486D9F000826BCF /* KeyboardHeightPublisher.swift */,
 				AF71D6F4248A85EE0035A48B /* KeyboardOffsetModifier.swift */,
@@ -609,7 +606,6 @@
 				A3295BDE244A2E9500F26E1F /* HelperFunctions.swift in Sources */,
 				A3C26386246EDA8B003616AB /* MainViewModel.swift in Sources */,
 				A3AD363B2452677200BCDA4D /* Installation.swift in Sources */,
-				AF79D2E024B39D6E00876C63 /* HelperViews.swift in Sources */,
 				AF7343282486DA6E00826BCF /* UIResponder+Current.swift in Sources */,
 				A39878D5246C3936000F99AC /* User.swift in Sources */,
 				AF452B0C2493CB1C00E5B04D /* Enums.swift in Sources */,

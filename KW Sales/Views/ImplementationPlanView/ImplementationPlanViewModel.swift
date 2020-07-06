@@ -20,11 +20,10 @@ class ImplementationPlanViewModel: ObservableObject {
         self.districtID = districtID
     }
     
-    public func fetchInstallations(completion: @escaping (Bool) -> ()) {
+    public func fetchInstallations() {
         collectionRef.whereField("districtID", isEqualTo: districtID).getDocuments { (snapshot, error) in
             if let error = error {
                 print(error)
-                completion(false)
             }
             for document in snapshot!.documents {
                 do {
@@ -36,10 +35,8 @@ class ImplementationPlanViewModel: ObservableObject {
                     
                 } catch {
                     print(error)
-                    completion(false)
                 }
             }
-            completion(true)
         }
     }
     

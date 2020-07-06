@@ -29,13 +29,13 @@ class MainViewModel: ObservableObject {
         .removeDuplicates()
             .debounce(for: 0.8, scheduler: DispatchQueue.main)
             .sink { str in
-                self.fetchDistricts(){b in}
+                self.fetchDistricts()
         }
     }
     
     //Networking
     
-    func fetchDistricts(completion: @escaping (Bool) -> ()) {
+    func fetchDistricts() {
         
         var query: Query
        
@@ -57,7 +57,6 @@ class MainViewModel: ObservableObject {
         
         query.getDocuments { (snapshot, error) in
             if let error = error {
-                completion(false)
                 print(error)
             } else {
                 self.districtList = []
@@ -66,11 +65,9 @@ class MainViewModel: ObservableObject {
                         let district = try FirestoreDecoder().decode(District.self, from: document.data())
                         self.districtList.append(district)
                     } catch {
-                        completion(false)
                         print(error)
                     }
                 }
-                completion(true)
             }
         }
     }
@@ -92,7 +89,7 @@ class MainViewModel: ObservableObject {
     func changeFilter(districtFilter: DistrictFilter) {
         if districtFilter != currentFilter {
             currentFilter = districtFilter
-            fetchDistricts(){b in}
+            fetchDistricts()
         }
     }
 }
