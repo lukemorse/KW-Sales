@@ -270,15 +270,6 @@ extension EditDistrictDetailView {
         return filtered
     }
     
-//    var districtPhoneField: some View {
-//        VStack(alignment: .leading) {
-//            Text("District Phone Number")
-//                .font(.headline)
-//            TextField("Enter District Phone Number", text: self.viewModel.district.districtPhoneNumber)
-//                .padding(.all)
-//        }
-//    }
-    
     var readyToInstallToggle: some View {
         Toggle(isOn: self.$viewModel.district.readyToInstall)  {
             Text("Ready To Install")
@@ -297,21 +288,19 @@ extension EditDistrictDetailView {
 }
 
 
-//
-//struct EditDistrictDetailView_Previews: PreviewProvider {
-//    static func handler(id: String, completion: @escaping (_ flag:Bool) -> ()) {}
-//    static var previews: some View {
-//
-//        let mvm = MainViewModel()
-//        var district = District()
-//        district.districtID = "123"
-//        mvm.districts = [district]
-//
-//        return NavigationView {
-//            EditDistrictDetailView(districtID: "123", newFlag: true, uploadDistrictHandler: handler)
-//                .environmentObject(mvm)
-//            .environmentObject(LocationSearchService())
-//        }
-//        .navigationViewStyle(StackNavigationViewStyle())
-//    }
-//}
+
+struct EditDistrictDetailView_Previews: PreviewProvider {
+    static func handler(id: String, completion: @escaping (_ flag:Bool) -> ()) {}
+    static var previews: some View {
+
+        let mvm = MainViewModel()
+        let vm = EditDistrictDetailViewModel(district: District())
+        var district = District()
+        district.districtID = "123"
+
+        return NavigationView {
+            EditDistrictDetailView(viewModel: vm, newFlag: false).environmentObject(mvm)
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
+    }
+}

@@ -65,19 +65,14 @@ struct ImplementationPlanView: View {
 }
 
 
-//struct CreateImplementationPlanListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//
-//        let mvm = MainViewModel()
-//        var district = District()
-//        district.districtID = "123"
-////        mvm.districts = [district]
-//        let collectionRef = Firestore.firestore().collection(Constants.kDistrictCollection)
-//
-//        return
-//            NavigationView {
-//                ImplementationPlanView(viewModel: ImplementationPlanViewModel(collectionRef: collectionRef), district: .constant(district))
-//        }
-//    .navigationViewStyle(StackNavigationViewStyle())
-//    }
-//}
+
+struct ImplementationPlanView_Previews: PreviewProvider {
+    static var previews: some View {
+        let vm = ImplementationPlanViewModel(districtID: "123")
+        vm.installations = [Installation(districtID: "123")]
+        return NavigationView {
+            ImplementationPlanView(viewModel: vm, shouldAddStatusListeners: true).environmentObject(MainViewModel())
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
+    }
+}
