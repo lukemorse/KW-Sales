@@ -12,7 +12,6 @@ import Firebase
 struct TestDB {
     static var testInstallation1: Installation {
         var result = Installation(districtID: "TestDistrictID")
-//        result.address = GeoPoint(latitude: 44, longitude: 19)
         result.address = ""
         result.teamName = "Test Team"
         result.status = .notStarted
