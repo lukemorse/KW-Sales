@@ -24,8 +24,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         mainViewModel.currentUser = "brigittec"
 //        let contentView = StartView().environmentObject(mainViewModel).environmentObject(locationSearchService)
-        let contentView = MainView().environmentObject(mainViewModel)
-            .environmentObject(locationSearchService)
+        
+//        let contentView = MainView().environmentObject(mainViewModel)
+//            .environmentObject(locationSearchService)
+        
+        let contentView = Image("corner pod")
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

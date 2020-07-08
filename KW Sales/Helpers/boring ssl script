@@ -1,0 +1,15 @@
+while true; do
+    sleep 0.1
+    _boring_ssl=$(find /Users/lukemorse/Library/Developer/Xcode/DerivedData/KW_Sales-caybzpaovzmjypaddmnrkcmnasui* \
+        -name "BoringSSL-GRPC" | head -n1)
+
+    cd "$_boring_ssl/openssl_grpc.framework" && ln -s Versions/Current/Headers Headers &&
+        echo "Patched openssl_grpc"
+
+    _grpc_core=$(find /Users/lukemorse/Library/Developer/Xcode/DerivedData/KW_Sales-caybzpaovzmjypaddmnrkcmnasui* \
+        -name "gRPC-Core" | head -n1)
+
+    cd "$_grpc_core/grpc.framework" && ln -s Versions/Current/Headers Headers &&
+        echo "Patched grpc"
+done
+
